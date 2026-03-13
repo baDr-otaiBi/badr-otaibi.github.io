@@ -75,7 +75,7 @@ const productCount = db.prepare('SELECT COUNT(*) as count FROM products').get();
 if (productCount.count === 0) {
   const insert = db.prepare('INSERT INTO products (id, name, description, category, price, file_path, is_available) VALUES (?, ?, ?, ?, ?, ?, ?)');
   insert.run('nafs-1000', 'تجميعات اختبار نافس — 1000 سؤال', 'تجميعة شاملة تضم 1000 سؤال من اختبارات نافس مع الإجابات النموذجية لكل سؤال', 'اختبار نافس', 49, 'nafs-1000.pdf', 1);
-  insert.run('science-summary', 'ملخص مادة العلوم', 'ملخص شامل ومنظّم لمادة العلوم يغطي أهم المفاهيم والمواضيع الأساسية', 'ملخصات', 29, 'science-summary.pdf', 1);
+  insert.run('science-summary', 'ملخص مادة العلوم — الصف السادس، الفصل الثاني', 'ملخص شامل ومنظّم لمادة العلوم للصف السادس الابتدائي — الفصل الدراسي الثاني، يغطي أهم المفاهيم والمواضيع الأساسية', 'ملخصات', 29, 'science-summary.pdf', 1);
   insert.run('qudrat-bank', 'بنك أسئلة القدرات', 'أسئلة محلولة للقسم الكمي واللفظي', 'اختبارات', 0, null, 0);
   insert.run('tahsili-pack', 'حقيبة التحصيلي', 'ملخصات وتجميعات لاختبار التحصيلي', 'اختبارات', 0, null, 0);
 }
@@ -351,6 +351,7 @@ app.post('/api/admin/orders/:id/approve', authenticateAdmin, (req, res) => {
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin.html')));
 app.get('/download.html', (req, res) => res.sendFile(path.join(__dirname, 'public', 'download.html')));
+app.get('/nafs.html', (req, res) => res.sendFile(path.join(__dirname, 'public', 'nafs.html')));
 
 // === Start Server ===
 app.listen(PORT, () => {

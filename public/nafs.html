@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بنك أسئلة نافس — الإتقان التعليمية</title>
+<meta name="description" content="بنك أسئلة نافس التفاعلي — 1000 سؤال تدريبي مع الإجابات النموذجية للصف السادس الابتدائي">
+<meta name="theme-color" content="#1D4ED8">
+<link rel="icon" type="image/png" href="/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0F172A;--ink-2:#334155;--ink-3:#64748B;--ink-4:#94A3B8;
+  --bg:#F8FAFC;--white:#FFFFFF;
+  --gray-50:#F8FAFC;--gray-100:#F1F5F9;--gray-200:#E2E8F0;--gray-300:#CBD5E1;
+  --blue:#1D4ED8;--blue-light:#3B82F6;--blue-soft:#EFF6FF;
+  --green:#059669;--green-soft:#ECFDF5;--green-dark:#047857;
+  --amber:#D97706;--amber-soft:#FFFBEB;
+  --rose:#E11D48;--rose-soft:#FFF1F2;
+  --violet:#7C3AED;--violet-soft:#F5F3FF;
+  --font:'Noto Kufi Arabic',sans-serif;
+  --font-body:'IBM Plex Sans Arabic',sans-serif;
+  --radius:12px;--radius-lg:20px;
+  --shadow:0 1px 3px rgba(0,0,0,.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,.06);
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-height:1.7;min-height:100vh}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:10px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+
+/* ===== GATE ===== */
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(135deg,#0F172A,#1E293B)}
+.gate-card{background:var(--white);border-radius:24px;padding:48px 40px;max-width:400px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.gate-card img{height:80px;margin-bottom:20px}
+.gate-card h2{font-family:var(--font);font-size:20px;font-weight:800;margin-bottom:6px}
+.gate-card .sub{font-size:13px;color:var(--ink-3);margin-bottom:28px;line-height:1.7}
+.pass-input{
+  width:100%;padding:16px;border:2px solid var(--gray-200);border-radius:14px;
+  font-family:var(--font);font-size:28px;text-align:center;letter-spacing:16px;
+  outline:none;transition:.2s;
+}
+.pass-input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(29,78,216,.1)}
+.gate-btn{
+  width:100%;padding:14px;border:none;border-radius:14px;background:var(--blue);color:#fff;
+  font-family:var(--font-body);font-size:16px;font-weight:700;cursor:pointer;margin-top:16px;transition:.2s;
+}
+.gate-btn:hover{background:var(--blue-light)}
+.gate-err{color:var(--rose);font-size:13px;margin-top:12px;display:none}
+.gate-back{display:inline-block;margin-top:24px;color:rgba(255,255,255,.4);text-decoration:none;font-size:13px}
+.gate-back:hover{color:rgba(255,255,255,.7)}
+
+/* ===== APP ===== */
+#app{display:none}
+
+/* Topbar */
+.topbar{
+  background:rgba(255,255,255,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:50;
+}
+.topbar-in{max-width:1100px;margin:0 auto;padding:0 20px;height:96px;display:flex;align-items:center;justify-content:space-between}
+.topbar img{height:80px}
+.topbar-right{display:flex;align-items:center;gap:14px}
+.progress-pill{
+  display:flex;align-items:center;gap:8px;padding:6px 14px;
+  background:var(--gray-100);border-radius:100px;font-size:13px;
+}
+.progress-pill .pct{font-family:var(--font);font-weight:800;color:var(--green)}
+.progress-mini{width:80px;height:6px;background:var(--gray-200);border-radius:10px;overflow:hidden}
+.progress-mini div{height:100%;background:var(--green);border-radius:10px;transition:.5s var(--ease)}
+.home-link{
+  padding:6px 14px;border-radius:8px;border:1px solid var(--gray-200);
+  background:var(--white);color:var(--ink-3);text-decoration:none;font-size:13px;
+}
+.home-link:hover{border-color:var(--blue);color:var(--blue)}
+
+/* Main */
+.main{max-width:1100px;margin:0 auto;padding:20px}
+
+/* Stats row */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.stat-box{
+  background:var(--white);border:1px solid var(--gray-200);border-radius:16px;
+  padding:18px;text-align:center;
+}
+.stat-box .s-icon{font-size:24px;margin-bottom:6px}
+.stat-box .s-val{font-family:var(--font);font-size:24px;font-weight:900}
+.stat-box .s-lbl{font-size:11px;color:var(--ink-4);margin-top:2px}
+.stat-box .s-bar{width:100%;height:5px;background:var(--gray-200);border-radius:10px;margin-top:8px;overflow:hidden}
+.stat-box .s-bar div{height:100%;border-radius:10px;transition:.5s var(--ease)}
+
+/* Section switcher */
+.sec-switch{display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px}
+.sec-btn{
+  flex-shrink:0;padding:12px 20px;border-radius:var(--radius);
+  background:var(--white);border:2px solid var(--gray-200);
+  cursor:pointer;font-family:var(--font-body);font-size:14px;font-weight:600;
+  color:var(--ink-3);transition:.2s;display:flex;align-items:center;gap:8px;
+}
+.sec-btn:hover{border-color:var(--blue-light);color:var(--blue)}
+.sec-btn.active{border-color:var(--blue);background:var(--blue-soft);color:var(--blue)}
+
+/* Subsection */
+.subsec{margin-bottom:10px;animation:fadeUp .3s var(--ease) both}
+.subsec-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;background:var(--white);border:1px solid var(--gray-200);
+  border-radius:var(--radius);cursor:pointer;transition:.2s;user-select:none;
+}
+.subsec-head:hover{border-color:var(--blue-light)}
+.subsec-left{display:flex;align-items:center;gap:10px}
+.subsec-name{font-weight:700;font-size:14px}
+.subsec-tag{
+  padding:2px 10px;border-radius:6px;font-size:11px;font-weight:700;
+  background:var(--gray-100);color:var(--ink-4);
+}
+.subsec-tag.complete{background:var(--green-soft);color:var(--green)}
+.subsec-arrow{font-size:10px;color:var(--ink-4);transition:.3s var(--ease)}
+.subsec.open .subsec-arrow{transform:rotate(180deg);color:var(--blue)}
+.subsec-body{display:none;padding-top:8px}
+.subsec.open .subsec-body{display:block}
+
+/* Question */
+.q{
+  background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);
+  margin-bottom:8px;overflow:hidden;transition:.2s;
+}
+.q:hover{box-shadow:var(--shadow-md)}
+.q.completed{border-right:4px solid var(--green)}
+.q-header{padding:14px 16px}
+.q-row{display:flex;align-items:flex-start;gap:10px}
+.q-id{
+  min-width:30px;height:30px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font);font-weight:800;font-size:11px;
+  background:var(--blue-soft);color:var(--blue);flex-shrink:0;
+}
+.q.completed .q-id{background:var(--green-soft);color:var(--green)}
+.q-question{flex:1;font-size:14px;font-weight:600;line-height:1.8}
+
+/* Answer input area */
+.q-input-area{
+  display:flex;gap:8px;margin-top:10px;padding:0 0 0 40px;
+}
+.q-input{
+  flex:1;padding:8px 12px;border:1.5px solid var(--gray-200);border-radius:8px;
+  font-family:var(--font-body);font-size:13px;outline:none;transition:.2s;
+}
+.q-input:focus{border-color:var(--blue)}
+.q-input.correct{border-color:var(--green);background:var(--green-soft)}
+.q-input.wrong{border-color:var(--rose);background:var(--rose-soft)}
+.q-check-btn{
+  padding:8px 14px;border-radius:8px;border:none;
+  background:var(--blue);color:#fff;cursor:pointer;
+  font-family:var(--font-body);font-size:12px;font-weight:600;transition:.2s;
+  white-space:nowrap;
+}
+.q-check-btn:hover{background:var(--blue-light)}
+
+/* Answer reveal */
+.q-footer{
+  padding:0 16px 14px;display:flex;align-items:center;gap:8px;
+}
+.q-reveal-btn{
+  padding:6px 14px;border-radius:8px;border:1px solid var(--gray-200);
+  background:var(--white);cursor:pointer;font-family:var(--font-body);
+  font-size:12px;font-weight:600;color:var(--ink-3);transition:.2s;
+}
+.q-reveal-btn:hover{border-color:var(--green);color:var(--green);background:var(--green-soft)}
+.q-done-btn{
+  padding:6px 14px;border-radius:8px;border:1px solid var(--gray-200);
+  background:var(--white);cursor:pointer;font-family:var(--font-body);
+  font-size:12px;font-weight:600;color:var(--ink-4);transition:.2s;
+}
+.q-done-btn:hover{border-color:var(--green);color:var(--green)}
+.q-done-btn.is-done{background:var(--green);color:#fff;border-color:var(--green)}
+
+.q-answer-box{
+  margin:10px 16px 14px;padding:12px 16px;
+  background:var(--green-soft);border-right:3px solid var(--green);
+  border-radius:10px;font-size:13px;color:#065F46;line-height:1.8;
+  display:none;
+}
+.q-answer-box.visible{display:block;animation:fadeUp .3s var(--ease)}
+
+/* Feedback */
+.q-feedback{
+  padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;
+  display:none;align-items:center;gap:4px;
+}
+.q-feedback.show{display:inline-flex}
+.q-feedback.right{background:var(--green-soft);color:var(--green)}
+.q-feedback.wrong-fb{background:var(--rose-soft);color:var(--rose)}
+
+/* Search */
+.search-box{margin-bottom:16px;position:relative}
+.search-input{
+  width:100%;padding:12px 16px 12px 40px;border:1.5px solid var(--gray-200);
+  border-radius:var(--radius);font-family:var(--font-body);font-size:14px;
+  outline:none;transition:.2s;background:var(--white);
+}
+.search-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(29,78,216,.08)}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-4);font-size:16px;pointer-events:none}
+.search-clear{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  background:var(--gray-200);border:none;border-radius:6px;width:24px;height:24px;
+  cursor:pointer;font-size:14px;color:var(--ink-3);display:none;
+  align-items:center;justify-content:center;
+}
+.search-clear.visible{display:flex}
+.no-results{text-align:center;padding:40px;color:var(--ink-4);font-size:14px}
+
+/* Reset */
+.reset-area{text-align:center;margin-top:32px;padding:20px;background:var(--white);border-radius:var(--radius-lg);border:1px solid var(--gray-200)}
+.reset-btn{
+  padding:8px 20px;border-radius:8px;border:1px solid var(--rose);
+  background:var(--rose-soft);color:var(--rose);cursor:pointer;
+  font-family:var(--font-body);font-size:13px;font-weight:600;
+}
+.reset-btn:hover{background:var(--rose);color:#fff}
+
+@media(max-width:768px){
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .topbar-in{padding:0 12px}
+  .topbar img{height:56px}
+  .main{padding:14px}
+  .gate-card{padding:32px 20px}
+  .pass-input{font-size:22px;letter-spacing:12px}
+}
+@media(max-width:480px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .stat-box{padding:12px}
+  .stat-box .s-val{font-size:20px}
+  .q-input-area{flex-direction:column;padding:0}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== PASSWORD GATE ===== -->
+<div id="gate">
+  <div class="gate-card">
+    <img src="/logo.png" alt="الإتقان التعليمية">
+    <h2>بنك أسئلة نافس</h2>
+    <p class="sub">1000 سؤال تدريبي مع الإجابات<br>الصف السادس الابتدائي<br>أدخل كلمة المرور للوصول</p>
+    <form id="gateForm">
+      <input type="password" class="pass-input" id="passField" maxlength="4" placeholder="••••" autofocus autocomplete="off">
+      <button type="submit" class="gate-btn">فتح البنك</button>
+    </form>
+    <div class="gate-err" id="gateErr">كلمة المرور غير صحيحة — حاول مرة أخرى</div>
+    <a href="/" class="gate-back">← العودة للرئيسية</a>
+  </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-in">
+      <a href="/"><img src="/logo.png" alt="الإتقان"></a>
+      <div class="topbar-right">
+        <div class="progress-pill">
+          <span class="pct" id="globalPct">0%</span>
+          <div class="progress-mini"><div id="globalBar" style="width:0"></div></div>
+        </div>
+        <a href="/" class="home-link">الرئيسية</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <!-- Stats -->
+    <div class="stats-row" id="statsRow"></div>
+
+    <!-- Section tabs -->
+    <div class="sec-switch" id="secSwitch"></div>
+
+    <!-- Search -->
+    <div class="search-box">
+      <input type="text" class="search-input" id="searchInput" placeholder="ابحث في الأسئلة..." oninput="handleSearch()" dir="auto">
+      <span class="search-icon">&#128269;</span>
+      <button class="search-clear" id="searchClear" onclick="clearSearch()">&times;</button>
+    </div>
+
+    <!-- Content -->
+    <div id="content"></div>
+
+    <!-- Reset -->
+    <div class="reset-area">
+      <p style="color:var(--ink-4);font-size:13px;margin-bottom:8px">تبي تبدأ من جديد؟</p>
+      <button class="reset-btn" onclick="resetAll()">مسح التقدم</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/nafs-data.js"></script>
+<script>
+// ===== CONFIG =====
+const PASS = '6362';
+const SK = 'nafs_done';
+const AK = 'nafs_auth';
+
+// ===== AUTH =====
+document.getElementById('gateForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var val = document.getElementById('passField').value.trim();
+  if (val === PASS) {
+    localStorage.setItem(AK, '1');
+    startApp();
+  } else {
+    document.getElementById('gateErr').style.display = 'block';
+    document.getElementById('passField').value = '';
+    document.getElementById('passField').focus();
+  }
+});
+
+// Auto-login if already authenticated
+if (localStorage.getItem(AK) === '1') {
+  startApp();
+}
+
+function startApp() {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  buildStats();
+  buildTabs();
+  showSection(0);
+  updateGlobal();
+}
+
+// ===== PROGRESS =====
+function getDone() {
+  try { return JSON.parse(localStorage.getItem(SK)) || {}; } catch(e) { return {}; }
+}
+function setDone(d) { localStorage.setItem(SK, JSON.stringify(d)); }
+function isDone(id) { return !!getDone()[id]; }
+function markDone(id) {
+  var d = getDone();
+  if (d[id]) { delete d[id]; } else { d[id] = 1; }
+  setDone(d);
+  refreshCurrent();
+  updateGlobal();
+  buildStats();
+}
+
+function totalQs() {
+  var t = 0;
+  NAFS_DATA.forEach(function(s) { s.subs.forEach(function(sub) { t += sub.qs.length; }); });
+  return t;
+}
+function totalDone() { return Object.keys(getDone()).length; }
+function secTotal(sec) {
+  var t = 0;
+  sec.subs.forEach(function(sub) { t += sub.qs.length; });
+  return t;
+}
+function secDone(sec) {
+  var d = getDone(), c = 0;
+  sec.subs.forEach(function(sub) {
+    sub.qs.forEach(function(q) { if (d[q[0]]) c++; });
+  });
+  return c;
+}
+
+// ===== GLOBAL PROGRESS =====
+function updateGlobal() {
+  var t = totalQs(), done = totalDone();
+  var pct = t > 0 ? Math.round(done / t * 100) : 0;
+  document.getElementById('globalPct').textContent = pct + '%';
+  document.getElementById('globalBar').style.width = pct + '%';
+}
+
+// ===== STATS =====
+function buildStats() {
+  var html = '';
+  var t = totalQs(), done = totalDone();
+  var pct = t > 0 ? Math.round(done / t * 100) : 0;
+  html += '<div class="stat-box"><div class="s-icon">📊</div><div class="s-val">' + done + '/' + t + '</div><div class="s-lbl">إجمالي التقدم</div><div class="s-bar"><div style="width:' + pct + '%;background:var(--blue)"></div></div></div>';
+
+  NAFS_DATA.forEach(function(sec) {
+    var st = secTotal(sec), sd = secDone(sec);
+    var sp = st > 0 ? Math.round(sd / st * 100) : 0;
+    html += '<div class="stat-box"><div class="s-icon">' + sec.icon + '</div><div class="s-val" style="color:' + sec.color + '">' + sd + '/' + st + '</div><div class="s-lbl">' + sec.name + '</div><div class="s-bar"><div style="width:' + sp + '%;background:' + sec.color + '"></div></div></div>';
+  });
+
+  document.getElementById('statsRow').innerHTML = html;
+}
+
+// ===== SECTION TABS =====
+var curSec = 0;
+
+function buildTabs() {
+  var html = '';
+  NAFS_DATA.forEach(function(sec, i) {
+    html += '<button class="sec-btn ' + (i === curSec ? 'active' : '') + '" onclick="showSection(' + i + ')">' + sec.icon + ' ' + sec.name + ' <span style="font-size:11px;color:var(--ink-4)">(' + secTotal(sec) + ')</span></button>';
+  });
+  document.getElementById('secSwitch').innerHTML = html;
+}
+
+function showSection(i) {
+  curSec = i;
+  buildTabs();
+  renderQuestions(i);
+}
+
+function refreshCurrent() {
+  renderQuestions(curSec);
+}
+
+// ===== RENDER QUESTIONS =====
+function renderQuestions(secIdx) {
+  var sec = NAFS_DATA[secIdx];
+  if (!sec) { document.getElementById('content').innerHTML = '<p>لا توجد بيانات</p>'; return; }
+
+  var html = '';
+  var d = getDone();
+
+  sec.subs.forEach(function(sub, si) {
+    var subDone = 0;
+    sub.qs.forEach(function(q) { if (d[q[0]]) subDone++; });
+    var subTotal = sub.qs.length;
+    var allDone = subDone === subTotal && subTotal > 0;
+    var uid = 'sub_' + secIdx + '_' + si;
+
+    html += '<div class="subsec open" id="' + uid + '">';
+    html += '<div class="subsec-head" onclick="document.getElementById(\'' + uid + '\').classList.toggle(\'open\')">';
+    html += '<div class="subsec-left"><span class="subsec-name">' + sub.name + '</span>';
+    html += '<span class="subsec-tag ' + (allDone ? 'complete' : '') + '">' + subDone + ' / ' + subTotal + '</span></div>';
+    html += '<span class="subsec-arrow">▼</span></div>';
+    html += '<div class="subsec-body">';
+
+    sub.qs.forEach(function(q) {
+      var id = q[0], question = q[1], answer = q[2];
+      var completed = !!d[id];
+
+      html += '<div class="q ' + (completed ? 'completed' : '') + '" id="q' + id + '">';
+      html += '<div class="q-header">';
+      html += '<div class="q-row"><div class="q-id">' + id + '</div><div class="q-question">' + escHtml(question) + '</div></div>';
+
+      // Input area
+      html += '<div class="q-input-area">';
+      html += '<input class="q-input" id="inp' + id + '" type="text" placeholder="اكتب إجابتك هنا..." dir="auto" onkeydown="if(event.key===\'Enter\'){event.preventDefault();checkAnswer(' + id + ')}">';
+      html += '<button class="q-check-btn" onclick="checkAnswer(' + id + ')">تحقق</button>';
+      html += '</div>';
+
+      // Feedback
+      html += '<div class="q-feedback" id="fb' + id + '"></div>';
+
+      html += '</div>'; // q-header
+
+      // Footer buttons
+      html += '<div class="q-footer">';
+      html += '<button class="q-reveal-btn" onclick="revealAnswer(' + id + ')">اظهر الجواب</button>';
+      html += '<button class="q-done-btn ' + (completed ? 'is-done' : '') + '" onclick="markDone(' + id + ')">' + (completed ? '✓ تم' : '○ حدد كمكتمل') + '</button>';
+      html += '</div>';
+
+      // Answer box (hidden)
+      html += '<div class="q-answer-box" id="abox' + id + '">' + escHtml(answer) + '</div>';
+
+      html += '</div>'; // q
+    });
+
+    html += '</div></div>';
+  });
+
+  document.getElementById('content').innerHTML = html;
+}
+
+// ===== ACTIONS =====
+function revealAnswer(id) {
+  var box = document.getElementById('abox' + id);
+  if (box.classList.contains('visible')) {
+    box.classList.remove('visible');
+  } else {
+    box.classList.add('visible');
+  }
+}
+
+function checkAnswer(id) {
+  var input = document.getElementById('inp' + id);
+  var fb = document.getElementById('fb' + id);
+  var userVal = input.value.trim();
+
+  if (!userVal) {
+    input.focus();
+    return;
+  }
+
+  // Show the answer
+  var box = document.getElementById('abox' + id);
+  box.classList.add('visible');
+
+  // Find the correct answer
+  var answer = findAnswer(id);
+  if (!answer) return;
+
+  // Simple match check (normalize Arabic)
+  var norm = function(s) {
+    return s.replace(/[\s\u200c\u200d]/g, ' ').replace(/\s+/g, ' ').trim()
+      .replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي')
+      .replace(/[٠-٩]/g, function(d) { return String.fromCharCode(d.charCodeAt(0) - 1632 + 48); })
+      .toLowerCase();
+  };
+
+  var userNorm = norm(userVal);
+  var ansNorm = norm(answer);
+
+  // Check if answer contains user input or user input contains answer start
+  var isCorrect = userNorm === ansNorm ||
+    ansNorm.indexOf(userNorm) === 0 ||
+    userNorm.indexOf(ansNorm.split(' ')[0]) !== -1 ||
+    (ansNorm.match(/[\d.]+/) && userNorm.match(/[\d.]+/) && ansNorm.match(/[\d.]+/)[0] === userNorm.match(/[\d.]+/)[0]);
+
+  fb.className = 'q-feedback show ' + (isCorrect ? 'right' : 'wrong-fb');
+  fb.innerHTML = isCorrect ? '✓ أحسنت! إجابة صحيحة' : '✗ إجابة مختلفة — راجع الجواب أدناه';
+
+  input.className = 'q-input ' + (isCorrect ? 'correct' : 'wrong');
+
+  // Auto-mark as done if correct
+  if (isCorrect && !isDone(id)) {
+    var d = getDone();
+    d[id] = 1;
+    setDone(d);
+    updateGlobal();
+    buildStats();
+    // Update the done button
+    var qEl = document.getElementById('q' + id);
+    if (qEl) {
+      qEl.classList.add('completed');
+      var qid = qEl.querySelector('.q-id');
+      if (qid) { qid.style.background = 'var(--green-soft)'; qid.style.color = 'var(--green)'; }
+      var doneBtn = qEl.querySelector('.q-done-btn');
+      if (doneBtn) { doneBtn.classList.add('is-done'); doneBtn.innerHTML = '✓ تم'; }
+    }
+  }
+}
+
+function findAnswer(id) {
+  for (var s = 0; s < NAFS_DATA.length; s++) {
+    for (var ss = 0; ss < NAFS_DATA[s].subs.length; ss++) {
+      for (var q = 0; q < NAFS_DATA[s].subs[ss].qs.length; q++) {
+        if (NAFS_DATA[s].subs[ss].qs[q][0] === id) {
+          return NAFS_DATA[s].subs[ss].qs[q][2];
+        }
+      }
+    }
+  }
+  return null;
+}
+
+function escHtml(str) {
+  var div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function resetAll() {
+  if (!confirm('هل أنت متأكد؟ سيتم مسح كل التقدم!')) return;
+  localStorage.removeItem(SK);
+  buildStats();
+  renderQuestions(curSec);
+  updateGlobal();
+}
+
+// ===== SEARCH =====
+var searchTimeout = null;
+function handleSearch() {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(doSearch, 200);
+  var val = document.getElementById('searchInput').value.trim();
+  var clearBtn = document.getElementById('searchClear');
+  if (val.length > 0) { clearBtn.classList.add('visible'); } else { clearBtn.classList.remove('visible'); }
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchClear').classList.remove('visible');
+  renderQuestions(curSec);
+}
+
+function doSearch() {
+  var query = document.getElementById('searchInput').value.trim();
+  if (!query) { renderQuestions(curSec); return; }
+
+  var normQ = query.replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').toLowerCase();
+  var results = [];
+  var d = getDone();
+
+  NAFS_DATA.forEach(function(sec) {
+    sec.subs.forEach(function(sub) {
+      sub.qs.forEach(function(q) {
+        var qText = (q[1] + ' ' + q[2]).replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').toLowerCase();
+        if (qText.indexOf(normQ) !== -1) {
+          results.push(q);
+        }
+      });
+    });
+  });
+
+  if (results.length === 0) {
+    document.getElementById('content').innerHTML = '<div class="no-results">لا توجد نتائج لـ "' + escHtml(query) + '"</div>';
+    return;
+  }
+
+  var html = '<div class="subsec open"><div class="subsec-head"><div class="subsec-left"><span class="subsec-name">نتائج البحث</span><span class="subsec-tag">' + results.length + ' نتيجة</span></div></div><div class="subsec-body">';
+
+  results.forEach(function(q) {
+    var id = q[0], question = q[1], answer = q[2];
+    var completed = !!d[id];
+
+    html += '<div class="q ' + (completed ? 'completed' : '') + '" id="q' + id + '">';
+    html += '<div class="q-header">';
+    html += '<div class="q-row"><div class="q-id">' + id + '</div><div class="q-question">' + escHtml(question) + '</div></div>';
+    html += '<div class="q-input-area">';
+    html += '<input class="q-input" id="inp' + id + '" type="text" placeholder="اكتب إجابتك هنا..." dir="auto" onkeydown="if(event.key===\'Enter\'){event.preventDefault();checkAnswer(' + id + ')}">';
+    html += '<button class="q-check-btn" onclick="checkAnswer(' + id + ')">تحقق</button>';
+    html += '</div>';
+    html += '<div class="q-feedback" id="fb' + id + '"></div>';
+    html += '</div>';
+    html += '<div class="q-footer">';
+    html += '<button class="q-reveal-btn" onclick="revealAnswer(' + id + ')">اظهر الجواب</button>';
+    html += '<button class="q-done-btn ' + (completed ? 'is-done' : '') + '" onclick="markDone(' + id + ')">' + (completed ? '✓ تم' : '○ حدد كمكتمل') + '</button>';
+    html += '</div>';
+    html += '<div class="q-answer-box" id="abox' + id + '">' + escHtml(answer) + '</div>';
+    html += '</div>';
+  });
+
+  html += '</div></div>';
+  document.getElementById('content').innerHTML = html;
+}
+</script>
+</body>
+</html>

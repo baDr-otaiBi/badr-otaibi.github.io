@@ -3,8 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الإتقان التعليمية</title>
-<meta name="description" content="منصة الإتقان التعليمية — تجميعات أسئلة اختبار نافس وملخصات تعليمية لجميع المراحل الدراسية">
+<title>الإتقان التعليمية — تجميعات نافس وملخصات تعليمية</title>
+<meta name="description" content="منصة الإتقان التعليمية — تجميعات أسئلة اختبار نافس 1000 سؤال مع الإجابات وملخصات تعليمية لجميع المراحل الدراسية">
+<meta property="og:title" content="الإتقان التعليمية — تجميعات نافس وملخصات تعليمية">
+<meta property="og:description" content="تجميعات أسئلة اختبار نافس 1000 سؤال مع الإجابات النموذجية وملخصات تعليمية شاملة">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_SA">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#1D4ED8">
+<link rel="icon" type="image/png" href="/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -71,17 +78,10 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 .nav.shadow{box-shadow:var(--shadow-md)}
 .nav-inner{
   display:flex;align-items:center;justify-content:space-between;
-  height:60px;
+  height:96px;
 }
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-mark{
-  width:36px;height:36px;background:var(--blue);border-radius:10px;
-  display:grid;place-items:center;color:#fff;
-  font-family:var(--font);font-weight:900;font-size:16px;
-  box-shadow:0 2px 8px rgba(29,78,216,.25);
-}
-.logo-text{font-family:var(--font);font-weight:800;font-size:17px;color:var(--ink)}
-.logo-text span{color:var(--blue)}
+.logo{display:flex;align-items:center;text-decoration:none}
+.logo img{height:80px;width:auto}
 
 .nav-links{display:flex;gap:4px;list-style:none}
 .nav-links a{
@@ -105,7 +105,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 /* Mobile nav */
 .nav-links.show{
   display:flex!important;flex-direction:column;
-  position:absolute;top:60px;right:0;left:0;
+  position:absolute;top:96px;right:0;left:0;
   background:var(--white);border-bottom:1px solid var(--gray-200);
   padding:12px 24px;box-shadow:var(--shadow-lg);
 }
@@ -306,7 +306,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 .g-file .f-icon{font-size:16px}
 
 /* ===== FEATURES ===== */
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .feat{
   padding:28px 22px;border-radius:var(--radius-lg);
   background:var(--white);border:1px solid var(--gray-200);
@@ -344,7 +344,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   padding:48px 0 24px;
 }
 .footer-grid{
-  display:grid;grid-template-columns:1.5fr 1fr 1fr;
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
   gap:40px;margin-bottom:36px;
 }
 .footer-brand p{font-size:13px;line-height:1.8;opacity:.6;margin-top:12px;max-width:260px}
@@ -441,6 +441,19 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 .alert.error{display:block;background:var(--rose-soft);color:var(--rose)}
 .alert.success{display:block;background:var(--green-soft);color:var(--green)}
 
+/* Scroll to top */
+.scroll-top{
+  position:fixed;bottom:24px;right:24px;z-index:98;
+  width:44px;height:44px;border-radius:12px;
+  background:var(--white);border:1px solid var(--gray-200);
+  color:var(--ink-3);cursor:pointer;
+  box-shadow:var(--shadow-md);
+  display:none;align-items:center;justify-content:center;
+  transition:.3s var(--ease);font-size:18px;
+}
+.scroll-top:hover{color:var(--blue);border-color:var(--blue);transform:translateY(-2px)}
+.scroll-top.show{display:flex}
+
 /* WhatsApp Button */
 .whatsapp-btn{
   position:fixed;bottom:24px;left:24px;z-index:99;
@@ -465,7 +478,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
   .products-grid{grid-template-columns:1fr}
-  .feat-grid{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:repeat(2,1fr)}
   .footer-grid{grid-template-columns:1fr;gap:24px}
 }
 @media(max-width:768px){
@@ -492,13 +505,13 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 <nav class="nav">
   <div class="container nav-inner">
     <a href="#" class="logo">
-      <div class="logo-mark">إ</div>
-      <div class="logo-text">الإتقان <span>التعليمية</span></div>
+      <img src="/logo.png" alt="الإتقان التعليمية">
     </a>
     <ul class="nav-links">
       <li><a href="#" class="on">الرئيسية</a></li>
       <li><a href="#stages">المراحل</a></li>
       <li><a href="#products">المنتجات</a></li>
+      <li><a href="#features">المميزات</a></li>
     </ul>
     <a href="#products" class="nav-cta">تصفح المنتجات</a>
     <button class="hamburger" onclick="this.closest('.nav').querySelector('.nav-links').classList.toggle('show')">
@@ -556,6 +569,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
           <div class="p-foot">
             <div class="p-price">49 <span class="cur">ر.س</span></div>
             <button class="p-btn" onclick="openBuyModal('nafs-1000', 'تجميعات اختبار نافس — 1000 سؤال', 49, '📝')">اشترِ الآن</button>
+            <a href="/nafs.html" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">ادخل الآن</a>
           </div>
         </div>
       </div>
@@ -569,11 +583,11 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
         </div>
         <div class="p-body">
           <div class="p-cat">ملخصات</div>
-          <h3 class="p-title">ملخص مادة العلوم</h3>
-          <p class="p-desc">ملخص شامل ومنظّم لمادة العلوم يغطي أهم المفاهيم والمواضيع الأساسية</p>
+          <h3 class="p-title">ملخص مادة العلوم — الصف السادس، الفصل الثاني</h3>
+          <p class="p-desc">ملخص شامل ومنظّم لمادة العلوم للصف السادس الابتدائي — الفصل الدراسي الثاني، يغطي أهم المفاهيم والمواضيع الأساسية</p>
           <div class="p-foot">
             <div class="p-price">29 <span class="cur">ر.س</span></div>
-            <button class="p-btn" onclick="openBuyModal('science-summary', 'ملخص مادة العلوم', 29, '🔬')">اشترِ الآن</button>
+            <button class="p-btn" onclick="openBuyModal('science-summary', 'ملخص مادة العلوم — الصف السادس، الفصل الثاني', 29, '🔬')">اشترِ الآن</button>
           </div>
         </div>
       </div>
@@ -655,8 +669,8 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
           </div>
           <div class="g-body">
             <div class="g-files">
-              <a class="g-file" onclick="event.stopPropagation();openBuyModal('nafs-1000','تجميعات اختبار نافس — 1000 سؤال',49,'📝')"><span class="f-icon">📝</span> نافس — تجميعة 1000 سؤال</a>
-              <a class="g-file" onclick="event.stopPropagation();openBuyModal('science-summary','ملخص مادة العلوم',29,'🔬')"><span class="f-icon">🔬</span> ملخص العلوم</a>
+              <a class="g-file" href="/nafs.html" onclick="event.stopPropagation()"><span class="f-icon">📝</span> نافس — تجميعة 1000 سؤال</a>
+              <a class="g-file" onclick="event.stopPropagation();openBuyModal('science-summary','ملخص مادة العلوم — الصف السادس، الفصل الثاني',29,'🔬')"><span class="f-icon">🔬</span> ملخص العلوم</a>
             </div>
           </div>
         </div>
@@ -770,7 +784,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 </section>
 
 <!-- FEATURES -->
-<section class="section section-w">
+<section class="section section-w" id="features">
   <div class="container">
     <div class="sec-head" data-r>
       <div class="sec-over">لماذا الإتقان؟</div>
@@ -791,6 +805,11 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
         <div class="feat-ic" style="background:var(--amber-soft);color:var(--amber)">📱</div>
         <h3>يعمل على كل جهاز</h3>
         <p>تصميم متجاوب يعمل بسلاسة على الجوال والتابلت والكمبيوتر</p>
+      </div>
+      <div class="feat" data-r>
+        <div class="feat-ic" style="background:var(--violet-soft);color:var(--violet)">🎯</div>
+        <h3>اختبار تفاعلي</h3>
+        <p>حل الأسئلة مباشرة في الموقع وتابع تقدمك بشكل مباشر</p>
       </div>
     </div>
   </div>
@@ -813,8 +832,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#" class="logo">
-          <div class="logo-mark">إ</div>
-          <div class="logo-text" style="color:#fff">الإتقان <span>التعليمية</span></div>
+          <img src="/logo.png" alt="الإتقان التعليمية" style="filter:brightness(0) invert(1)">
         </a>
         <p>منصة تعليمية سعودية توفّر تجميعات أسئلة وملخصات لجميع المراحل الدراسية.</p>
       </div>
@@ -830,7 +848,13 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
         <h4>المنتجات</h4>
         <ul>
           <li><a href="#products">تجميعات نافس</a></li>
-          <li><a href="#products">ملخص العلوم</a></li>
+          <li><a href="#products">ملخص العلوم — سادس ف2</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>تواصل معنا</h4>
+        <ul>
+          <li><a href="javascript:openWhatsApp()">واتساب</a></li>
         </ul>
       </div>
     </div>
@@ -900,6 +924,9 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   </div>
 </div>
 
+<!-- Scroll to top -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="العودة للأعلى">&#8593;</button>
+
 <!-- WhatsApp Button -->
 <button class="whatsapp-btn" onclick="openWhatsApp()" title="تواصل معنا عبر واتساب">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -917,8 +944,11 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 let currentProduct = {};
 let currentOrderId = null;
 
-// === Nav scroll shadow ===
-window.addEventListener('scroll', () => document.querySelector('.nav').classList.toggle('shadow', scrollY > 10));
+// === Nav scroll shadow + scroll-to-top ===
+window.addEventListener('scroll', () => {
+  document.querySelector('.nav').classList.toggle('shadow', scrollY > 10);
+  document.getElementById('scrollTop').classList.toggle('show', scrollY > 400);
+});
 
 // === Reveal on scroll ===
 const obs = new IntersectionObserver(e => e.forEach(x => {
