@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة التحكم — الإتقان التعليمية</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0F172A;--ink-2:#334155;--ink-3:#64748B;--ink-4:#94A3B8;
+  --bg:#F8FAFC;--white:#FFFFFF;
+  --gray-50:#F8FAFC;--gray-100:#F1F5F9;--gray-200:#E2E8F0;
+  --blue:#1D4ED8;--blue-light:#3B82F6;--blue-soft:#EFF6FF;
+  --green:#059669;--green-soft:#ECFDF5;
+  --amber:#D97706;--amber-soft:#FFFBEB;
+  --rose:#E11D48;--rose-soft:#FFF1F2;
+  --font:'Noto Kufi Arabic',sans-serif;
+  --font-body:'IBM Plex Sans Arabic',sans-serif;
+}
+body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-height:1.7}
+
+/* Login */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-card{background:var(--white);border-radius:20px;padding:40px;max-width:400px;width:100%;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.login-card h2{font-family:var(--font);font-size:22px;font-weight:800;margin-bottom:24px;text-align:center}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-weight:600;font-size:13px;margin-bottom:6px;color:var(--ink-2)}
+.form-group input{width:100%;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-family:var(--font-body);font-size:14px;outline:none}
+.form-group input:focus{border-color:var(--blue)}
+.login-btn{width:100%;padding:12px;border:none;border-radius:12px;background:var(--blue);color:#fff;font-family:var(--font-body);font-size:15px;font-weight:700;cursor:pointer;margin-top:8px}
+.login-btn:hover{background:var(--blue-light)}
+.login-error{color:var(--rose);font-size:13px;text-align:center;margin-top:12px;display:none}
+
+/* Dashboard */
+.dashboard{display:none}
+.dash-nav{background:var(--white);border-bottom:1px solid var(--gray-200);padding:0 24px}
+.dash-nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.dash-nav h1{font-family:var(--font);font-size:16px;font-weight:800}
+.dash-nav h1 span{color:var(--blue)}
+.logout-btn{padding:6px 16px;border-radius:8px;border:1px solid var(--gray-200);background:var(--white);cursor:pointer;font-family:var(--font-body);font-size:13px;color:var(--ink-3)}
+.logout-btn:hover{border-color:var(--rose);color:var(--rose);background:var(--rose-soft)}
+
+.dash-content{max-width:1100px;margin:0 auto;padding:24px}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+.stat-card{background:var(--white);border-radius:16px;padding:20px 22px;border:1px solid var(--gray-200)}
+.stat-card .label{font-size:12px;color:var(--ink-4);font-weight:600;margin-bottom:4px}
+.stat-card .value{font-family:var(--font);font-size:28px;font-weight:900;color:var(--ink)}
+.stat-card .sub{font-size:12px;color:var(--ink-4);margin-top:2px}
+
+/* Table */
+.table-card{background:var(--white);border-radius:16px;border:1px solid var(--gray-200);overflow:hidden}
+.table-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--gray-200)}
+.table-header h2{font-family:var(--font);font-size:16px;font-weight:800}
+.table-header .count{font-size:13px;color:var(--ink-4)}
+table{width:100%;border-collapse:collapse}
+th{background:var(--gray-50);padding:10px 16px;font-size:12px;font-weight:700;color:var(--ink-3);text-align:right;border-bottom:1px solid var(--gray-200)}
+td{padding:12px 16px;font-size:13px;border-bottom:1px solid var(--gray-100)}
+tr:hover td{background:var(--gray-50)}
+.status{padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700;display:inline-block}
+.status-paid{background:var(--green-soft);color:var(--green)}
+.status-pending{background:var(--amber-soft);color:var(--amber)}
+.status-failed{background:var(--rose-soft);color:var(--rose)}
+.approve-btn{padding:4px 12px;border-radius:6px;border:1px solid var(--green);background:var(--green-soft);color:var(--green);cursor:pointer;font-family:var(--font-body);font-size:12px;font-weight:600}
+.approve-btn:hover{background:var(--green);color:#fff}
+.copy-btn{padding:4px 10px;border-radius:6px;border:1px solid var(--gray-200);background:var(--white);cursor:pointer;font-size:12px;color:var(--ink-3)}
+.copy-btn:hover{border-color:var(--blue);color:var(--blue)}
+.empty-msg{text-align:center;padding:48px;color:var(--ink-4);font-size:14px}
+
+@media(max-width:768px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .table-card{overflow-x:auto}
+  table{min-width:600px}
+}
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Login Page -->
+<div class="login-page" id="loginPage">
+  <div class="login-card">
+    <h2>🔐 لوحة التحكم</h2>
+    <form onsubmit="login(event)">
+      <div class="form-group">
+        <label>اسم المستخدم</label>
+        <input type="text" id="loginUser" required>
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input type="password" id="loginPass" required>
+      </div>
+      <button type="submit" class="login-btn">دخول</button>
+    </form>
+    <div class="login-error" id="loginError">بيانات الدخول غير صحيحة</div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div class="dashboard" id="dashboard">
+  <nav class="dash-nav">
+    <div class="dash-nav-inner">
+      <h1>لوحة التحكم — <span>الإتقان</span></h1>
+      <button class="logout-btn" onclick="logout()">خروج</button>
+    </div>
+  </nav>
+
+  <div class="dash-content">
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <div class="label">إجمالي الطلبات</div>
+        <div class="value" id="statTotalOrders">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">إجمالي الإيرادات</div>
+        <div class="value" id="statTotalRevenue">0</div>
+        <div class="sub">ريال سعودي</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">طلبات اليوم</div>
+        <div class="value" id="statTodayOrders">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">إيرادات اليوم</div>
+        <div class="value" id="statTodayRevenue">0</div>
+        <div class="sub">ريال سعودي</div>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <div class="table-header">
+        <h2>الطلبات</h2>
+        <span class="count" id="orderCount">0 طلب</span>
+      </div>
+      <div id="ordersTable"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let adminToken = localStorage.getItem('admin_token');
+
+if (adminToken) {
+  showDashboard();
+}
+
+async function login(e) {
+  e.preventDefault();
+  const user = document.getElementById('loginUser').value;
+  const pass = document.getElementById('loginPass').value;
+
+  try {
+    const res = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: user, password: pass })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    adminToken = data.token;
+    localStorage.setItem('admin_token', adminToken);
+    showDashboard();
+  } catch {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+function logout() {
+  adminToken = null;
+  localStorage.removeItem('admin_token');
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('loginPage').style.display = 'flex';
+}
+
+async function showDashboard() {
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  await Promise.all([loadStats(), loadOrders()]);
+}
+
+async function apiFetch(url) {
+  const res = await fetch(url, { headers: { 'Authorization': 'Bearer ' + adminToken } });
+  if (res.status === 401) { logout(); return null; }
+  return res.json();
+}
+
+async function loadStats() {
+  const data = await apiFetch('/api/admin/stats');
+  if (!data) return;
+  document.getElementById('statTotalOrders').textContent = data.total_orders;
+  document.getElementById('statTotalRevenue').textContent = data.total_revenue;
+  document.getElementById('statTodayOrders').textContent = data.today_orders;
+  document.getElementById('statTodayRevenue').textContent = data.today_revenue;
+}
+
+async function loadOrders() {
+  const orders = await apiFetch('/api/admin/orders');
+  if (!orders) return;
+  document.getElementById('orderCount').textContent = orders.length + ' طلب';
+
+  if (orders.length === 0) {
+    document.getElementById('ordersTable').innerHTML = '<div class="empty-msg">لا توجد طلبات بعد</div>';
+    return;
+  }
+
+  let html = '<table><thead><tr><th>التاريخ</th><th>العميل</th><th>الجوال</th><th>المنتج</th><th>المبلغ</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody>';
+
+  for (const o of orders) {
+    const date = new Date(o.created_at).toLocaleDateString('ar-SA', { year: 'numeric', month: 'short', day: 'numeric' });
+    const statusClass = o.status === 'paid' ? 'status-paid' : o.status === 'failed' ? 'status-failed' : 'status-pending';
+    const statusText = o.status === 'paid' ? 'مدفوع' : o.status === 'failed' ? 'فشل' : 'بانتظار الدفع';
+
+    let action = '';
+    if (o.status === 'pending') {
+      action = `<button class="approve-btn" onclick="approveOrder('${o.id}')">اعتماد يدوي</button>`;
+    } else if (o.status === 'paid' && o.download_token) {
+      action = `<button class="copy-btn" onclick="copyLink('${o.download_token}')">نسخ رابط التحميل</button>`;
+    }
+
+    html += `<tr>
+      <td>${date}</td>
+      <td>${escapeHtml(o.customer_name || '—')}</td>
+      <td dir="ltr">${escapeHtml(o.customer_phone || '—')}</td>
+      <td>${escapeHtml(o.product_name)}</td>
+      <td>${o.amount} ر.س</td>
+      <td><span class="status ${statusClass}">${statusText}</span></td>
+      <td>${action}</td>
+    </tr>`;
+  }
+
+  html += '</tbody></table>';
+  document.getElementById('ordersTable').innerHTML = html;
+}
+
+async function approveOrder(orderId) {
+  if (!confirm('هل تريد اعتماد هذا الطلب يدوياً وإرسال رابط التحميل؟')) return;
+  const res = await fetch('/api/admin/orders/' + orderId + '/approve', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + adminToken }
+  });
+  if (res.ok) {
+    const data = await res.json();
+    alert('تم الاعتماد! رابط التحميل:\n' + window.location.origin + '/download.html?token=' + data.download_token);
+    loadOrders();
+    loadStats();
+  }
+}
+
+function copyLink(token) {
+  const link = window.location.origin + '/download.html?token=' + token;
+  navigator.clipboard.writeText(link).then(() => alert('تم نسخ الرابط!'));
+}
+
+function escapeHtml(text) {
+  const d = document.createElement('div');
+  d.textContent = text;
+  return d.innerHTML;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تحميل الملف — الإتقان التعليمية</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0F172A;--ink-3:#64748B;--ink-4:#94A3B8;
+  --bg:#FAFBFD;--white:#FFFFFF;
+  --gray-100:#F1F5F9;--gray-200:#E2E8F0;
+  --blue:#1D4ED8;--blue-soft:#EFF6FF;
+  --green:#059669;--green-soft:#ECFDF5;
+  --rose:#E11D48;--rose-soft:#FFF1F2;
+  --font:'Noto Kufi Arabic',sans-serif;
+  --font-body:'IBM Plex Sans Arabic',sans-serif;
+}
+body{font-family:var(--font-body);background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.card{background:var(--white);border-radius:24px;padding:48px 40px;max-width:460px;width:100%;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,.08)}
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:32px}
+.logo-mark{width:36px;height:36px;background:var(--blue);border-radius:10px;display:grid;place-items:center;color:#fff;font-family:var(--font);font-weight:900;font-size:16px}
+.logo-text{font-family:var(--font);font-weight:800;font-size:17px;color:var(--ink)}
+.logo-text span{color:var(--blue)}
+.icon{font-size:56px;margin-bottom:16px}
+h1{font-family:var(--font);font-size:22px;font-weight:800;margin-bottom:8px}
+.desc{color:var(--ink-3);font-size:14px;line-height:1.7;margin-bottom:24px}
+.info{display:flex;gap:24px;justify-content:center;margin-bottom:28px}
+.info-item{text-align:center}
+.info-val{font-family:var(--font);font-weight:800;font-size:20px;color:var(--ink)}
+.info-label{font-size:12px;color:var(--ink-4);margin-top:2px}
+.dl-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 36px;border-radius:14px;
+  background:var(--green);color:#fff;
+  font-family:var(--font-body);font-size:16px;font-weight:700;
+  text-decoration:none;transition:.25s;border:none;cursor:pointer;
+}
+.dl-btn:hover{background:#047857;transform:translateY(-2px);box-shadow:0 6px 20px rgba(5,150,105,.25)}
+.dl-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.error-box{background:var(--rose-soft);color:var(--rose);padding:16px;border-radius:12px;font-size:14px}
+.back-link{display:inline-block;margin-top:24px;color:var(--blue);text-decoration:none;font-size:14px;font-weight:500}
+.back-link:hover{text-decoration:underline}
+#loading{color:var(--ink-3);font-size:14px}
+</style>
+</head>
+<body>
+<div class="card">
+  <a href="/" class="logo">
+    <div class="logo-mark">إ</div>
+    <div class="logo-text">الإتقان <span>التعليمية</span></div>
+  </a>
+
+  <div id="loading">جاري التحقق من الرابط...</div>
+  <div id="content" style="display:none"></div>
+</div>
+
+<script>
+async function init() {
+  const token = new URLSearchParams(window.location.search).get('token');
+  const content = document.getElementById('content');
+  const loading = document.getElementById('loading');
+
+  if (!token) {
+    loading.style.display = 'none';
+    content.style.display = 'block';
+    content.innerHTML = '<div class="error-box">رابط غير صالح</div><a href="/" class="back-link">← العودة للرئيسية</a>';
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/download/' + token + '/info');
+    const data = await res.json();
+    loading.style.display = 'none';
+    content.style.display = 'block';
+
+    if (!res.ok) {
+      content.innerHTML = `<div class="icon">❌</div><h1>رابط غير صالح</h1><p class="desc">${data.error}</p><a href="/" class="back-link">← العودة للرئيسية</a>`;
+      return;
+    }
+
+    if (data.expired) {
+      content.innerHTML = '<div class="icon">⏰</div><h1>انتهت صلاحية الرابط</h1><p class="desc">رابط التحميل انتهت صلاحيته. تواصل معنا للمساعدة.</p><a href="/" class="back-link">← العودة للرئيسية</a>';
+      return;
+    }
+
+    if (data.downloads_remaining <= 0) {
+      content.innerHTML = '<div class="icon">🚫</div><h1>تم استنفاد التحميلات</h1><p class="desc">تم تجاوز الحد الأقصى للتحميل (5 مرات). تواصل معنا للمساعدة.</p><a href="/" class="back-link">← العودة للرئيسية</a>';
+      return;
+    }
+
+    const expDate = new Date(data.expires_at);
+    const hours = Math.max(0, Math.round((expDate - new Date()) / 3600000));
+
+    content.innerHTML = `
+      <div class="icon">📥</div>
+      <h1>${data.product_name}</h1>
+      <p class="desc">ملفك جاهز للتحميل</p>
+      <div class="info">
+        <div class="info-item">
+          <div class="info-val">${data.downloads_remaining}</div>
+          <div class="info-label">تحميلات متبقية</div>
+        </div>
+        <div class="info-item">
+          <div class="info-val">${hours}</div>
+          <div class="info-label">ساعة متبقية</div>
+        </div>
+      </div>
+      <a href="/api/download/${token}" class="dl-btn">⬇️ تحميل الملف PDF</a>
+      <br><a href="/" class="back-link">← العودة للرئيسية</a>
+    `;
+  } catch {
+    loading.style.display = 'none';
+    content.style.display = 'block';
+    content.innerHTML = '<div class="error-box">حدث خطأ في الاتصال بالسيرفر</div><a href="/" class="back-link">← العودة للرئيسية</a>';
+  }
+}
+
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الإتقان التعليمية</title>
+<meta name="description" content="منصة الإتقان التعليمية — تجميعات أسئلة اختبار نافس وملخصات تعليمية لجميع المراحل الدراسية">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0F172A;
+  --ink-2:#334155;
+  --ink-3:#64748B;
+  --ink-4:#94A3B8;
+  --ink-5:#CBD5E1;
+  --bg:#FAFBFD;
+  --white:#FFFFFF;
+  --gray-50:#F8FAFC;
+  --gray-100:#F1F5F9;
+  --gray-200:#E2E8F0;
+  --gray-300:#CBD5E1;
+  --blue:#1D4ED8;
+  --blue-light:#3B82F6;
+  --blue-soft:#EFF6FF;
+  --blue-glow:rgba(29,78,216,.1);
+  --green:#059669;
+  --green-soft:#ECFDF5;
+  --amber:#D97706;
+  --amber-soft:#FFFBEB;
+  --rose:#E11D48;
+  --rose-soft:#FFF1F2;
+  --violet:#7C3AED;
+  --violet-soft:#F5F3FF;
+  --teal:#0D9488;
+  --teal-soft:#F0FDFA;
+  --font:'Noto Kufi Arabic',sans-serif;
+  --font-body:'IBM Plex Sans Arabic',sans-serif;
+  --radius:12px;
+  --radius-lg:20px;
+  --radius-xl:28px;
+  --shadow:0 1px 3px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.03);
+  --shadow-md:0 4px 12px rgba(0,0,0,.06);
+  --shadow-lg:0 12px 32px rgba(0,0,0,.08);
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-height:1.7}
+::selection{background:var(--blue);color:#fff}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:10px}
+
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+[data-r]{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+[data-r].v{opacity:1;transform:translateY(0)}
+.au{animation:up .7s var(--ease) both}
+.au2{animation-delay:.08s}.au3{animation-delay:.16s}.au4{animation-delay:.24s}.au5{animation-delay:.32s}
+
+/* ===== NAV ===== */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--gray-200);
+}
+.nav.shadow{box-shadow:var(--shadow-md)}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  height:60px;
+}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{
+  width:36px;height:36px;background:var(--blue);border-radius:10px;
+  display:grid;place-items:center;color:#fff;
+  font-family:var(--font);font-weight:900;font-size:16px;
+  box-shadow:0 2px 8px rgba(29,78,216,.25);
+}
+.logo-text{font-family:var(--font);font-weight:800;font-size:17px;color:var(--ink)}
+.logo-text span{color:var(--blue)}
+
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--ink-3);font-size:14px;font-weight:500;
+  padding:7px 14px;border-radius:8px;transition:.2s var(--ease);
+}
+.nav-links a:hover,.nav-links a.on{color:var(--blue);background:var(--blue-soft)}
+
+.nav-cta{
+  padding:8px 20px;border-radius:10px;
+  background:var(--blue);color:#fff;
+  font-family:var(--font-body);font-size:13px;font-weight:600;
+  border:none;cursor:pointer;text-decoration:none;
+  transition:.2s var(--ease);
+}
+.nav-cta:hover{background:var(--blue-light);box-shadow:0 2px 10px rgba(29,78,216,.25)}
+
+.hamburger{display:none;background:none;border:none;cursor:pointer}
+.hamburger svg{width:22px;height:22px;color:var(--ink)}
+
+/* Mobile nav */
+.nav-links.show{
+  display:flex!important;flex-direction:column;
+  position:absolute;top:60px;right:0;left:0;
+  background:var(--white);border-bottom:1px solid var(--gray-200);
+  padding:12px 24px;box-shadow:var(--shadow-lg);
+}
+
+/* ===== HERO ===== */
+.hero{
+  padding:80px 0 64px;
+  background:var(--white);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-200px;right:-200px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,var(--blue-glow),transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{text-align:center;position:relative;z-index:1;max-width:700px;margin:0 auto}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--blue-soft);color:var(--blue);
+  padding:6px 16px;border-radius:100px;font-size:13px;font-weight:600;
+  margin-bottom:24px;
+}
+.hero h1{
+  font-family:var(--font);font-size:42px;font-weight:900;
+  line-height:1.25;color:var(--ink);margin-bottom:18px;
+}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero-desc{
+  font-size:17px;color:var(--ink-3);line-height:1.8;
+  margin-bottom:36px;max-width:540px;margin-inline:auto;
+}
+.hero-btns{display:flex;gap:12px;justify-content:center;margin-bottom:48px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:12px;
+  font-family:var(--font-body);font-size:14px;font-weight:600;
+  border:none;cursor:pointer;text-decoration:none;
+  transition:.25s var(--ease);
+}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 2px 10px rgba(29,78,216,.2)}
+.btn-blue:hover{background:var(--blue-light);transform:translateY(-2px);box-shadow:0 6px 20px rgba(29,78,216,.25)}
+.btn-out{background:transparent;color:var(--ink-2);border:1.5px solid var(--gray-200)}
+.btn-out:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-soft)}
+
+.hero-stats{display:flex;justify-content:center;gap:48px}
+.stat-n{font-family:var(--font);font-size:28px;font-weight:800;color:var(--ink)}
+.stat-n span{color:var(--blue)}
+.stat-l{font-size:13px;color:var(--ink-4);margin-top:2px}
+
+/* ===== SECTION ===== */
+.section{padding:80px 0}
+.section-w{background:var(--white)}
+.sec-head{margin-bottom:44px}
+.sec-over{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.sec-title{font-family:var(--font);font-size:30px;font-weight:800;color:var(--ink);margin-bottom:10px}
+.sec-desc{font-size:15px;color:var(--ink-3);max-width:520px;line-height:1.7}
+
+/* ===== PRODUCTS ===== */
+.products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.p-card{
+  background:var(--white);border:1px solid var(--gray-200);
+  border-radius:var(--radius-lg);overflow:hidden;
+  transition:.3s var(--ease);position:relative;
+}
+.p-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:transparent}
+.p-card.soon{opacity:.75}
+.p-card.soon:hover{transform:none;box-shadow:none;border-color:var(--gray-200)}
+.p-badge{
+  position:absolute;top:14px;right:14px;z-index:2;
+  padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;
+}
+.badge-hot{background:var(--rose);color:#fff}
+.badge-new{background:var(--blue);color:#fff}
+.badge-soon{background:var(--gray-200);color:var(--ink-3)}
+.p-img{
+  height:160px;display:grid;place-items:center;position:relative;overflow:hidden;
+}
+.p-img-bg{position:absolute;inset:0}
+.p-img .emoji{font-size:52px;position:relative;z-index:1;filter:drop-shadow(0 4px 10px rgba(0,0,0,.1))}
+.p-dots{
+  position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.15) 1px,transparent 1px);
+  background-size:14px 14px;
+}
+.p-body{padding:22px}
+.p-cat{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+.p-title{font-family:var(--font);font-size:18px;font-weight:700;color:var(--ink);margin-bottom:8px;line-height:1.4}
+.p-desc{font-size:13.5px;color:var(--ink-3);line-height:1.7;margin-bottom:18px}
+.p-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:14px;border-top:1px solid var(--gray-100);
+}
+.p-price{font-family:var(--font);font-weight:800;font-size:20px;color:var(--ink)}
+.p-price .cur{font-size:13px;font-weight:500;color:var(--ink-4)}
+.p-btn{
+  padding:8px 18px;border-radius:8px;
+  font-family:var(--font-body);font-size:13px;font-weight:600;
+  border:none;cursor:pointer;
+  background:var(--blue);color:#fff;transition:.2s var(--ease);
+}
+.p-btn:hover{background:var(--blue-light)}
+.p-btn.soon-btn{background:var(--gray-100);color:var(--ink-4);cursor:default}
+.p-btn.soon-btn:hover{background:var(--gray-100)}
+
+.soon-overlay{
+  position:absolute;inset:0;z-index:3;
+  background:rgba(255,255,255,.5);backdrop-filter:blur(1px);
+  display:grid;place-items:center;
+  border-radius:var(--radius-lg);
+}
+.soon-label{
+  background:var(--white);border:1px solid var(--gray-200);
+  padding:10px 28px;border-radius:100px;
+  font-family:var(--font);font-weight:700;font-size:15px;
+  color:var(--ink-3);box-shadow:var(--shadow);
+}
+
+/* ===== STAGES ===== */
+.stage-tabs{
+  display:flex;gap:6px;
+  background:var(--gray-50);border:1px solid var(--gray-200);
+  padding:5px;border-radius:14px;width:fit-content;margin-bottom:32px;
+}
+.s-tab{
+  padding:9px 24px;border-radius:10px;
+  font-family:var(--font-body);font-size:14px;font-weight:600;
+  border:none;cursor:pointer;background:transparent;color:var(--ink-3);
+  transition:.2s var(--ease);display:flex;align-items:center;gap:6px;
+}
+.s-tab:hover{color:var(--ink-2);background:var(--white)}
+.s-tab.on{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(29,78,216,.2)}
+
+.s-panel{display:none}
+.s-panel.on{display:block;animation:scaleIn .4s var(--ease) both}
+
+.s-head{
+  display:flex;align-items:center;gap:18px;
+  background:var(--white);border:1px solid var(--gray-200);
+  border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:20px;
+}
+.s-icon{
+  width:56px;height:56px;border-radius:14px;
+  display:grid;place-items:center;font-size:26px;flex-shrink:0;
+}
+.s-head h3{font-family:var(--font);font-size:20px;font-weight:800}
+.s-head p{font-size:13px;color:var(--ink-3);margin-top:4px}
+.s-chips{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.s-chip{
+  padding:4px 12px;border-radius:100px;font-size:12px;font-weight:600;
+  background:var(--gray-100);color:var(--ink-3);
+}
+
+.grade-list{display:flex;flex-direction:column;gap:6px}
+.g-row{
+  background:var(--white);border:1px solid var(--gray-200);
+  border-radius:var(--radius);transition:.2s var(--ease);
+}
+.g-row:hover{border-color:var(--blue-light)}
+.g-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;cursor:pointer;
+}
+.g-right{display:flex;align-items:center;gap:12px}
+.g-num{
+  width:32px;height:32px;border-radius:8px;
+  display:grid;place-items:center;
+  font-family:var(--font);font-weight:800;font-size:13px;
+}
+.g-name{font-weight:600;font-size:14px}
+.g-left{display:flex;align-items:center;gap:10px}
+.g-meta{font-size:12px;color:var(--ink-4)}
+.g-soon-tag{
+  padding:3px 10px;border-radius:6px;font-size:11px;font-weight:600;
+  background:var(--amber-soft);color:var(--amber);
+}
+.g-available-tag{
+  padding:3px 10px;border-radius:6px;font-size:11px;font-weight:600;
+  background:var(--green-soft);color:var(--green);
+}
+.g-chevron{
+  width:24px;height:24px;border-radius:6px;
+  background:var(--gray-100);display:grid;place-items:center;
+  font-size:11px;color:var(--ink-4);transition:.2s var(--ease);
+}
+.g-row.open .g-chevron{transform:rotate(180deg);background:var(--blue-soft);color:var(--blue)}
+.g-body{display:none;padding:0 20px 16px;border-top:1px solid var(--gray-100)}
+.g-row.open .g-body{display:block;animation:up .3s var(--ease) both}
+.g-files{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin-top:14px}
+.g-file{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:8px;
+  background:var(--gray-50);border:1px solid var(--gray-200);
+  font-size:13px;font-weight:500;color:var(--ink-2);
+  cursor:pointer;transition:.2s var(--ease);text-decoration:none;
+}
+.g-file:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-soft)}
+.g-file .f-icon{font-size:16px}
+
+/* ===== FEATURES ===== */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feat{
+  padding:28px 22px;border-radius:var(--radius-lg);
+  background:var(--white);border:1px solid var(--gray-200);
+  text-align:center;transition:.3s var(--ease);
+}
+.feat:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:transparent}
+.feat-ic{
+  width:50px;height:50px;border-radius:13px;
+  display:grid;place-items:center;font-size:24px;
+  margin:0 auto 16px;
+}
+.feat h3{font-family:var(--font);font-weight:700;font-size:15px;margin-bottom:6px}
+.feat p{font-size:13px;color:var(--ink-3);line-height:1.7}
+
+/* ===== CTA ===== */
+.cta-box{
+  background:var(--blue);border-radius:var(--radius-xl);
+  padding:56px 40px;text-align:center;color:#fff;
+  position:relative;overflow:hidden;
+}
+.cta-box::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 20% 80%,rgba(255,255,255,.06),transparent 50%),
+    radial-gradient(circle at 80% 20%,rgba(255,255,255,.04),transparent 50%);
+}
+.cta-box h2{font-family:var(--font);font-size:30px;font-weight:900;margin-bottom:12px;position:relative}
+.cta-box p{font-size:15px;opacity:.8;margin-bottom:28px;position:relative}
+.cta-box .btn{position:relative}
+.btn-w{background:#fff;color:var(--blue)}
+.btn-w:hover{background:var(--gray-50);transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,.15)}
+
+/* ===== FOOTER ===== */
+.footer{
+  background:var(--ink);color:rgba(255,255,255,.7);
+  padding:48px 0 24px;
+}
+.footer-grid{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr;
+  gap:40px;margin-bottom:36px;
+}
+.footer-brand p{font-size:13px;line-height:1.8;opacity:.6;margin-top:12px;max-width:260px}
+.footer-col h4{font-family:var(--font);font-weight:700;font-size:13px;color:#fff;margin-bottom:14px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:8px}
+.footer-col a{text-decoration:none;color:rgba(255,255,255,.5);font-size:13px;transition:.2s}
+.footer-col a:hover{color:var(--amber)}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:18px;font-size:12px;opacity:.4;text-align:center;
+}
+
+/* ===== MODAL ===== */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.5);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.active{display:flex}
+.modal{
+  background:var(--white);border-radius:var(--radius-xl);
+  width:100%;max-width:480px;max-height:90vh;overflow-y:auto;
+  box-shadow:0 24px 48px rgba(0,0,0,.15);
+  animation:scaleIn .3s var(--ease) both;
+}
+.modal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;border-bottom:1px solid var(--gray-200);
+}
+.modal-header h3{font-family:var(--font);font-weight:800;font-size:18px}
+.modal-close{
+  width:32px;height:32px;border-radius:8px;border:none;
+  background:var(--gray-100);cursor:pointer;font-size:18px;
+  display:grid;place-items:center;color:var(--ink-3);transition:.2s;
+}
+.modal-close:hover{background:var(--rose-soft);color:var(--rose)}
+.modal-body{padding:24px}
+.modal-product{
+  display:flex;align-items:center;gap:14px;
+  padding:16px;background:var(--gray-50);border-radius:var(--radius);
+  margin-bottom:24px;
+}
+.modal-product-icon{font-size:32px}
+.modal-product-name{font-family:var(--font);font-weight:700;font-size:14px}
+.modal-product-price{font-size:13px;color:var(--blue);font-weight:600;margin-top:2px}
+
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-weight:600;font-size:13px;margin-bottom:6px;color:var(--ink-2)}
+.form-group input{
+  width:100%;padding:10px 14px;border:1.5px solid var(--gray-200);
+  border-radius:10px;font-family:var(--font-body);font-size:14px;
+  transition:.2s;outline:none;
+}
+.form-group input:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+.form-group input::placeholder{color:var(--ink-4)}
+
+.form-submit{
+  width:100%;padding:13px;border:none;border-radius:12px;
+  background:var(--blue);color:#fff;font-family:var(--font-body);
+  font-size:15px;font-weight:700;cursor:pointer;transition:.2s;
+  margin-top:8px;
+}
+.form-submit:hover{background:var(--blue-light)}
+.form-submit:disabled{opacity:.6;cursor:not-allowed}
+
+.form-note{font-size:12px;color:var(--ink-4);text-align:center;margin-top:12px;line-height:1.6}
+
+/* Payment step */
+.step{display:none}
+.step.active{display:block;animation:scaleIn .3s var(--ease) both}
+
+/* Success page elements */
+.success-box{
+  text-align:center;padding:20px 0;
+}
+.success-icon{font-size:56px;margin-bottom:16px}
+.success-title{font-family:var(--font);font-weight:800;font-size:20px;margin-bottom:8px;color:var(--green)}
+.success-desc{font-size:14px;color:var(--ink-3);line-height:1.7;margin-bottom:24px}
+.download-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 32px;border-radius:12px;
+  background:var(--green);color:#fff;
+  font-family:var(--font-body);font-size:15px;font-weight:700;
+  text-decoration:none;transition:.2s;
+}
+.download-btn:hover{background:#047857;transform:translateY(-2px)}
+
+/* Alert */
+.alert{
+  padding:12px 16px;border-radius:10px;font-size:13px;font-weight:500;
+  margin-bottom:16px;display:none;
+}
+.alert.error{display:block;background:var(--rose-soft);color:var(--rose)}
+.alert.success{display:block;background:var(--green-soft);color:var(--green)}
+
+/* WhatsApp Button */
+.whatsapp-btn{
+  position:fixed;bottom:24px;left:24px;z-index:99;
+  width:56px;height:56px;border-radius:50%;
+  background:#25D366;color:#fff;border:none;cursor:pointer;
+  box-shadow:0 4px 16px rgba(37,211,102,.35);
+  display:grid;place-items:center;
+  transition:.3s var(--ease);
+}
+.whatsapp-btn:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(37,211,102,.45)}
+.whatsapp-btn svg{width:28px;height:28px}
+
+/* Toast notification */
+.toast{
+  position:fixed;top:80px;right:50%;transform:translateX(50%) translateY(-100px);
+  z-index:1001;padding:14px 24px;border-radius:12px;
+  background:var(--ink);color:#fff;font-size:14px;font-weight:500;
+  box-shadow:var(--shadow-lg);transition:.4s var(--ease);opacity:0;
+}
+.toast.show{transform:translateX(50%) translateY(0);opacity:1}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .products-grid{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:24px}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:block}
+  .hero{padding:56px 0 48px}
+  .hero h1{font-size:30px}
+  .hero-stats{gap:28px}
+  .stat-n{font-size:22px}
+  .section{padding:56px 0}
+  .sec-title{font-size:24px}
+  .stage-tabs{width:100%;flex-wrap:wrap}
+  .s-tab{flex:1;justify-content:center;font-size:13px;padding:9px 12px}
+  .s-head{flex-direction:column;text-align:center}
+  .cta-box{padding:40px 24px}
+  .cta-box h2{font-size:24px}
+  .modal{margin:10px;max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">إ</div>
+      <div class="logo-text">الإتقان <span>التعليمية</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" class="on">الرئيسية</a></li>
+      <li><a href="#stages">المراحل</a></li>
+      <li><a href="#products">المنتجات</a></li>
+    </ul>
+    <a href="#products" class="nav-cta">تصفح المنتجات</a>
+    <button class="hamburger" onclick="this.closest('.nav').querySelector('.nav-links').classList.toggle('show')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge au">📚 منصة تعليمية سعودية</div>
+      <h1 class="au au2">تجميعات اختبار نافس<br><em>1000 سؤال مع الإجابات</em></h1>
+      <p class="hero-desc au au3">منصة الإتقان التعليمية توفّر لك تجميعات أسئلة اختبار نافس الشاملة مع الإجابات النموذجية، وملخصات تعليمية لجميع المراحل الدراسية</p>
+      <div class="hero-btns au au4">
+        <a href="#products" class="btn btn-blue">تصفح المنتجات ←</a>
+        <a href="#stages" class="btn btn-out">المراحل الدراسية</a>
+      </div>
+      <div class="hero-stats au au5">
+        <div>
+          <div class="stat-n">1000<span>+</span></div>
+          <div class="stat-l">سؤال مع الإجابة</div>
+        </div>
+        <div>
+          <div class="stat-n">3</div>
+          <div class="stat-l">مراحل دراسية</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section section-w" id="products">
+  <div class="container">
+    <div class="sec-head" data-r>
+      <div class="sec-over">المنتجات</div>
+      <h2 class="sec-title">المنتجات المتوفرة</h2>
+      <p class="sec-desc">المنتجات الجاهزة حالياً للتحميل — والباقي قريباً بإذن الله</p>
+    </div>
+
+    <div class="products-grid">
+      <div class="p-card" data-r>
+        <span class="p-badge badge-hot">🔥 متوفر الآن</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#1D4ED8,#3B82F6)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">📝</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">اختبار نافس</div>
+          <h3 class="p-title">تجميعات اختبار نافس — 1000 سؤال</h3>
+          <p class="p-desc">تجميعة شاملة تضم 1000 سؤال من اختبارات نافس مع الإجابات النموذجية لكل سؤال</p>
+          <div class="p-foot">
+            <div class="p-price">49 <span class="cur">ر.س</span></div>
+            <button class="p-btn" onclick="openBuyModal('nafs-1000', 'تجميعات اختبار نافس — 1000 سؤال', 49, '📝')">اشترِ الآن</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" data-r>
+        <span class="p-badge badge-new">متوفر</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#059669,#6EE7B7)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">🔬</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">ملخصات</div>
+          <h3 class="p-title">ملخص مادة العلوم</h3>
+          <p class="p-desc">ملخص شامل ومنظّم لمادة العلوم يغطي أهم المفاهيم والمواضيع الأساسية</p>
+          <div class="p-foot">
+            <div class="p-price">29 <span class="cur">ر.س</span></div>
+            <button class="p-btn" onclick="openBuyModal('science-summary', 'ملخص مادة العلوم', 29, '🔬')">اشترِ الآن</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card soon" data-r>
+        <div class="soon-overlay"><div class="soon-label">⏳ قريباً</div></div>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#94A3B8,#CBD5E1)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">🧠</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">اختبارات</div>
+          <h3 class="p-title">بنك أسئلة القدرات</h3>
+          <p class="p-desc">أسئلة محلولة للقسم الكمي واللفظي — قريباً بإذن الله</p>
+          <div class="p-foot">
+            <div class="p-price" style="color:var(--ink-4)">—</div>
+            <button class="p-btn soon-btn">قريباً</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card soon" data-r>
+        <div class="soon-overlay"><div class="soon-label">⏳ قريباً</div></div>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#94A3B8,#CBD5E1)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">🎓</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">اختبارات</div>
+          <h3 class="p-title">حقيبة التحصيلي</h3>
+          <p class="p-desc">ملخصات وتجميعات لاختبار التحصيلي — قريباً بإذن الله</p>
+          <div class="p-foot">
+            <div class="p-price" style="color:var(--ink-4)">—</div>
+            <button class="p-btn soon-btn">قريباً</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGES -->
+<section class="section" id="stages">
+  <div class="container">
+    <div class="sec-head" data-r>
+      <div class="sec-over">المراحل الدراسية</div>
+      <h2 class="sec-title">محتوى لكل مرحلة</h2>
+      <p class="sec-desc">اختر مرحلتك واستعرض المحتوى المتاح — المزيد قريباً</p>
+    </div>
+
+    <div class="stage-tabs" data-r>
+      <button class="s-tab on" data-s="elem">🌟 الابتدائية</button>
+      <button class="s-tab" data-s="mid">🚀 المتوسطة</button>
+      <button class="s-tab" data-s="high">🎯 الثانوية</button>
+    </div>
+
+    <!-- ELEMENTARY -->
+    <div class="s-panel on" id="p-elem">
+      <div class="s-head" style="border-right:4px solid var(--rose)">
+        <div class="s-icon" style="background:var(--rose-soft);color:var(--rose)">🌟</div>
+        <div>
+          <h3>المرحلة الابتدائية</h3>
+          <p>من الصف الأول حتى السادس</p>
+          <div class="s-chips">
+            <span class="s-chip">رياضيات</span>
+            <span class="s-chip">لغتي</span>
+            <span class="s-chip">علوم</span>
+            <span class="s-chip">إنجليزي</span>
+          </div>
+        </div>
+      </div>
+      <div class="grade-list">
+        <div class="g-row" onclick="this.classList.toggle('open')">
+          <div class="g-header">
+            <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">6</div><div class="g-name">الصف السادس الابتدائي</div></div>
+            <div class="g-left"><span class="g-available-tag">متاح</span><div class="g-chevron">▼</div></div>
+          </div>
+          <div class="g-body">
+            <div class="g-files">
+              <a class="g-file" onclick="event.stopPropagation();openBuyModal('nafs-1000','تجميعات اختبار نافس — 1000 سؤال',49,'📝')"><span class="f-icon">📝</span> نافس — تجميعة 1000 سؤال</a>
+              <a class="g-file" onclick="event.stopPropagation();openBuyModal('science-summary','ملخص مادة العلوم',29,'🔬')"><span class="f-icon">🔬</span> ملخص العلوم</a>
+            </div>
+          </div>
+        </div>
+        <div class="g-row">
+          <div class="g-header" style="cursor:default">
+            <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">5</div><div class="g-name">الصف الخامس الابتدائي</div></div>
+            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+          </div>
+        </div>
+        <div class="g-row">
+          <div class="g-header" style="cursor:default">
+            <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">4</div><div class="g-name">الصف الرابع الابتدائي</div></div>
+            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+          </div>
+        </div>
+        <div class="g-row">
+          <div class="g-header" style="cursor:default">
+            <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">3</div><div class="g-name">الصف الثالث الابتدائي</div></div>
+            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+          </div>
+        </div>
+        <div class="g-row">
+          <div class="g-header" style="cursor:default">
+            <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">2</div><div class="g-name">الصف الثاني الابتدائي</div></div>
+            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+          </div>
+        </div>
+        <div class="g-row">
+          <div class="g-header" style="cursor:default">
+            <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">1</div><div class="g-name">الصف الأول الابتدائي</div></div>
+            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MIDDLE -->
+    <div class="s-panel" id="p-mid">
+      <div class="s-head" style="border-right:4px solid var(--teal)">
+        <div class="s-icon" style="background:var(--teal-soft);color:var(--teal)">🚀</div>
+        <div>
+          <h3>المرحلة المتوسطة</h3>
+          <p>من الأول حتى الثالث متوسط</p>
+          <div class="s-chips">
+            <span class="s-chip">رياضيات</span>
+            <span class="s-chip">لغة عربية</span>
+            <span class="s-chip">علوم</span>
+            <span class="s-chip">إنجليزي</span>
+          </div>
+        </div>
+      </div>
+      <div class="grade-list">
+        <div class="g-row">
+          <div class="g-header" style="cursor:default">
+            <div class="g-right"><div class="g-num" style="background:var(--teal-soft);color:var(--teal)">3</div><div class="g-name">الصف الثالث المتوسط</div></div>
+            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+          </div>
+        </div>
+        <div class="g-row">
+          <div class="g-header" style="cursor:default">
+            <div class="g-right"><div class="g-num" style="background:var(--teal-soft);color:var(--teal)">2</div><div class="g-name">الصف الثاني المتوسط</div></div>
+            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+          </div>
+        </div>
+        <div class="g-row">
+          <div class="g-header" style="cursor:default">
+            <div class="g-right"><div class="g-num" style="background:var(--teal-soft);color:var(--teal)">1</div><div class="g-name">الصف الأول المتوسط</div></div>
+            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIGH -->
+    <div class="s-panel" id="p-high">
+      <div class="s-head" style="border-right:4px solid var(--violet)">
+        <div class="s-icon" style="background:var(--violet-soft);color:var(--violet)">🎯</div>
+        <div>
+          <h3>المرحلة الثانوية</h3>
+          <p>المسار العام والتخصصي</p>
+          <div class="s-chips">
+            <span class="s-chip">رياضيات</span>
+            <span class="s-chip">فيزياء</span>
+            <span class="s-chip">كيمياء</span>
+            <span class="s-chip">أحياء</span>
+          </div>
+        </div>
+      </div>
+      <div class="grade-list">
+        <div class="g-row">
+          <div class="g-header" style="cursor:default">
+            <div class="g-right"><div class="g-num" style="background:var(--violet-soft);color:var(--violet)">3</div><div class="g-name">الصف الثالث الثانوي</div></div>
+            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+          </div>
+        </div>
+        <div class="g-row">
+          <div class="g-header" style="cursor:default">
+            <div class="g-right"><div class="g-num" style="background:var(--violet-soft);color:var(--violet)">2</div><div class="g-name">الصف الثاني الثانوي</div></div>
+            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+          </div>
+        </div>
+        <div class="g-row">
+          <div class="g-header" style="cursor:default">
+            <div class="g-right"><div class="g-num" style="background:var(--violet-soft);color:var(--violet)">1</div><div class="g-name">الصف الأول الثانوي</div></div>
+            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section section-w">
+  <div class="container">
+    <div class="sec-head" data-r>
+      <div class="sec-over">لماذا الإتقان؟</div>
+      <h2 class="sec-title">مميزات المنصة</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat" data-r>
+        <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">📝</div>
+        <h3>1000 سؤال مع الإجابة</h3>
+        <p>تجميعة شاملة لأسئلة نافس مع إجابات نموذجية مفصّلة</p>
+      </div>
+      <div class="feat" data-r>
+        <div class="feat-ic" style="background:var(--green-soft);color:var(--green)">⬇️</div>
+        <h3>تحميل فوري</h3>
+        <p>حمّل الملفات مباشرة بصيغة PDF واستخدمها بدون إنترنت</p>
+      </div>
+      <div class="feat" data-r>
+        <div class="feat-ic" style="background:var(--amber-soft);color:var(--amber)">📱</div>
+        <h3>يعمل على كل جهاز</h3>
+        <p>تصميم متجاوب يعمل بسلاسة على الجوال والتابلت والكمبيوتر</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <div class="cta-box" data-r>
+      <h2>ابدأ مذاكرتك الآن</h2>
+      <p>تجميعات نافس وملخص العلوم جاهزين للتحميل</p>
+      <a href="#products" class="btn btn-w btn-blue" style="background:#fff;color:var(--blue)">تصفح المنتجات ←</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">إ</div>
+          <div class="logo-text" style="color:#fff">الإتقان <span>التعليمية</span></div>
+        </a>
+        <p>منصة تعليمية سعودية توفّر تجميعات أسئلة وملخصات لجميع المراحل الدراسية.</p>
+      </div>
+      <div class="footer-col">
+        <h4>المراحل</h4>
+        <ul>
+          <li><a href="#stages">الابتدائية</a></li>
+          <li><a href="#stages">المتوسطة</a></li>
+          <li><a href="#stages">الثانوية</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>المنتجات</h4>
+        <ul>
+          <li><a href="#products">تجميعات نافس</a></li>
+          <li><a href="#products">ملخص العلوم</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 الإتقان التعليمية — جميع الحقوق محفوظة
+    </div>
+  </div>
+</footer>
+
+<!-- BUY MODAL -->
+<div class="modal-overlay" id="buyModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">إتمام الشراء</h3>
+      <button class="modal-close" onclick="closeBuyModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <!-- Step 1: Customer Info -->
+      <div class="step active" id="step1">
+        <div class="modal-product" id="modalProduct">
+          <div class="modal-product-icon" id="modalIcon">📝</div>
+          <div>
+            <div class="modal-product-name" id="modalProductName">—</div>
+            <div class="modal-product-price" id="modalProductPrice">—</div>
+          </div>
+        </div>
+
+        <div id="formAlert" class="alert"></div>
+
+        <form id="buyForm" onsubmit="submitOrder(event)">
+          <div class="form-group">
+            <label for="customerName">الاسم الكامل *</label>
+            <input type="text" id="customerName" placeholder="مثال: محمد أحمد" required>
+          </div>
+          <div class="form-group">
+            <label for="customerPhone">رقم الجوال *</label>
+            <input type="tel" id="customerPhone" placeholder="05XXXXXXXX" required dir="ltr">
+          </div>
+          <div class="form-group">
+            <label for="customerEmail">البريد الإلكتروني (اختياري)</label>
+            <input type="email" id="customerEmail" placeholder="example@email.com" dir="ltr">
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">متابعة للدفع</button>
+        </form>
+        <p class="form-note">بعد الدفع ستحصل على رابط تحميل فوري صالح لمدة 72 ساعة</p>
+      </div>
+
+      <!-- Step 2: Payment -->
+      <div class="step" id="step2">
+        <div id="paymentAlert" class="alert"></div>
+        <div id="moyasarForm"></div>
+        <div style="text-align:center;margin-top:16px">
+          <button onclick="goToStep(1)" style="background:none;border:none;color:var(--blue);cursor:pointer;font-family:var(--font-body);font-size:14px">← رجوع</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Success -->
+      <div class="step" id="step3">
+        <div class="success-box">
+          <div class="success-icon">✅</div>
+          <div class="success-title">تم الشراء بنجاح!</div>
+          <div class="success-desc">شكراً لك! يمكنك تحميل الملف الآن.<br>الرابط صالح لمدة 72 ساعة و 5 تحميلات.</div>
+          <a id="downloadLink" href="#" class="download-btn">⬇️ تحميل الملف</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WhatsApp Button -->
+<button class="whatsapp-btn" onclick="openWhatsApp()" title="تواصل معنا عبر واتساب">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</button>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Moyasar SDK -->
+<link rel="stylesheet" href="https://cdn.moyasar.com/mpf/1.14.0/moyasar.css">
+<script src="https://cdn.moyasar.com/mpf/1.14.0/moyasar.js"></script>
+
+<script>
+// === State ===
+let currentProduct = {};
+let currentOrderId = null;
+
+// === Nav scroll shadow ===
+window.addEventListener('scroll', () => document.querySelector('.nav').classList.toggle('shadow', scrollY > 10));
+
+// === Reveal on scroll ===
+const obs = new IntersectionObserver(e => e.forEach(x => {
+  if (x.isIntersecting) { x.target.classList.add('v'); obs.unobserve(x.target); }
+}), { threshold: .08 });
+document.querySelectorAll('[data-r]').forEach(el => obs.observe(el));
+
+// === Stage tabs ===
+document.querySelectorAll('.s-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.s-tab').forEach(x => x.classList.remove('on'));
+    document.querySelectorAll('.s-panel').forEach(x => x.classList.remove('on'));
+    t.classList.add('on');
+    document.getElementById('p-' + t.dataset.s).classList.add('on');
+  });
+});
+
+// === Smooth scroll ===
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href === '#') return;
+    e.preventDefault();
+    const t = document.querySelector(href);
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
+    // Close mobile menu
+    document.querySelector('.nav-links')?.classList.remove('show');
+  });
+});
+
+// === Buy Modal ===
+function openBuyModal(productId, name, price, icon) {
+  currentProduct = { id: productId, name, price, icon };
+  document.getElementById('modalIcon').textContent = icon;
+  document.getElementById('modalProductName').textContent = name;
+  document.getElementById('modalProductPrice').textContent = price + ' ر.س';
+  goToStep(1);
+  document.getElementById('buyModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBuyModal() {
+  document.getElementById('buyModal').classList.remove('active');
+  document.body.style.overflow = '';
+  // Reset form
+  document.getElementById('buyForm').reset();
+  document.getElementById('formAlert').className = 'alert';
+  document.getElementById('formAlert').textContent = '';
+}
+
+function goToStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+}
+
+// Close modal on overlay click
+document.getElementById('buyModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeBuyModal();
+});
+
+// === Submit Order ===
+async function submitOrder(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const alert = document.getElementById('formAlert');
+
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const email = document.getElementById('customerEmail').value.trim();
+
+  // Validate phone
+  if (!/^05\d{8}$/.test(phone)) {
+    alert.className = 'alert error';
+    alert.textContent = 'رقم الجوال غير صحيح — يجب أن يبدأ بـ 05 ويتكون من 10 أرقام';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'جاري المعالجة...';
+  alert.className = 'alert';
+
+  try {
+    const res = await fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        product_id: currentProduct.id,
+        customer_name: name,
+        customer_phone: phone,
+        customer_email: email
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    currentOrderId = data.order_id;
+    initPayment(data);
+    goToStep(2);
+  } catch (err) {
+    alert.className = 'alert error';
+    alert.textContent = err.message || 'حدث خطأ، حاول مرة أخرى';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'متابعة للدفع';
+  }
+}
+
+// === Initialize Moyasar Payment ===
+function initPayment(orderData) {
+  const container = document.getElementById('moyasarForm');
+  container.innerHTML = '';
+
+  if (!orderData.moyasar_key) {
+    // Test mode — show a simulated payment button
+    container.innerHTML = `
+      <div style="text-align:center;padding:20px">
+        <div style="background:var(--amber-soft);color:var(--amber);padding:16px;border-radius:12px;margin-bottom:20px;font-size:14px">
+          ⚠️ وضع الاختبار — بوابة الدفع غير مفعّلة
+        </div>
+        <p style="color:var(--ink-3);font-size:14px;margin-bottom:20px">
+          المبلغ: <strong style="color:var(--ink)">${currentProduct.price} ر.س</strong>
+        </p>
+        <button onclick="simulatePayment()" class="form-submit" style="background:var(--green)">
+          ✅ محاكاة الدفع (للاختبار)
+        </button>
+        <p style="font-size:12px;color:var(--ink-4);margin-top:12px">
+          لتفعيل الدفع الحقيقي، أضف مفتاح Moyasar في ملف .env
+        </p>
+      </div>
+    `;
+    return;
+  }
+
+  // Real Moyasar payment form
+  Moyasar.init({
+    element: '#moyasarForm',
+    amount: orderData.amount,
+    currency: 'SAR',
+    description: orderData.product_name,
+    publishable_api_key: orderData.moyasar_key,
+    callback_url: window.location.origin + '/api/payment/callback',
+    metadata: { order_id: currentOrderId },
+    methods: ['creditcard', 'applepay', 'stcpay'],
+    apple_pay: {
+      country: 'SA',
+      label: 'الإتقان التعليمية',
+      validate_merchant_url: 'https://api.moyasar.com/v1/applepay/initiate'
+    },
+    on_completed: function(payment) {
+      if (payment.status === 'paid') {
+        verifyAndShowDownload(payment.id);
+      }
+    }
+  });
+}
+
+// === Simulate payment (test mode) ===
+async function simulatePayment() {
+  try {
+    const res = await fetch('/api/payment/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ order_id: currentOrderId, payment_id: 'test_' + Date.now() })
+    });
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('downloadLink').href = '/api/download/' + data.download_token;
+      goToStep(3);
+      showToast('تم الشراء بنجاح! يمكنك تحميل الملف الآن');
+    }
+  } catch (err) {
+    const alert = document.getElementById('paymentAlert');
+    alert.className = 'alert error';
+    alert.textContent = 'حدث خطأ في المعالجة';
+  }
+}
+
+// === Verify real payment ===
+async function verifyAndShowDownload(paymentId) {
+  try {
+    const res = await fetch('/api/payment/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ order_id: currentOrderId, payment_id: paymentId })
+    });
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('downloadLink').href = '/api/download/' + data.download_token;
+      goToStep(3);
+      showToast('تم الشراء بنجاح!');
+    }
+  } catch (err) {
+    const alert = document.getElementById('paymentAlert');
+    alert.className = 'alert error';
+    alert.textContent = 'حدث خطأ في التحقق من الدفع';
+  }
+}
+
+// === WhatsApp ===
+function openWhatsApp() {
+  const msg = encodeURIComponent('السلام عليكم، أبغى أستفسر عن منتجات الإتقان التعليمية');
+  window.open('https://wa.me/966XXXXXXXXX?text=' + msg, '_blank');
+}
+
+// === Toast ===
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// === Check URL params (payment redirect) ===
+const params = new URLSearchParams(window.location.search);
+if (params.get('payment') === 'failed') {
+  showToast('فشل الدفع — حاول مرة أخرى');
+}
+</script>
+</body>
+</html>
