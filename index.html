@@ -85,6 +85,162 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 /* Reading progress bar */
 .reading-bar{position:fixed;top:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--violet),var(--blue));z-index:200;width:0;transition:none;border-radius:0 0 0 2px}
 
+/* ===== 3D SPACE ENGINE ===== */
+#meshCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+.page-content{position:relative;z-index:1}
+
+/* Mouse-reactive volumetric light */
+.mouse-glow{
+  position:fixed;width:800px;height:800px;border-radius:50%;z-index:0;
+  background:radial-gradient(circle,rgba(59,130,246,.07) 0%,rgba(124,58,237,.03) 40%,transparent 70%);
+  pointer-events:none;transform:translate(-50%,-50%);
+  transition:left .08s linear,top .08s linear;
+  mix-blend-mode:screen;
+}
+[data-theme="dark"] .mouse-glow{
+  background:radial-gradient(circle,rgba(59,130,246,.12) 0%,rgba(124,58,237,.06) 40%,transparent 70%);
+}
+
+/* 3D Perspective System */
+.scene-3d{perspective:1400px;perspective-origin:50% 50%}
+.float-card{
+  transform-style:preserve-3d;
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+  will-change:transform;
+}
+.float-card:hover{
+  box-shadow:0 25px 60px rgba(0,0,0,.12),0 0 40px rgba(59,130,246,.08);
+}
+[data-theme="dark"] .float-card:hover{
+  box-shadow:0 25px 60px rgba(0,0,0,.4),0 0 60px rgba(59,130,246,.15);
+}
+/* Depth layers */
+.depth-0{transform:translateZ(0)}
+.depth-1{transform:translateZ(10px)}
+.depth-2{transform:translateZ(25px)}
+.depth-3{transform:translateZ(40px)}
+
+/* Glassmorphism cards */
+.glass{
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(24px) saturate(1.8);
+  -webkit-backdrop-filter:blur(24px) saturate(1.8);
+  border:1px solid rgba(255,255,255,.3);
+}
+[data-theme="dark"] .glass{
+  background:rgba(21,31,50,.55);
+  border:1px solid rgba(255,255,255,.06);
+}
+/* Glass shimmer on hover */
+.glass::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(135deg,rgba(255,255,255,.1) 0%,transparent 50%,rgba(255,255,255,.05) 100%);
+  opacity:0;transition:opacity .4s;pointer-events:none;
+}
+.glass:hover::after{opacity:1}
+
+/* Animated gradient border (glow wire) */
+.glow-wire{position:relative;overflow:visible}
+.glow-wire::before{
+  content:'';position:absolute;inset:-2px;border-radius:inherit;z-index:-1;
+  background:conic-gradient(from var(--glow-angle,0deg),var(--blue),var(--violet),var(--teal),var(--rose),var(--blue));
+  opacity:0;transition:opacity .5s;filter:blur(4px);
+}
+.glow-wire:hover::before{opacity:.6}
+
+/* ===== KINETIC TYPOGRAPHY ===== */
+.kinetic-title{
+  background:linear-gradient(135deg,var(--blue) 0%,var(--violet) 25%,var(--teal) 50%,var(--blue) 75%,var(--violet) 100%);
+  background-size:300% 300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;color:transparent;
+  animation:kinFlow 6s ease infinite;
+}
+@keyframes kinFlow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* Text portal — text reveals animated data texture behind it */
+.text-portal{
+  position:relative;display:inline-block;
+  -webkit-text-fill-color:transparent;
+  background:
+    linear-gradient(135deg,var(--blue),var(--violet),var(--teal),var(--amber),var(--blue));
+  background-size:400% 400%;
+  -webkit-background-clip:text;background-clip:text;
+  animation:portalShift 8s ease infinite;
+}
+.text-portal::after{
+  content:attr(data-text);position:absolute;inset:0;
+  -webkit-text-fill-color:transparent;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(59,130,246,.03) 2px,rgba(59,130,246,.03) 4px);
+  -webkit-background-clip:text;background-clip:text;
+  animation:portalScan 3s linear infinite;
+}
+@keyframes portalShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes portalScan{0%{transform:translateY(0)}100%{transform:translateY(20px)}}
+
+/* Character stagger animation */
+.char-anim span{
+  display:inline-block;opacity:0;
+  animation:charIn .5s var(--ease) both;
+}
+@keyframes charIn{
+  from{opacity:0;transform:translateY(30px) rotateX(-40deg) scale(.8)}
+  to{opacity:1;transform:translateY(0) rotateX(0) scale(1)}
+}
+
+/* Volumetric light beams */
+.v-beam{
+  position:absolute;pointer-events:none;
+  width:2px;height:200%;
+  background:linear-gradient(180deg,transparent,rgba(59,130,246,.06),transparent);
+  transform-origin:top center;
+}
+[data-theme="dark"] .v-beam{
+  background:linear-gradient(180deg,transparent,rgba(59,130,246,.1),transparent);
+}
+
+/* Floating depth indicator dots */
+.depth-dots{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.d-dot{
+  position:absolute;border-radius:50%;
+  background:var(--blue);opacity:.04;
+  animation:dotFloat 15s infinite ease-in-out;
+}
+[data-theme="dark"] .d-dot{opacity:.06}
+@keyframes dotFloat{
+  0%,100%{transform:translate(0,0)}
+  33%{transform:translate(20px,-30px)}
+  66%{transform:translate(-15px,20px)}
+}
+
+/* Scroll-triggered morph */
+.morph-shape{
+  position:absolute;border-radius:30% 70% 70% 30%/30% 30% 70% 70%;
+  animation:morphAnim 12s infinite ease-in-out;
+  pointer-events:none;
+}
+@keyframes morphAnim{
+  0%,100%{border-radius:30% 70% 70% 30%/30% 30% 70% 70%}
+  25%{border-radius:58% 42% 75% 25%/76% 46% 54% 24%}
+  50%{border-radius:50% 50% 33% 67%/55% 27% 73% 45%}
+  75%{border-radius:33% 67% 58% 42%/63% 68% 32% 37%}
+}
+
+/* Interactive card reflection */
+.card-reflect{
+  position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none;
+}
+.card-reflect::before{
+  content:'';position:absolute;width:200%;height:200%;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.08),transparent 50%);
+  top:-50%;left:-50%;transition:none;
+}
+
 .container{max-width:1100px;margin:0 auto;padding:0 24px}
 
 @keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -150,21 +306,21 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 
 /* ===== HERO ===== */
 .hero{
-  padding:80px 0 64px;
-  background:var(--white);
+  padding:100px 0 80px;
+  background:transparent;
   position:relative;overflow:hidden;
 }
 .hero::before{
   content:'';position:absolute;top:-200px;right:-200px;
-  width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,var(--blue-glow),transparent 70%);
-  pointer-events:none;
+  width:700px;height:700px;
+  background:radial-gradient(circle,var(--blue-glow),transparent 60%);
+  pointer-events:none;animation:morphAnim 20s infinite;
 }
 .hero::after{
   content:'';position:absolute;bottom:-150px;left:-150px;
-  width:400px;height:400px;border-radius:50%;
-  background:radial-gradient(circle,rgba(124,58,237,.06),transparent 70%);
-  pointer-events:none;
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(124,58,237,.08),transparent 60%);
+  pointer-events:none;animation:morphAnim 16s infinite reverse;
 }
 /* Floating shapes */
 .hero-shapes{position:absolute;inset:0;pointer-events:none;overflow:hidden}
@@ -181,28 +337,20 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   50%{transform:translate(-20px,30px) rotate(180deg) scale(.9)}
   75%{transform:translate(40px,20px) rotate(270deg) scale(1.05)}
 }
-/* Animated gradient text */
-.hero h1 em{
-  font-style:normal;
-  background:linear-gradient(135deg,var(--blue),var(--violet),var(--blue));
-  background-size:200% 200%;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-  animation:gradientText 4s ease infinite;
-}
-@keyframes gradientText{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.hero-inner{text-align:center;position:relative;z-index:1;max-width:700px;margin:0 auto}
+.hero-inner{text-align:center;position:relative;z-index:1;max-width:700px;margin:0 auto;transform-style:preserve-3d}
 .hero-badge{
   display:inline-flex;align-items:center;gap:6px;
-  background:var(--blue-soft);color:var(--blue);
-  padding:6px 16px;border-radius:100px;font-size:13px;font-weight:600;
-  margin-bottom:24px;
+  background:rgba(59,130,246,.1);color:var(--blue);backdrop-filter:blur(8px);
+  padding:8px 20px;border-radius:100px;font-size:13px;font-weight:600;
+  margin-bottom:24px;border:1px solid rgba(59,130,246,.15);
 }
+[data-theme="dark"] .hero-badge{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.2)}
 .hero h1{
-  font-family:var(--font);font-size:42px;font-weight:900;
-  line-height:1.25;color:var(--ink);margin-bottom:18px;
+  font-family:var(--font);font-size:46px;font-weight:900;
+  line-height:1.3;margin-bottom:20px;
+  transform-style:preserve-3d;
 }
-.hero h1 em{font-style:normal;color:var(--blue)}
+.hero h1 em{font-style:normal}
 .hero-desc{
   font-size:17px;color:var(--ink-3);line-height:1.8;
   margin-bottom:36px;max-width:540px;margin-inline:auto;
@@ -227,7 +375,8 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 
 /* ===== SECTION ===== */
 .section{padding:80px 0}
-.section-w{background:var(--card-bg)}
+.section-w{background:rgba(255,255,255,.4);backdrop-filter:blur(2px)}
+[data-theme="dark"] .section-w{background:rgba(11,17,32,.4)}
 .sec-head{margin-bottom:44px}
 .sec-over{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
 .sec-title{font-family:var(--font);font-size:30px;font-weight:800;color:var(--ink);margin-bottom:10px}
@@ -236,12 +385,18 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 /* ===== PRODUCTS ===== */
 .products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .p-card{
-  background:var(--card-bg);border:1px solid var(--gray-200);
+  background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.4);
   border-radius:var(--radius-lg);overflow:hidden;
-  transition:.4s var(--ease);position:relative;
+  transition:.5s var(--ease);position:relative;
+  backdrop-filter:blur(16px) saturate(1.6);-webkit-backdrop-filter:blur(16px) saturate(1.6);
+  transform-style:preserve-3d;
 }
-.p-card:hover{box-shadow:var(--shadow-lg),0 0 40px rgba(29,78,216,.08);transform:translateY(-5px) scale(1.01);border-color:transparent}
-[data-theme="dark"] .p-card:hover{box-shadow:var(--shadow-lg),0 0 60px rgba(59,130,246,.1)}
+[data-theme="dark"] .p-card{background:rgba(21,31,50,.6);border-color:rgba(255,255,255,.06)}
+.p-card:hover{
+  box-shadow:0 30px 60px rgba(0,0,0,.12),0 0 50px rgba(59,130,246,.06);
+  border-color:transparent;
+}
+[data-theme="dark"] .p-card:hover{box-shadow:0 30px 60px rgba(0,0,0,.4),0 0 80px rgba(59,130,246,.12)}
 .p-card.soon{opacity:.75}
 .p-card.soon:hover{transform:none;box-shadow:none;border-color:var(--gray-200)}
 .p-badge{
@@ -380,16 +535,20 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .feat{
   padding:28px 22px;border-radius:var(--radius-lg);
-  background:var(--card-bg);border:1px solid var(--gray-200);
-  text-align:center;transition:.4s var(--ease);position:relative;overflow:hidden;
+  background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.3);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  text-align:center;transition:.5s var(--ease);position:relative;overflow:hidden;
+  transform-style:preserve-3d;
 }
+[data-theme="dark"] .feat{background:rgba(21,31,50,.5);border-color:rgba(255,255,255,.05)}
 .feat::before{
-  content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;
-  background:radial-gradient(circle,var(--blue-glow),transparent 70%);
-  opacity:0;transition:.4s;pointer-events:none;
+  content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;
+  background:radial-gradient(circle at 30% 30%,rgba(59,130,246,.08),transparent 50%);
+  opacity:0;transition:.5s;pointer-events:none;
 }
 .feat:hover::before{opacity:1}
-.feat:hover{box-shadow:var(--shadow-md);transform:translateY(-5px);border-color:transparent}
+.feat:hover{box-shadow:0 20px 50px rgba(0,0,0,.08);border-color:transparent}
+[data-theme="dark"] .feat:hover{box-shadow:0 20px 50px rgba(0,0,0,.3)}
 .feat-ic{
   width:50px;height:50px;border-radius:13px;
   display:grid;place-items:center;font-size:24px;
@@ -616,9 +775,16 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 </head>
 <body>
 
+<!-- 3D Mesh Background -->
+<canvas id="meshCanvas"></canvas>
+
+<!-- Mouse Volumetric Light -->
+<div class="mouse-glow" id="mouseGlow"></div>
+
 <!-- Reading Progress -->
 <div class="reading-bar" id="readingBar"></div>
 
+<div class="page-content">
 <!-- NAV -->
 <nav class="nav">
   <div class="container nav-inner">
@@ -644,18 +810,26 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-shapes">
-    <div class="h-shape"></div>
-    <div class="h-shape"></div>
-    <div class="h-shape"></div>
-    <div class="h-shape"></div>
-    <div class="h-shape"></div>
+<section class="hero scene-3d">
+  <!-- Volumetric light beams -->
+  <div class="v-beam" style="right:15%;top:-20%;transform:rotate(15deg);height:150%"></div>
+  <div class="v-beam" style="left:20%;top:-10%;transform:rotate(-8deg);height:140%"></div>
+  <div class="v-beam" style="right:40%;top:-30%;transform:rotate(5deg);height:160%"></div>
+  <!-- Morphing shapes -->
+  <div class="morph-shape" style="width:400px;height:400px;top:-100px;right:-50px;background:var(--blue);opacity:.04"></div>
+  <div class="morph-shape" style="width:300px;height:300px;bottom:-80px;left:-60px;background:var(--violet);opacity:.03;animation-delay:-4s"></div>
+  <!-- Depth dots -->
+  <div class="depth-dots">
+    <div class="d-dot" style="width:6px;height:6px;top:20%;right:10%;animation-delay:-2s"></div>
+    <div class="d-dot" style="width:4px;height:4px;top:60%;right:25%;animation-delay:-5s"></div>
+    <div class="d-dot" style="width:8px;height:8px;top:40%;left:8%;animation-delay:-8s"></div>
+    <div class="d-dot" style="width:5px;height:5px;top:70%;left:30%;animation-delay:-11s"></div>
+    <div class="d-dot" style="width:3px;height:3px;top:15%;left:45%;animation-delay:-3s"></div>
   </div>
   <div class="container">
     <div class="hero-inner">
-      <div class="hero-badge au">📚 منصة تعليمية سعودية</div>
-      <h1 class="au au2">تجميعات اختبار نافس<br><em>1000 سؤال مع الإجابات</em></h1>
+      <div class="hero-badge au depth-1">📚 منصة تعليمية سعودية</div>
+      <h1 class="au au2 depth-2"><span class="char-anim" id="heroTitle"></span><br><em class="text-portal kinetic-title" data-text="1000 سؤال مع الإجابات">1000 سؤال مع الإجابات</em></h1>
       <p class="hero-desc au au3">منصة الإتقان التعليمية توفّر لك تجميعات أسئلة اختبار نافس الشاملة مع الإجابات النموذجية، وملخصات تعليمية لجميع المراحل الدراسية</p>
       <div class="hero-btns au au4">
         <a href="#products" class="btn btn-blue ripple">تصفح المنتجات ←</a>
@@ -676,7 +850,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 </section>
 
 <!-- PRODUCTS -->
-<section class="section section-w" id="products">
+<section class="section section-w scene-3d" id="products">
   <div class="container">
     <div class="sec-head" data-r>
       <div class="sec-over">المنتجات</div>
@@ -685,7 +859,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
     </div>
 
     <div class="products-grid">
-      <div class="p-card" data-r>
+      <div class="p-card float-card glow-wire" data-r>
         <span class="p-badge badge-hot">🔥 متوفر الآن</span>
         <div class="p-img">
           <div class="p-img-bg" style="background:linear-gradient(135deg,#1D4ED8,#3B82F6)"></div>
@@ -704,7 +878,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
         </div>
       </div>
 
-      <div class="p-card" data-r>
+      <div class="p-card float-card glow-wire" data-r>
         <span class="p-badge badge-new">متوفر</span>
         <div class="p-img">
           <div class="p-img-bg" style="background:linear-gradient(135deg,#059669,#6EE7B7)"></div>
@@ -722,7 +896,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
         </div>
       </div>
 
-      <div class="p-card soon" data-r>
+      <div class="p-card soon float-card" data-r>
         <div class="soon-overlay"><div class="soon-label">⏳ قريباً</div></div>
         <div class="p-img">
           <div class="p-img-bg" style="background:linear-gradient(135deg,#94A3B8,#CBD5E1)"></div>
@@ -740,7 +914,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
         </div>
       </div>
 
-      <div class="p-card soon" data-r>
+      <div class="p-card soon float-card" data-r>
         <div class="soon-overlay"><div class="soon-label">⏳ قريباً</div></div>
         <div class="p-img">
           <div class="p-img-bg" style="background:linear-gradient(135deg,#94A3B8,#CBD5E1)"></div>
@@ -921,22 +1095,22 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
       <h2 class="sec-title">مميزات المنصة</h2>
     </div>
     <div class="feat-grid">
-      <div class="feat" data-r>
+      <div class="feat float-card" data-r>
         <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">📝</div>
         <h3>1000 سؤال مع الإجابة</h3>
         <p>تجميعة شاملة لأسئلة نافس مع إجابات نموذجية مفصّلة</p>
       </div>
-      <div class="feat" data-r>
+      <div class="feat float-card" data-r>
         <div class="feat-ic" style="background:var(--green-soft);color:var(--green)">⬇️</div>
         <h3>تحميل فوري</h3>
         <p>حمّل الملفات مباشرة بصيغة PDF واستخدمها بدون إنترنت</p>
       </div>
-      <div class="feat" data-r>
+      <div class="feat float-card" data-r>
         <div class="feat-ic" style="background:var(--amber-soft);color:var(--amber)">📱</div>
         <h3>يعمل على كل جهاز</h3>
         <p>تصميم متجاوب يعمل بسلاسة على الجوال والتابلت والكمبيوتر</p>
       </div>
-      <div class="feat" data-r>
+      <div class="feat float-card" data-r>
         <div class="feat-ic" style="background:var(--violet-soft);color:var(--violet)">🎯</div>
         <h3>اختبار تفاعلي</h3>
         <p>حل الأسئلة مباشرة في الموقع وتابع تقدمك بشكل مباشر</p>
@@ -1065,6 +1239,8 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
+</div><!-- /page-content -->
+
 <!-- Moyasar SDK -->
 <link rel="stylesheet" href="https://cdn.moyasar.com/mpf/1.14.0/moyasar.css">
 <script src="https://cdn.moyasar.com/mpf/1.14.0/moyasar.js"></script>
@@ -1073,6 +1249,153 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 // === State ===
 let currentProduct = {};
 let currentOrderId = null;
+
+// === 3D MESH BACKGROUND ENGINE ===
+(function(){
+  const c = document.getElementById('meshCanvas');
+  const ctx = c.getContext('2d');
+  let W, H, pts = [], mouse = {x:-999,y:-999}, raf;
+  const N = 70, DIST = 140, SPEED = .3;
+
+  function resize(){ W=c.width=window.innerWidth; H=c.height=window.innerHeight; }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // Create points
+  for(let i=0;i<N;i++){
+    pts.push({
+      x:Math.random()*W, y:Math.random()*H,
+      vx:(Math.random()-.5)*SPEED, vy:(Math.random()-.5)*SPEED,
+      r:1+Math.random()*1.5
+    });
+  }
+
+  function isDark(){ return document.documentElement.getAttribute('data-theme')==='dark'; }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const dark = isDark();
+
+    // Move points
+    pts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if(p.x<0||p.x>W) p.vx *= -1;
+      if(p.y<0||p.y>H) p.vy *= -1;
+      // Mouse attraction
+      const dx=mouse.x-p.x, dy=mouse.y-p.y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<250){
+        p.x += dx*0.003;
+        p.y += dy*0.003;
+      }
+    });
+
+    // Draw connections
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<DIST){
+          const a=(1-d/DIST)*(dark?.12:.05);
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = dark ? `rgba(96,165,250,${a})` : `rgba(29,78,216,${a})`;
+          ctx.lineWidth = .8;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw points with glow
+    pts.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = dark ? `rgba(96,165,250,.25)` : `rgba(29,78,216,.15)`;
+      ctx.fill();
+      // Glow
+      if(dark){
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r*4, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(96,165,250,.03)`;
+        ctx.fill();
+      }
+    });
+
+    // Volumetric light from mouse
+    if(mouse.x > 0 && mouse.y > 0){
+      const g = ctx.createRadialGradient(mouse.x,mouse.y,0,mouse.x,mouse.y,200);
+      g.addColorStop(0, dark?'rgba(59,130,246,.04)':'rgba(29,78,216,.02)');
+      g.addColorStop(1, 'transparent');
+      ctx.fillStyle = g;
+      ctx.fillRect(mouse.x-200,mouse.y-200,400,400);
+    }
+
+    raf = requestAnimationFrame(draw);
+  }
+  draw();
+
+  document.addEventListener('mousemove', e => {
+    mouse.x = e.clientX; mouse.y = e.clientY;
+    // Move mouse glow
+    const glow = document.getElementById('mouseGlow');
+    if(glow){glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';}
+  });
+  document.addEventListener('mouseleave', ()=>{mouse.x=-999;mouse.y=-999;});
+})();
+
+// === 3D CARD TILT ON HOVER ===
+document.addEventListener('mousemove', e => {
+  document.querySelectorAll('.float-card').forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const cx = rect.left + rect.width/2;
+    const cy = rect.top + rect.height/2;
+    const dx = e.clientX - cx;
+    const dy = e.clientY - cy;
+    const dist = Math.sqrt(dx*dx+dy*dy);
+    const maxDist = 500;
+    if(dist < maxDist){
+      const intensity = 1 - dist/maxDist;
+      const rotY = (dx / rect.width) * 8 * intensity;
+      const rotX = -(dy / rect.height) * 8 * intensity;
+      card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${intensity*10}px)`;
+    } else {
+      card.style.transform = '';
+    }
+  });
+});
+// Reset on mouse leave
+document.addEventListener('mouseleave', () => {
+  document.querySelectorAll('.float-card').forEach(card => {
+    card.style.transform = '';
+  });
+});
+
+// === ANIMATED GLOW WIRE ANGLE ===
+(function(){
+  let angle = 0;
+  function updateGlow(){
+    angle = (angle + .5) % 360;
+    document.querySelectorAll('.glow-wire').forEach(el => {
+      el.style.setProperty('--glow-angle', angle+'deg');
+    });
+    requestAnimationFrame(updateGlow);
+  }
+  updateGlow();
+})();
+
+// === KINETIC HERO TEXT (character stagger) ===
+(function(){
+  const target = document.getElementById('heroTitle');
+  if(!target) return;
+  const text = 'تجميعات اختبار نافس';
+  let html = '';
+  for(let i=0;i<text.length;i++){
+    const ch = text[i] === ' ' ? '&nbsp;' : text[i];
+    html += `<span style="animation-delay:${i*0.04}s">${ch}</span>`;
+  }
+  target.innerHTML = html;
+})();
 
 // === DARK MODE ===
 function getTheme() { return localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
