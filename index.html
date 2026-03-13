@@ -854,6 +854,14 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   .cta-box{padding:40px 24px}
   .cta-box h2{font-size:24px}
   .modal{margin:10px;max-width:100%}
+  /* Mobile performance: disable heavy effects */
+  .mouse-glow{display:none!important}
+  .v-beam{display:none!important}
+  .morph-shape{animation:none!important}
+  .glow-wire::before{display:none!important}
+  .nav{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--bg)!important}
+  .p-card,.feat{backdrop-filter:none;-webkit-backdrop-filter:none}
+  .depth-dots{display:none!important}
 }
 </style>
 </head>
@@ -1012,6 +1020,25 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
           <p class="p-desc">ملخص حصري لأحدث منهج إنجليزي Top Goal 2 للصف السادس — الفصل الثاني، لا يتوفر في أي موقع آخر. حصرياً على منصة الإتقان التعليمية</p>
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
+            <a href="/products/english-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
+            <a href="/products/english-summary.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card float-card glow-wire" data-r>
+        <span class="p-badge badge-new">متوفر</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#6366F1,#818CF8)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">📘</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">كتب مدرسية</div>
+          <h3 class="p-title">كتاب الإنجليزي Top Goal 2 — الصف السادس، الفصل الثاني</h3>
+          <p class="p-desc">المنهج الرسمي لمادة الإنجليزي Top Goal 2 للصف السادس الابتدائي — الفصل الدراسي الثاني</p>
+          <div class="p-foot">
+            <div class="p-price free-tag">مجاني</div>
             <a href="/products/english-topgoal2.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
             <a href="/products/english-topgoal2.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
           </div>
@@ -1098,7 +1125,8 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
               <a class="g-file" href="/nafs.html" onclick="event.stopPropagation()"><span class="f-icon">📝</span> نافس — تجميعة 1000 سؤال</a>
               <a class="g-file" href="/products/science-summary.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">🔬</span> ملخص العلوم</a>
               <a class="g-file" href="/products/arabic-summary.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">📖</span> ملخص لغتي</a>
-              <a class="g-file" href="/products/english-topgoal2.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">🇬🇧</span> ملخص إنجليزي Top Goal 2 <span style="color:var(--violet);font-size:11px;font-weight:700">حصري</span></a>
+              <a class="g-file" href="/products/english-summary.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">🇬🇧</span> ملخص إنجليزي Top Goal 2 <span style="color:var(--violet);font-size:11px;font-weight:700">حصري</span></a>
+              <a class="g-file" href="/products/english-topgoal2.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">📘</span> كتاب إنجليزي Top Goal 2</a>
             </div>
           </div>
         </div>
@@ -1314,7 +1342,8 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   const c = document.getElementById('meshCanvas');
   const ctx = c.getContext('2d');
   let W, H, pts = [], mouse = {x:-999,y:-999};
-  const N = 80, DIST = 160, SPEED = .25;
+  const isMobile = window.innerWidth < 768;
+  const N = isMobile ? 25 : 80, DIST = isMobile ? 120 : 160, SPEED = .25;
   let time = 0;
 
   function resize(){ W=c.width=window.innerWidth; H=c.height=window.innerHeight; initPts(); }
@@ -1334,7 +1363,11 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 
   function isDark(){ return document.documentElement.getAttribute('data-theme')==='dark'; }
 
-  function draw(){
+  let lastFrame = 0;
+  const frameInterval = isMobile ? 50 : 0; // ~20fps on mobile vs uncapped desktop
+  function draw(now){
+    if(isMobile && now - lastFrame < frameInterval){ requestAnimationFrame(draw); return; }
+    lastFrame = now;
     ctx.clearRect(0,0,W,H);
     const dark = isDark();
     time += 0.008;
@@ -1385,20 +1418,22 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
     pts.forEach(p => {
       const pulse = 1 + Math.sin(time*2 + p.phase) * 0.3;
       const r = p.r * pulse;
-      // Outer glow
-      const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r*8);
-      g.addColorStop(0, dark?`hsla(${p.hue},80%,70%,.12)`:`hsla(${p.hue},70%,50%,.06)`);
-      g.addColorStop(1, 'transparent');
-      ctx.fillStyle = g;
-      ctx.beginPath(); ctx.arc(p.x,p.y,r*8,0,Math.PI*2); ctx.fill();
+      // Outer glow (skip on mobile for performance)
+      if(!isMobile){
+        const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r*8);
+        g.addColorStop(0, dark?`hsla(${p.hue},80%,70%,.12)`:`hsla(${p.hue},70%,50%,.06)`);
+        g.addColorStop(1, 'transparent');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(p.x,p.y,r*8,0,Math.PI*2); ctx.fill();
+      }
       // Core
       ctx.beginPath(); ctx.arc(p.x,p.y,r,0,Math.PI*2);
       ctx.fillStyle = dark?`hsla(${p.hue},80%,70%,.4)`:`hsla(${p.hue},70%,50%,.2)`;
       ctx.fill();
     });
 
-    // Mouse volumetric light cone
-    if(mouse.x>0 && mouse.y>0){
+    // Mouse volumetric light cone (desktop only)
+    if(!isMobile && mouse.x>0 && mouse.y>0){
       const g = ctx.createRadialGradient(mouse.x,mouse.y,0,mouse.x,mouse.y,280);
       g.addColorStop(0, dark?'rgba(59,130,246,.06)':'rgba(29,78,216,.025)');
       g.addColorStop(.5, dark?'rgba(124,58,237,.03)':'rgba(124,58,237,.01)');
@@ -1409,7 +1444,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 
     requestAnimationFrame(draw);
   }
-  draw();
+  requestAnimationFrame(draw);
 
   document.addEventListener('mousemove', e => {
     mouse.x = e.clientX; mouse.y = e.clientY;
@@ -1419,72 +1454,74 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   document.addEventListener('mouseleave', ()=>{mouse.x=-999;mouse.y=-999;});
 })();
 
-// === 3D CARD TILT ON HOVER (smooth physics) ===
-const cardStates = new WeakMap();
-document.addEventListener('mousemove', e => {
-  document.querySelectorAll('.float-card').forEach(card => {
-    const rect = card.getBoundingClientRect();
-    // Only if card is in viewport
-    if(rect.bottom < 0 || rect.top > window.innerHeight) return;
-    const cx = rect.left + rect.width/2;
-    const cy = rect.top + rect.height/2;
-    const dx = (e.clientX - cx) / (rect.width/2);
-    const dy = (e.clientY - cy) / (rect.height/2);
-    const dist = Math.sqrt(dx*dx+dy*dy);
-    if(dist < 2.5){
-      const intensity = Math.max(0, 1 - dist/2.5);
-      const rotY = dx * 6 * intensity;
-      const rotX = -dy * 6 * intensity;
-      const z = intensity * 15;
-      const shine = `radial-gradient(circle at ${50+dx*30}% ${50+dy*30}%,rgba(255,255,255,.08),transparent 60%)`;
-      card.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${z}px) scale(${1+intensity*0.02})`;
-      card.style.backgroundImage = shine;
-      cardStates.set(card, true);
-    } else if(cardStates.get(card)){
+// === 3D CARD TILT ON HOVER (desktop only) ===
+if(window.innerWidth >= 768){
+  const cardStates = new WeakMap();
+  document.addEventListener('mousemove', e => {
+    document.querySelectorAll('.float-card').forEach(card => {
+      const rect = card.getBoundingClientRect();
+      if(rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top + rect.height/2;
+      const dx = (e.clientX - cx) / (rect.width/2);
+      const dy = (e.clientY - cy) / (rect.height/2);
+      const dist = Math.sqrt(dx*dx+dy*dy);
+      if(dist < 2.5){
+        const intensity = Math.max(0, 1 - dist/2.5);
+        const rotY = dx * 6 * intensity;
+        const rotX = -dy * 6 * intensity;
+        const z = intensity * 15;
+        const shine = `radial-gradient(circle at ${50+dx*30}% ${50+dy*30}%,rgba(255,255,255,.08),transparent 60%)`;
+        card.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${z}px) scale(${1+intensity*0.02})`;
+        card.style.backgroundImage = shine;
+        cardStates.set(card, true);
+      } else if(cardStates.get(card)){
+        card.style.transform = '';
+        card.style.backgroundImage = '';
+        cardStates.set(card, false);
+      }
+    });
+  });
+  document.addEventListener('mouseleave', () => {
+    document.querySelectorAll('.float-card').forEach(card => {
       card.style.transform = '';
       card.style.backgroundImage = '';
-      cardStates.set(card, false);
+    });
+  });
+}
+
+// === SCROLL PARALLAX (desktop only) ===
+if(window.innerWidth >= 768){
+  (function(){
+    function parallax(){
+      const sy = window.scrollY;
+      const hero = document.querySelector('.hero-inner');
+      if(hero) hero.style.transform = `translateY(${sy*0.15}px)`;
+      document.querySelectorAll('.morph-shape').forEach((s,i) => {
+        s.style.transform = `translateY(${sy*(0.05+i*0.03)}px)`;
+      });
+      document.querySelectorAll('.d-dot').forEach((d,i) => {
+        d.style.transform = `translateY(${sy*(0.02+i*0.01)}px)`;
+      });
     }
-  });
-});
-document.addEventListener('mouseleave', () => {
-  document.querySelectorAll('.float-card').forEach(card => {
-    card.style.transform = '';
-    card.style.backgroundImage = '';
-  });
-});
+    window.addEventListener('scroll', parallax, {passive:true});
+  })();
+}
 
-// === SCROLL PARALLAX ===
-(function(){
-  function parallax(){
-    const sy = window.scrollY;
-    // Hero elements move at different speeds
-    const hero = document.querySelector('.hero-inner');
-    if(hero) hero.style.transform = `translateY(${sy*0.15}px)`;
-    // Morph shapes
-    document.querySelectorAll('.morph-shape').forEach((s,i) => {
-      s.style.transform = `translateY(${sy*(0.05+i*0.03)}px)`;
-    });
-    // Depth dots
-    document.querySelectorAll('.d-dot').forEach((d,i) => {
-      d.style.transform = `translateY(${sy*(0.02+i*0.01)}px)`;
-    });
-  }
-  window.addEventListener('scroll', parallax, {passive:true});
-})();
-
-// === ANIMATED GLOW WIRE ANGLE ===
-(function(){
-  let angle = 0;
-  function updateGlow(){
-    angle = (angle + .5) % 360;
-    document.querySelectorAll('.glow-wire').forEach(el => {
-      el.style.setProperty('--glow-angle', angle+'deg');
-    });
-    requestAnimationFrame(updateGlow);
-  }
-  updateGlow();
-})();
+// === ANIMATED GLOW WIRE ANGLE (desktop only) ===
+if(window.innerWidth >= 768){
+  (function(){
+    let angle = 0;
+    function updateGlow(){
+      angle = (angle + .5) % 360;
+      document.querySelectorAll('.glow-wire').forEach(el => {
+        el.style.setProperty('--glow-angle', angle+'deg');
+      });
+      requestAnimationFrame(updateGlow);
+    }
+    updateGlow();
+  })();
+}
 
 // === KINETIC HERO TEXT (word stagger — Arabic-safe) ===
 (function(){
