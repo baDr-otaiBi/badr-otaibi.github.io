@@ -183,14 +183,26 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 @keyframes portalShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 @keyframes portalScan{0%{transform:translateY(0)}100%{transform:translateY(20px)}}
 
-/* Character stagger animation */
-.char-anim span{
+/* Word stagger animation (Arabic-safe — keeps letter connections) */
+.word-anim{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.word-anim .w{
   display:inline-block;opacity:0;
-  animation:charIn .5s var(--ease) both;
+  animation:wordIn .7s var(--ease) both;
+  filter:blur(8px);
 }
-@keyframes charIn{
-  from{opacity:0;transform:translateY(30px) rotateX(-40deg) scale(.8)}
-  to{opacity:1;transform:translateY(0) rotateX(0) scale(1)}
+@keyframes wordIn{
+  from{opacity:0;transform:translateY(40px) scale(.85);filter:blur(8px)}
+  60%{filter:blur(0)}
+  to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+}
+/* Word glow on arrival */
+.word-anim .w.landed{
+  text-shadow:0 0 30px rgba(59,130,246,.3);
+  animation:wordLand .4s ease;
+}
+@keyframes wordLand{
+  0%{text-shadow:0 0 40px rgba(59,130,246,.6)}
+  100%{text-shadow:none}
 }
 
 /* Volumetric light beams */
@@ -240,6 +252,78 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.08),transparent 50%);
   top:-50%;left:-50%;transition:none;
 }
+
+/* Enhanced product emoji float */
+.p-img .emoji{
+  font-size:56px;position:relative;z-index:1;
+  filter:drop-shadow(0 8px 20px rgba(0,0,0,.15));
+  animation:emojiFloat 4s ease-in-out infinite;
+}
+@keyframes emojiFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-8px) rotate(3deg)}
+}
+
+/* Product card inner glow on hover */
+.p-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:60%;
+  background:linear-gradient(to top,rgba(59,130,246,.04),transparent);
+  pointer-events:none;opacity:0;transition:.5s;border-radius:inherit;
+}
+.p-card:hover::after{opacity:1}
+[data-theme="dark"] .p-card:hover::after{
+  background:linear-gradient(to top,rgba(59,130,246,.08),transparent);opacity:1;
+}
+
+/* Enhanced stat cards with pulse */
+.hero-stats > div{
+  padding:12px 20px;border-radius:16px;
+  background:rgba(255,255,255,.3);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.2);transition:.3s;
+}
+[data-theme="dark"] .hero-stats > div{
+  background:rgba(21,31,50,.4);border-color:rgba(255,255,255,.06);
+}
+.hero-stats > div:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+
+/* Section title decoration */
+.sec-title{position:relative;display:inline-block}
+.sec-title::after{
+  content:'';position:absolute;bottom:-8px;right:0;width:40px;height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--violet));border-radius:3px;
+}
+
+/* CTA enhanced glow */
+.cta-box{
+  background:linear-gradient(135deg,#1D4ED8 0%,#7C3AED 50%,#1D4ED8 100%);
+  background-size:200% 200%;animation:ctaGlow 6s ease infinite;
+}
+@keyframes ctaGlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.cta-box::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(ellipse at 30% 80%,rgba(255,255,255,.08),transparent 50%),
+    radial-gradient(ellipse at 70% 20%,rgba(255,255,255,.06),transparent 50%);
+  pointer-events:none;
+}
+
+/* Stage panel slide animation */
+.s-panel.on{animation:panelSlide .5s var(--ease) both}
+@keyframes panelSlide{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+
+/* Footer enhanced */
+.footer-col a{position:relative;display:inline-block}
+.footer-col a::after{
+  content:'';position:absolute;bottom:-2px;right:0;width:0;height:1px;
+  background:var(--amber);transition:width .3s var(--ease);
+}
+.footer-col a:hover::after{width:100%}
+
+/* Smooth parallax sections */
+.parallax-slow{will-change:transform}
+
+/* Feature icon pulse */
+.feat-ic{transition:.4s var(--ease)}
+.feat:hover .feat-ic{transform:scale(1.15) rotate(-5deg);box-shadow:0 8px 24px rgba(0,0,0,.1)}
 
 .container{max-width:1100px;margin:0 auto;padding:0 24px}
 
@@ -742,10 +826,9 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 .p-card:hover .p-img::after{background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.05) 100%)}
 
 /* Hero stat separator */
-.hero-stats > div{position:relative}
 .hero-stats > div + div::before{
-  content:'';position:absolute;right:-24px;top:10%;height:80%;width:1px;
-  background:var(--gray-200);
+  content:'';position:absolute;right:-24px;top:15%;height:70%;width:1px;
+  background:linear-gradient(180deg,transparent,var(--blue),transparent);opacity:.3;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -829,7 +912,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   <div class="container">
     <div class="hero-inner">
       <div class="hero-badge au depth-1">📚 منصة تعليمية سعودية</div>
-      <h1 class="au au2 depth-2"><span class="char-anim" id="heroTitle"></span><br><em class="text-portal kinetic-title" data-text="1000 سؤال مع الإجابات">1000 سؤال مع الإجابات</em></h1>
+      <h1 class="au au2 depth-2"><span class="word-anim" id="heroTitle"></span><br><em class="text-portal kinetic-title" data-text="1000 سؤال مع الإجابات">1000 سؤال مع الإجابات</em></h1>
       <p class="hero-desc au au3">منصة الإتقان التعليمية توفّر لك تجميعات أسئلة اختبار نافس الشاملة مع الإجابات النموذجية، وملخصات تعليمية لجميع المراحل الدراسية</p>
       <div class="hero-btns au au4">
         <a href="#products" class="btn btn-blue ripple">تصفح المنتجات ←</a>
@@ -1254,122 +1337,165 @@ let currentOrderId = null;
 (function(){
   const c = document.getElementById('meshCanvas');
   const ctx = c.getContext('2d');
-  let W, H, pts = [], mouse = {x:-999,y:-999}, raf;
-  const N = 70, DIST = 140, SPEED = .3;
+  let W, H, pts = [], mouse = {x:-999,y:-999};
+  const N = 80, DIST = 160, SPEED = .25;
+  let time = 0;
 
-  function resize(){ W=c.width=window.innerWidth; H=c.height=window.innerHeight; }
+  function resize(){ W=c.width=window.innerWidth; H=c.height=window.innerHeight; initPts(); }
+  function initPts(){
+    if(pts.length) return;
+    for(let i=0;i<N;i++){
+      pts.push({
+        x:Math.random()*W, y:Math.random()*H,
+        vx:(Math.random()-.5)*SPEED, vy:(Math.random()-.5)*SPEED,
+        r:1+Math.random()*1.5, phase:Math.random()*Math.PI*2,
+        hue: Math.random()>.5 ? 220 : 260
+      });
+    }
+  }
   window.addEventListener('resize', resize);
   resize();
-
-  // Create points
-  for(let i=0;i<N;i++){
-    pts.push({
-      x:Math.random()*W, y:Math.random()*H,
-      vx:(Math.random()-.5)*SPEED, vy:(Math.random()-.5)*SPEED,
-      r:1+Math.random()*1.5
-    });
-  }
 
   function isDark(){ return document.documentElement.getAttribute('data-theme')==='dark'; }
 
   function draw(){
     ctx.clearRect(0,0,W,H);
     const dark = isDark();
+    time += 0.008;
 
-    // Move points
+    // Move points with organic motion
     pts.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if(p.x<0||p.x>W) p.vx *= -1;
-      if(p.y<0||p.y>H) p.vy *= -1;
-      // Mouse attraction
+      p.x += p.vx + Math.sin(time + p.phase) * 0.15;
+      p.y += p.vy + Math.cos(time + p.phase) * 0.15;
+      if(p.x<-20) p.x = W+20; if(p.x>W+20) p.x = -20;
+      if(p.y<-20) p.y = H+20; if(p.y>H+20) p.y = -20;
+      // Mouse interaction — attract + repel zone
       const dx=mouse.x-p.x, dy=mouse.y-p.y;
       const d=Math.sqrt(dx*dx+dy*dy);
-      if(d<250){
-        p.x += dx*0.003;
-        p.y += dy*0.003;
+      if(d<300 && d>30){
+        const force = 0.004 * (1-d/300);
+        p.x += dx*force; p.y += dy*force;
+      } else if(d<=30 && d>0){
+        p.x -= dx*0.02; p.y -= dy*0.02;
       }
     });
 
-    // Draw connections
+    // Draw connections with gradient lines
     for(let i=0;i<N;i++){
       for(let j=i+1;j<N;j++){
         const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y;
         const d=Math.sqrt(dx*dx+dy*dy);
         if(d<DIST){
-          const a=(1-d/DIST)*(dark?.12:.05);
+          const a=(1-d/DIST);
+          const alpha = a*(dark?.15:.06);
+          // Near mouse — lines glow brighter
+          const mx=(pts[i].x+pts[j].x)/2, my=(pts[i].y+pts[j].y)/2;
+          const md=Math.sqrt((mouse.x-mx)**2+(mouse.y-my)**2);
+          const boost = md<200 ? (1-md/200)*0.15 : 0;
           ctx.beginPath();
           ctx.moveTo(pts[i].x, pts[i].y);
           ctx.lineTo(pts[j].x, pts[j].y);
-          ctx.strokeStyle = dark ? `rgba(96,165,250,${a})` : `rgba(29,78,216,${a})`;
-          ctx.lineWidth = .8;
+          const hue = (pts[i].hue+pts[j].hue)/2;
+          ctx.strokeStyle = dark
+            ? `hsla(${hue},80%,70%,${alpha+boost})`
+            : `hsla(${hue},70%,40%,${alpha*0.7+boost*0.5})`;
+          ctx.lineWidth = .6+a*.8;
           ctx.stroke();
         }
       }
     }
 
-    // Draw points with glow
+    // Draw points with pulsing glow
     pts.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = dark ? `rgba(96,165,250,.25)` : `rgba(29,78,216,.15)`;
-      ctx.fill();
-      // Glow
-      if(dark){
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r*4, 0, Math.PI*2);
-        ctx.fillStyle = `rgba(96,165,250,.03)`;
-        ctx.fill();
-      }
-    });
-
-    // Volumetric light from mouse
-    if(mouse.x > 0 && mouse.y > 0){
-      const g = ctx.createRadialGradient(mouse.x,mouse.y,0,mouse.x,mouse.y,200);
-      g.addColorStop(0, dark?'rgba(59,130,246,.04)':'rgba(29,78,216,.02)');
+      const pulse = 1 + Math.sin(time*2 + p.phase) * 0.3;
+      const r = p.r * pulse;
+      // Outer glow
+      const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r*8);
+      g.addColorStop(0, dark?`hsla(${p.hue},80%,70%,.12)`:`hsla(${p.hue},70%,50%,.06)`);
       g.addColorStop(1, 'transparent');
       ctx.fillStyle = g;
-      ctx.fillRect(mouse.x-200,mouse.y-200,400,400);
+      ctx.beginPath(); ctx.arc(p.x,p.y,r*8,0,Math.PI*2); ctx.fill();
+      // Core
+      ctx.beginPath(); ctx.arc(p.x,p.y,r,0,Math.PI*2);
+      ctx.fillStyle = dark?`hsla(${p.hue},80%,70%,.4)`:`hsla(${p.hue},70%,50%,.2)`;
+      ctx.fill();
+    });
+
+    // Mouse volumetric light cone
+    if(mouse.x>0 && mouse.y>0){
+      const g = ctx.createRadialGradient(mouse.x,mouse.y,0,mouse.x,mouse.y,280);
+      g.addColorStop(0, dark?'rgba(59,130,246,.06)':'rgba(29,78,216,.025)');
+      g.addColorStop(.5, dark?'rgba(124,58,237,.03)':'rgba(124,58,237,.01)');
+      g.addColorStop(1, 'transparent');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(mouse.x,mouse.y,280,0,Math.PI*2); ctx.fill();
     }
 
-    raf = requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
   }
   draw();
 
   document.addEventListener('mousemove', e => {
     mouse.x = e.clientX; mouse.y = e.clientY;
-    // Move mouse glow
     const glow = document.getElementById('mouseGlow');
     if(glow){glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';}
   });
   document.addEventListener('mouseleave', ()=>{mouse.x=-999;mouse.y=-999;});
 })();
 
-// === 3D CARD TILT ON HOVER ===
+// === 3D CARD TILT ON HOVER (smooth physics) ===
+const cardStates = new WeakMap();
 document.addEventListener('mousemove', e => {
   document.querySelectorAll('.float-card').forEach(card => {
     const rect = card.getBoundingClientRect();
+    // Only if card is in viewport
+    if(rect.bottom < 0 || rect.top > window.innerHeight) return;
     const cx = rect.left + rect.width/2;
     const cy = rect.top + rect.height/2;
-    const dx = e.clientX - cx;
-    const dy = e.clientY - cy;
+    const dx = (e.clientX - cx) / (rect.width/2);
+    const dy = (e.clientY - cy) / (rect.height/2);
     const dist = Math.sqrt(dx*dx+dy*dy);
-    const maxDist = 500;
-    if(dist < maxDist){
-      const intensity = 1 - dist/maxDist;
-      const rotY = (dx / rect.width) * 8 * intensity;
-      const rotX = -(dy / rect.height) * 8 * intensity;
-      card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${intensity*10}px)`;
-    } else {
+    if(dist < 2.5){
+      const intensity = Math.max(0, 1 - dist/2.5);
+      const rotY = dx * 6 * intensity;
+      const rotX = -dy * 6 * intensity;
+      const z = intensity * 15;
+      const shine = `radial-gradient(circle at ${50+dx*30}% ${50+dy*30}%,rgba(255,255,255,.08),transparent 60%)`;
+      card.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${z}px) scale(${1+intensity*0.02})`;
+      card.style.backgroundImage = shine;
+      cardStates.set(card, true);
+    } else if(cardStates.get(card)){
       card.style.transform = '';
+      card.style.backgroundImage = '';
+      cardStates.set(card, false);
     }
   });
 });
-// Reset on mouse leave
 document.addEventListener('mouseleave', () => {
   document.querySelectorAll('.float-card').forEach(card => {
     card.style.transform = '';
+    card.style.backgroundImage = '';
   });
 });
+
+// === SCROLL PARALLAX ===
+(function(){
+  function parallax(){
+    const sy = window.scrollY;
+    // Hero elements move at different speeds
+    const hero = document.querySelector('.hero-inner');
+    if(hero) hero.style.transform = `translateY(${sy*0.15}px)`;
+    // Morph shapes
+    document.querySelectorAll('.morph-shape').forEach((s,i) => {
+      s.style.transform = `translateY(${sy*(0.05+i*0.03)}px)`;
+    });
+    // Depth dots
+    document.querySelectorAll('.d-dot').forEach((d,i) => {
+      d.style.transform = `translateY(${sy*(0.02+i*0.01)}px)`;
+    });
+  }
+  window.addEventListener('scroll', parallax, {passive:true});
+})();
 
 // === ANIMATED GLOW WIRE ANGLE ===
 (function(){
@@ -1384,17 +1510,23 @@ document.addEventListener('mouseleave', () => {
   updateGlow();
 })();
 
-// === KINETIC HERO TEXT (character stagger) ===
+// === KINETIC HERO TEXT (word stagger — Arabic-safe) ===
 (function(){
   const target = document.getElementById('heroTitle');
   if(!target) return;
-  const text = 'تجميعات اختبار نافس';
+  const words = ['تجميعات', 'اختبار', 'نافس'];
   let html = '';
-  for(let i=0;i<text.length;i++){
-    const ch = text[i] === ' ' ? '&nbsp;' : text[i];
-    html += `<span style="animation-delay:${i*0.04}s">${ch}</span>`;
-  }
+  words.forEach((w, i) => {
+    html += `<span class="w" style="animation-delay:${i*0.18}s">${w}</span>`;
+  });
   target.innerHTML = html;
+  // Add landing glow effect after animation
+  setTimeout(() => {
+    target.querySelectorAll('.w').forEach((el, i) => {
+      setTimeout(() => el.classList.add('landed'), i * 180 + 700);
+      setTimeout(() => el.classList.remove('landed'), i * 180 + 1100);
+    });
+  }, 200);
 })();
 
 // === DARK MODE ===
