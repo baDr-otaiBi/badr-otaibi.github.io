@@ -19,7 +19,7 @@ app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
 app.use('/api/', limiter);
@@ -348,10 +348,10 @@ app.post('/api/admin/orders/:id/approve', authenticateAdmin, (req, res) => {
 });
 
 // === Serve Pages ===
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
-app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin.html')));
-app.get('/download.html', (req, res) => res.sendFile(path.join(__dirname, 'public', 'download.html')));
-app.get('/nafs.html', (req, res) => res.sendFile(path.join(__dirname, 'public', 'nafs.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'admin.html')));
+app.get('/download.html', (req, res) => res.sendFile(path.join(__dirname, 'download.html')));
+app.get('/nafs.html', (req, res) => res.sendFile(path.join(__dirname, 'nafs.html')));
 
 // === Start Server ===
 app.listen(PORT, () => {
