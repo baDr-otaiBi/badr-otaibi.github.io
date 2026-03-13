@@ -510,6 +510,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 }
 .p-price{font-family:var(--font);font-weight:800;font-size:20px;color:var(--ink)}
 .p-price .cur{font-size:13px;font-weight:500;color:var(--ink-4)}
+.p-price.free-tag{color:var(--green);font-size:16px}
 .p-btn{
   padding:8px 18px;border-radius:8px;
   font-family:var(--font-body);font-size:13px;font-weight:600;
@@ -954,9 +955,8 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
           <h3 class="p-title">تجميعات اختبار نافس — 1000 سؤال</h3>
           <p class="p-desc">تجميعة شاملة تضم 1000 سؤال من اختبارات نافس مع الإجابات النموذجية لكل سؤال</p>
           <div class="p-foot">
-            <div class="p-price">49 <span class="cur">ر.س</span></div>
-            <button class="p-btn" onclick="openBuyModal('nafs-1000', 'تجميعات اختبار نافس — 1000 سؤال', 49, '📝')">اشترِ الآن</button>
-            <a href="/nafs.html" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">ادخل الآن</a>
+            <div class="p-price free-tag">مجاني</div>
+            <a href="/nafs.html" class="p-btn" style="background:var(--green);text-decoration:none">ادخل الاختبار</a>
           </div>
         </div>
       </div>
@@ -973,8 +973,9 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
           <h3 class="p-title">ملخص مادة العلوم — الصف السادس، الفصل الثاني</h3>
           <p class="p-desc">ملخص شامل ومنظّم لمادة العلوم للصف السادس الابتدائي — الفصل الدراسي الثاني، يغطي أهم المفاهيم والمواضيع الأساسية</p>
           <div class="p-foot">
-            <div class="p-price">29 <span class="cur">ر.س</span></div>
-            <button class="p-btn" onclick="openBuyModal('science-summary', 'ملخص مادة العلوم — الصف السادس، الفصل الثاني', 29, '🔬')">اشترِ الآن</button>
+            <div class="p-price free-tag">مجاني</div>
+            <a href="/products/science-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
+            <a href="/products/science-summary.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
           </div>
         </div>
       </div>
@@ -1057,7 +1058,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
           <div class="g-body">
             <div class="g-files">
               <a class="g-file" href="/nafs.html" onclick="event.stopPropagation()"><span class="f-icon">📝</span> نافس — تجميعة 1000 سؤال</a>
-              <a class="g-file" onclick="event.stopPropagation();openBuyModal('science-summary','ملخص مادة العلوم — الصف السادس، الفصل الثاني',29,'🔬')"><span class="f-icon">🔬</span> ملخص العلوم</a>
+              <a class="g-file" href="/products/science-summary.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">🔬</span> ملخص العلوم</a>
             </div>
           </div>
         </div>
@@ -1207,7 +1208,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   <div class="container">
     <div class="cta-box" data-r>
       <h2>ابدأ مذاكرتك الآن</h2>
-      <p>تجميعات نافس وملخص العلوم جاهزين للتحميل</p>
+      <p>تجميعات نافس وملخص العلوم متاحين مجاناً للتحميل والاستعراض</p>
       <a href="#products" class="btn btn-w btn-blue" style="background:#fff;color:var(--blue)">تصفح المنتجات ←</a>
     </div>
   </div>
@@ -1251,66 +1252,6 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   </div>
 </footer>
 
-<!-- BUY MODAL -->
-<div class="modal-overlay" id="buyModal">
-  <div class="modal">
-    <div class="modal-header">
-      <h3 id="modalTitle">إتمام الشراء</h3>
-      <button class="modal-close" onclick="closeBuyModal()">&times;</button>
-    </div>
-    <div class="modal-body">
-      <!-- Step 1: Customer Info -->
-      <div class="step active" id="step1">
-        <div class="modal-product" id="modalProduct">
-          <div class="modal-product-icon" id="modalIcon">📝</div>
-          <div>
-            <div class="modal-product-name" id="modalProductName">—</div>
-            <div class="modal-product-price" id="modalProductPrice">—</div>
-          </div>
-        </div>
-
-        <div id="formAlert" class="alert"></div>
-
-        <form id="buyForm" onsubmit="submitOrder(event)">
-          <div class="form-group">
-            <label for="customerName">الاسم الكامل *</label>
-            <input type="text" id="customerName" placeholder="مثال: محمد أحمد" required>
-          </div>
-          <div class="form-group">
-            <label for="customerPhone">رقم الجوال *</label>
-            <input type="tel" id="customerPhone" placeholder="05XXXXXXXX" required dir="ltr">
-          </div>
-          <div class="form-group">
-            <label for="customerEmail">البريد الإلكتروني (اختياري)</label>
-            <input type="email" id="customerEmail" placeholder="example@email.com" dir="ltr">
-          </div>
-          <button type="submit" class="form-submit" id="submitBtn">متابعة للدفع</button>
-        </form>
-        <p class="form-note">بعد الدفع ستحصل على رابط تحميل فوري صالح لمدة 72 ساعة</p>
-      </div>
-
-      <!-- Step 2: Payment -->
-      <div class="step" id="step2">
-        <div id="paymentAlert" class="alert"></div>
-        <div id="moyasarForm"></div>
-        <div style="text-align:center;margin-top:16px">
-          <button onclick="goToStep(1)" style="background:none;border:none;color:var(--blue);cursor:pointer;font-family:var(--font-body);font-size:14px">← رجوع</button>
-        </div>
-      </div>
-
-      <!-- Step 3: Success -->
-      <div class="step" id="step3">
-        <div class="success-box">
-          <div class="success-icon">✅</div>
-          <div class="success-title">تم الشراء بنجاح!</div>
-          <div class="success-desc">شكراً لك! يمكنك تحميل الملف الآن.<br>الرابط صالح لمدة 72 ساعة و 5 تحميلات.</div>
-          <a id="downloadLink" href="#" class="download-btn">⬇️ تحميل الملف</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Scroll to top -->
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="العودة للأعلى">&#8593;</button>
 
@@ -1324,14 +1265,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 
 </div><!-- /page-content -->
 
-<!-- Moyasar SDK -->
-<link rel="stylesheet" href="https://cdn.moyasar.com/mpf/1.14.0/moyasar.css">
-<script src="https://cdn.moyasar.com/mpf/1.14.0/moyasar.js"></script>
-
 <script>
-// === State ===
-let currentProduct = {};
-let currentOrderId = null;
 
 // === 3D MESH BACKGROUND ENGINE ===
 (function(){
@@ -1624,175 +1558,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// === Buy Modal ===
-function openBuyModal(productId, name, price, icon) {
-  currentProduct = { id: productId, name, price, icon };
-  document.getElementById('modalIcon').textContent = icon;
-  document.getElementById('modalProductName').textContent = name;
-  document.getElementById('modalProductPrice').textContent = price + ' ر.س';
-  goToStep(1);
-  document.getElementById('buyModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeBuyModal() {
-  document.getElementById('buyModal').classList.remove('active');
-  document.body.style.overflow = '';
-  // Reset form
-  document.getElementById('buyForm').reset();
-  document.getElementById('formAlert').className = 'alert';
-  document.getElementById('formAlert').textContent = '';
-}
-
-function goToStep(n) {
-  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-  document.getElementById('step' + n).classList.add('active');
-}
-
-// Close modal on overlay click
-document.getElementById('buyModal').addEventListener('click', e => {
-  if (e.target === e.currentTarget) closeBuyModal();
-});
-
-// === Submit Order ===
-async function submitOrder(e) {
-  e.preventDefault();
-  const btn = document.getElementById('submitBtn');
-  const alert = document.getElementById('formAlert');
-
-  const name = document.getElementById('customerName').value.trim();
-  const phone = document.getElementById('customerPhone').value.trim();
-  const email = document.getElementById('customerEmail').value.trim();
-
-  // Validate phone
-  if (!/^05\d{8}$/.test(phone)) {
-    alert.className = 'alert error';
-    alert.textContent = 'رقم الجوال غير صحيح — يجب أن يبدأ بـ 05 ويتكون من 10 أرقام';
-    return;
-  }
-
-  btn.disabled = true;
-  btn.textContent = 'جاري المعالجة...';
-  alert.className = 'alert';
-
-  try {
-    const res = await fetch('/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        product_id: currentProduct.id,
-        customer_name: name,
-        customer_phone: phone,
-        customer_email: email
-      })
-    });
-
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error);
-
-    currentOrderId = data.order_id;
-    initPayment(data);
-    goToStep(2);
-  } catch (err) {
-    alert.className = 'alert error';
-    alert.textContent = err.message || 'حدث خطأ، حاول مرة أخرى';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'متابعة للدفع';
-  }
-}
-
-// === Initialize Moyasar Payment ===
-function initPayment(orderData) {
-  const container = document.getElementById('moyasarForm');
-  container.innerHTML = '';
-
-  if (!orderData.moyasar_key) {
-    // Test mode — show a simulated payment button
-    container.innerHTML = `
-      <div style="text-align:center;padding:20px">
-        <div style="background:var(--amber-soft);color:var(--amber);padding:16px;border-radius:12px;margin-bottom:20px;font-size:14px">
-          ⚠️ وضع الاختبار — بوابة الدفع غير مفعّلة
-        </div>
-        <p style="color:var(--ink-3);font-size:14px;margin-bottom:20px">
-          المبلغ: <strong style="color:var(--ink)">${currentProduct.price} ر.س</strong>
-        </p>
-        <button onclick="simulatePayment()" class="form-submit" style="background:var(--green)">
-          ✅ محاكاة الدفع (للاختبار)
-        </button>
-        <p style="font-size:12px;color:var(--ink-4);margin-top:12px">
-          لتفعيل الدفع الحقيقي، أضف مفتاح Moyasar في ملف .env
-        </p>
-      </div>
-    `;
-    return;
-  }
-
-  // Real Moyasar payment form
-  Moyasar.init({
-    element: '#moyasarForm',
-    amount: orderData.amount,
-    currency: 'SAR',
-    description: orderData.product_name,
-    publishable_api_key: orderData.moyasar_key,
-    callback_url: window.location.origin + '/api/payment/callback',
-    metadata: { order_id: currentOrderId },
-    methods: ['creditcard', 'applepay', 'stcpay'],
-    apple_pay: {
-      country: 'SA',
-      label: 'الإتقان التعليمية',
-      validate_merchant_url: 'https://api.moyasar.com/v1/applepay/initiate'
-    },
-    on_completed: function(payment) {
-      if (payment.status === 'paid') {
-        verifyAndShowDownload(payment.id);
-      }
-    }
-  });
-}
-
-// === Simulate payment (test mode) ===
-async function simulatePayment() {
-  try {
-    const res = await fetch('/api/payment/verify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ order_id: currentOrderId, payment_id: 'test_' + Date.now() })
-    });
-    const data = await res.json();
-    if (data.success) {
-      document.getElementById('downloadLink').href = '/api/download/' + data.download_token;
-      goToStep(3);
-      showToast('تم الشراء بنجاح! يمكنك تحميل الملف الآن');
-    }
-  } catch (err) {
-    const alert = document.getElementById('paymentAlert');
-    alert.className = 'alert error';
-    alert.textContent = 'حدث خطأ في المعالجة';
-  }
-}
-
-// === Verify real payment ===
-async function verifyAndShowDownload(paymentId) {
-  try {
-    const res = await fetch('/api/payment/verify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ order_id: currentOrderId, payment_id: paymentId })
-    });
-    const data = await res.json();
-    if (data.success) {
-      document.getElementById('downloadLink').href = '/api/download/' + data.download_token;
-      goToStep(3);
-      showToast('تم الشراء بنجاح!');
-    }
-  } catch (err) {
-    const alert = document.getElementById('paymentAlert');
-    alert.className = 'alert error';
-    alert.textContent = 'حدث خطأ في التحقق من الدفع';
-  }
-}
-
 // === WhatsApp ===
 function openWhatsApp() {
   const msg = encodeURIComponent('السلام عليكم، أبغى أستفسر عن منتجات الإتقان التعليمية');
@@ -1807,11 +1572,6 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// === Check URL params (payment redirect) ===
-const params = new URLSearchParams(window.location.search);
-if (params.get('payment') === 'failed') {
-  showToast('فشل الدفع — حاول مرة أخرى');
-}
 </script>
 </body>
 </html>
