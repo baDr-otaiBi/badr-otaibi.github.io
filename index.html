@@ -393,6 +393,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   animation:float 4s ease-in-out infinite;
   filter:drop-shadow(0 6px 12px rgba(0,0,0,.1));
 }
+.p-img .p-ad-img{
+  width:100%;height:100%;object-fit:cover;position:relative;z-index:1;
+}
 .p-dots{
   position:absolute;inset:0;
   background-image:radial-gradient(rgba(255,255,255,.2) 1.5px,transparent 1.5px);
@@ -923,9 +926,10 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <div class="p-exclusive"></div>
         <span class="p-badge badge-hot">🔥 متوفر الآن</span>
         <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#2563eb,#3b82f6)"></div>
-          <div class="p-dots"></div>
-          <div class="emoji">📝</div>
+          <picture>
+            <source srcset="/images/nafs-ad.webp" type="image/webp">
+            <img src="/images/nafs-ad.png" alt="تجميعات اختبار نافس" class="p-ad-img" loading="lazy">
+          </picture>
         </div>
         <div class="p-body">
           <div class="p-cat">اختبار نافس</div>
@@ -947,9 +951,10 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <div class="p-exclusive"></div>
         <span class="p-badge badge-new">متوفر</span>
         <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#1d4ed8,#60a5fa)"></div>
-          <div class="p-dots"></div>
-          <div class="emoji">🔬</div>
+          <picture>
+            <source srcset="/images/science-summary-ad.webp" type="image/webp">
+            <img src="/images/science-summary-ad.png" alt="ملخص مادة العلوم" class="p-ad-img" loading="lazy">
+          </picture>
         </div>
         <div class="p-body">
           <div class="p-cat">ملخصات</div>
@@ -1045,9 +1050,10 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <div class="p-exclusive"></div>
         <span class="p-badge badge-new">جديد</span>
         <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#1e3a5f,#3b82f6)"></div>
-          <div class="p-dots"></div>
-          <div class="emoji">📝</div>
+          <picture>
+            <source srcset="/images/science-worksheets-ad.webp" type="image/webp">
+            <img src="/images/science-worksheets-ad.png" alt="أوراق عمل علوم" class="p-ad-img" loading="lazy">
+          </picture>
         </div>
         <div class="p-body">
           <div class="p-cat">أوراق عمل</div>
