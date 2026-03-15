@@ -93,7 +93,7 @@ body{
 ::-webkit-scrollbar-track{background:transparent}
 
 /* Reading progress */
-.reading-bar{position:fixed;top:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--yellow),var(--rose));z-index:200;width:0;transition:none;border-radius:0 0 0 2px}
+.reading-bar{position:fixed;top:0;right:0;height:3px;background:var(--blue);z-index:200;width:0;transition:none;border-radius:0 0 0 2px}
 
 .container{max-width:1100px;margin:0 auto;padding:0 24px}
 
@@ -162,16 +162,16 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   padding:8px 18px;border-radius:10px;transition:.2s var(--ease);
   font-family:var(--font);letter-spacing:0.01em;
 }
-.nav-links a:hover{color:var(--ink-on-accent);background:var(--yellow);border-radius:10px}
-.nav-links a.on{color:var(--ink-on-accent);background:var(--yellow);border-radius:10px;position:relative}
-.nav-links a.on::after{content:'';position:absolute;bottom:-2px;right:25%;left:25%;height:3px;background:var(--ink-on-accent);border-radius:3px}
+.nav-links a:hover{color:var(--blue);background:var(--blue-soft);border-radius:10px}
+.nav-links a.on{color:var(--blue);background:var(--blue-soft);border-radius:10px;position:relative}
+.nav-links a.on::after{content:'';position:absolute;bottom:-2px;right:25%;left:25%;height:3px;background:var(--blue);border-radius:3px}
 .nav-actions{display:flex;align-items:center;gap:8px}
 .theme-toggle{
   width:42px;height:42px;border-radius:12px;border:1.5px solid var(--border);
   background:var(--white);cursor:pointer;display:grid;place-items:center;
   font-size:20px;transition:.3s var(--ease);position:relative;color:var(--ink-3);
 }
-.theme-toggle:hover{background:var(--yellow);transform:rotate(15deg);color:var(--ink-on-accent);border-color:var(--yellow)}
+.theme-toggle:hover{background:var(--blue-soft);transform:rotate(15deg);color:var(--blue);border-color:var(--blue)}
 .theme-toggle .t-icon{transition:.4s var(--ease)}
 [data-theme="dark"] .theme-toggle{border-color:var(--border);background:var(--white)}
 
@@ -245,9 +245,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 }
 .hero h1 .highlight{
   position:relative;display:inline-block;
-  background:linear-gradient(135deg,var(--blue),var(--purple));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
+  color:var(--blue);-webkit-text-fill-color:var(--blue);
   padding:0 4px;
 }
 .hero h1 .green-highlight{
@@ -314,8 +312,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .btn:hover{transform:translateY(-3px)}
 .btn:active{transform:translateY(0)}
 
-.btn-green{background:var(--green);color:#fff;box-shadow:0 4px 14px rgba(5,150,105,.3)}
-.btn-green:hover{box-shadow:0 8px 25px rgba(5,150,105,.35)}
+.btn-green,.btn-primary{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.3)}
+.btn-green:hover,.btn-primary:hover{box-shadow:0 8px 25px rgba(37,99,235,.35)}
 .btn-out{background:var(--white);color:var(--ink);border:1.5px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .btn-out:hover{border-color:var(--ink-4);box-shadow:0 6px 20px rgba(0,0,0,.08)}
 [data-theme="dark"] .btn-out{background:var(--white);border-color:var(--border)}
@@ -330,7 +328,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 [data-theme="dark"] .hero-stats > div{background:var(--white);border-color:var(--border)}
 .hero-stats > div:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
 .stat-n{font-family:var(--font);font-size:30px;font-weight:900;color:var(--ink)}
-.stat-n span{color:var(--purple)}
+.stat-n span{color:var(--blue)}
 .stat-l{font-size:13px;color:var(--ink-3);margin-top:2px;font-weight:600}
 
 /* Trust bar */
@@ -343,7 +341,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   font-size:13px;color:var(--ink-2);font-weight:700;
   font-family:var(--font);letter-spacing:0.01em;
 }
-.trust-item svg{width:20px;height:20px;color:var(--green);flex-shrink:0}
+.trust-item svg{width:20px;height:20px;color:var(--blue);flex-shrink:0}
 
 /* ===== SECTION ===== */
 .section{padding:80px 0}
@@ -417,7 +415,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   flex-wrap:wrap;gap:8px;
 }
 .p-price{font-family:var(--font);font-weight:900;font-size:20px;color:var(--ink)}
-.p-price.free-tag{color:var(--green);font-size:17px}
+.p-price.free-tag{color:var(--blue);font-size:17px}
 .p-btn{
   padding:10px 20px;border-radius:10px;
   font-family:var(--font);font-size:13px;font-weight:700;
@@ -427,6 +425,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   box-shadow:0 2px 6px rgba(37,99,235,.2);
 }
 .p-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(37,99,235,.25)}
+.p-btn-alt{background:var(--blue-soft)!important;color:var(--blue)!important;box-shadow:none!important}
+.p-btn-alt:hover{background:var(--blue)!important;color:#fff!important}
 .p-btn.soon-btn{background:var(--ink-4);color:#fff;cursor:default;box-shadow:none}
 .p-btn.soon-btn:hover{transform:none}
 
@@ -475,7 +475,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   width:56px;height:56px;border-radius:50%;
   display:grid;place-items:center;margin:0 auto 18px;
   font-family:var(--font);font-weight:900;font-size:24px;
-  background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;
+  background:var(--blue);color:#fff;border:none;
 }
 .step-card h3{font-family:var(--font);font-weight:800;font-size:17px;margin-bottom:10px;letter-spacing:-0.01em}
 .step-card p{font-size:13.5px;color:var(--ink-2);line-height:1.9}
@@ -498,7 +498,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   transition:.3s var(--ease);display:flex;align-items:center;gap:6px;
 }
 .s-tab:hover{color:var(--ink);background:var(--white)}
-.s-tab.on{background:var(--green);color:#fff;box-shadow:0 2px 8px rgba(5,150,105,.25)}
+.s-tab.on{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.25)}
 
 .s-panel{display:none}
 .s-panel.on{display:block;animation:scaleIn .4s var(--ease) both}
@@ -561,7 +561,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   font-size:12px;color:var(--ink-3);transition:.2s var(--ease);
   border:1px solid var(--border);
 }
-.g-row.open .g-chevron{transform:rotate(180deg);background:var(--green-soft);color:var(--green);border-color:var(--green)}
+.g-row.open .g-chevron{transform:rotate(180deg);background:var(--blue-soft);color:var(--blue);border-color:var(--blue)}
 .g-body{display:none;padding:0 22px 18px;border-top:1px solid var(--border)}
 .g-row.open .g-body{display:block;animation:up .3s var(--ease) both}
 .g-files{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:16px}
@@ -573,7 +573,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   cursor:pointer;transition:.25s var(--ease);text-decoration:none;
   font-family:var(--font);
 }
-.g-file:hover{border-color:var(--green);color:var(--green);background:var(--green-soft);transform:translateY(-2px);box-shadow:0 4px 12px rgba(5,150,105,.1)}
+.g-file:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-soft);transform:translateY(-2px);box-shadow:0 4px 12px rgba(37,99,235,.1)}
 .g-file .f-icon{font-size:18px}
 
 /* ===== FEATURES ===== */
@@ -613,7 +613,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .stat-card .stat-icon{font-size:36px;margin-bottom:12px}
 .stat-card .stat-number{
   font-family:var(--font);font-weight:900;font-size:34px;
-  color:var(--purple);
+  color:var(--blue);
 }
 .stat-card .stat-label{font-size:13px;color:var(--ink-2);margin-top:6px;font-weight:600;font-family:var(--font)}
 
@@ -628,7 +628,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 [data-theme="dark"] .test-card{background:var(--white);border-color:var(--border)}
 .test-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08)}
 .test-stars{font-size:16px;margin-bottom:12px;letter-spacing:2px}
-.test-stars span{color:var(--yellow-dark)}
+.test-stars span{color:var(--blue)}
 .test-text{font-size:14px;color:var(--ink-2);line-height:2;margin-bottom:20px}
 .test-author{display:flex;align-items:center;gap:12px}
 .test-avatar{
@@ -646,14 +646,14 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   padding:72px 48px;text-align:center;color:#fff;
   position:relative;overflow:hidden;border:none;
 }
-[data-theme="dark"] .cta-box{background:linear-gradient(135deg,var(--purple) 0%,var(--blue) 100%)}
+[data-theme="dark"] .cta-box{background:linear-gradient(135deg,#1e3a5f 0%,#1e293b 100%)}
 .cta-box h2{font-family:var(--font);font-size:34px;font-weight:900;margin-bottom:16px;position:relative;letter-spacing:-0.02em}
 .cta-box p{font-size:16px;opacity:.85;margin-bottom:36px;position:relative;line-height:1.9}
 .cta-box .btn{border:none}
 .btn-w{background:#fff;color:var(--ink-on-accent);box-shadow:0 4px 14px rgba(0,0,0,.15)}
 .btn-w:hover{box-shadow:0 8px 25px rgba(0,0,0,.2)}
 /* CTA decorative dots */
-.cta-deco{position:absolute;border-radius:50%;opacity:.1;border:2px solid #fff}
+.cta-deco{position:absolute;border-radius:50%;opacity:.1;border:1px solid rgba(255,255,255,.15)}
 .cta-deco-1{width:100px;height:100px;top:-20px;right:-20px}
 .cta-deco-2{width:60px;height:60px;bottom:20px;left:30px}
 .cta-deco-3{width:80px;height:80px;top:40%;left:-20px}
@@ -674,7 +674,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .footer-col ul{list-style:none}
 .footer-col li{margin-bottom:12px}
 .footer-col a{text-decoration:none;color:rgba(255,255,255,.7);font-size:14px;transition:.2s;font-weight:500}
-.footer-col a:hover{color:var(--yellow)}
+.footer-col a:hover{color:var(--blue)}
 .footer-bottom{
   border-top:1px solid rgba(255,255,255,.1);
   padding-top:24px;font-size:13px;color:rgba(255,255,255,.45);text-align:center;
@@ -685,13 +685,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .scroll-top{
   position:fixed;bottom:24px;right:24px;z-index:98;
   width:48px;height:48px;border-radius:14px;
-  background:var(--white);border:2px solid var(--ink);
+  background:var(--white);border:1px solid var(--border);
   color:var(--ink);cursor:pointer;
   display:none;align-items:center;justify-content:center;
   transition:.3s var(--ease);font-size:20px;font-weight:800;
   box-shadow:0 4px 16px rgba(0,0,0,.1);
 }
-.scroll-top:hover{transform:translateY(-3px);background:var(--yellow);color:var(--ink-on-accent);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.scroll-top:hover{transform:translateY(-3px);background:var(--blue);color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.15)}
 .scroll-top.show{display:flex}
 
 /* WhatsApp */
@@ -923,7 +923,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <div class="p-exclusive"></div>
         <span class="p-badge badge-hot">🔥 متوفر الآن</span>
         <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#4A6CF7,#7B5CFA)"></div>
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#2563eb,#3b82f6)"></div>
           <div class="p-dots"></div>
           <div class="emoji">📝</div>
         </div>
@@ -938,7 +938,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           </div>
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
-            <a href="/nafs.html" class="p-btn" style="background:var(--green);text-decoration:none">ادخل الاختبار</a>
+            <a href="/nafs.html" class="p-btn" style="text-decoration:none">ادخل الاختبار</a>
           </div>
         </div>
       </div>
@@ -947,7 +947,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <div class="p-exclusive"></div>
         <span class="p-badge badge-new">متوفر</span>
         <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#14B8A6,#6EE7B7)"></div>
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#1d4ed8,#60a5fa)"></div>
           <div class="p-dots"></div>
           <div class="emoji">🔬</div>
         </div>
@@ -962,7 +962,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <a href="/products/science-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
-            <a href="/products/science-summary.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+            <a href="/products/science-summary.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
         </div>
       </div>
@@ -971,7 +971,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <div class="p-exclusive"></div>
         <span class="p-badge badge-new">متوفر</span>
         <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#FF8A4C,#FBBF24)"></div>
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#1e40af,#3b82f6)"></div>
           <div class="p-dots"></div>
           <div class="emoji">📖</div>
         </div>
@@ -986,32 +986,32 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <a href="/products/arabic-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
-            <a href="/products/arabic-summary.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+            <a href="/products/arabic-summary.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
         </div>
       </div>
 
       <div class="p-card" data-r>
-        <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,var(--purple),var(--rose),var(--purple));background-size:200% 100%;animation:shimmer 3s infinite"></div>
-        <span class="p-badge" style="background:var(--purple);color:#fff;border-color:var(--purple)">⭐ حصري</span>
+        <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,var(--blue),#60a5fa,var(--blue));background-size:200% 100%;animation:shimmer 3s infinite"></div>
+        <span class="p-badge" style="background:var(--blue);color:#fff">⭐ حصري</span>
         <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#7B5CFA,#A78BFA)"></div>
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#1e40af,#60a5fa)"></div>
           <div class="p-dots"></div>
           <div class="emoji">🇬🇧</div>
         </div>
         <div class="p-body">
-          <div class="p-cat" style="background:var(--purple-soft);color:var(--purple);border-color:var(--purple)">ملخصات — حصري</div>
+          <div class="p-cat">ملخصات — حصري</div>
           <h3 class="p-title">ملخص الإنجليزي Top Goal 2 — الصف السادس، الفصل الثاني</h3>
           <p class="p-desc">ملخص حصري لأحدث منهج إنجليزي Top Goal 2 — لا يتوفر في أي موقع آخر</p>
           <div class="p-features">
-            <span class="p-feature" style="background:var(--purple-soft);color:var(--purple);border-color:var(--purple)">⭐ حصري</span>
+            <span class="p-feature">⭐ حصري</span>
             <span class="p-feature">📄 PDF</span>
             <span class="p-feature">📚 سادس ف2</span>
           </div>
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
-            <a href="/products/english-summary.pdf" download class="p-btn" style="text-decoration:none;background:var(--purple)">تحميل</a>
-            <a href="/products/english-summary.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+            <a href="/products/english-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
+            <a href="/products/english-summary.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
         </div>
       </div>
@@ -1020,12 +1020,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <div class="p-exclusive"></div>
         <span class="p-badge badge-new">متوفر</span>
         <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#6366F1,#818CF8)"></div>
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#2563eb,#93c5fd)"></div>
           <div class="p-dots"></div>
           <div class="emoji">📘</div>
         </div>
         <div class="p-body">
-          <div class="p-cat" style="background:var(--blue-soft);color:var(--blue);border-color:var(--blue)">كتب مدرسية</div>
+          <div class="p-cat">كتب مدرسية</div>
           <h3 class="p-title">كتاب الإنجليزي Top Goal 2 — الصف السادس، الفصل الثاني</h3>
           <p class="p-desc">المنهج الرسمي لمادة الإنجليزي Top Goal 2 للصف السادس الابتدائي</p>
           <div class="p-features">
@@ -1036,66 +1036,66 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <a href="/products/english-topgoal2.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
-            <a href="/products/english-topgoal2.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+            <a href="/products/english-topgoal2.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
         </div>
       </div>
 
       <div class="p-card" data-r>
         <div class="p-exclusive"></div>
-        <span class="p-badge" style="background:var(--rose);color:#fff;border-color:var(--ink)">جديد</span>
+        <span class="p-badge badge-new">جديد</span>
         <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#FF5A7E,#FF8A4C)"></div>
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#1e3a5f,#3b82f6)"></div>
           <div class="p-dots"></div>
           <div class="emoji">📝</div>
         </div>
         <div class="p-body">
-          <div class="p-cat" style="background:var(--rose-soft);color:var(--rose);border-color:var(--rose)">أوراق عمل</div>
+          <div class="p-cat">أوراق عمل</div>
           <h3 class="p-title">أوراق عمل علوم — الصف السادس، الفصل الثاني</h3>
           <p class="p-desc">أوراق عمل شاملة لمادة العلوم للصف السادس الابتدائي — تمارين وأنشطة متنوعة</p>
           <div class="p-features">
             <span class="p-feature">📄 PDF</span>
             <span class="p-feature">📚 سادس ف2</span>
-            <span class="p-feature" style="background:var(--rose-soft);color:var(--rose);border-color:var(--rose)">📝 أوراق عمل</span>
+            <span class="p-feature">📝 أوراق عمل</span>
           </div>
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <a href="/products/science-worksheets-grade6.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
-            <a href="/products/science-worksheets-grade6.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+            <a href="/products/science-worksheets-grade6.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
         </div>
       </div>
 
       <div class="p-card" data-r>
         <div class="p-exclusive"></div>
-        <span class="p-badge" style="background:var(--orange);color:#fff;border-color:var(--ink)">جديد</span>
+        <span class="p-badge badge-new">جديد</span>
         <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#FF8A4C,#FBBF24)"></div>
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#1d4ed8,#93c5fd)"></div>
           <div class="p-dots"></div>
           <div class="emoji">📝</div>
         </div>
         <div class="p-body">
-          <div class="p-cat" style="background:var(--orange-soft);color:var(--orange);border-color:var(--orange)">أوراق عمل</div>
+          <div class="p-cat">أوراق عمل</div>
           <h3 class="p-title">أوراق عمل لغتي — الصف السادس، الفصل الثاني</h3>
           <p class="p-desc">أوراق عمل شاملة لمادة لغتي الجميلة للصف السادس الابتدائي — تدريبات وأنشطة متنوعة</p>
           <div class="p-features">
             <span class="p-feature">📄 PDF</span>
             <span class="p-feature">📚 سادس ف2</span>
-            <span class="p-feature" style="background:var(--orange-soft);color:var(--orange);border-color:var(--orange)">📝 أوراق عمل</span>
+            <span class="p-feature">📝 أوراق عمل</span>
           </div>
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <a href="/products/arabic-worksheets-grade6.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
-            <a href="/products/arabic-worksheets-grade6.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+            <a href="/products/arabic-worksheets-grade6.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
         </div>
       </div>
 
       <div class="p-card" data-r>
         <div class="p-exclusive"></div>
-        <span class="p-badge" style="background:var(--green);color:#fff;border-color:var(--ink)">جديد</span>
+        <span class="p-badge badge-new">جديد</span>
         <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#FF8A4C,#FBBF24)"></div>
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#2563eb,#60a5fa)"></div>
           <div class="p-dots"></div>
           <div class="emoji">📖</div>
         </div>
@@ -1110,16 +1110,16 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <a href="/products/arabic-grade5-sem1-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
-            <a href="/products/arabic-grade5-sem1-summary.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+            <a href="/products/arabic-grade5-sem1-summary.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
         </div>
       </div>
 
       <div class="p-card" data-r>
         <div class="p-exclusive"></div>
-        <span class="p-badge" style="background:var(--green);color:#fff;border-color:var(--ink)">جديد</span>
+        <span class="p-badge badge-new">جديد</span>
         <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#FF8A4C,#FBBF24)"></div>
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#2563eb,#60a5fa)"></div>
           <div class="p-dots"></div>
           <div class="emoji">📖</div>
         </div>
@@ -1134,7 +1134,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <a href="/products/arabic-grade5-sem2-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
-            <a href="/products/arabic-grade5-sem2-summary.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+            <a href="/products/arabic-grade5-sem2-summary.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
         </div>
       </div>
@@ -1195,8 +1195,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 
     <!-- ELEMENTARY -->
     <div class="s-panel on" id="p-elem">
-      <div class="s-head" style="border-right:4px solid var(--rose)">
-        <div class="s-icon" style="background:var(--rose-soft);color:var(--rose)">🌟</div>
+      <div class="s-head" style="border-right:4px solid var(--blue)">
+        <div class="s-icon" style="background:var(--blue-soft);color:var(--blue)">🌟</div>
         <div>
           <h3>المرحلة الابتدائية</h3>
           <p>من الصف الأول حتى السادس</p>
@@ -1211,7 +1211,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
       <div class="grade-list">
         <div class="g-row" onclick="this.classList.toggle('open')">
           <div class="g-header">
-            <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">6</div><div class="g-name">الصف السادس الابتدائي</div></div>
+            <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">6</div><div class="g-name">الصف السادس الابتدائي</div></div>
             <div class="g-left"><span class="g-available-tag">متاح</span><div class="g-chevron">▼</div></div>
           </div>
           <div class="g-body">
@@ -1219,7 +1219,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
               <a class="g-file" href="/nafs.html" onclick="event.stopPropagation()"><span class="f-icon">📝</span> نافس — تجميعة 1000 سؤال</a>
               <a class="g-file" href="/products/science-summary.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">🔬</span> ملخص العلوم</a>
               <a class="g-file" href="/products/arabic-summary.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">📖</span> ملخص لغتي</a>
-              <a class="g-file" href="/products/english-summary.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">🇬🇧</span> ملخص إنجليزي Top Goal 2 <span style="color:var(--purple);font-size:11px;font-weight:800">حصري</span></a>
+              <a class="g-file" href="/products/english-summary.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">🇬🇧</span> ملخص إنجليزي Top Goal 2 <span style="color:var(--blue);font-size:11px;font-weight:800">حصري</span></a>
               <a class="g-file" href="/products/english-topgoal2.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">📘</span> كتاب إنجليزي Top Goal 2</a>
               <a class="g-file" href="/products/science-worksheets-grade6.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">📝</span> أوراق عمل علوم</a>
               <a class="g-file" href="/products/arabic-worksheets-grade6.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">📝</span> أوراق عمل لغتي</a>
@@ -1228,7 +1228,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
         <div class="g-row" onclick="this.classList.toggle('open')">
           <div class="g-header">
-            <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">5</div><div class="g-name">الصف الخامس الابتدائي</div></div>
+            <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">5</div><div class="g-name">الصف الخامس الابتدائي</div></div>
             <div class="g-left"><span class="g-available-tag">متاح</span><div class="g-chevron">▼</div></div>
           </div>
           <div class="g-body">
@@ -1240,25 +1240,25 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
         <div class="g-row">
           <div class="g-header" style="cursor:default">
-            <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">4</div><div class="g-name">الصف الرابع الابتدائي</div></div>
+            <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">4</div><div class="g-name">الصف الرابع الابتدائي</div></div>
             <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
           </div>
         </div>
         <div class="g-row">
           <div class="g-header" style="cursor:default">
-            <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">3</div><div class="g-name">الصف الثالث الابتدائي</div></div>
+            <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">3</div><div class="g-name">الصف الثالث الابتدائي</div></div>
             <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
           </div>
         </div>
         <div class="g-row">
           <div class="g-header" style="cursor:default">
-            <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">2</div><div class="g-name">الصف الثاني الابتدائي</div></div>
+            <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">2</div><div class="g-name">الصف الثاني الابتدائي</div></div>
             <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
           </div>
         </div>
         <div class="g-row">
           <div class="g-header" style="cursor:default">
-            <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">1</div><div class="g-name">الصف الأول الابتدائي</div></div>
+            <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">1</div><div class="g-name">الصف الأول الابتدائي</div></div>
             <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
           </div>
         </div>
@@ -1267,8 +1267,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 
     <!-- MIDDLE -->
     <div class="s-panel" id="p-mid">
-      <div class="s-head" style="border-right:4px solid var(--teal)">
-        <div class="s-icon" style="background:var(--teal-soft);color:var(--teal)">🚀</div>
+      <div class="s-head" style="border-right:4px solid var(--blue)">
+        <div class="s-icon" style="background:var(--blue-soft);color:var(--blue)">🚀</div>
         <div>
           <h3>المرحلة المتوسطة</h3>
           <p>من الأول حتى الثالث متوسط</p>
@@ -1283,19 +1283,19 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
       <div class="grade-list">
         <div class="g-row">
           <div class="g-header" style="cursor:default">
-            <div class="g-right"><div class="g-num" style="background:var(--teal-soft);color:var(--teal)">3</div><div class="g-name">الصف الثالث المتوسط</div></div>
+            <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">3</div><div class="g-name">الصف الثالث المتوسط</div></div>
             <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
           </div>
         </div>
         <div class="g-row">
           <div class="g-header" style="cursor:default">
-            <div class="g-right"><div class="g-num" style="background:var(--teal-soft);color:var(--teal)">2</div><div class="g-name">الصف الثاني المتوسط</div></div>
+            <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">2</div><div class="g-name">الصف الثاني المتوسط</div></div>
             <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
           </div>
         </div>
         <div class="g-row">
           <div class="g-header" style="cursor:default">
-            <div class="g-right"><div class="g-num" style="background:var(--teal-soft);color:var(--teal)">1</div><div class="g-name">الصف الأول المتوسط</div></div>
+            <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">1</div><div class="g-name">الصف الأول المتوسط</div></div>
             <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
           </div>
         </div>
@@ -1304,8 +1304,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 
     <!-- HIGH -->
     <div class="s-panel" id="p-high">
-      <div class="s-head" style="border-right:4px solid var(--purple)">
-        <div class="s-icon" style="background:var(--purple-soft);color:var(--purple)">🎯</div>
+      <div class="s-head" style="border-right:4px solid var(--blue)">
+        <div class="s-icon" style="background:var(--blue-soft);color:var(--blue)">🎯</div>
         <div>
           <h3>المرحلة الثانوية</h3>
           <p>المسار العام والتخصصي</p>
@@ -1320,19 +1320,19 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
       <div class="grade-list">
         <div class="g-row">
           <div class="g-header" style="cursor:default">
-            <div class="g-right"><div class="g-num" style="background:var(--purple-soft);color:var(--purple)">3</div><div class="g-name">الصف الثالث الثانوي</div></div>
+            <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">3</div><div class="g-name">الصف الثالث الثانوي</div></div>
             <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
           </div>
         </div>
         <div class="g-row">
           <div class="g-header" style="cursor:default">
-            <div class="g-right"><div class="g-num" style="background:var(--purple-soft);color:var(--purple)">2</div><div class="g-name">الصف الثاني الثانوي</div></div>
+            <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">2</div><div class="g-name">الصف الثاني الثانوي</div></div>
             <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
           </div>
         </div>
         <div class="g-row">
           <div class="g-header" style="cursor:default">
-            <div class="g-right"><div class="g-num" style="background:var(--purple-soft);color:var(--purple)">1</div><div class="g-name">الصف الأول الثانوي</div></div>
+            <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">1</div><div class="g-name">الصف الأول الثانوي</div></div>
             <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
           </div>
         </div>
@@ -1384,27 +1384,27 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <p>تجميعة شاملة لأسئلة نافس مع إجابات نموذجية مفصّلة</p>
       </div>
       <div class="feat" data-r>
-        <div class="feat-ic" style="background:var(--green-soft);color:var(--green)">⬇️</div>
+        <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">⬇️</div>
         <h3>تحميل فوري</h3>
         <p>حمّل الملفات مباشرة بصيغة PDF واستخدمها بدون إنترنت</p>
       </div>
       <div class="feat" data-r>
-        <div class="feat-ic" style="background:var(--orange-soft);color:var(--orange)">📱</div>
+        <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">📱</div>
         <h3>يعمل على كل جهاز</h3>
         <p>تصميم متجاوب يعمل بسلاسة على الجوال والتابلت والكمبيوتر</p>
       </div>
       <div class="feat" data-r>
-        <div class="feat-ic" style="background:var(--purple-soft);color:var(--purple)">🎯</div>
+        <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">🎯</div>
         <h3>اختبار تفاعلي</h3>
         <p>حل الأسئلة مباشرة في الموقع وتابع تقدمك بشكل مباشر</p>
       </div>
       <div class="feat" data-r>
-        <div class="feat-ic" style="background:var(--rose-soft);color:var(--rose)">⭐</div>
+        <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">⭐</div>
         <h3>محتوى حصري</h3>
         <p>ملخصات لا تتوفر في أي موقع آخر — حصرياً على الإتقان</p>
       </div>
       <div class="feat" data-r>
-        <div class="feat-ic" style="background:var(--teal-soft);color:var(--teal)">🔄</div>
+        <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">🔄</div>
         <h3>تحديث مستمر</h3>
         <p>إضافة مواد ومراحل جديدة باستمرار — تابعنا للمزيد</p>
       </div>
@@ -1424,7 +1424,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <div class="test-stars"><span>★★★★★</span></div>
         <p class="test-text">تجميعات نافس ساعدتني كثير في التحضير للاختبار. الأسئلة شاملة والإجابات واضحة ومفصّلة</p>
         <div class="test-author">
-          <div class="test-avatar" style="background:linear-gradient(135deg,var(--blue),var(--purple))">س</div>
+          <div class="test-avatar" style="background:var(--blue)">س</div>
           <div>
             <div class="test-name">سارة</div>
             <div class="test-role">طالبة — الصف السادس</div>
@@ -1435,7 +1435,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <div class="test-stars"><span>★★★★★</span></div>
         <p class="test-text">ملخص العلوم ممتاز ومنظّم بشكل يسهّل المراجعة. أنصح كل طالب فيه خصوصاً وقت الاختبارات</p>
         <div class="test-author">
-          <div class="test-avatar" style="background:linear-gradient(135deg,var(--green),var(--teal))">م</div>
+          <div class="test-avatar" style="background:var(--blue)">م</div>
           <div>
             <div class="test-name">محمد</div>
             <div class="test-role">طالب — الصف السادس</div>
@@ -1446,7 +1446,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <div class="test-stars"><span>★★★★★</span></div>
         <p class="test-text">الموقع سهل الاستخدام والملخصات مجانية. ملخص الإنجليزي الحصري وفّر عليّ وقت كبير</p>
         <div class="test-author">
-          <div class="test-avatar" style="background:linear-gradient(135deg,var(--orange),var(--rose))">ن</div>
+          <div class="test-avatar" style="background:var(--blue)">ن</div>
           <div>
             <div class="test-name">نورة</div>
             <div class="test-role">طالبة — الصف السادس</div>
