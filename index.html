@@ -482,6 +482,15 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .p-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(37,99,235,.25)}
 .p-btn-alt{background:var(--blue-soft)!important;color:var(--blue)!important;box-shadow:none!important}
 .p-btn-alt:hover{background:var(--blue)!important;color:#fff!important}
+.p-btn-buy{
+  padding:10px 20px;border-radius:10px;
+  font-family:var(--font);font-size:13px;font-weight:700;
+  border:none;cursor:pointer;
+  background:var(--green);color:#fff;transition:.25s var(--ease);
+  text-decoration:none;
+  box-shadow:0 2px 6px rgba(5,150,105,.2);
+}
+.p-btn-buy:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(5,150,105,.25)}
 .p-btn.soon-btn{background:var(--ink-4);color:#fff;cursor:default;box-shadow:none}
 .p-btn.soon-btn:hover{transform:none}
 
@@ -996,6 +1005,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price">49 <span class="currency">ر.س</span></div>
             <button class="p-btn" onclick="openPreview('nafs','بنك أسئلة نافس — 1000 سؤال',271)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('بنك أسئلة نافس — 1000 سؤال')">شراء</button>
           </div>
         </div>
       </div>
@@ -1020,6 +1030,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price">19 <span class="currency">ر.س</span></div>
             <button class="p-btn" onclick="openPreview('science-summary','ملخص العلوم — سادس ف2',15)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص العلوم — سادس ف2')">شراء</button>
           </div>
         </div>
       </div>
@@ -1043,6 +1054,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price">19 <span class="currency">ر.س</span></div>
             <button class="p-btn" onclick="openPreview('arabic-summary','ملخص لغتي — سادس ف2',12)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — سادس ف2')">شراء</button>
           </div>
         </div>
       </div>
@@ -1067,6 +1079,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price">19 <span class="currency">ر.س</span></div>
             <button class="p-btn" onclick="openPreview('english-summary','ملخص إنجليزي Top Goal 2 — سادس ف2',12)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص إنجليزي Top Goal 2 — سادس ف2')">شراء</button>
           </div>
         </div>
       </div>
@@ -1091,6 +1104,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <button class="p-btn" onclick="openPreview('english-textbook','كتاب إنجليزي Top Goal 2 — سادس ف2',125)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('كتاب إنجليزي Top Goal 2 — سادس ف2')">شراء</button>
           </div>
         </div>
       </div>
@@ -1116,6 +1130,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price">29 <span class="currency">ر.س</span></div>
             <button class="p-btn" onclick="openPreview('science-worksheets','أوراق عمل العلوم — سادس ف2',30)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('أوراق عمل العلوم — سادس ف2')">شراء</button>
           </div>
         </div>
       </div>
@@ -1140,6 +1155,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price">29 <span class="currency">ر.س</span></div>
             <button class="p-btn" onclick="openPreview('arabic-worksheets','أوراق عمل لغتي — سادس ف2',24)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('أوراق عمل لغتي — سادس ف2')">شراء</button>
           </div>
         </div>
       </div>
@@ -1163,6 +1179,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price">19 <span class="currency">ر.س</span></div>
             <button class="p-btn" onclick="openPreview('arabic-g5-s1','ملخص لغتي — خامس ف1',10)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — خامس ف1')">شراء</button>
           </div>
         </div>
       </div>
@@ -1186,6 +1203,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price">19 <span class="currency">ر.س</span></div>
             <button class="p-btn" onclick="openPreview('arabic-g5-s2','ملخص لغتي — خامس ف2',11)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — خامس ف2')">شراء</button>
           </div>
         </div>
       </div>
@@ -1595,7 +1613,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
     <div class="preview-pages" id="previewPages"></div>
     <div class="preview-info" id="previewInfo"></div>
     <div class="preview-footer">
-      <button class="btn btn-green" onclick="orderViaWhatsApp()" style="font-size:14px;padding:12px 28px;background:var(--blue);box-shadow:0 4px 14px rgba(37,99,235,.3)">🛒 اطلب الآن</button>
+      <button class="btn" onclick="orderViaWhatsApp()" style="font-size:14px;padding:12px 28px;background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.3)">🛒 اطلب النسخة الكاملة</button>
     </div>
   </div>
 </div>
@@ -1606,6 +1624,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 <script>
 
 // === PREVIEW MODAL ===
+const WA_NUMBER = '966580608654';
 let currentPreviewTitle = '';
 function openPreview(slug, title, totalPages){
   currentPreviewTitle = title;
@@ -1620,7 +1639,7 @@ function openPreview(slug, title, totalPages){
     pages.appendChild(img);
   }
   document.getElementById('previewInfo').innerHTML =
-    'هذه معاينة لأول صفحتين فقط<br>الملف الكامل يحتوي على <strong>' + totalPages + ' صفحة</strong>';
+    '📄 هذه معاينة لأول صفحتين فقط<br>الملف الكامل يحتوي على <strong>' + totalPages + ' صفحة</strong><br><span style="color:var(--ink-3);font-size:12px">تواصل معنا عبر واتساب وسيتم إرسال الآيبان وتسليم الملف فوراً</span>';
   document.getElementById('previewOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1628,9 +1647,12 @@ function closePreview(){
   document.getElementById('previewOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
+function orderProduct(title){
+  const msg = encodeURIComponent('السلام عليكم 👋\nأبغى أطلب: ' + title + '\nأرجو إرسال بيانات التحويل');
+  window.open('https://wa.me/' + WA_NUMBER + '?text=' + msg, '_blank');
+}
 function orderViaWhatsApp(){
-  const msg = encodeURIComponent('السلام عليكم، أبغى أطلب: ' + currentPreviewTitle);
-  window.open('https://wa.me/966XXXXXXXXX?text=' + msg, '_blank');
+  orderProduct(currentPreviewTitle);
 }
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closePreview(); });
 
@@ -1791,8 +1813,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 
 // === WHATSAPP ===
 function openWhatsApp(){
-  const msg=encodeURIComponent('السلام عليكم، أبغى أستفسر عن منتجات الإتقان التعليمية');
-  window.open('https://wa.me/966XXXXXXXXX?text='+msg,'_blank');
+  const msg=encodeURIComponent('السلام عليكم 👋\nأبغى أستفسر عن منتجات الإتقان التعليمية');
+  window.open('https://wa.me/'+WA_NUMBER+'?text='+msg,'_blank');
 }
 
 // === TOAST ===
