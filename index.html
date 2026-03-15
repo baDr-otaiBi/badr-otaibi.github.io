@@ -11,8 +11,17 @@
 <meta property="og:locale" content="ar_SA">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#FAFAFE">
+<meta name="color-scheme" content="light dark">
 <link rel="icon" type="image/png" href="/logo.png">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+// Apply theme instantly to prevent flash
+(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.querySelector('meta[name="theme-color"]').content=t==='dark'?'#0E0E1A':'#FAFAFE'})();
+</script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -68,6 +77,7 @@ body{
   font-family:var(--font-body);background:var(--bg);color:var(--ink);line-height:1.8;
   font-size:15px;letter-spacing:-0.01em;
   transition:background .4s var(--ease),color .4s var(--ease);
+  opacity:0;animation:pageIn .5s var(--ease) .1s forwards;
   /* Subtle grid pattern like Adam Mirek */
   background-image:
     linear-gradient(var(--grid-color) 1px, transparent 1px),
@@ -86,6 +96,7 @@ body{
 .container{max-width:1100px;margin:0 auto;padding:0 24px}
 
 /* ===== ANIMATIONS ===== */
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
 @keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes scaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
@@ -94,10 +105,24 @@ body{
 @keyframes popIn{0%{opacity:0;transform:scale(0.5) rotate(-10deg)}60%{transform:scale(1.1) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0deg)}}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-[data-r]{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+[data-r]{opacity:0;transform:translateY(28px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
 [data-r].v{opacity:1;transform:translateY(0)}
-.au{animation:up .7s var(--ease) both}
-.au2{animation-delay:.1s}.au3{animation-delay:.2s}.au4{animation-delay:.3s}.au5{animation-delay:.4s}
+[data-r].v .step-card,[data-r].v .feat,[data-r].v .test-card,[data-r].v .stat-card,[data-r].v .p-card{
+  animation:up .5s var(--ease) both;
+}
+[data-r].v :nth-child(1){animation-delay:.0s}
+[data-r].v :nth-child(2){animation-delay:.08s}
+[data-r].v :nth-child(3){animation-delay:.16s}
+[data-r].v :nth-child(4){animation-delay:.24s}
+.au{animation:up .6s var(--ease) both}
+.au2{animation-delay:.08s}.au3{animation-delay:.16s}.au4{animation-delay:.24s}.au5{animation-delay:.32s}
+
+/* Performance: skip rendering of off-screen sections */
+.section,.section-alt{content-visibility:auto;contain-intrinsic-size:auto 600px}
+
+/* Focus states for accessibility */
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:4px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 
 /* ===== OFFSET SHADOW (Adam Mirek signature) ===== */
 .shadow-pop{position:relative}
@@ -114,12 +139,13 @@ body{
 /* ===== NAV ===== */
 .nav{
   position:sticky;top:0;z-index:100;
-  background:rgba(250,250,254,.92);
+  background:rgba(250,250,254,.85);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border-bottom:2px solid var(--ink);
-  transition:background .3s,box-shadow .3s;
+  transition:background .3s,box-shadow .3s,border-color .3s;
 }
-[data-theme="dark"] .nav{background:rgba(14,14,26,.95);border-color:rgba(255,255,255,.1)}
-.nav.shadow{box-shadow:0 4px 20px rgba(0,0,0,.06)}
+[data-theme="dark"] .nav{background:rgba(14,14,26,.88);border-color:rgba(255,255,255,.1)}
+.nav.shadow{box-shadow:0 4px 24px rgba(0,0,0,.08)}
 .nav-inner{
   display:flex;align-items:center;justify-content:space-between;
   height:72px;
@@ -132,7 +158,9 @@ body{
   padding:8px 18px;border-radius:10px;transition:.2s var(--ease);
   font-family:var(--font);letter-spacing:0.01em;
 }
-.nav-links a:hover,.nav-links a.on{color:var(--ink-on-accent);background:var(--yellow);border-radius:10px}
+.nav-links a:hover{color:var(--ink-on-accent);background:var(--yellow);border-radius:10px}
+.nav-links a.on{color:var(--ink-on-accent);background:var(--yellow);border-radius:10px;position:relative}
+.nav-links a.on::after{content:'';position:absolute;bottom:-2px;right:25%;left:25%;height:3px;background:var(--ink-on-accent);border-radius:3px}
 .nav-actions{display:flex;align-items:center;gap:8px}
 .theme-toggle{
   width:42px;height:42px;border-radius:12px;border:2px solid var(--ink);
@@ -162,10 +190,19 @@ body{
 
 .nav-links.show{
   display:flex!important;flex-direction:column;
-  position:absolute;top:72px;right:0;left:0;
-  background:var(--bg);border-bottom:2px solid var(--ink);
-  padding:16px 24px;z-index:99;
+  position:fixed;top:0;right:0;bottom:0;width:280px;
+  background:var(--bg);border-left:2px solid var(--ink);
+  padding:88px 24px 24px;z-index:101;gap:4px;
+  animation:slideIn .3s var(--ease);
+  box-shadow:-8px 0 32px rgba(0,0,0,.12);
 }
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+.nav-backdrop{
+  display:none;position:fixed;inset:0;z-index:100;
+  background:rgba(0,0,0,.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  animation:fadeIn .2s var(--ease);
+}
+.nav-backdrop.show{display:block}
 
 /* ===== HERO ===== */
 .hero{
@@ -173,8 +210,9 @@ body{
   position:relative;overflow:hidden;
   min-height:85vh;display:flex;align-items:center;
   border-bottom:3px solid var(--ink);
+  background:linear-gradient(180deg,transparent 0%,var(--bg-alt) 100%);
 }
-[data-theme="dark"] .hero{border-color:var(--ink-5)}
+[data-theme="dark"] .hero{border-color:var(--ink-5);background:linear-gradient(180deg,transparent 0%,var(--bg-alt) 100%)}
 .hero-inner{text-align:center;position:relative;z-index:2;max-width:720px;margin:0 auto}
 
 /* Floating decorative shapes */
@@ -314,8 +352,8 @@ body{
   transition:transform .3s var(--ease);
 }
 [data-theme="dark"] .p-card::after{background:rgba(255,255,255,.06)}
-.p-card:hover{transform:translate(-2px,-2px)}
-.p-card:hover::after{transform:translate(6px,6px)}
+.p-card:hover{transform:translate(-3px,-3px) rotate(-0.5deg)}
+.p-card:hover::after{transform:translate(7px,7px)}
 .p-card.soon{opacity:.7}
 .p-card.soon:hover{transform:none}
 .p-card.soon::after{display:none}
@@ -684,28 +722,21 @@ body{
   color:var(--ink);cursor:pointer;
   display:none;align-items:center;justify-content:center;
   transition:.3s var(--ease);font-size:20px;font-weight:800;
-  position:relative;
+  box-shadow:0 4px 16px rgba(0,0,0,.1);
 }
-.scroll-top::after{
-  content:'';position:absolute;inset:0;border-radius:inherit;z-index:-1;
-  background:var(--ink);transform:translate(3px,3px);
-}
-.scroll-top:hover{transform:translate(-2px,-2px);background:var(--yellow);color:var(--ink-on-accent)}
+.scroll-top:hover{transform:translateY(-3px);background:var(--yellow);color:var(--ink-on-accent);box-shadow:0 8px 24px rgba(0,0,0,.15)}
 .scroll-top.show{display:flex}
 
 /* WhatsApp */
 .whatsapp-btn{
   position:fixed;bottom:24px;left:24px;z-index:99;
   width:56px;height:56px;border-radius:50%;
-  background:#25D366;color:#fff;border:2px solid var(--ink);cursor:pointer;
+  background:#25D366;color:#fff;border:none;cursor:pointer;
   display:grid;place-items:center;
   transition:.3s var(--ease);
+  box-shadow:0 4px 20px rgba(37,211,102,.35);
 }
-.whatsapp-btn::after{
-  content:'';position:absolute;inset:0;border-radius:inherit;z-index:-1;
-  background:var(--ink);transform:translate(3px,3px);
-}
-.whatsapp-btn:hover{transform:translate(-2px,-2px) scale(1.05)}
+.whatsapp-btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 8px 28px rgba(37,211,102,.45)}
 .whatsapp-btn svg{width:28px;height:28px}
 
 /* Toast */
@@ -720,15 +751,15 @@ body{
 
 /* Mouse follow cursor */
 .cursor-dot{
-  position:fixed;width:20px;height:20px;border-radius:50%;
+  position:fixed;top:0;left:0;width:20px;height:20px;border-radius:50%;
   background:var(--yellow);border:2px solid var(--ink);
   pointer-events:none;z-index:999;
-  transform:translate(-50%,-50%);
-  transition:width .2s,height .2s,background .2s;
+  will-change:transform;
+  transition:width .2s,height .2s,background .2s,border-radius .2s;
   mix-blend-mode:normal;
   display:none;
 }
-@media(pointer:fine){.cursor-dot{display:block}}
+@media(pointer:fine) and (min-width:768px){.cursor-dot{display:block}}
 .cursor-dot.hovering{
   width:40px;height:40px;
   background:var(--green);
@@ -800,23 +831,24 @@ body{
         <span class="t-icon" id="themeIcon">&#9790;</span>
       </button>
       <a href="#products" class="nav-cta">تصفح المنتجات</a>
-      <button class="hamburger" onclick="this.closest('.nav').querySelector('.nav-links').classList.toggle('show')">
+      <button class="hamburger" onclick="toggleMobileMenu()" aria-label="القائمة">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
       </button>
     </div>
   </div>
 </nav>
+<div class="nav-backdrop" id="navBackdrop" onclick="toggleMobileMenu()"></div>
 
 <!-- HERO -->
 <section class="hero">
   <!-- Decorative floating shapes -->
   <div class="hero-deco">
-    <div class="deco deco-1"></div>
-    <div class="deco deco-2"></div>
-    <div class="deco deco-3"></div>
-    <div class="deco deco-4"></div>
-    <div class="deco deco-5"></div>
-    <div class="deco deco-6"></div>
+    <div class="deco deco-1" data-rot="12"></div>
+    <div class="deco deco-2" data-rot="0"></div>
+    <div class="deco deco-3" data-rot="-8"></div>
+    <div class="deco deco-4" data-rot="25"></div>
+    <div class="deco deco-5" data-rot="0"></div>
+    <div class="deco deco-6" data-rot="-15"></div>
   </div>
   <div class="container">
     <div class="hero-inner">
@@ -1460,7 +1492,7 @@ body{
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#" class="logo">
-          <img src="/logo.png" alt="الإتقان التعليمية" style="filter:brightness(0) invert(1)">
+          <img src="/logo.png" alt="الإتقان التعليمية" loading="lazy" style="filter:brightness(0) invert(1)">
         </a>
         <p>منصة تعليمية سعودية توفّر تجميعات أسئلة وملخصات لجميع المراحل الدراسية.</p>
       </div>
@@ -1507,142 +1539,172 @@ body{
 
 <script>
 
-// === CUSTOM CURSOR (desktop only) ===
-if(window.matchMedia('(pointer:fine)').matches){
+// === MOBILE MENU ===
+function toggleMobileMenu(){
+  const links = document.querySelector('.nav-links');
+  const backdrop = document.getElementById('navBackdrop');
+  const isOpen = links.classList.contains('show');
+  links.classList.toggle('show');
+  backdrop.classList.toggle('show');
+  document.body.style.overflow = isOpen ? '' : 'hidden';
+}
+
+// === CUSTOM CURSOR (desktop only, skip on touch) ===
+if(window.matchMedia('(pointer:fine)').matches && window.innerWidth >= 768){
   const dot = document.getElementById('cursorDot');
   let mx = -100, my = -100, cx = -100, cy = -100;
+  let ticking = false;
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
-  });
+    if(!ticking){ticking=true;requestAnimationFrame(moveCursor)}
+  }, {passive:true});
 
-  // Smooth follow
   function moveCursor(){
     cx += (mx - cx) * 0.15;
     cy += (my - cy) * 0.15;
-    dot.style.left = cx + 'px';
-    dot.style.top = cy + 'px';
-    requestAnimationFrame(moveCursor);
+    dot.style.transform = `translate3d(${cx}px,${cy}px,0) translate(-50%,-50%)`;
+    if(Math.abs(mx-cx)>0.5||Math.abs(my-cy)>0.5) requestAnimationFrame(moveCursor);
+    else ticking=false;
   }
-  moveCursor();
 
-  // Hover effect on interactive elements
   document.addEventListener('mouseover', e => {
-    if(e.target.closest('a, button, .p-card, .feat, .step-card, .test-card, .g-row, .s-tab')){
+    if(e.target.closest('a, button, .p-card, .feat, .step-card, .test-card, .g-row, .s-tab'))
       dot.classList.add('hovering');
-    }
-  });
+  }, {passive:true});
   document.addEventListener('mouseout', e => {
-    if(e.target.closest('a, button, .p-card, .feat, .step-card, .test-card, .g-row, .s-tab')){
+    if(e.target.closest('a, button, .p-card, .feat, .step-card, .test-card, .g-row, .s-tab'))
       dot.classList.remove('hovering');
-    }
-  });
+  }, {passive:true});
 }
 
-// === PARALLAX DECORATIVE SHAPES (desktop only) ===
+// === PARALLAX (desktop only, use transform3d for GPU) ===
 if(window.innerWidth >= 768){
+  let pTick = false;
   document.addEventListener('mousemove', e => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 2;
-    const y = (e.clientY / window.innerHeight - 0.5) * 2;
-    document.querySelectorAll('.deco').forEach((d, i) => {
-      const speed = (i + 1) * 8;
-      d.style.transform = d.style.transform.replace(/translate\([^)]*\)/, '') +
-        ` translate(${x * speed}px, ${y * speed}px)`;
+    if(pTick) return; pTick = true;
+    requestAnimationFrame(() => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      document.querySelectorAll('.deco').forEach((d, i) => {
+        const speed = (i + 1) * 6;
+        d.style.transform = `translate3d(${x*speed}px,${y*speed}px,0) rotate(${d.dataset.rot||0}deg)`;
+      });
+      pTick = false;
     });
-  });
+  }, {passive:true});
 }
 
 // === DARK MODE ===
-function getTheme() { return localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
-function setTheme(t) {
-  document.documentElement.setAttribute('data-theme', t);
-  localStorage.setItem('theme', t);
-  document.getElementById('themeIcon').innerHTML = t === 'dark' ? '&#9788;' : '&#9790;';
-  document.querySelector('meta[name="theme-color"]').content = t === 'dark' ? '#0E0E1A' : '#FAFAFE';
+function getTheme(){return localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('theme',t);
+  document.getElementById('themeIcon').innerHTML = t==='dark'?'&#9788;':'&#9790;';
+  document.querySelector('meta[name="theme-color"]').content = t==='dark'?'#0E0E1A':'#FAFAFE';
 }
-setTheme(getTheme());
-document.getElementById('themeToggle').addEventListener('click', () => {
-  setTheme(getTheme() === 'dark' ? 'light' : 'dark');
-});
+// Theme is already applied via inline script, just update icon
+document.getElementById('themeIcon').innerHTML = getTheme()==='dark'?'&#9788;':'&#9790;';
+document.getElementById('themeToggle').addEventListener('click',()=>setTheme(getTheme()==='dark'?'light':'dark'));
 
-// === Reading progress bar ===
-function updateReadingBar() {
+// === SCROLL HANDLER (single, throttled) ===
+let lastScroll = 0;
+function onScroll(){
+  const y = scrollY;
+  document.querySelector('.nav').classList.toggle('shadow', y > 10);
+  document.getElementById('scrollTop').classList.toggle('show', y > 400);
+  // Reading progress
   const h = document.documentElement.scrollHeight - window.innerHeight;
-  const pct = h > 0 ? (scrollY / h) * 100 : 0;
-  document.getElementById('readingBar').style.width = pct + '%';
+  if(h>0) document.getElementById('readingBar').style.width = (y/h*100)+'%';
+  lastScroll = y;
 }
+window.addEventListener('scroll', onScroll, {passive:true});
 
-// === Nav scroll shadow + scroll-to-top + reading bar ===
-window.addEventListener('scroll', () => {
-  document.querySelector('.nav').classList.toggle('shadow', scrollY > 10);
-  document.getElementById('scrollTop').classList.toggle('show', scrollY > 400);
-  updateReadingBar();
-}, {passive: true});
-
-// === Counter animation ===
-function animateCounters() {
+// === COUNTER ANIMATION ===
+function animateCounters(){
   document.querySelectorAll('.counter').forEach(el => {
     const target = +el.dataset.target;
-    if (el.dataset.done) return;
-    const duration = 1500;
+    if(el.dataset.done) return;
     const start = performance.now();
-    function step(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(eased * target);
-      if (progress < 1) requestAnimationFrame(step);
-      else { el.textContent = target; el.dataset.done = '1'; }
+    function step(now){
+      const p = Math.min((now-start)/1400,1);
+      const e = 1-Math.pow(1-p,3);
+      el.textContent = Math.floor(e*target);
+      if(p<1) requestAnimationFrame(step);
+      else {el.textContent=target;el.dataset.done='1'}
     }
     requestAnimationFrame(step);
   });
 }
 
-// === Reveal on scroll ===
+// === INTERSECTION OBSERVERS ===
 const obs = new IntersectionObserver(e => e.forEach(x => {
-  if (x.isIntersecting) { x.target.classList.add('v'); obs.unobserve(x.target); }
-}), { threshold: .08 });
+  if(x.isIntersecting){x.target.classList.add('v');obs.unobserve(x.target)}
+}),{threshold:.06,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('[data-r]').forEach(el => obs.observe(el));
 
-// Counter observer
 const counterObs = new IntersectionObserver(e => {
-  e.forEach(x => { if (x.isIntersecting) { animateCounters(); counterObs.unobserve(x.target); } });
-}, { threshold: .3 });
+  e.forEach(x=>{if(x.isIntersecting){animateCounters();counterObs.unobserve(x.target)}});
+},{threshold:.3});
 document.querySelectorAll('.hero-stats, .stats-banner').forEach(el => counterObs.observe(el));
 
-// === Stage tabs ===
+// === ACTIVE NAV SECTION TRACKING ===
+const navSections = ['products','stages','features'];
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const id = entry.target.id;
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.toggle('on', a.getAttribute('href') === '#'+id);
+      });
+    }
+  });
+},{threshold:.2,rootMargin:'-80px 0px -50% 0px'});
+navSections.forEach(id => {
+  const el = document.getElementById(id);
+  if(el) navObs.observe(el);
+});
+
+// === STAGE TABS ===
 document.querySelectorAll('.s-tab').forEach(t => {
-  t.addEventListener('click', () => {
-    document.querySelectorAll('.s-tab').forEach(x => x.classList.remove('on'));
-    document.querySelectorAll('.s-panel').forEach(x => x.classList.remove('on'));
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.s-tab').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.s-panel').forEach(x=>x.classList.remove('on'));
     t.classList.add('on');
-    document.getElementById('p-' + t.dataset.s).classList.add('on');
+    document.getElementById('p-'+t.dataset.s).classList.add('on');
   });
 });
 
-// === Smooth scroll ===
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const href = a.getAttribute('href');
-    if (href === '#') return;
+// === SMOOTH SCROLL ===
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href');
+    if(href==='#')return;
     e.preventDefault();
-    const t = document.querySelector(href);
-    if (t) t.scrollIntoView({ behavior: 'smooth' });
+    const t=document.querySelector(href);
+    if(t){
+      const offset = 80; // nav height
+      const y = t.getBoundingClientRect().top + scrollY - offset;
+      window.scrollTo({top:y,behavior:'smooth'});
+    }
+    // Close mobile menu
     document.querySelector('.nav-links')?.classList.remove('show');
+    document.getElementById('navBackdrop')?.classList.remove('show');
+    document.body.style.overflow='';
   });
 });
 
-// === WhatsApp ===
-function openWhatsApp() {
-  const msg = encodeURIComponent('السلام عليكم، أبغى أستفسر عن منتجات الإتقان التعليمية');
-  window.open('https://wa.me/966XXXXXXXXX?text=' + msg, '_blank');
+// === WHATSAPP ===
+function openWhatsApp(){
+  const msg=encodeURIComponent('السلام عليكم، أبغى أستفسر عن منتجات الإتقان التعليمية');
+  window.open('https://wa.me/966XXXXXXXXX?text='+msg,'_blank');
 }
 
-// === Toast ===
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3500);
+// === TOAST ===
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
 }
 
 </script>

@@ -6,8 +6,12 @@
 <title>بنك أسئلة نافس — الإتقان التعليمية</title>
 <meta name="description" content="بنك أسئلة نافس التفاعلي — 1000 سؤال تدريبي مع الإجابات النموذجية للصف السادس الابتدائي">
 <meta name="theme-color" content="#1D4ED8">
+<meta name="color-scheme" content="light dark">
 <link rel="icon" type="image/png" href="/logo.png">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>(function(){var t=localStorage.getItem('nafs_theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})()</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -72,10 +76,11 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 
 /* Topbar */
 .topbar{
-  background:rgba(255,255,255,.92);backdrop-filter:blur(16px);
+  background:rgba(255,255,255,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:50;
+  transition:background .3s,border-color .3s;
 }
-[data-theme="dark"] .topbar{background:rgba(11,17,32,.92)}
+[data-theme="dark"] .topbar{background:rgba(11,17,32,.85)}
 [data-theme="dark"] .q-answer-box{color:var(--green);background:rgba(16,185,129,.12)}
 .topbar-in{max-width:1100px;margin:0 auto;padding:0 20px;height:96px;display:flex;align-items:center;justify-content:space-between}
 .topbar img{height:80px}
