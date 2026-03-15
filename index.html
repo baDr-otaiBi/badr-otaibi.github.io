@@ -417,8 +417,18 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   padding-top:16px;border-top:1px solid var(--border);
   flex-wrap:wrap;gap:8px;
 }
-.p-price{font-family:var(--font);font-weight:900;font-size:20px;color:var(--ink)}
-.p-price.free-tag{color:var(--blue);font-size:17px}
+.p-price{font-family:var(--font);font-weight:900;font-size:22px;color:var(--ink);display:flex;align-items:baseline;gap:4px}
+.p-price .currency{font-size:13px;font-weight:600;color:var(--ink-3)}
+.p-price.free-tag{color:var(--green);font-size:17px}
+
+.payment-note{
+  margin-top:32px;padding:20px 28px;border-radius:var(--radius);
+  background:var(--blue-soft);border:1px solid var(--blue);
+  display:flex;align-items:center;gap:14px;
+  font-size:14px;color:var(--ink-2);line-height:1.8;
+}
+.payment-note .pn-icon{font-size:24px;flex-shrink:0}
+.payment-note strong{color:var(--ink);font-weight:700}
 .p-btn{
   padding:10px 20px;border-radius:10px;
   font-family:var(--font);font-size:13px;font-weight:700;
@@ -832,7 +842,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
     <div class="hero-inner">
       <div class="hero-badge au">منصة الإتقان التعليمية</div>
       <h1 class="au au2">كل ما يحتاجه الطالب<br><span class="highlight">في مكان واحد</span></h1>
-      <p class="hero-desc au au3">ملخصات تعليمية شاملة، أوراق عمل، تجميعات أسئلة مع الإجابات، واختبارات تفاعلية — لجميع المراحل الدراسية. مجاناً بالكامل.</p>
+      <p class="hero-desc au au3">ملخصات تعليمية شاملة، أوراق عمل، تجميعات أسئلة مع الإجابات، واختبارات تفاعلية — لجميع المراحل الدراسية بأسعار رمزية.</p>
       <div class="hero-btns au au4">
         <a href="#products" class="btn btn-green">استكشف المحتوى</a>
         <a href="#stages" class="btn btn-out">تصفح المراحل</a>
@@ -872,7 +882,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
         <div class="trust-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-          مجاني بالكامل
+          أسعار رمزية
         </div>
         <div class="trust-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
@@ -941,7 +951,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">🎯 تفاعلي</span>
           </div>
           <div class="p-foot">
-            <div class="p-price free-tag">مجاني</div>
+            <div class="p-price">49 <span class="currency">ر.س</span></div>
             <a href="/nafs.html" class="p-btn" style="text-decoration:none">ادخل الاختبار</a>
           </div>
         </div>
@@ -965,7 +975,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📚 سادس ف2</span>
           </div>
           <div class="p-foot">
-            <div class="p-price free-tag">مجاني</div>
+            <div class="p-price">19 <span class="currency">ر.س</span></div>
             <a href="/products/science-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
             <a href="/products/science-summary.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
@@ -989,7 +999,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📚 سادس ف2</span>
           </div>
           <div class="p-foot">
-            <div class="p-price free-tag">مجاني</div>
+            <div class="p-price">19 <span class="currency">ر.س</span></div>
             <a href="/products/arabic-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
             <a href="/products/arabic-summary.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
@@ -1014,7 +1024,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📚 سادس ف2</span>
           </div>
           <div class="p-foot">
-            <div class="p-price free-tag">مجاني</div>
+            <div class="p-price">19 <span class="currency">ر.س</span></div>
             <a href="/products/english-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
             <a href="/products/english-summary.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
@@ -1065,7 +1075,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📝 أوراق عمل</span>
           </div>
           <div class="p-foot">
-            <div class="p-price free-tag">مجاني</div>
+            <div class="p-price">29 <span class="currency">ر.س</span></div>
             <a href="/products/science-worksheets-grade6.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
             <a href="/products/science-worksheets-grade6.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
@@ -1090,7 +1100,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📝 أوراق عمل</span>
           </div>
           <div class="p-foot">
-            <div class="p-price free-tag">مجاني</div>
+            <div class="p-price">29 <span class="currency">ر.س</span></div>
             <a href="/products/arabic-worksheets-grade6.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
             <a href="/products/arabic-worksheets-grade6.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
@@ -1114,7 +1124,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📚 خامس ف1</span>
           </div>
           <div class="p-foot">
-            <div class="p-price free-tag">مجاني</div>
+            <div class="p-price">19 <span class="currency">ر.س</span></div>
             <a href="/products/arabic-grade5-sem1-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
             <a href="/products/arabic-grade5-sem1-summary.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
@@ -1138,7 +1148,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📚 خامس ف2</span>
           </div>
           <div class="p-foot">
-            <div class="p-price free-tag">مجاني</div>
+            <div class="p-price">19 <span class="currency">ر.س</span></div>
             <a href="/products/arabic-grade5-sem2-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
             <a href="/products/arabic-grade5-sem2-summary.pdf" target="_blank" class="p-btn p-btn-alt" style="text-decoration:none;margin-right:6px">استعراض</a>
           </div>
@@ -1181,6 +1191,17 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
       </div>
     </div>
+
+    <!-- Payment Methods -->
+    <div class="payment-note" data-r>
+      <div class="pn-icon">🏦</div>
+      <div>
+        <strong>طرق الدفع</strong><br>
+        ✅ حوالة بنكية — متاح الآن<br>
+        <span style="color:var(--ink-4)">🕐 Apple Pay — قريباً &nbsp;|&nbsp; 🕐 مدى — قريباً &nbsp;|&nbsp; 🕐 STC Pay — قريباً</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1367,9 +1388,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <div class="stat-label">مراحل دراسية</div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon">⭐</div>
-        <div class="stat-number">100%</div>
-        <div class="stat-label">مجاني بالكامل</div>
+        <div class="stat-icon">💰</div>
+        <div class="stat-number">19</div>
+        <div class="stat-label">ر.س تبدأ من</div>
       </div>
     </div>
   </div>
@@ -1471,8 +1492,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
       <div class="cta-deco cta-deco-2"></div>
       <div class="cta-deco cta-deco-3"></div>
       <div class="cta-deco cta-deco-4"></div>
-      <h2>ابدأ مذاكرتك الآن — مجاناً</h2>
-      <p>جميع المنتجات والملخصات متاحة مجاناً للتحميل والاستعراض</p>
+      <h2>ابدأ مذاكرتك الآن</h2>
+      <p>ملخصات وأوراق عمل واختبارات تفاعلية لجميع المراحل الدراسية</p>
       <div style="display:flex;gap:14px;justify-content:center;position:relative;flex-wrap:wrap">
         <a href="#products" class="btn btn-w">تصفح المنتجات ←</a>
         <a href="/nafs.html" class="btn" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.4)">ادخل اختبار نافس</a>
