@@ -76,6 +76,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:50;
 }
 [data-theme="dark"] .topbar{background:rgba(11,17,32,.92)}
+[data-theme="dark"] .q-answer-box{color:var(--green);background:rgba(16,185,129,.12)}
 .topbar-in{max-width:1100px;margin:0 auto;padding:0 20px;height:96px;display:flex;align-items:center;justify-content:space-between}
 .topbar img{height:80px}
 .topbar-right{display:flex;align-items:center;gap:14px}
@@ -203,7 +204,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 .q-answer-box{
   margin:10px 16px 14px;padding:12px 16px;
   background:var(--green-soft);border-right:3px solid var(--green);
-  border-radius:10px;font-size:13px;color:#065F46;line-height:1.8;
+  border-radius:10px;font-size:13px;color:var(--green-dark, #065F46);line-height:1.8;
   display:none;
 }
 .q-answer-box.visible{display:block;animation:fadeUp .3s var(--ease)}
