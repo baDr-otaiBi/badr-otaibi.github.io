@@ -617,7 +617,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 .g-file .f-icon{font-size:16px}
 
 /* ===== FEATURES ===== */
-.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .feat{
   padding:28px 22px;border-radius:var(--radius-lg);
   background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.3);
@@ -775,6 +775,177 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 .scroll-top:hover{color:var(--blue);border-color:var(--blue);transform:translateY(-2px)}
 .scroll-top.show{display:flex}
 
+/* ===== TRUST BAR ===== */
+.trust-bar{
+  display:flex;align-items:center;justify-content:center;gap:32px;
+  margin-top:40px;padding:16px 0;
+  opacity:.6;flex-wrap:wrap;
+}
+.trust-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--ink-3);font-weight:500;
+}
+.trust-item svg{width:18px;height:18px;color:var(--green);flex-shrink:0}
+
+/* ===== HOW IT WORKS ===== */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
+.step-card{
+  text-align:center;padding:36px 24px;border-radius:var(--radius-xl);
+  background:var(--card-bg);border:1px solid var(--gray-200);
+  position:relative;transition:.5s var(--ease);
+}
+.step-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--blue)}
+.step-num{
+  width:52px;height:52px;border-radius:50%;
+  display:grid;place-items:center;margin:0 auto 18px;
+  font-family:var(--font);font-weight:900;font-size:22px;
+  background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;
+  box-shadow:0 6px 20px rgba(29,78,216,.25);
+}
+.step-card h3{font-family:var(--font);font-weight:700;font-size:16px;margin-bottom:8px}
+.step-card p{font-size:13.5px;color:var(--ink-3);line-height:1.7}
+.step-connector{
+  position:absolute;top:50%;width:100%;height:2px;z-index:-1;
+  background:repeating-linear-gradient(90deg,var(--gray-200) 0,var(--gray-200) 8px,transparent 8px,transparent 16px);
+}
+[data-theme="dark"] .step-connector{
+  background:repeating-linear-gradient(90deg,var(--gray-300) 0,var(--gray-300) 8px,transparent 8px,transparent 16px);
+}
+
+/* ===== STATS BANNER ===== */
+.stats-banner{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+  padding:48px 0;
+}
+.stat-card{
+  text-align:center;padding:28px 16px;border-radius:var(--radius-lg);
+  background:var(--card-bg);border:1px solid var(--gray-200);
+  transition:.4s var(--ease);position:relative;overflow:hidden;
+}
+.stat-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 60%,rgba(59,130,246,.04));
+  pointer-events:none;
+}
+.stat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.stat-card .stat-icon{font-size:32px;margin-bottom:10px}
+.stat-card .stat-number{
+  font-family:var(--font);font-weight:900;font-size:32px;
+  background:linear-gradient(135deg,var(--blue),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.stat-card .stat-label{font-size:13px;color:var(--ink-3);margin-top:4px;font-weight:500}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.test-card{
+  padding:28px;border-radius:var(--radius-lg);
+  background:var(--card-bg);border:1px solid var(--gray-200);
+  transition:.4s var(--ease);position:relative;
+}
+.test-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.test-card::before{
+  content:'\201D';position:absolute;top:12px;left:16px;
+  font-size:60px;color:var(--blue);opacity:.12;font-family:serif;line-height:1;
+}
+.test-stars{color:#FBBF24;font-size:14px;margin-bottom:10px;letter-spacing:2px}
+.test-text{font-size:14px;color:var(--ink-2);line-height:1.8;margin-bottom:16px}
+.test-author{display:flex;align-items:center;gap:10px}
+.test-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--violet));
+  display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px;
+}
+.test-name{font-weight:700;font-size:13px}
+.test-role{font-size:12px;color:var(--ink-4)}
+
+/* ===== ENHANCED PRODUCT CARDS ===== */
+.p-card{position:relative}
+.p-card .p-img{height:180px}
+.p-exclusive{
+  position:absolute;top:0;right:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--violet),var(--teal));
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+  opacity:0;transition:.4s;
+}
+.p-card:hover .p-exclusive{opacity:1}
+.p-features{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.p-feature{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;
+  background:var(--gray-50);color:var(--ink-3);border:1px solid var(--gray-200);
+}
+[data-theme="dark"] .p-feature{background:var(--gray-100);border-color:var(--gray-200)}
+
+/* ===== ENHANCED NAV ===== */
+.nav-inner{height:72px}
+.logo img{height:56px}
+.nav-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:2px 10px;border-radius:100px;font-size:10px;font-weight:700;
+  background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;
+  margin-right:8px;letter-spacing:.5px;
+}
+
+/* ===== ENHANCED HERO ===== */
+.hero-glow-orb{
+  position:absolute;border-radius:50%;pointer-events:none;
+  filter:blur(80px);opacity:.15;
+  animation:orbFloat 20s infinite ease-in-out;
+}
+[data-theme="dark"] .hero-glow-orb{opacity:.08}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(40px,-60px) scale(1.2)}
+  66%{transform:translate(-30px,40px) scale(.8)}
+}
+.hero-badge.au-done{
+  animation:badgePulse 3s ease-in-out infinite;
+}
+@keyframes badgePulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.2)}
+  50%{box-shadow:0 0 0 10px rgba(59,130,246,0)}
+}
+
+/* ===== ENHANCED CTA ===== */
+.cta-box{position:relative;overflow:hidden}
+.cta-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.cta-particle{
+  position:absolute;width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.15);
+  animation:ctaParticle 8s infinite ease-in-out;
+}
+@keyframes ctaParticle{
+  0%,100%{transform:translateY(0) scale(1);opacity:.15}
+  50%{transform:translateY(-60px) scale(1.5);opacity:.3}
+}
+
+/* Enhanced floating shapes in hero */
+.hero-shapes .h-shape{
+  border-radius:30% 70% 70% 30%/30% 30% 70% 70%;
+  animation:floatShape 20s infinite, morphAnim 12s infinite ease-in-out;
+}
+
+/* Improved features grid */
+.feat{min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.feat-ic{
+  width:56px;height:56px;border-radius:16px;font-size:26px;
+  position:relative;
+}
+.feat-ic::after{
+  content:'';position:absolute;inset:-4px;border-radius:inherit;
+  background:inherit;opacity:.3;filter:blur(8px);z-index:-1;
+}
+
+@media(max-width:768px){
+  .trust-bar{gap:16px}
+  .trust-item{font-size:12px}
+  .stats-banner{grid-template-columns:1fr 1fr;gap:12px}
+  .feat{min-height:auto}
+  .hero-glow-orb{display:none}
+}
+
 /* WhatsApp Button */
 .whatsapp-btn{
   position:fixed;bottom:24px;left:24px;z-index:99;
@@ -805,6 +976,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   pointer-events:none;
 }
 @keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
 /* Number counter animation */
 .counter{display:inline-block}
@@ -837,6 +1009,10 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   .products-grid{grid-template-columns:1fr}
   .feat-grid{grid-template-columns:repeat(2,1fr)}
   .footer-grid{grid-template-columns:1fr;gap:24px}
+  .steps-grid{grid-template-columns:1fr}
+  .step-connector{display:none}
+  .stats-banner{grid-template-columns:repeat(2,1fr)}
+  .testimonials-grid{grid-template-columns:1fr}
 }
 @media(max-width:768px){
   .nav-links{display:none}
@@ -933,9 +1109,61 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
           <div class="stat-l">سؤال مع الإجابة</div>
         </div>
         <div>
+          <div class="stat-n"><span class="counter" data-target="9">0</span></div>
+          <div class="stat-l">ملخصات وأوراق عمل</div>
+        </div>
+        <div>
           <div class="stat-n"><span class="counter" data-target="3">0</span></div>
           <div class="stat-l">مراحل دراسية</div>
         </div>
+      </div>
+      <!-- Trust Bar -->
+      <div class="trust-bar au au5">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          محتوى موثوق ومراجع
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          تحميل آمن ومجاني
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          تحديث مستمر
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Glow orbs -->
+  <div class="hero-glow-orb" style="width:500px;height:500px;top:-100px;right:-100px;background:var(--blue)"></div>
+  <div class="hero-glow-orb" style="width:400px;height:400px;bottom:-80px;left:-80px;background:var(--violet);animation-delay:-7s"></div>
+  <div class="hero-glow-orb" style="width:300px;height:300px;top:40%;left:50%;background:var(--teal);animation-delay:-13s"></div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-w">
+  <div class="container">
+    <div class="sec-head" style="text-align:center" data-r>
+      <div class="sec-over">كيف تبدأ؟</div>
+      <h2 class="sec-title">ثلاث خطوات فقط</h2>
+      <p class="sec-desc" style="margin-inline:auto">ابدأ مذاكرتك في دقائق — بدون تسجيل أو اشتراك</p>
+    </div>
+    <div class="steps-grid" data-r>
+      <div class="step-connector"></div>
+      <div class="step-card">
+        <div class="step-num">١</div>
+        <h3>اختر المرحلة</h3>
+        <p>حدد مرحلتك الدراسية والصف المطلوب من قائمة المراحل المتاحة</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">٢</div>
+        <h3>تصفّح المحتوى</h3>
+        <p>استعرض الملخصات وتجميعات الأسئلة المتوفرة لمادتك</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">٣</div>
+        <h3>حمّل أو ادخل الاختبار</h3>
+        <p>حمّل الملخصات بصيغة PDF أو ادخل الاختبار التفاعلي مباشرة</p>
       </div>
     </div>
   </div>
@@ -952,6 +1180,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 
     <div class="products-grid">
       <div class="p-card float-card glow-wire" data-r>
+        <div class="p-exclusive"></div>
         <span class="p-badge badge-hot">🔥 متوفر الآن</span>
         <div class="p-img">
           <div class="p-img-bg" style="background:linear-gradient(135deg,#1D4ED8,#3B82F6)"></div>
@@ -962,6 +1191,11 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
           <div class="p-cat">اختبار نافس</div>
           <h3 class="p-title">تجميعات اختبار نافس — 1000 سؤال</h3>
           <p class="p-desc">تجميعة شاملة تضم 1000 سؤال من اختبارات نافس مع الإجابات النموذجية لكل سؤال</p>
+          <div class="p-features">
+            <span class="p-feature">📝 1000 سؤال</span>
+            <span class="p-feature">✅ مع الإجابات</span>
+            <span class="p-feature">🎯 تفاعلي</span>
+          </div>
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <a href="/nafs.html" class="p-btn" style="background:var(--green);text-decoration:none">ادخل الاختبار</a>
@@ -970,6 +1204,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
       </div>
 
       <div class="p-card float-card glow-wire" data-r>
+        <div class="p-exclusive"></div>
         <span class="p-badge badge-new">متوفر</span>
         <div class="p-img">
           <div class="p-img-bg" style="background:linear-gradient(135deg,#059669,#6EE7B7)"></div>
@@ -979,7 +1214,11 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
         <div class="p-body">
           <div class="p-cat">ملخصات</div>
           <h3 class="p-title">ملخص مادة العلوم — الصف السادس، الفصل الثاني</h3>
-          <p class="p-desc">ملخص شامل ومنظّم لمادة العلوم للصف السادس الابتدائي — الفصل الدراسي الثاني، يغطي أهم المفاهيم والمواضيع الأساسية</p>
+          <p class="p-desc">ملخص شامل ومنظّم لمادة العلوم للصف السادس الابتدائي — يغطي أهم المفاهيم والمواضيع الأساسية</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+          </div>
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <a href="/products/science-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
@@ -989,6 +1228,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
       </div>
 
       <div class="p-card float-card glow-wire" data-r>
+        <div class="p-exclusive"></div>
         <span class="p-badge badge-new">متوفر</span>
         <div class="p-img">
           <div class="p-img-bg" style="background:linear-gradient(135deg,#D97706,#FBBF24)"></div>
@@ -998,7 +1238,11 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
         <div class="p-body">
           <div class="p-cat">ملخصات</div>
           <h3 class="p-title">ملخص مادة لغتي — الصف السادس، الفصل الثاني</h3>
-          <p class="p-desc">ملخص شامل ومنظّم لمادة لغتي الجميلة للصف السادس الابتدائي — الفصل الدراسي الثاني، يغطي أهم الدروس والقواعد</p>
+          <p class="p-desc">ملخص شامل ومنظّم لمادة لغتي الجميلة للصف السادس الابتدائي — يغطي أهم الدروس والقواعد</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+          </div>
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <a href="/products/arabic-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
@@ -1008,6 +1252,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
       </div>
 
       <div class="p-card float-card glow-wire" data-r>
+        <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,#7C3AED,#A78BFA,#7C3AED);background-size:200% 100%;animation:shimmer 3s infinite"></div>
         <span class="p-badge badge-hot">⭐ حصري</span>
         <div class="p-img">
           <div class="p-img-bg" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)"></div>
@@ -1015,18 +1260,24 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
           <div class="emoji">🇬🇧</div>
         </div>
         <div class="p-body">
-          <div class="p-cat">ملخصات</div>
+          <div class="p-cat" style="color:var(--violet)">ملخصات — حصري</div>
           <h3 class="p-title">ملخص الإنجليزي Top Goal 2 — الصف السادس، الفصل الثاني</h3>
-          <p class="p-desc">ملخص حصري لأحدث منهج إنجليزي Top Goal 2 للصف السادس — الفصل الثاني، لا يتوفر في أي موقع آخر. حصرياً على منصة الإتقان التعليمية</p>
+          <p class="p-desc">ملخص حصري لأحدث منهج إنجليزي Top Goal 2 — لا يتوفر في أي موقع آخر</p>
+          <div class="p-features">
+            <span class="p-feature" style="background:var(--violet-soft);color:var(--violet);border-color:rgba(124,58,237,.2)">⭐ حصري</span>
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+          </div>
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
-            <a href="/products/english-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
+            <a href="/products/english-summary.pdf" download class="p-btn" style="text-decoration:none;background:var(--violet)">تحميل</a>
             <a href="/products/english-summary.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
           </div>
         </div>
       </div>
 
       <div class="p-card float-card glow-wire" data-r>
+        <div class="p-exclusive"></div>
         <span class="p-badge badge-new">متوفر</span>
         <div class="p-img">
           <div class="p-img-bg" style="background:linear-gradient(135deg,#6366F1,#818CF8)"></div>
@@ -1036,11 +1287,114 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
         <div class="p-body">
           <div class="p-cat">كتب مدرسية</div>
           <h3 class="p-title">كتاب الإنجليزي Top Goal 2 — الصف السادس، الفصل الثاني</h3>
-          <p class="p-desc">المنهج الرسمي لمادة الإنجليزي Top Goal 2 للصف السادس الابتدائي — الفصل الدراسي الثاني</p>
+          <p class="p-desc">المنهج الرسمي لمادة الإنجليزي Top Goal 2 للصف السادس الابتدائي</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+            <span class="p-feature">📘 كتاب رسمي</span>
+          </div>
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <a href="/products/english-topgoal2.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
             <a href="/products/english-topgoal2.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card float-card glow-wire" data-r>
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">جديد</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#E11D48,#FB7185)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">📝</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat" style="color:var(--rose)">أوراق عمل</div>
+          <h3 class="p-title">أوراق عمل علوم — الصف السادس، الفصل الثاني</h3>
+          <p class="p-desc">أوراق عمل شاملة لمادة العلوم للصف السادس الابتدائي — تمارين وأنشطة متنوعة</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+            <span class="p-feature" style="background:var(--rose-soft);color:var(--rose);border-color:rgba(225,29,72,.2)">📝 أوراق عمل</span>
+          </div>
+          <div class="p-foot">
+            <div class="p-price free-tag">مجاني</div>
+            <a href="/products/science-worksheets-grade6.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
+            <a href="/products/science-worksheets-grade6.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card float-card glow-wire" data-r>
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">جديد</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#D97706,#FBBF24)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">📝</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat" style="color:var(--amber)">أوراق عمل</div>
+          <h3 class="p-title">أوراق عمل لغتي — الصف السادس، الفصل الثاني</h3>
+          <p class="p-desc">أوراق عمل شاملة لمادة لغتي الجميلة للصف السادس الابتدائي — تدريبات وأنشطة متنوعة</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+            <span class="p-feature" style="background:var(--amber-soft);color:var(--amber);border-color:rgba(217,119,6,.2)">📝 أوراق عمل</span>
+          </div>
+          <div class="p-foot">
+            <div class="p-price free-tag">مجاني</div>
+            <a href="/products/arabic-worksheets-grade6.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
+            <a href="/products/arabic-worksheets-grade6.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card float-card glow-wire" data-r>
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">جديد</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#D97706,#FBBF24)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">📖</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">ملخصات</div>
+          <h3 class="p-title">ملخص مادة لغتي — الصف الخامس، الفصل الأول</h3>
+          <p class="p-desc">ملخص شامل ومنظّم لمادة لغتي الجميلة للصف الخامس الابتدائي — الفصل الدراسي الأول</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 خامس ف1</span>
+          </div>
+          <div class="p-foot">
+            <div class="p-price free-tag">مجاني</div>
+            <a href="/products/arabic-grade5-sem1-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
+            <a href="/products/arabic-grade5-sem1-summary.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card float-card glow-wire" data-r>
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">جديد</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#D97706,#FBBF24)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">📖</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">ملخصات</div>
+          <h3 class="p-title">ملخص مادة لغتي — الصف الخامس، الفصل الثاني</h3>
+          <p class="p-desc">ملخص شامل ومنظّم لمادة لغتي الجميلة للصف الخامس الابتدائي — الفصل الدراسي الثاني</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 خامس ف2</span>
+          </div>
+          <div class="p-foot">
+            <div class="p-price free-tag">مجاني</div>
+            <a href="/products/arabic-grade5-sem2-summary.pdf" download class="p-btn" style="text-decoration:none">تحميل</a>
+            <a href="/products/arabic-grade5-sem2-summary.pdf" target="_blank" class="p-btn" style="background:var(--green);text-decoration:none;margin-right:6px">استعراض</a>
           </div>
         </div>
       </div>
@@ -1127,13 +1481,21 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
               <a class="g-file" href="/products/arabic-summary.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">📖</span> ملخص لغتي</a>
               <a class="g-file" href="/products/english-summary.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">🇬🇧</span> ملخص إنجليزي Top Goal 2 <span style="color:var(--violet);font-size:11px;font-weight:700">حصري</span></a>
               <a class="g-file" href="/products/english-topgoal2.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">📘</span> كتاب إنجليزي Top Goal 2</a>
+              <a class="g-file" href="/products/science-worksheets-grade6.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">📝</span> أوراق عمل علوم</a>
+              <a class="g-file" href="/products/arabic-worksheets-grade6.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">📝</span> أوراق عمل لغتي</a>
             </div>
           </div>
         </div>
-        <div class="g-row">
-          <div class="g-header" style="cursor:default">
+        <div class="g-row" onclick="this.classList.toggle('open')">
+          <div class="g-header">
             <div class="g-right"><div class="g-num" style="background:var(--rose-soft);color:var(--rose)">5</div><div class="g-name">الصف الخامس الابتدائي</div></div>
-            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+            <div class="g-left"><span class="g-available-tag">متاح</span><div class="g-chevron">▼</div></div>
+          </div>
+          <div class="g-body">
+            <div class="g-files">
+              <a class="g-file" href="/products/arabic-grade5-sem1-summary.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">📖</span> ملخص لغتي — ف1</a>
+              <a class="g-file" href="/products/arabic-grade5-sem2-summary.pdf" target="_blank" onclick="event.stopPropagation()"><span class="f-icon">📖</span> ملخص لغتي — ف2</a>
+            </div>
           </div>
         </div>
         <div class="g-row">
@@ -1239,12 +1601,41 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
   </div>
 </section>
 
+<!-- STATS BANNER -->
+<section class="section">
+  <div class="container">
+    <div class="stats-banner" data-r>
+      <div class="stat-card">
+        <div class="stat-icon">📝</div>
+        <div class="stat-number"><span class="counter" data-target="1000">0</span>+</div>
+        <div class="stat-label">سؤال في بنك نافس</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-number"><span class="counter" data-target="9">0</span></div>
+        <div class="stat-label">ملخصات وأوراق عمل</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎓</div>
+        <div class="stat-number"><span class="counter" data-target="3">0</span></div>
+        <div class="stat-label">مراحل دراسية</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-number">100%</div>
+        <div class="stat-label">مجاني بالكامل</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FEATURES -->
 <section class="section section-w" id="features">
   <div class="container">
-    <div class="sec-head" data-r>
+    <div class="sec-head" style="text-align:center" data-r>
       <div class="sec-over">لماذا الإتقان؟</div>
       <h2 class="sec-title">مميزات المنصة</h2>
+      <p class="sec-desc" style="margin-inline:auto">كل ما تحتاجه للمذاكرة في مكان واحد</p>
     </div>
     <div class="feat-grid">
       <div class="feat float-card" data-r>
@@ -1267,6 +1658,61 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
         <h3>اختبار تفاعلي</h3>
         <p>حل الأسئلة مباشرة في الموقع وتابع تقدمك بشكل مباشر</p>
       </div>
+      <div class="feat float-card" data-r>
+        <div class="feat-ic" style="background:var(--rose-soft);color:var(--rose)">⭐</div>
+        <h3>محتوى حصري</h3>
+        <p>ملخصات لا تتوفر في أي موقع آخر — حصرياً على الإتقان</p>
+      </div>
+      <div class="feat float-card" data-r>
+        <div class="feat-ic" style="background:var(--teal-soft);color:var(--teal)">🔄</div>
+        <h3>تحديث مستمر</h3>
+        <p>إضافة مواد ومراحل جديدة باستمرار — تابعنا للمزيد</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head" style="text-align:center" data-r>
+      <div class="sec-over">آراء الطلاب</div>
+      <h2 class="sec-title">ماذا يقولون عنّا؟</h2>
+    </div>
+    <div class="testimonials-grid" data-r>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">تجميعات نافس ساعدتني كثير في التحضير للاختبار. الأسئلة شاملة والإجابات واضحة ومفصّلة</p>
+        <div class="test-author">
+          <div class="test-avatar">س</div>
+          <div>
+            <div class="test-name">سارة</div>
+            <div class="test-role">طالبة — الصف السادس</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">ملخص العلوم ممتاز ومنظّم بشكل يسهّل المراجعة. أنصح كل طالب فيه خصوصاً وقت الاختبارات</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(135deg,var(--green),var(--teal))">م</div>
+          <div>
+            <div class="test-name">محمد</div>
+            <div class="test-role">طالب — الصف السادس</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">الموقع سهل الاستخدام والملخصات مجانية. ملخص الإنجليزي الحصري وفّر عليّ وقت كبير</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(135deg,var(--amber),var(--rose))">ن</div>
+          <div>
+            <div class="test-name">نورة</div>
+            <div class="test-role">طالبة — الصف السادس</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1275,9 +1721,20 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-hei
 <section class="section">
   <div class="container">
     <div class="cta-box" data-r>
-      <h2>ابدأ مذاكرتك الآن</h2>
-      <p>تجميعات نافس وملخص العلوم متاحين مجاناً للتحميل والاستعراض</p>
-      <a href="#products" class="btn btn-w btn-blue" style="background:#fff;color:var(--blue)">تصفح المنتجات ←</a>
+      <div class="cta-particles">
+        <div class="cta-particle" style="top:20%;right:10%;animation-delay:0s"></div>
+        <div class="cta-particle" style="top:60%;right:25%;animation-delay:-2s"></div>
+        <div class="cta-particle" style="top:40%;left:15%;animation-delay:-4s"></div>
+        <div class="cta-particle" style="top:70%;left:30%;animation-delay:-6s"></div>
+        <div class="cta-particle" style="top:30%;left:60%;animation-delay:-3s"></div>
+        <div class="cta-particle" style="top:80%;right:40%;animation-delay:-5s"></div>
+      </div>
+      <h2>ابدأ مذاكرتك الآن — مجاناً</h2>
+      <p>جميع المنتجات والملخصات متاحة مجاناً للتحميل والاستعراض</p>
+      <div style="display:flex;gap:12px;justify-content:center;position:relative;flex-wrap:wrap">
+        <a href="#products" class="btn btn-w btn-blue" style="background:#fff;color:var(--blue)">تصفح المنتجات ←</a>
+        <a href="/nafs.html" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3)">ادخل اختبار نافس</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1542,6 +1999,12 @@ if(window.innerWidth >= 768){
   }, 200);
 })();
 
+// === Badge pulse after initial animation ===
+setTimeout(() => {
+  const badge = document.querySelector('.hero-badge');
+  if(badge) badge.classList.add('au-done');
+}, 1500);
+
 // === DARK MODE ===
 function getTheme() { return localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
 function setTheme(t) {
@@ -1596,8 +2059,8 @@ document.querySelectorAll('[data-r]').forEach(el => obs.observe(el));
 // Counter observer
 const counterObs = new IntersectionObserver(e => {
   e.forEach(x => { if (x.isIntersecting) { animateCounters(); counterObs.unobserve(x.target); } });
-}, { threshold: .5 });
-document.querySelectorAll('.hero-stats').forEach(el => counterObs.observe(el));
+}, { threshold: .3 });
+document.querySelectorAll('.hero-stats, .stats-banner').forEach(el => counterObs.observe(el));
 
 // === Ripple effect ===
 document.addEventListener('click', e => {
