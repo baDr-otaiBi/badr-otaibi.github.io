@@ -899,56 +899,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   .guarantee-box{flex-direction:column;text-align:center;padding:32px 24px;gap:20px}
 }
 
-/* ===== MARKETING: Bundle Offer ===== */
-.bundle-section{padding:60px 0}
-.bundle-card{
-  background:linear-gradient(135deg,#1e3a5f 0%,#0f172a 100%);
-  border-radius:var(--radius-xl);padding:48px;
-  color:#fff;position:relative;overflow:hidden;
-  display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;
-}
-.bundle-deco{
-  position:absolute;width:300px;height:300px;border-radius:50%;
-  background:var(--blue);opacity:.06;filter:blur(60px);
-  top:-50px;left:-50px;
-}
-.bundle-info{position:relative;z-index:1}
-.bundle-info h3{font-family:var(--font);font-size:28px;font-weight:900;margin-bottom:12px}
-.bundle-info p{font-size:15px;opacity:.8;line-height:2;margin-bottom:24px}
-.bundle-items{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
-.bundle-item{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 16px;border-radius:10px;
-  background:rgba(255,255,255,.08);font-size:14px;
-}
-.bundle-item .check{color:var(--green);font-size:18px}
-.bundle-pricing{position:relative;z-index:1;text-align:center}
-.bundle-pricing .old-price{
-  font-size:22px;color:rgba(255,255,255,.4);text-decoration:line-through;
-  font-weight:600;margin-bottom:4px;
-}
-.bundle-pricing .new-price{
-  font-family:var(--font);font-size:56px;font-weight:900;
-  color:#fff;line-height:1;
-}
-.bundle-pricing .new-price span{font-size:20px;font-weight:600;opacity:.7}
-.bundle-pricing .save-tag{
-  display:inline-block;background:var(--green);color:#fff;
-  padding:6px 20px;border-radius:100px;font-size:14px;font-weight:800;
-  margin:16px 0 24px;font-family:var(--font);
-}
-.bundle-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:16px 36px;border-radius:14px;
-  background:#fff;color:#111827;font-family:var(--font);
-  font-size:16px;font-weight:800;border:none;cursor:pointer;
-  transition:.3s var(--ease);box-shadow:0 4px 20px rgba(0,0,0,.2);
-}
-.bundle-btn:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
-@media(max-width:768px){
-  .bundle-card{grid-template-columns:1fr;padding:32px 24px}
-  .bundle-pricing .new-price{font-size:42px}
-}
 
 /* ===== MARKETING: FAQ Section ===== */
 .faq-section{padding:60px 0}
@@ -1328,7 +1278,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="announce-icon">🎉</div>
           <div class="announce-text">
             <div class="announce-label">عرض لفترة محدودة</div>
-            <p>خصم يصل إلى <strong>35%</strong> على جميع المنتجات + <strong>باقة الطالب المتفوّق</strong> بـ 99 ر.س بدلاً من 164</p>
+            <p>خصم يصل إلى <strong>35%</strong> على جميع المنتجات — <strong>عرض لفترة محدودة</strong></p>
           </div>
           <a href="#products" class="announce-btn">استفد الآن</a>
         </div>
@@ -2107,32 +2057,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   </div>
 </section>
 
-<!-- BUNDLE OFFER -->
-<section class="bundle-section">
-  <div class="container">
-    <div class="bundle-card" data-r>
-      <div class="bundle-deco"></div>
-      <div class="bundle-info">
-        <h3>باقة الطالب المتفوّق</h3>
-        <p>احصل على جميع ملخصات الصف السادس + أوراق العمل + تجميعات نافس في باقة واحدة بسعر خاص</p>
-        <div class="bundle-items">
-          <div class="bundle-item"><span class="check">✓</span> تجميعات نافس — 1000 سؤال (49 ر.س)</div>
-          <div class="bundle-item"><span class="check">✓</span> ملخص العلوم + لغتي + إنجليزي (57 ر.س)</div>
-          <div class="bundle-item"><span class="check">✓</span> أوراق عمل العلوم + لغتي (58 ر.س)</div>
-          <div class="bundle-item"><span class="check">✓</span> كتاب الإنجليزي Top Goal 2 (مجاناً)</div>
-        </div>
-      </div>
-      <div class="bundle-pricing">
-        <div class="old-price">164 ر.س</div>
-        <div class="new-price">99 <span>ر.س</span></div>
-        <div class="save-tag">وفّر 65 ر.س</div>
-        <button class="bundle-btn" onclick="orderProduct('باقة الطالب المتفوّق — جميع المنتجات')">اطلب الباقة عبر واتساب</button>
-        <div style="font-size:12px;opacity:.6;margin-top:10px">تسليم فوري خلال 5 دقائق</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- GUARANTEE -->
 <section class="guarantee-section">
   <div class="container">
@@ -2595,13 +2519,13 @@ startCountdown();
 const socialProofData=[
   {name:'أحمد',city:'الرياض',product:'تجميعات نافس'},
   {name:'فاطمة',city:'جدة',product:'ملخص العلوم'},
-  {name:'سعود',city:'الدمام',product:'باقة الطالب المتفوّق'},
+  {name:'سعود',city:'الدمام',product:'أوراق عمل العلوم'},
   {name:'نورة',city:'مكة',product:'ملخص لغتي'},
   {name:'خالد',city:'المدينة',product:'أوراق عمل العلوم'},
   {name:'ريم',city:'الرياض',product:'ملخص إنجليزي Top Goal 2'},
   {name:'عبدالله',city:'بريدة',product:'تجميعات نافس'},
   {name:'هيا',city:'الطائف',product:'ملخص لغتي — خامس'},
-  {name:'محمد',city:'أبها',product:'باقة الطالب المتفوّق'},
+  {name:'محمد',city:'أبها',product:'كتاب أساسيات البرمجة'},
   {name:'لمى',city:'حائل',product:'أوراق عمل لغتي'},
 ];
 let spIndex=0;
