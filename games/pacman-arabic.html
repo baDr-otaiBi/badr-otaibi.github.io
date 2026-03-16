@@ -2,14 +2,15 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>باك مان الحروف العربية — الإتقان التعليمية</title>
 <link rel="icon" type="image/png" href="/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0f172a;
+  --bg:#0a0e1a;
+  --bg2:#111827;
   --ink:#f3f4f6;
   --blue:#60a5fa;
   --yellow:#fbbf24;
@@ -18,454 +19,679 @@
   --rose:#fb7185;
   --font:'Cairo',sans-serif;
 }
+html,body{
+  height:100%;overflow:hidden;
+  touch-action:none;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;user-select:none;
+}
 body{
   font-family:var(--font);
   background:var(--bg);
   color:var(--ink);
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
+  display:flex;flex-direction:column;
   align-items:center;
-  overflow-x:hidden;
 }
 
+/* === TOP BAR === */
 .top-bar{
-  width:100%;padding:16px 24px;
+  width:100%;padding:8px 16px;
   display:flex;justify-content:space-between;align-items:center;
-  background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.08);
+  flex-shrink:0;
 }
 .top-bar a{
-  color:var(--blue);text-decoration:none;font-weight:700;font-size:14px;
-  display:flex;align-items:center;gap:6px;
+  color:var(--blue);text-decoration:none;font-weight:700;font-size:13px;
+  display:flex;align-items:center;gap:4px;
 }
-.top-bar a:hover{text-decoration:underline}
 
-.game-header{
-  text-align:center;padding:24px 16px 8px;
+/* === STATS BAR === */
+.stats-bar{
+  display:flex;gap:16px;justify-content:center;align-items:center;
+  padding:8px 16px;flex-shrink:0;width:100%;
+  font-size:14px;font-weight:700;
 }
-.game-header h1{font-size:28px;font-weight:900;color:var(--yellow)}
-.game-header p{color:#94a3b8;font-size:14px;margin-top:4px}
-
-.stats{
-  display:flex;gap:24px;justify-content:center;padding:12px;
-  font-size:15px;font-weight:700;
+.stat-item{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.06);padding:4px 14px;border-radius:100px;
+  border:1px solid rgba(255,255,255,.08);
 }
-.stats span{display:flex;align-items:center;gap:6px}
-.stats .score-val{color:var(--yellow)}
-.stats .collected-val{color:var(--green)}
+.stat-item.score .val{color:var(--yellow)}
+.stat-item.letters .val{color:var(--green)}
 
+/* === GAME AREA === */
+.game-area{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  width:100%;min-height:0;
+  padding:4px;
+}
 #gameCanvas{
-  border:2px solid rgba(255,255,255,.15);
-  border-radius:12px;
-  background:#1a1a2e;
+  border:2px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  background:var(--bg2);
   display:block;
-  touch-action:none;
+  image-rendering:pixelated;
 }
 
-.controls-hint{
-  text-align:center;padding:12px;color:#64748b;font-size:13px;
-}
-
-.collected-letters{
-  margin:16px auto;padding:16px 24px;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-  border-radius:16px;max-width:600px;width:90%;min-height:60px;
-  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;
-}
-.collected-letters .letter-bubble{
-  width:44px;height:44px;border-radius:12px;
-  display:grid;place-items:center;font-size:22px;font-weight:800;
-  animation:popIn .3s ease;
-  color:#fff;
-}
-@keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
-
-.letter-overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.7);backdrop-filter:blur(8px);
-  z-index:100;justify-content:center;align-items:center;flex-direction:column;
-}
-.letter-overlay.show{display:flex}
-.letter-overlay .big-letter{
-  font-size:120px;font-weight:900;color:var(--yellow);
-  animation:bounceIn .5s ease;
-}
-.letter-overlay .letter-name{
-  font-size:28px;color:#fff;margin-top:8px;
-}
-@keyframes bounceIn{
-  0%{transform:scale(0) rotate(-20deg);opacity:0}
-  60%{transform:scale(1.2) rotate(5deg)}
-  100%{transform:scale(1) rotate(0);opacity:1}
-}
-
-.mobile-controls{
-  display:none;
-  padding:16px;gap:8px;
-  justify-content:center;
+/* === ARROW CONTROLS (always visible) === */
+.arrow-controls{
+  flex-shrink:0;padding:8px 0 4px;
+  display:flex;justify-content:center;
 }
 .d-pad{
-  display:grid;grid-template-columns:repeat(3,56px);grid-template-rows:repeat(3,56px);gap:4px;
+  display:grid;
+  grid-template-areas:
+    ". up ."
+    "left center right"
+    ". down .";
+  gap:6px;
 }
 .d-btn{
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
-  border-radius:12px;color:#fff;font-size:22px;
+  width:56px;height:56px;
+  background:rgba(255,255,255,.08);
+  border:1.5px solid rgba(255,255,255,.15);
+  border-radius:14px;color:#fff;font-size:20px;
   display:grid;place-items:center;cursor:pointer;
   -webkit-tap-highlight-color:transparent;
-  user-select:none;
+  transition:background .1s;
 }
-.d-btn:active{background:rgba(255,255,255,.25)}
-.d-btn.empty{background:transparent;border:none}
+.d-btn:hover{background:rgba(255,255,255,.15)}
+.d-btn:active,.d-btn.pressed{background:rgba(96,165,250,.35);border-color:var(--blue)}
+.d-btn[data-dir="up"]{grid-area:up}
+.d-btn[data-dir="down"]{grid-area:down}
+.d-btn[data-dir="left"]{grid-area:left}
+.d-btn[data-dir="right"]{grid-area:right}
+.d-btn.center{grid-area:center;background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.3);font-size:24px}
 
-.btn-restart{
-  margin:12px auto;padding:10px 32px;
-  background:var(--blue);color:#fff;border:none;border-radius:100px;
-  font-family:var(--font);font-size:15px;font-weight:700;cursor:pointer;
-  display:block;
+/* === COLLECTED LETTERS === */
+.collected-bar{
+  flex-shrink:0;width:100%;padding:6px 12px;
+  overflow-x:auto;overflow-y:hidden;
+  display:flex;gap:6px;align-items:center;
+  justify-content:center;flex-wrap:wrap;
+  max-height:52px;
+  scrollbar-width:none;
 }
-.btn-restart:hover{opacity:.85}
+.collected-bar::-webkit-scrollbar{display:none}
+.letter-pill{
+  min-width:32px;height:32px;border-radius:8px;
+  display:grid;place-items:center;font-size:16px;font-weight:800;
+  color:#fff;animation:popIn .25s ease;cursor:pointer;
+  flex-shrink:0;
+}
+@keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
 
-.win-screen{
+/* === LETTER POPUP (non-blocking) === */
+.letter-popup{
+  position:fixed;top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  z-index:100;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+  opacity:0;
+}
+.letter-popup.show{
+  transform:translate(-50%,-50%) scale(1);
+  opacity:1;
+}
+.letter-popup .popup-letter{
+  font-size:100px;font-weight:900;
+  text-shadow:0 0 40px currentColor, 0 0 80px currentColor;
+  line-height:1;
+}
+.letter-popup .popup-name{
+  font-size:22px;color:#fff;
+  background:rgba(0,0,0,.6);backdrop-filter:blur(8px);
+  padding:6px 20px;border-radius:100px;margin-top:4px;
+}
+
+/* === FOOTER === */
+.footer{
+  flex-shrink:0;width:100%;text-align:center;
+  padding:6px;font-size:11px;color:rgba(255,255,255,.3);
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.footer a{color:rgba(255,255,255,.5);text-decoration:none}
+
+/* === WIN SCREEN === */
+.win-overlay{
   display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.8);backdrop-filter:blur(12px);
-  z-index:200;justify-content:center;align-items:center;flex-direction:column;
-  text-align:center;padding:24px;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(12px);
+  z-index:200;justify-content:center;align-items:center;
+  flex-direction:column;text-align:center;padding:24px;
 }
-.win-screen.show{display:flex}
-.win-screen h2{font-size:36px;color:var(--yellow);margin-bottom:8px}
-.win-screen p{color:#94a3b8;font-size:16px;margin-bottom:24px}
+.win-overlay.show{display:flex}
+.win-title{font-size:32px;color:var(--yellow);margin-bottom:6px;font-weight:900}
+.win-sub{color:#94a3b8;font-size:15px;margin-bottom:6px}
+.win-letters{
+  display:flex;flex-wrap:wrap;gap:6px;justify-content:center;
+  max-width:400px;margin:12px auto;
+}
+.win-letters .wl{
+  width:36px;height:36px;border-radius:10px;
+  display:grid;place-items:center;font-size:18px;font-weight:800;color:#fff;
+  animation:popIn .3s ease both;
+}
+.btn-play{
+  margin-top:16px;padding:12px 40px;
+  background:var(--yellow);color:#111;border:none;border-radius:100px;
+  font-family:var(--font);font-size:16px;font-weight:800;cursor:pointer;
+}
+.btn-play:active{transform:scale(.95)}
 
-@media(max-width:600px){
-  .mobile-controls{display:grid}
-  .controls-hint{display:none}
-  #gameCanvas{max-width:95vw}
-  .game-header h1{font-size:22px}
+/* === START SCREEN === */
+.start-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.9);
+  z-index:200;display:flex;justify-content:center;align-items:center;
+  flex-direction:column;text-align:center;padding:24px;
+}
+.start-overlay.hidden{display:none}
+.start-title{font-size:36px;color:var(--yellow);font-weight:900;margin-bottom:8px}
+.start-sub{color:#94a3b8;font-size:15px;margin-bottom:24px;max-width:300px;line-height:1.8}
+.start-pac{
+  width:60px;height:60px;margin:0 auto 20px;
+  background:var(--yellow);border-radius:50%;
+  position:relative;
+  animation:startChomp .5s ease infinite alternate;
+}
+@keyframes startChomp{
+  from{clip-path:polygon(100% 50%,35% 5%,0% 0%,0% 100%,35% 95%)}
+  to{clip-path:polygon(100% 50%,50% 42%,0% 0%,0% 100%,50% 58%)}
+}
+
+/* === RESPONSIVE === */
+@media(min-width:700px){
+  .d-btn{width:64px;height:64px;font-size:22px}
+}
+@media(max-height:600px){
+  .d-btn{width:48px;height:48px;font-size:18px}
+  .stats-bar{padding:4px 8px;font-size:12px}
+  .letter-popup .popup-letter{font-size:70px}
 }
 </style>
 </head>
 <body>
 
 <div class="top-bar">
-  <a href="/">→ العودة للرئيسية</a>
-  <span style="font-size:13px;color:#64748b">الإتقان التعليمية</span>
+  <a href="/">← الرئيسية</a>
+  <span style="font-size:12px;color:rgba(255,255,255,.4)">الإتقان التعليمية</span>
 </div>
 
-<div class="game-header">
-  <h1>🟡 باك مان الحروف العربية</h1>
-  <p>ساعد باك مان في أكل جميع الحروف الهجائية!</p>
+<div class="stats-bar">
+  <div class="stat-item score">النقاط: <span class="val" id="scoreVal">0</span></div>
+  <div class="stat-item letters">الحروف: <span class="val" id="collectedCount">0</span> / 28</div>
 </div>
 
-<div class="stats">
-  <span>النقاط: <span class="score-val" id="scoreVal">0</span></span>
-  <span>الحروف: <span class="collected-val" id="collectedCount">0</span> / 28</span>
+<div class="game-area">
+  <canvas id="gameCanvas"></canvas>
 </div>
 
-<canvas id="gameCanvas" width="560" height="560"></canvas>
+<div class="collected-bar" id="collectedBar"></div>
 
-<div class="controls-hint">استخدم أسهم لوحة المفاتيح للتحكم بباك مان</div>
-
-<div class="mobile-controls">
+<div class="arrow-controls">
   <div class="d-pad">
-    <div class="d-btn empty"></div>
-    <div class="d-btn" data-dir="up">▲</div>
-    <div class="d-btn empty"></div>
-    <div class="d-btn" data-dir="right">◄</div>
-    <div class="d-btn empty"></div>
-    <div class="d-btn" data-dir="left">►</div>
-    <div class="d-btn empty"></div>
-    <div class="d-btn" data-dir="down">▼</div>
-    <div class="d-btn empty"></div>
+    <div class="d-btn" data-dir="up">&#9650;</div>
+    <div class="d-btn" data-dir="left">&#9664;</div>
+    <div class="d-btn center" id="restartBtn">&#8635;</div>
+    <div class="d-btn" data-dir="right">&#9654;</div>
+    <div class="d-btn" data-dir="down">&#9660;</div>
   </div>
 </div>
 
-<button class="btn-restart" id="restartBtn">إعادة اللعبة 🔄</button>
+<div class="footer">&copy; 2026 <a href="/">الإتقان التعليمية</a> — جميع الحقوق محفوظة</div>
 
-<div class="collected-letters" id="collectedLetters"></div>
-
-<div class="letter-overlay" id="letterOverlay">
-  <div class="big-letter" id="bigLetter"></div>
-  <div class="letter-name" id="letterName"></div>
+<!-- Letter popup (non-blocking, no overlay) -->
+<div class="letter-popup" id="letterPopup">
+  <div class="popup-letter" id="popupLetter"></div>
+  <div class="popup-name" id="popupName"></div>
 </div>
 
-<div class="win-screen" id="winScreen">
-  <h2>🎉 أحسنت! جمعت كل الحروف!</h2>
-  <p>لقد تعلّمت جميع الحروف الهجائية العربية</p>
-  <button class="btn-restart" onclick="restartGame()">العب مرة أخرى 🔄</button>
+<!-- Win screen -->
+<div class="win-overlay" id="winOverlay">
+  <div class="win-title">&#127881; أحسنت!</div>
+  <div class="win-sub">جمعت كل الحروف الهجائية!</div>
+  <div class="win-letters" id="winLetters"></div>
+  <button class="btn-play" onclick="startGame()">العب مرة أخرى</button>
+  <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.3)">&copy; الإتقان التعليمية</div>
+</div>
+
+<!-- Start screen -->
+<div class="start-overlay" id="startOverlay">
+  <div class="start-pac"></div>
+  <div class="start-title">باك مان الحروف</div>
+  <div class="start-sub">ساعد باك مان في أكل الحروف الهجائية العربية! عند أكل كل حرف ستسمع نطقه.</div>
+  <button class="btn-play" id="startBtn">ابدأ اللعب &#9654;</button>
+  <div style="margin-top:20px;font-size:11px;color:rgba(255,255,255,.3)">&copy; الإتقان التعليمية</div>
 </div>
 
 <script>
-const ARABIC_LETTERS = [
-  {letter:'أ', name:'ألف'},
-  {letter:'ب', name:'باء'},
-  {letter:'ت', name:'تاء'},
-  {letter:'ث', name:'ثاء'},
-  {letter:'ج', name:'جيم'},
-  {letter:'ح', name:'حاء'},
-  {letter:'خ', name:'خاء'},
-  {letter:'د', name:'دال'},
-  {letter:'ذ', name:'ذال'},
-  {letter:'ر', name:'راء'},
-  {letter:'ز', name:'زاي'},
-  {letter:'س', name:'سين'},
-  {letter:'ش', name:'شين'},
-  {letter:'ص', name:'صاد'},
-  {letter:'ض', name:'ضاد'},
-  {letter:'ط', name:'طاء'},
-  {letter:'ظ', name:'ظاء'},
-  {letter:'ع', name:'عين'},
-  {letter:'غ', name:'غين'},
-  {letter:'ف', name:'فاء'},
-  {letter:'ق', name:'قاف'},
-  {letter:'ك', name:'كاف'},
-  {letter:'ل', name:'لام'},
-  {letter:'م', name:'ميم'},
-  {letter:'ن', name:'نون'},
-  {letter:'هـ', name:'هاء'},
-  {letter:'و', name:'واو'},
-  {letter:'ي', name:'ياء'},
+// ============================
+// ARABIC LETTERS DATA
+// ============================
+const LETTERS_DATA = [
+  {letter:'\u0623', name:'\u0623\u064E\u0644\u0650\u0641', speak:'أَلِف'},
+  {letter:'\u0628', name:'\u0628\u064E\u0627\u0621', speak:'بَاء'},
+  {letter:'\u062A', name:'\u062A\u064E\u0627\u0621', speak:'تَاء'},
+  {letter:'\u062B', name:'\u062B\u064E\u0627\u0621', speak:'ثَاء'},
+  {letter:'\u062C', name:'\u062C\u0650\u064A\u0645', speak:'جِيم'},
+  {letter:'\u062D', name:'\u062D\u064E\u0627\u0621', speak:'حَاء'},
+  {letter:'\u062E', name:'\u062E\u064E\u0627\u0621', speak:'خَاء'},
+  {letter:'\u062F', name:'\u062F\u064E\u0627\u0644', speak:'دَال'},
+  {letter:'\u0630', name:'\u0630\u064E\u0627\u0644', speak:'ذَال'},
+  {letter:'\u0631', name:'\u0631\u064E\u0627\u0621', speak:'رَاء'},
+  {letter:'\u0632', name:'\u0632\u064E\u0627\u064A', speak:'زَاي'},
+  {letter:'\u0633', name:'\u0633\u0650\u064A\u0646', speak:'سِين'},
+  {letter:'\u0634', name:'\u0634\u0650\u064A\u0646', speak:'شِين'},
+  {letter:'\u0635', name:'\u0635\u064E\u0627\u062F', speak:'صَاد'},
+  {letter:'\u0636', name:'\u0636\u064E\u0627\u062F', speak:'ضَاد'},
+  {letter:'\u0637', name:'\u0637\u064E\u0627\u0621', speak:'طَاء'},
+  {letter:'\u0638', name:'\u0638\u064E\u0627\u0621', speak:'ظَاء'},
+  {letter:'\u0639', name:'\u0639\u064E\u064A\u0646', speak:'عَين'},
+  {letter:'\u063A', name:'\u063A\u064E\u064A\u0646', speak:'غَين'},
+  {letter:'\u0641', name:'\u0641\u064E\u0627\u0621', speak:'فَاء'},
+  {letter:'\u0642', name:'\u0642\u064E\u0627\u0641', speak:'قَاف'},
+  {letter:'\u0643', name:'\u0643\u064E\u0627\u0641', speak:'كَاف'},
+  {letter:'\u0644', name:'\u0644\u064E\u0627\u0645', speak:'لَام'},
+  {letter:'\u0645', name:'\u0645\u0650\u064A\u0645', speak:'مِيم'},
+  {letter:'\u0646', name:'\u0646\u064F\u0648\u0646', speak:'نُون'},
+  {letter:'\u0647', name:'\u0647\u064E\u0627\u0621', speak:'هَاء'},
+  {letter:'\u0648', name:'\u0648\u064E\u0627\u0648', speak:'وَاو'},
+  {letter:'\u064A', name:'\u064A\u064E\u0627\u0621', speak:'يَاء'},
 ];
 
-const LETTER_COLORS = [
+const COLORS = [
   '#f87171','#fb923c','#fbbf24','#a3e635','#34d399','#22d3ee',
   '#60a5fa','#a78bfa','#f472b6','#fb7185','#38bdf8','#4ade80',
-  '#facc15','#c084fc','#e879f9','#2dd4bf','#fb923c','#f87171',
-  '#818cf8','#34d399','#fbbf24','#60a5fa','#a78bfa','#f472b6',
-  '#22d3ee','#4ade80','#38bdf8','#c084fc'
+  '#facc15','#c084fc','#e879f9','#2dd4bf','#f97316','#ef4444',
+  '#818cf8','#10b981','#eab308','#3b82f6','#8b5cf6','#ec4899',
+  '#06b6d4','#22c55e','#0ea5e9','#d946ef'
 ];
 
+// ============================
+// MAP - 15x15 with more open space for 28 letters
+// ============================
+const COLS = 15, ROWS = 15;
+const MAP = [
+  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  [1,0,0,0,0,0,1,0,1,0,0,0,0,0,1],
+  [1,0,1,1,0,0,0,0,0,0,0,1,1,0,1],
+  [1,0,1,0,0,1,0,0,0,1,0,0,1,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,1,0,1,0,0,0,0,0,1,0,1,0,1],
+  [1,0,0,0,0,0,1,0,1,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,1,0,1,0,0,0,0,0,1],
+  [1,0,1,0,1,0,0,0,0,0,1,0,1,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,1,0,0,1,0,0,0,1,0,0,1,0,1],
+  [1,0,1,1,0,0,0,0,0,0,0,1,1,0,1],
+  [1,0,0,0,0,0,1,0,1,0,0,0,0,0,1],
+  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+];
+
+// ============================
+// GAME STATE
+// ============================
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// Grid: 14x14 cells, each 40px
-const COLS = 14, ROWS = 14, CELL = 40;
+let CELL = 32; // will be calculated
+let pacman = {col:1, row:1, dir:{r:0,c:0}, nextDir:{r:0,c:0}};
+let letters = [];
+let collected = [];
+let score = 0;
+let paused = true;
+let gameWon = false;
+let animFrame = 0;
+let mouthOpen = 0;
 
-// 0=path, 1=wall
-const MAP = [
-  [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-  [1,0,0,0,0,0,0,0,0,0,0,0,0,1],
-  [1,0,1,1,0,1,1,1,1,0,1,1,0,1],
-  [1,0,1,0,0,0,0,0,0,0,0,1,0,1],
-  [1,0,0,0,1,0,1,1,0,1,0,0,0,1],
-  [1,0,1,0,1,0,0,0,0,1,0,1,0,1],
-  [1,0,1,0,0,0,1,1,0,0,0,1,0,1],
-  [1,0,0,0,1,0,0,0,0,1,0,0,0,1],
-  [1,0,1,0,1,0,1,1,0,1,0,1,0,1],
-  [1,0,1,0,0,0,0,0,0,0,0,1,0,1],
-  [1,0,0,0,1,0,1,1,0,1,0,0,0,1],
-  [1,0,1,1,0,0,0,0,0,0,1,1,0,1],
-  [1,0,0,0,0,0,0,0,0,0,0,0,0,1],
-  [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-];
+// Eating queue to prevent overlap
+let eatQueue = [];
+let isShowingLetter = false;
+let popupTimer = null;
 
-let pacman, letters, collected, score, gameOver, mouthAngle, mouthDir, direction, nextDirection;
+// ============================
+// SPEECH - better Arabic pronunciation
+// ============================
+let arabicVoice = null;
 
-// Speech synthesis for letter pronunciation
-function speakLetter(name) {
-  if ('speechSynthesis' in window) {
-    const utter = new SpeechSynthesisUtterance(name);
-    utter.lang = 'ar-SA';
-    utter.rate = 0.8;
-    utter.pitch = 1.1;
-    speechSynthesis.speak(utter);
+function loadVoices() {
+  const voices = speechSynthesis.getVoices();
+  // Prefer Arabic voices
+  arabicVoice = voices.find(v => v.lang.startsWith('ar') && v.localService) ||
+                voices.find(v => v.lang.startsWith('ar')) ||
+                null;
+}
+
+if ('speechSynthesis' in window) {
+  speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+
+function speakLetter(text) {
+  if (!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel(); // stop any current speech
+  const utter = new SpeechSynthesisUtterance('حرف ' + text);
+  utter.lang = 'ar-SA';
+  utter.rate = 0.7;
+  utter.pitch = 1.2;
+  utter.volume = 1;
+  if (arabicVoice) utter.voice = arabicVoice;
+  speechSynthesis.speak(utter);
+}
+
+// ============================
+// CANVAS SIZING
+// ============================
+function resizeCanvas() {
+  const area = document.querySelector('.game-area');
+  const maxW = area.clientWidth - 8;
+  const maxH = area.clientHeight - 8;
+  CELL = Math.floor(Math.min(maxW / COLS, maxH / ROWS));
+  if (CELL < 16) CELL = 16;
+  if (CELL > 48) CELL = 48;
+  canvas.width = COLS * CELL;
+  canvas.height = ROWS * CELL;
+}
+
+// ============================
+// SHUFFLE UTILITY
+// ============================
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
+  return arr;
 }
 
-function getFreeCells() {
-  const cells = [];
-  for (let r = 0; r < ROWS; r++)
-    for (let c = 0; c < COLS; c++)
-      if (MAP[r][c] === 0) cells.push({r, c});
-  return cells;
-}
-
+// ============================
+// INIT GAME
+// ============================
 function initGame() {
-  pacman = {r: 1, c: 1, x: 1*CELL + CELL/2, y: 1*CELL + CELL/2};
-  direction = {r:0, c:0};
-  nextDirection = {r:0, c:0};
-  mouthAngle = 0.25;
-  mouthDir = 1;
+  resizeCanvas();
+  pacman = {col:7, row:7, dir:{r:0,c:0}, nextDir:{r:0,c:0}};
   collected = [];
   score = 0;
-  gameOver = false;
+  gameWon = false;
+  eatQueue = [];
+  isShowingLetter = false;
+  if (popupTimer) clearTimeout(popupTimer);
+  document.getElementById('letterPopup').classList.remove('show');
 
-  // Place letters on free cells (skip pacman start)
-  const free = getFreeCells().filter(c => !(c.r===1 && c.c===1));
-  // Shuffle
-  for (let i = free.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [free[i], free[j]] = [free[j], free[i]];
+  // Get free cells (exclude pacman start and neighbors for spacing)
+  const free = [];
+  for (let r = 0; r < ROWS; r++)
+    for (let c = 0; c < COLS; c++)
+      if (MAP[r][c] === 0 && !(r === 7 && c === 7))
+        free.push({r, c});
+  shuffle(free);
+
+  // Place all 28 letters with minimum spacing
+  letters = [];
+  const used = new Set();
+  used.add('7,7'); // pacman pos
+
+  for (let i = 0; i < LETTERS_DATA.length; i++) {
+    let placed = false;
+    for (let f = 0; f < free.length; f++) {
+      const key = free[f].r + ',' + free[f].c;
+      if (!used.has(key)) {
+        letters.push({
+          ...LETTERS_DATA[i],
+          row: free[f].r,
+          col: free[f].c,
+          color: COLORS[i],
+          eaten: false,
+          eatAnim: 0
+        });
+        used.add(key);
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) {
+      // Fallback: just use any free cell
+      const cell = free[i % free.length];
+      letters.push({
+        ...LETTERS_DATA[i],
+        row: cell.r, col: cell.c,
+        color: COLORS[i], eaten: false, eatAnim: 0
+      });
+    }
   }
-  letters = ARABIC_LETTERS.map((l, i) => ({
-    ...l,
-    r: free[i].r,
-    c: free[i].c,
-    color: LETTER_COLORS[i],
-    eaten: false
-  }));
 
-  document.getElementById('collectedLetters').innerHTML = '';
-  document.getElementById('scoreVal').textContent = '0';
-  document.getElementById('collectedCount').textContent = '0';
-  document.getElementById('winScreen').classList.remove('show');
+  updateUI();
 }
 
-function canMove(r, c) {
-  return r >= 0 && r < ROWS && c >= 0 && c < COLS && MAP[r][c] === 0;
+function updateUI() {
+  document.getElementById('scoreVal').textContent = score;
+  document.getElementById('collectedCount').textContent = collected.length;
 }
 
+// ============================
+// MOVEMENT - Grid-locked, cell-by-cell
+// ============================
+function canMove(row, col) {
+  return row >= 0 && row < ROWS && col >= 0 && col < COLS && MAP[row][col] === 0;
+}
+
+function movePacman() {
+  if (paused || gameWon) return;
+
+  // Try next direction first
+  const nd = pacman.nextDir;
+  if ((nd.r !== 0 || nd.c !== 0) && canMove(pacman.row + nd.r, pacman.col + nd.c)) {
+    pacman.dir = {...nd};
+  }
+
+  const d = pacman.dir;
+  if (d.r === 0 && d.c === 0) return;
+
+  const nr = pacman.row + d.r;
+  const nc = pacman.col + d.c;
+  if (canMove(nr, nc)) {
+    pacman.row = nr;
+    pacman.col = nc;
+    checkLetterCollision();
+  }
+}
+
+// ============================
+// COLLISION - Queue-based to prevent overlap
+// ============================
+function checkLetterCollision() {
+  const hit = letters.find(l => !l.eaten && l.row === pacman.row && l.col === pacman.col);
+  if (!hit) return;
+
+  hit.eaten = true;
+  hit.eatAnim = 1;
+  score += 10;
+  collected.push(hit);
+  updateUI();
+  addCollectedPill(hit);
+
+  // Queue the letter display
+  eatQueue.push(hit);
+  processEatQueue();
+
+  if (collected.length === LETTERS_DATA.length) {
+    gameWon = true;
+    paused = true;
+    // Wait for last letter popup then show win
+    setTimeout(showWinScreen, 1800);
+  }
+}
+
+function processEatQueue() {
+  if (isShowingLetter || eatQueue.length === 0) return;
+  isShowingLetter = true;
+
+  const letterData = eatQueue.shift();
+  showLetterPopup(letterData);
+  speakLetter(letterData.speak);
+
+  if (popupTimer) clearTimeout(popupTimer);
+  popupTimer = setTimeout(() => {
+    document.getElementById('letterPopup').classList.remove('show');
+    isShowingLetter = false;
+    // Process next in queue
+    if (eatQueue.length > 0) {
+      setTimeout(processEatQueue, 150);
+    }
+  }, 1200);
+}
+
+function showLetterPopup(l) {
+  const popup = document.getElementById('letterPopup');
+  const pl = document.getElementById('popupLetter');
+  const pn = document.getElementById('popupName');
+  pl.textContent = l.letter;
+  pl.style.color = l.color;
+  pn.textContent = 'حرف ' + l.name;
+  popup.classList.remove('show');
+  // Force reflow for re-animation
+  void popup.offsetWidth;
+  popup.classList.add('show');
+}
+
+function addCollectedPill(l) {
+  const bar = document.getElementById('collectedBar');
+  const pill = document.createElement('div');
+  pill.className = 'letter-pill';
+  pill.style.background = l.color;
+  pill.textContent = l.letter;
+  pill.title = l.name;
+  pill.addEventListener('click', () => speakLetter(l.speak));
+  pill.addEventListener('touchstart', (e) => { e.preventDefault(); speakLetter(l.speak); }, {passive:false});
+  bar.appendChild(pill);
+  // Scroll to show latest
+  bar.scrollLeft = bar.scrollWidth;
+}
+
+// ============================
+// DRAWING
+// ============================
 function drawMap() {
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLS; c++) {
+      const x = c * CELL, y = r * CELL;
       if (MAP[r][c] === 1) {
-        ctx.fillStyle = '#1e3a5f';
-        ctx.fillRect(c*CELL, r*CELL, CELL, CELL);
-        // Wall border
-        ctx.strokeStyle = '#2563eb';
-        ctx.lineWidth = 1.5;
-        ctx.strokeRect(c*CELL+1, r*CELL+1, CELL-2, CELL-2);
+        // Wall
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(x, y, CELL, CELL);
+        // Neon border
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(x + 0.5, y + 0.5, CELL - 1, CELL - 1);
+        // Inner glow on edges adjacent to path
+        if (r > 0 && MAP[r-1][c] === 0) { ctx.fillStyle='#1e3a5f'; ctx.fillRect(x,y,CELL,2); }
+        if (r < ROWS-1 && MAP[r+1][c] === 0) { ctx.fillStyle='#1e3a5f'; ctx.fillRect(x,y+CELL-2,CELL,2); }
+        if (c > 0 && MAP[r][c-1] === 0) { ctx.fillStyle='#1e3a5f'; ctx.fillRect(x,y,2,CELL); }
+        if (c < COLS-1 && MAP[r][c+1] === 0) { ctx.fillStyle='#1e3a5f'; ctx.fillRect(x+CELL-2,y,2,CELL); }
       } else {
-        ctx.fillStyle = '#111827';
-        ctx.fillRect(c*CELL, r*CELL, CELL, CELL);
+        // Path
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(x, y, CELL, CELL);
+        // Small dot for empty paths (decoration)
+        if (!letters.some(l => !l.eaten && l.row === r && l.col === c)) {
+          ctx.fillStyle = 'rgba(255,255,255,.04)';
+          ctx.beginPath();
+          ctx.arc(x + CELL/2, y + CELL/2, 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
     }
   }
 }
 
 function drawLetters() {
+  const fontSize = Math.max(12, CELL * 0.55);
+  ctx.font = `800 ${fontSize}px Cairo`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
   letters.forEach(l => {
-    if (l.eaten) return;
-    ctx.font = '700 20px Cairo';
+    if (l.eaten) {
+      // Brief eat animation (shrink)
+      if (l.eatAnim > 0) {
+        l.eatAnim -= 0.1;
+        const s = l.eatAnim;
+        ctx.save();
+        ctx.globalAlpha = s;
+        const cx = l.col * CELL + CELL/2;
+        const cy = l.row * CELL + CELL/2;
+        ctx.translate(cx, cy);
+        ctx.scale(s, s);
+        ctx.fillStyle = l.color;
+        ctx.shadowColor = l.color;
+        ctx.shadowBlur = 10;
+        ctx.fillText(l.letter, 0, 0);
+        ctx.shadowBlur = 0;
+        ctx.restore();
+      }
+      return;
+    }
+
+    const cx = l.col * CELL + CELL/2;
+    const cy = l.row * CELL + CELL/2;
+
+    // Gentle float animation
+    const floatY = Math.sin(animFrame * 0.03 + l.col + l.row) * 2;
+
+    ctx.save();
     ctx.fillStyle = l.color;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    // Glow effect
     ctx.shadowColor = l.color;
-    ctx.shadowBlur = 8;
-    ctx.fillText(l.letter, l.c*CELL+CELL/2, l.r*CELL+CELL/2);
+    ctx.shadowBlur = 6;
+    ctx.fillText(l.letter, cx, cy + floatY);
     ctx.shadowBlur = 0;
+    ctx.restore();
   });
 }
 
 function drawPacman() {
-  const x = pacman.x;
-  const y = pacman.y;
-  const r = CELL/2 - 4;
+  const cx = pacman.col * CELL + CELL/2;
+  const cy = pacman.row * CELL + CELL/2;
+  const r = CELL / 2 - 3;
 
-  // Determine rotation based on direction
+  // Direction angle
   let angle = 0;
-  if (direction.c === 1) angle = 0;        // right
-  else if (direction.c === -1) angle = Math.PI; // left
-  else if (direction.r === -1) angle = -Math.PI/2; // up
-  else if (direction.r === 1) angle = Math.PI/2;  // down
+  const d = pacman.dir;
+  if (d.c === 1) angle = 0;
+  else if (d.c === -1) angle = Math.PI;
+  else if (d.r === -1) angle = -Math.PI / 2;
+  else if (d.r === 1) angle = Math.PI / 2;
+
+  // Mouth animation
+  mouthOpen = 0.08 + Math.abs(Math.sin(animFrame * 0.15)) * 0.25;
 
   ctx.save();
-  ctx.translate(x, y);
+  ctx.translate(cx, cy);
   ctx.rotate(angle);
+
+  // Glow
+  ctx.shadowColor = '#fbbf24';
+  ctx.shadowBlur = 15;
 
   // Body
   ctx.beginPath();
-  ctx.arc(0, 0, r, mouthAngle * Math.PI, (2 - mouthAngle) * Math.PI);
+  ctx.arc(0, 0, r, mouthOpen * Math.PI, (2 - mouthOpen) * Math.PI);
   ctx.lineTo(0, 0);
   ctx.closePath();
   ctx.fillStyle = '#fbbf24';
-  ctx.shadowColor = '#fbbf24';
-  ctx.shadowBlur = 12;
   ctx.fill();
   ctx.shadowBlur = 0;
 
   // Eye
+  const eyeR = Math.max(2, r * 0.18);
   ctx.beginPath();
-  ctx.arc(4, -r/2, 3, 0, Math.PI*2);
+  ctx.arc(r * 0.2, -r * 0.4, eyeR, 0, Math.PI * 2);
   ctx.fillStyle = '#111';
   ctx.fill();
 
   ctx.restore();
-
-  // Animate mouth
-  mouthAngle += 0.02 * mouthDir;
-  if (mouthAngle > 0.3) mouthDir = -1;
-  if (mouthAngle < 0.02) mouthDir = 1;
-}
-
-function showLetterOverlay(l) {
-  const overlay = document.getElementById('letterOverlay');
-  document.getElementById('bigLetter').textContent = l.letter;
-  document.getElementById('bigLetter').style.color = l.color;
-  document.getElementById('letterName').textContent = 'حرف ' + l.name;
-  overlay.classList.add('show');
-  speakLetter(l.name);
-  setTimeout(() => overlay.classList.remove('show'), 1500);
-}
-
-function addCollectedBubble(l) {
-  const container = document.getElementById('collectedLetters');
-  const div = document.createElement('div');
-  div.className = 'letter-bubble';
-  div.style.background = l.color;
-  div.textContent = l.letter;
-  div.title = l.name;
-  div.addEventListener('click', () => speakLetter(l.name));
-  container.appendChild(div);
-}
-
-const MOVE_SPEED = 2.5;
-let moveTarget = null;
-
-function update() {
-  if (gameOver) return;
-
-  // If we have a move target, move towards it
-  if (moveTarget) {
-    const tx = moveTarget.c * CELL + CELL/2;
-    const ty = moveTarget.r * CELL + CELL/2;
-    const dx = tx - pacman.x;
-    const dy = ty - pacman.y;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-
-    if (dist < MOVE_SPEED) {
-      pacman.x = tx;
-      pacman.y = ty;
-      pacman.r = moveTarget.r;
-      pacman.c = moveTarget.c;
-      moveTarget = null;
-
-      // Check letter collision
-      const hit = letters.find(l => !l.eaten && l.r === pacman.r && l.c === pacman.c);
-      if (hit) {
-        hit.eaten = true;
-        score += 10;
-        collected.push(hit);
-        document.getElementById('scoreVal').textContent = score;
-        document.getElementById('collectedCount').textContent = collected.length;
-        addCollectedBubble(hit);
-        showLetterOverlay(hit);
-
-        if (collected.length === ARABIC_LETTERS.length) {
-          gameOver = true;
-          setTimeout(() => document.getElementById('winScreen').classList.add('show'), 1600);
-        }
-      }
-    } else {
-      pacman.x += (dx / dist) * MOVE_SPEED;
-      pacman.y += (dy / dist) * MOVE_SPEED;
-    }
-  }
-
-  // Try next direction first, then current
-  if (!moveTarget) {
-    const nr = pacman.r + nextDirection.r;
-    const nc = pacman.c + nextDirection.c;
-    if ((nextDirection.r || nextDirection.c) && canMove(nr, nc)) {
-      direction = {...nextDirection};
-      moveTarget = {r: nr, c: nc};
-    } else {
-      const cr = pacman.r + direction.r;
-      const cc = pacman.c + direction.c;
-      if ((direction.r || direction.c) && canMove(cr, cc)) {
-        moveTarget = {r: cr, c: cc};
-      }
-    }
-  }
 }
 
 function draw() {
@@ -473,67 +699,141 @@ function draw() {
   drawMap();
   drawLetters();
   drawPacman();
+  animFrame++;
 }
 
-function gameLoop() {
-  update();
+// ============================
+// GAME LOOP - Fixed tick rate for smooth consistent movement
+// ============================
+const TICK_RATE = 130; // ms per move (grid cell)
+let lastTick = 0;
+
+function gameLoop(timestamp) {
+  if (!lastTick) lastTick = timestamp;
+
+  if (timestamp - lastTick >= TICK_RATE) {
+    movePacman();
+    lastTick = timestamp;
+  }
+
   draw();
   requestAnimationFrame(gameLoop);
 }
 
-function restartGame() {
-  initGame();
+// ============================
+// WIN SCREEN
+// ============================
+function showWinScreen() {
+  const overlay = document.getElementById('winOverlay');
+  const container = document.getElementById('winLetters');
+  container.innerHTML = '';
+  collected.forEach((l, i) => {
+    const div = document.createElement('div');
+    div.className = 'wl';
+    div.style.background = l.color;
+    div.style.animationDelay = (i * 0.05) + 's';
+    div.textContent = l.letter;
+    div.addEventListener('click', () => speakLetter(l.speak));
+    container.appendChild(div);
+  });
+  overlay.classList.add('show');
 }
 
-// Keyboard controls
+// ============================
+// CONTROLS - Keyboard
+// ============================
 document.addEventListener('keydown', e => {
-  switch(e.key) {
-    case 'ArrowUp':    nextDirection = {r:-1, c:0}; e.preventDefault(); break;
-    case 'ArrowDown':  nextDirection = {r:1, c:0}; e.preventDefault(); break;
-    case 'ArrowLeft':  nextDirection = {r:0, c:1}; e.preventDefault(); break;  // RTL: left arrow = right in grid
-    case 'ArrowRight': nextDirection = {r:0, c:-1}; e.preventDefault(); break; // RTL: right arrow = left in grid
+  if (paused && !gameWon) { paused = false; }
+  switch (e.key) {
+    case 'ArrowUp':   case 'w': case 'W': pacman.nextDir = {r:-1, c:0}; e.preventDefault(); break;
+    case 'ArrowDown': case 's': case 'S': pacman.nextDir = {r:1, c:0}; e.preventDefault(); break;
+    case 'ArrowLeft': case 'a': case 'A': pacman.nextDir = {r:0, c:-1}; e.preventDefault(); break;
+    case 'ArrowRight':case 'd': case 'D': pacman.nextDir = {r:0, c:1}; e.preventDefault(); break;
   }
 });
 
-// Mobile controls
+// ============================
+// CONTROLS - D-Pad (touch + mouse, always visible)
+// ============================
 document.querySelectorAll('.d-btn[data-dir]').forEach(btn => {
-  const handler = (e) => {
+  function handleDir(e) {
     e.preventDefault();
-    switch(btn.dataset.dir) {
-      case 'up':    nextDirection = {r:-1, c:0}; break;
-      case 'down':  nextDirection = {r:1, c:0}; break;
-      case 'left':  nextDirection = {r:0, c:-1}; break;
-      case 'right': nextDirection = {r:0, c:1}; break;
+    e.stopPropagation();
+    if (paused && !gameWon) paused = false;
+    btn.classList.add('pressed');
+    setTimeout(() => btn.classList.remove('pressed'), 150);
+    switch (btn.dataset.dir) {
+      case 'up':    pacman.nextDir = {r:-1, c:0}; break;
+      case 'down':  pacman.nextDir = {r:1, c:0}; break;
+      case 'left':  pacman.nextDir = {r:0, c:-1}; break;
+      case 'right': pacman.nextDir = {r:0, c:1}; break;
     }
-  };
-  btn.addEventListener('touchstart', handler, {passive:false});
-  btn.addEventListener('mousedown', handler);
+  }
+  btn.addEventListener('touchstart', handleDir, {passive: false});
+  btn.addEventListener('mousedown', handleDir);
 });
 
-// Touch swipe on canvas
-let touchStart = null;
+// Restart button (center of d-pad)
+document.getElementById('restartBtn').addEventListener('click', startGame);
+document.getElementById('restartBtn').addEventListener('touchstart', (e) => { e.preventDefault(); startGame(); }, {passive:false});
+
+// ============================
+// TOUCH SWIPE on canvas
+// ============================
+let swipeStart = null;
 canvas.addEventListener('touchstart', e => {
-  touchStart = {x: e.touches[0].clientX, y: e.touches[0].clientY};
-}, {passive: true});
+  e.preventDefault();
+  if (paused && !gameWon) paused = false;
+  swipeStart = {x: e.touches[0].clientX, y: e.touches[0].clientY};
+}, {passive: false});
+
 canvas.addEventListener('touchmove', e => {
-  if (!touchStart) return;
-  const dx = e.touches[0].clientX - touchStart.x;
-  const dy = e.touches[0].clientY - touchStart.y;
-  if (Math.abs(dx) > 20 || Math.abs(dy) > 20) {
+  e.preventDefault();
+  if (!swipeStart) return;
+  const dx = e.touches[0].clientX - swipeStart.x;
+  const dy = e.touches[0].clientY - swipeStart.y;
+  const threshold = 15;
+  if (Math.abs(dx) > threshold || Math.abs(dy) > threshold) {
     if (Math.abs(dx) > Math.abs(dy)) {
-      nextDirection = dx > 0 ? {r:0, c:1} : {r:0, c:-1};
+      pacman.nextDir = dx > 0 ? {r:0, c:1} : {r:0, c:-1};
     } else {
-      nextDirection = dy > 0 ? {r:1, c:0} : {r:-1, c:0};
+      pacman.nextDir = dy > 0 ? {r:1, c:0} : {r:-1, c:0};
     }
-    touchStart = null;
+    swipeStart = {x: e.touches[0].clientX, y: e.touches[0].clientY};
   }
-}, {passive: true});
+}, {passive: false});
 
-document.getElementById('restartBtn').addEventListener('click', restartGame);
+canvas.addEventListener('touchend', () => { swipeStart = null; });
 
-// Init & start
+// Prevent scrolling
+document.addEventListener('touchmove', e => e.preventDefault(), {passive: false});
+
+// ============================
+// START / RESTART
+// ============================
+function startGame() {
+  document.getElementById('startOverlay').classList.add('hidden');
+  document.getElementById('winOverlay').classList.remove('show');
+  document.getElementById('collectedBar').innerHTML = '';
+  initGame();
+  paused = true; // wait for first input
+}
+
+document.getElementById('startBtn').addEventListener('click', startGame);
+
+// ============================
+// RESIZE HANDLER
+// ============================
+window.addEventListener('resize', () => {
+  resizeCanvas();
+});
+
+// ============================
+// BOOT
+// ============================
+resizeCanvas();
 initGame();
-gameLoop();
+requestAnimationFrame(gameLoop);
 </script>
 </body>
 </html>
