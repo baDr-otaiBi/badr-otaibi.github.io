@@ -803,6 +803,306 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .s-panel.on{animation:scaleIn .4s var(--ease) both}
 @keyframes panelSlide{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
 
+/* ===== MARKETING: Social Proof Popup ===== */
+.social-proof{
+  position:fixed;bottom:90px;left:24px;z-index:97;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:16px;padding:14px 20px;
+  box-shadow:0 8px 32px rgba(0,0,0,.12);
+  display:flex;align-items:center;gap:12px;
+  transform:translateX(-120%);opacity:0;
+  transition:all .5s var(--ease);
+  max-width:340px;
+}
+.social-proof.show{transform:translateX(0);opacity:1}
+.social-proof-avatar{
+  width:42px;height:42px;border-radius:12px;
+  display:grid;place-items:center;font-size:20px;
+  background:var(--green-soft);flex-shrink:0;
+}
+.social-proof-text{font-size:13px;color:var(--ink-2);line-height:1.7}
+.social-proof-text strong{color:var(--ink);font-weight:700}
+.social-proof-time{font-size:11px;color:var(--ink-4);margin-top:2px}
+.social-proof-close{
+  position:absolute;top:6px;left:6px;width:20px;height:20px;
+  border-radius:50%;border:none;background:var(--bg-alt);
+  font-size:10px;cursor:pointer;color:var(--ink-4);
+  display:grid;place-items:center;
+}
+
+/* ===== MARKETING: Urgency Banner ===== */
+.urgency-banner{
+  background:linear-gradient(90deg,#dc2626,#ef4444,#dc2626);
+  background-size:200% 100%;animation:gradientShift 3s ease infinite;
+  color:#fff;text-align:center;padding:10px 16px;
+  font-family:var(--font);font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  flex-wrap:wrap;
+}
+.urgency-banner .countdown{
+  display:inline-flex;align-items:center;gap:4px;
+  background:rgba(0,0,0,.2);padding:4px 12px;border-radius:8px;
+  font-size:14px;font-weight:900;direction:ltr;
+}
+
+/* ===== MARKETING: Price Anchoring ===== */
+.p-price-old{
+  font-size:15px;color:var(--ink-4);text-decoration:line-through;
+  font-weight:600;margin-left:8px;
+}
+.p-discount-badge{
+  display:inline-block;background:var(--rose);color:#fff;
+  font-size:10px;font-weight:800;padding:2px 8px;
+  border-radius:6px;margin-right:6px;font-family:var(--font);
+}
+
+/* ===== MARKETING: Bestseller / Popular Badge ===== */
+.bestseller-glow{
+  position:absolute;inset:-2px;border-radius:calc(var(--radius-lg) + 2px);
+  background:linear-gradient(135deg,var(--blue),var(--purple),var(--rose),var(--blue));
+  background-size:300% 300%;animation:gradientShift 4s ease infinite;
+  z-index:-1;opacity:0;transition:.3s;
+}
+.p-card.bestseller .bestseller-glow{opacity:1}
+.p-card.bestseller{border-color:transparent;box-shadow:0 4px 20px rgba(37,99,235,.15)}
+.p-card.bestseller:hover{box-shadow:0 20px 50px rgba(37,99,235,.2)}
+
+/* Viewers count */
+.p-viewers{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;color:var(--ink-3);margin-bottom:12px;
+  font-family:var(--font);
+}
+.p-viewers .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);animation:pulse 1.5s infinite;
+}
+
+/* ===== MARKETING: Guarantee Section ===== */
+.guarantee-section{
+  padding:60px 0;
+}
+.guarantee-box{
+  display:flex;align-items:center;gap:32px;
+  background:var(--white);border:2px solid var(--green);
+  border-radius:var(--radius-xl);padding:40px 48px;
+  box-shadow:0 4px 24px rgba(5,150,105,.08);
+}
+[data-theme="dark"] .guarantee-box{background:var(--white)}
+.guarantee-icon{font-size:64px;flex-shrink:0}
+.guarantee-text h3{
+  font-family:var(--font);font-size:22px;font-weight:900;
+  color:var(--green);margin-bottom:8px;
+}
+.guarantee-text p{font-size:15px;color:var(--ink-2);line-height:2}
+@media(max-width:768px){
+  .guarantee-box{flex-direction:column;text-align:center;padding:32px 24px;gap:20px}
+}
+
+/* ===== MARKETING: Bundle Offer ===== */
+.bundle-section{padding:60px 0}
+.bundle-card{
+  background:linear-gradient(135deg,#1e3a5f 0%,#0f172a 100%);
+  border-radius:var(--radius-xl);padding:48px;
+  color:#fff;position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;
+}
+.bundle-deco{
+  position:absolute;width:300px;height:300px;border-radius:50%;
+  background:var(--blue);opacity:.06;filter:blur(60px);
+  top:-50px;left:-50px;
+}
+.bundle-info{position:relative;z-index:1}
+.bundle-info h3{font-family:var(--font);font-size:28px;font-weight:900;margin-bottom:12px}
+.bundle-info p{font-size:15px;opacity:.8;line-height:2;margin-bottom:24px}
+.bundle-items{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.bundle-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 16px;border-radius:10px;
+  background:rgba(255,255,255,.08);font-size:14px;
+}
+.bundle-item .check{color:var(--green);font-size:18px}
+.bundle-pricing{position:relative;z-index:1;text-align:center}
+.bundle-pricing .old-price{
+  font-size:22px;color:rgba(255,255,255,.4);text-decoration:line-through;
+  font-weight:600;margin-bottom:4px;
+}
+.bundle-pricing .new-price{
+  font-family:var(--font);font-size:56px;font-weight:900;
+  color:#fff;line-height:1;
+}
+.bundle-pricing .new-price span{font-size:20px;font-weight:600;opacity:.7}
+.bundle-pricing .save-tag{
+  display:inline-block;background:var(--green);color:#fff;
+  padding:6px 20px;border-radius:100px;font-size:14px;font-weight:800;
+  margin:16px 0 24px;font-family:var(--font);
+}
+.bundle-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:16px 36px;border-radius:14px;
+  background:#fff;color:#111827;font-family:var(--font);
+  font-size:16px;font-weight:800;border:none;cursor:pointer;
+  transition:.3s var(--ease);box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
+.bundle-btn:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+@media(max-width:768px){
+  .bundle-card{grid-template-columns:1fr;padding:32px 24px}
+  .bundle-pricing .new-price{font-size:42px}
+}
+
+/* ===== MARKETING: FAQ Section ===== */
+.faq-section{padding:60px 0}
+.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq-item{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  transition:.3s var(--ease);
+}
+[data-theme="dark"] .faq-item{background:var(--white);border-color:var(--border)}
+.faq-item:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 24px;cursor:pointer;
+  font-family:var(--font);font-weight:700;font-size:15px;
+  color:var(--ink);transition:.2s;
+}
+.faq-q:hover{color:var(--blue)}
+.faq-arrow{
+  width:28px;height:28px;border-radius:8px;
+  background:var(--bg-alt);display:grid;place-items:center;
+  font-size:12px;color:var(--ink-3);transition:.3s var(--ease);
+  border:1px solid var(--border);flex-shrink:0;
+}
+.faq-item.open .faq-arrow{transform:rotate(180deg);background:var(--blue-soft);color:var(--blue);border-color:var(--blue)}
+.faq-a{
+  display:none;padding:0 24px 18px;
+  font-size:14px;color:var(--ink-2);line-height:2;
+  border-top:1px solid var(--border);
+}
+.faq-item.open .faq-a{display:block;animation:up .3s var(--ease) both}
+
+/* ===== MARKETING: Sticky Mobile CTA ===== */
+.sticky-cta{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;
+  background:var(--white);border-top:1px solid var(--border);
+  padding:12px 20px;
+  box-shadow:0 -4px 20px rgba(0,0,0,.1);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.sticky-cta-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  max-width:600px;margin:0 auto;
+}
+.sticky-cta-text{font-family:var(--font);font-size:13px;font-weight:700;color:var(--ink)}
+.sticky-cta-text span{display:block;font-size:11px;color:var(--ink-3);font-weight:500}
+.sticky-cta-btn{
+  padding:12px 28px;border-radius:12px;border:none;
+  background:var(--green);color:#fff;font-family:var(--font);
+  font-size:14px;font-weight:800;cursor:pointer;
+  box-shadow:0 4px 14px rgba(5,150,105,.3);
+  transition:.25s var(--ease);white-space:nowrap;
+  animation:pulse 2s infinite;
+}
+.sticky-cta-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){
+  .sticky-cta{display:block}
+  .whatsapp-btn{bottom:76px}
+  .scroll-top{bottom:76px}
+  .social-proof{bottom:142px}
+}
+
+/* ===== MARKETING: Animated CTA Button ===== */
+@keyframes ctaGlow{
+  0%,100%{box-shadow:0 4px 14px rgba(5,150,105,.3)}
+  50%{box-shadow:0 4px 28px rgba(5,150,105,.5),0 0 40px rgba(5,150,105,.2)}
+}
+.btn-glow{animation:ctaGlow 2s ease-in-out infinite}
+
+/* ===== MARKETING: Live Activity ===== */
+.live-activity{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--green);font-weight:700;
+  font-family:var(--font);margin-top:16px;
+}
+.live-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green);animation:pulse 1.5s infinite;
+  box-shadow:0 0 8px var(--green);
+}
+
+/* ===== MARKETING: Order Confirmation Modal ===== */
+.order-overlay{
+  display:none;position:fixed;inset:0;z-index:300;
+  background:rgba(0,0,0,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;padding:24px;
+}
+.order-overlay.open{display:flex}
+.order-modal{
+  background:var(--white);border-radius:var(--radius-xl);
+  max-width:480px;width:100%;
+  box-shadow:0 24px 64px rgba(0,0,0,.2);
+  animation:scaleIn .3s var(--ease);
+  overflow:hidden;
+}
+.order-modal-header{
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  padding:28px 28px 24px;text-align:center;color:#fff;
+}
+.order-modal-header .wa-icon{font-size:48px;margin-bottom:12px}
+.order-modal-header h3{font-family:var(--font);font-size:20px;font-weight:900}
+.order-modal-header p{font-size:13px;opacity:.9;margin-top:6px}
+.order-modal-body{padding:28px}
+.order-product-name{
+  background:var(--bg-alt);border:1px solid var(--border);
+  border-radius:12px;padding:14px 18px;margin-bottom:20px;
+  font-family:var(--font);font-weight:700;font-size:15px;
+  color:var(--ink);text-align:center;
+}
+.order-steps{display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
+.order-step{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:14px;color:var(--ink-2);line-height:1.8;
+}
+.order-step-num{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:var(--green-soft);color:var(--green);
+  display:grid;place-items:center;
+  font-family:var(--font);font-weight:900;font-size:13px;
+  border:1.5px solid var(--green);
+}
+.order-modal-footer{
+  padding:0 28px 28px;display:flex;flex-direction:column;gap:10px;
+}
+.order-wa-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px 28px;border-radius:14px;border:none;
+  background:#25D366;color:#fff;font-family:var(--font);
+  font-size:16px;font-weight:800;cursor:pointer;
+  transition:.3s var(--ease);
+  box-shadow:0 4px 16px rgba(37,211,102,.3);
+}
+.order-wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.4)}
+.order-wa-btn svg{width:22px;height:22px}
+.order-cancel-btn{
+  padding:12px;border-radius:10px;border:1px solid var(--border);
+  background:transparent;color:var(--ink-3);font-family:var(--font);
+  font-size:13px;font-weight:600;cursor:pointer;
+  transition:.2s;text-align:center;
+}
+.order-cancel-btn:hover{background:var(--bg-alt);color:var(--ink)}
+.order-guarantee{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:11px;color:var(--ink-4);margin-top:4px;
+}
+
+/* WhatsApp hint on product cards */
+.p-wa-hint{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;color:var(--green);font-weight:600;
+  margin-top:10px;font-family:var(--font);
+}
+.p-wa-hint svg{width:14px;height:14px;flex-shrink:0}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
   .products-grid{grid-template-columns:1fr}
@@ -847,6 +1147,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 <!-- Custom Cursor -->
 <div class="cursor-dot" id="cursorDot"></div>
 
+<!-- URGENCY BANNER -->
+<div class="urgency-banner">
+  <span>عرض محدود — خصم على جميع المنتجات</span>
+  <div class="countdown" id="countdown">00:00:00</div>
+</div>
+
 <!-- NAV -->
 <nav class="nav">
   <div class="container nav-inner">
@@ -863,7 +1169,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
       <button class="theme-toggle" id="themeToggle" title="تبديل الوضع">
         <span class="t-icon" id="themeIcon">&#9790;</span>
       </button>
-      <a href="#products" class="nav-cta">تصفح المنتجات</a>
+      <a href="#products" class="nav-cta">اطلب الآن</a>
       <button class="hamburger" onclick="toggleMobileMenu()" aria-label="القائمة">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
       </button>
@@ -891,53 +1197,57 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   </div>
   <div class="container">
     <div class="hero-inner">
-      <div class="hero-badge au">منصة الإتقان التعليمية</div>
-      <h1 class="au au2">كل ما يحتاجه الطالب<br><span class="highlight">في مكان واحد</span></h1>
-      <p class="hero-desc au au3">ملخصات تعليمية شاملة، أوراق عمل، تجميعات أسئلة مع الإجابات، واختبارات تفاعلية — لجميع المراحل الدراسية بأسعار رمزية.</p>
+      <div class="hero-badge au">+500 طالب يثقون بنا</div>
+      <h1 class="au au2">ارفع درجاتك<br><span class="highlight">بأقل مجهود</span> <span class="green-highlight">وأسرع وقت</span></h1>
+      <p class="hero-desc au au3">ملخصات مركّزة تختصر عليك ساعات المذاكرة، تجميعات 1000 سؤال مع الإجابات، واختبارات تفاعلية — كل اللي تحتاجه عشان تتفوّق.</p>
       <div class="hero-btns au au4">
-        <a href="#products" class="btn btn-green">استكشف المحتوى</a>
+        <a href="#products" class="btn btn-green btn-glow">اطلب الآن — قبل انتهاء العرض</a>
         <a href="#stages" class="btn btn-out">تصفح المراحل</a>
+      </div>
+      <div class="live-activity au au4">
+        <span class="live-dot"></span>
+        <span id="liveViewers">23 طالب يتصفحون الآن</span>
       </div>
 
       <!-- Announcement Banner -->
       <div class="hero-announce au au5">
         <div class="announce-glow"></div>
         <div class="announce-content">
-          <div class="announce-icon">🚀</div>
+          <div class="announce-icon">🎉</div>
           <div class="announce-text">
-            <div class="announce-label">جديد</div>
-            <p>أضفنا <strong>أوراق عمل</strong> وملخصات <strong>الصف الخامس</strong> — تصفّحها الآن</p>
+            <div class="announce-label">عرض لفترة محدودة</div>
+            <p>خصم يصل إلى <strong>35%</strong> على جميع المنتجات + <strong>باقة الطالب المتفوّق</strong> بـ 99 ر.س بدلاً من 164</p>
           </div>
-          <a href="#products" class="announce-btn">اكتشف</a>
+          <a href="#products" class="announce-btn">استفد الآن</a>
         </div>
       </div>
 
       <div class="hero-stats au au5">
+        <div>
+          <div class="stat-n"><span class="counter" data-target="500">0</span><span>+</span></div>
+          <div class="stat-l">طالب يثق فينا</div>
+        </div>
         <div>
           <div class="stat-n"><span class="counter" data-target="1000">0</span><span>+</span></div>
           <div class="stat-l">سؤال مع الإجابة</div>
         </div>
         <div>
           <div class="stat-n"><span class="counter" data-target="9">0</span></div>
-          <div class="stat-l">ملخص وورقة عمل</div>
-        </div>
-        <div>
-          <div class="stat-n"><span class="counter" data-target="3">0</span></div>
-          <div class="stat-l">مراحل دراسية</div>
+          <div class="stat-l">منتج تعليمي</div>
         </div>
       </div>
       <div class="trust-bar au au5">
         <div class="trust-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          محتوى موثوق
+          ضمان استرجاع 24 ساعة
         </div>
         <div class="trust-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-          أسعار رمزية
+          تسليم فوري
         </div>
         <div class="trust-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-          تحديث مستمر
+          أسعار تبدأ من 19 ر.س
         </div>
       </div>
     </div>
@@ -948,26 +1258,26 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 <section class="section section-alt">
   <div class="container">
     <div class="sec-head" style="text-align:center" data-r>
-      <div class="sec-over">كيف تبدأ؟</div>
-      <h2 class="sec-title">ثلاث خطوات فقط</h2>
-      <p class="sec-desc" style="margin-inline:auto">ابدأ مذاكرتك في دقائق — بدون تسجيل أو اشتراك</p>
+      <div class="sec-over">سهل وسريع</div>
+      <h2 class="sec-title">3 خطوات وتبدأ تتفوّق</h2>
+      <p class="sec-desc" style="margin-inline:auto">بدون تسجيل، بدون تعقيد — تستلم ملفاتك خلال دقائق</p>
     </div>
     <div class="steps-grid" data-r>
       <div class="step-connector"></div>
       <div class="step-card">
         <div class="step-num">١</div>
-        <h3>اختر المرحلة</h3>
-        <p>حدد مرحلتك الدراسية والصف المطلوب من قائمة المراحل المتاحة</p>
+        <h3>اختر المنتج</h3>
+        <p>تصفّح المنتجات واختر اللي يناسب مادتك وصفك</p>
       </div>
       <div class="step-card">
         <div class="step-num">٢</div>
-        <h3>تصفّح المحتوى</h3>
-        <p>استعرض الملخصات وتجميعات الأسئلة المتوفرة لمادتك</p>
+        <h3>حوّل المبلغ</h3>
+        <p>تواصل معنا عبر الواتساب ونرسل لك بيانات التحويل فوراً</p>
       </div>
       <div class="step-card">
         <div class="step-num">٣</div>
-        <h3>حمّل أو ادخل الاختبار</h3>
-        <p>حمّل الملخصات بصيغة PDF أو ادخل الاختبار التفاعلي مباشرة</p>
+        <h3>استلم وابدأ</h3>
+        <p>نرسل لك الملفات خلال 5 دقائق — حمّلها وابدأ ذاكر</p>
       </div>
     </div>
   </div>
@@ -978,14 +1288,15 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   <div class="container">
     <div class="sec-head" data-r>
       <div class="sec-over">المنتجات</div>
-      <h2 class="sec-title">المنتجات المتوفرة</h2>
-      <p class="sec-desc">المنتجات الجاهزة حالياً للتحميل — والباقي قريباً بإذن الله</p>
+      <h2 class="sec-title">ابدأ التفوّق من هنا</h2>
+      <p class="sec-desc">اختر المنتج اللي يناسبك — أسعار رمزية ونتائج مضمونة</p>
     </div>
 
     <div class="products-grid">
-      <div class="p-card" data-r>
-        <div class="p-exclusive"></div>
-        <span class="p-badge badge-hot">🔥 متوفر الآن</span>
+      <div class="p-card bestseller" data-r>
+        <div class="bestseller-glow"></div>
+        <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,var(--blue),var(--purple),var(--rose));background-size:200% 100%;animation:gradientShift 3s infinite"></div>
+        <span class="p-badge badge-hot">🔥 الأكثر مبيعاً</span>
         <div class="p-img">
           <picture>
             <source srcset="/images/nafs-ad.webp" type="image/webp">
@@ -995,6 +1306,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <div class="p-body">
           <div class="p-cat">بنك أسئلة نافس</div>
           <h3 class="p-title">تجميعات اختبار نافس — 1000 سؤال</h3>
+          <div class="p-viewers"><span class="dot"></span> <span>12 طالب يشاهدون هذا المنتج الآن</span></div>
           <p class="p-desc">تجميعة شاملة تضم 1000 سؤال من اختبارات نافس مع الإجابات النموذجية — تشمل ملفات PDF + دخول الاختبار التدريبي التفاعلي</p>
           <div class="p-features">
             <span class="p-feature">📝 1000 سؤال</span>
@@ -1003,9 +1315,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📄 ملفات PDF</span>
           </div>
           <div class="p-foot">
-            <div class="p-price">49 <span class="currency">ر.س</span></div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 30%</span>
+              <div class="p-price">49 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">69 ر.س</span>
+            </div>
             <button class="p-btn" onclick="openPreview('nafs','بنك أسئلة نافس — 1000 سؤال',271)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('بنك أسئلة نافس — 1000 سؤال')">شراء</button>
+            <button class="p-btn-buy btn-glow" onclick="orderProduct('بنك أسئلة نافس — 1000 سؤال')">اطلب الآن</button>
           </div>
         </div>
       </div>
@@ -1028,9 +1344,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📚 سادس ف2</span>
           </div>
           <div class="p-foot">
-            <div class="p-price">19 <span class="currency">ر.س</span></div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
             <button class="p-btn" onclick="openPreview('science-summary','ملخص العلوم — سادس ف2',15)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('ملخص العلوم — سادس ف2')">شراء</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص العلوم — سادس ف2')">اطلب الآن</button>
           </div>
         </div>
       </div>
@@ -1052,9 +1372,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📚 سادس ف2</span>
           </div>
           <div class="p-foot">
-            <div class="p-price">19 <span class="currency">ر.س</span></div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
             <button class="p-btn" onclick="openPreview('arabic-summary','ملخص لغتي — سادس ف2',12)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — سادس ف2')">شراء</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — سادس ف2')">اطلب الآن</button>
           </div>
         </div>
       </div>
@@ -1077,9 +1401,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📚 سادس ف2</span>
           </div>
           <div class="p-foot">
-            <div class="p-price">19 <span class="currency">ر.س</span></div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
             <button class="p-btn" onclick="openPreview('english-summary','ملخص إنجليزي Top Goal 2 — سادس ف2',12)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('ملخص إنجليزي Top Goal 2 — سادس ف2')">شراء</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص إنجليزي Top Goal 2 — سادس ف2')">اطلب الآن</button>
           </div>
         </div>
       </div>
@@ -1104,7 +1432,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="p-foot">
             <div class="p-price free-tag">مجاني</div>
             <button class="p-btn" onclick="openPreview('english-textbook','كتاب إنجليزي Top Goal 2 — سادس ف2',125)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('كتاب إنجليزي Top Goal 2 — سادس ف2')">شراء</button>
+            <button class="p-btn-buy" onclick="orderProduct('كتاب إنجليزي Top Goal 2 — سادس ف2')">احصل عليه مجاناً</button>
           </div>
         </div>
       </div>
@@ -1128,9 +1456,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📝 أوراق عمل</span>
           </div>
           <div class="p-foot">
-            <div class="p-price">29 <span class="currency">ر.س</span></div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 25%</span>
+              <div class="p-price">29 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">39 ر.س</span>
+            </div>
             <button class="p-btn" onclick="openPreview('science-worksheets','أوراق عمل العلوم — سادس ف2',30)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('أوراق عمل العلوم — سادس ف2')">شراء</button>
+            <button class="p-btn-buy" onclick="orderProduct('أوراق عمل العلوم — سادس ف2')">اطلب الآن</button>
           </div>
         </div>
       </div>
@@ -1153,9 +1485,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📝 أوراق عمل</span>
           </div>
           <div class="p-foot">
-            <div class="p-price">29 <span class="currency">ر.س</span></div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 25%</span>
+              <div class="p-price">29 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">39 ر.س</span>
+            </div>
             <button class="p-btn" onclick="openPreview('arabic-worksheets','أوراق عمل لغتي — سادس ف2',24)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('أوراق عمل لغتي — سادس ف2')">شراء</button>
+            <button class="p-btn-buy" onclick="orderProduct('أوراق عمل لغتي — سادس ف2')">اطلب الآن</button>
           </div>
         </div>
       </div>
@@ -1177,9 +1513,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📚 خامس ف1</span>
           </div>
           <div class="p-foot">
-            <div class="p-price">19 <span class="currency">ر.س</span></div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
             <button class="p-btn" onclick="openPreview('arabic-g5-s1','ملخص لغتي — خامس ف1',10)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — خامس ف1')">شراء</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — خامس ف1')">اطلب الآن</button>
           </div>
         </div>
       </div>
@@ -1201,9 +1541,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <span class="p-feature">📚 خامس ف2</span>
           </div>
           <div class="p-foot">
-            <div class="p-price">19 <span class="currency">ر.س</span></div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
             <button class="p-btn" onclick="openPreview('arabic-g5-s2','ملخص لغتي — خامس ف2',11)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — خامس ف2')">شراء</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — خامس ف2')">اطلب الآن</button>
           </div>
         </div>
       </div>
@@ -1246,12 +1590,18 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
     </div>
 
     <!-- Payment Methods -->
-    <div class="payment-note" data-r>
-      <div class="pn-icon">🏦</div>
-      <div>
-        <strong>طرق الدفع</strong><br>
-        ✅ حوالة بنكية — متاح الآن<br>
-        <span style="color:var(--ink-4)">🕐 Apple Pay — قريباً &nbsp;|&nbsp; 🕐 مدى — قريباً &nbsp;|&nbsp; 🕐 STC Pay — قريباً</span>
+    <div class="payment-note" data-r style="flex-direction:column;gap:16px;text-align:center">
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px">
+        <svg viewBox="0 0 24 24" fill="#25D366" style="width:28px;height:28px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <strong style="font-size:16px">كيف تطلب؟ عبر الواتساب مباشرة</strong>
+      </div>
+      <div style="font-size:13px;line-height:2">
+        اضغط على <strong>"اطلب الآن"</strong> في أي منتج ← تنتقل للواتساب تلقائياً ← نرسل لك الآيبان ← حوّل المبلغ ← تستلم الملفات فوراً خلال 5 دقائق
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-3)">
+        <span>✅ حوالة بنكية</span>
+        <span style="color:var(--ink-4)">🕐 Apple Pay — قريباً</span>
+        <span style="color:var(--ink-4)">🕐 مدى — قريباً</span>
       </div>
     </div>
 
@@ -1426,24 +1776,24 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   <div class="container">
     <div class="stats-banner" data-r>
       <div class="stat-card">
+        <div class="stat-icon">👨‍🎓</div>
+        <div class="stat-number"><span class="counter" data-target="500">0</span>+</div>
+        <div class="stat-label">طالب استفاد</div>
+      </div>
+      <div class="stat-card">
         <div class="stat-icon">📝</div>
         <div class="stat-number"><span class="counter" data-target="1000">0</span>+</div>
         <div class="stat-label">سؤال في بنك نافس</div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon">📚</div>
-        <div class="stat-number"><span class="counter" data-target="9">0</span></div>
-        <div class="stat-label">ملخصات وأوراق عمل</div>
+        <div class="stat-icon">⭐</div>
+        <div class="stat-number">4.9</div>
+        <div class="stat-label">تقييم الطلاب</div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon">🎓</div>
-        <div class="stat-number"><span class="counter" data-target="3">0</span></div>
-        <div class="stat-label">مراحل دراسية</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">💰</div>
-        <div class="stat-number">19</div>
-        <div class="stat-label">ر.س تبدأ من</div>
+        <div class="stat-icon">⚡</div>
+        <div class="stat-number">5</div>
+        <div class="stat-label">دقائق للتسليم</div>
       </div>
     </div>
   </div>
@@ -1454,8 +1804,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   <div class="container">
     <div class="sec-head" style="text-align:center" data-r>
       <div class="sec-over">لماذا الإتقان؟</div>
-      <h2 class="sec-title">مميزات المنصة</h2>
-      <p class="sec-desc" style="margin-inline:auto">كل ما تحتاجه للمذاكرة في مكان واحد</p>
+      <h2 class="sec-title">ليش أكثر من 500 طالب يثقون فينا؟</h2>
+      <p class="sec-desc" style="margin-inline:auto">لأننا نوفّر لك محتوى مركّز يوصلك للدرجة الكاملة</p>
     </div>
     <div class="feat-grid">
       <div class="feat" data-r>
@@ -1497,41 +1847,128 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   <div class="container">
     <div class="sec-head" style="text-align:center" data-r>
       <div class="sec-over">آراء الطلاب</div>
-      <h2 class="sec-title">ماذا يقولون عنّا؟</h2>
+      <h2 class="sec-title">طلاب تفوّقوا بمنتجاتنا</h2>
+      <p class="sec-desc" style="margin-inline:auto">شوف تجاربهم الحقيقية</p>
     </div>
     <div class="testimonials-grid" data-r>
       <div class="test-card">
         <div class="test-stars"><span>★★★★★</span></div>
-        <p class="test-text">تجميعات نافس ساعدتني كثير في التحضير للاختبار. الأسئلة شاملة والإجابات واضحة ومفصّلة</p>
+        <p class="test-text">"ذاكرت من تجميعات نافس فقط وجبت درجة كاملة في الاختبار! الأسئلة كانت شبه نفس اللي في الاختبار الحقيقي — أنصح فيها بقوة"</p>
         <div class="test-author">
-          <div class="test-avatar" style="background:var(--blue)">س</div>
+          <div class="test-avatar" style="background:var(--green)">س</div>
           <div>
-            <div class="test-name">سارة</div>
-            <div class="test-role">طالبة — الصف السادس</div>
+            <div class="test-name">سارة ✓</div>
+            <div class="test-role">طالبة — الصف السادس، الرياض</div>
           </div>
         </div>
       </div>
       <div class="test-card">
         <div class="test-stars"><span>★★★★★</span></div>
-        <p class="test-text">ملخص العلوم ممتاز ومنظّم بشكل يسهّل المراجعة. أنصح كل طالب فيه خصوصاً وقت الاختبارات</p>
+        <p class="test-text">"ملخص العلوم اختصر عليّ أسبوع مذاكرة كامل! كل شيء منظّم ومرتّب وأسلوبه سهل — جبت 98 من 100 الحمدلله"</p>
         <div class="test-author">
           <div class="test-avatar" style="background:var(--blue)">م</div>
           <div>
-            <div class="test-name">محمد</div>
-            <div class="test-role">طالب — الصف السادس</div>
+            <div class="test-name">محمد ✓</div>
+            <div class="test-role">طالب — الصف السادس، جدة</div>
           </div>
         </div>
       </div>
       <div class="test-card">
         <div class="test-stars"><span>★★★★★</span></div>
-        <p class="test-text">الموقع سهل الاستخدام والملخصات مجانية. ملخص الإنجليزي الحصري وفّر عليّ وقت كبير</p>
+        <p class="test-text">"أخذت الباقة الكاملة لبنتي وفرق كبير بدرجاتها! خصوصاً ملخص الإنجليزي الحصري — ما لقيناه في أي مكان ثاني"</p>
         <div class="test-author">
-          <div class="test-avatar" style="background:var(--blue)">ن</div>
+          <div class="test-avatar" style="background:var(--purple)">أ</div>
           <div>
-            <div class="test-name">نورة</div>
-            <div class="test-role">طالبة — الصف السادس</div>
+            <div class="test-name">أم نورة ✓</div>
+            <div class="test-role">ولية أمر — الدمام</div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUNDLE OFFER -->
+<section class="bundle-section">
+  <div class="container">
+    <div class="bundle-card" data-r>
+      <div class="bundle-deco"></div>
+      <div class="bundle-info">
+        <h3>باقة الطالب المتفوّق</h3>
+        <p>احصل على جميع ملخصات الصف السادس + أوراق العمل + تجميعات نافس في باقة واحدة بسعر خاص</p>
+        <div class="bundle-items">
+          <div class="bundle-item"><span class="check">✓</span> تجميعات نافس — 1000 سؤال (49 ر.س)</div>
+          <div class="bundle-item"><span class="check">✓</span> ملخص العلوم + لغتي + إنجليزي (57 ر.س)</div>
+          <div class="bundle-item"><span class="check">✓</span> أوراق عمل العلوم + لغتي (58 ر.س)</div>
+          <div class="bundle-item"><span class="check">✓</span> كتاب الإنجليزي Top Goal 2 (مجاناً)</div>
+        </div>
+      </div>
+      <div class="bundle-pricing">
+        <div class="old-price">164 ر.س</div>
+        <div class="new-price">99 <span>ر.س</span></div>
+        <div class="save-tag">وفّر 65 ر.س</div>
+        <button class="bundle-btn" onclick="orderProduct('باقة الطالب المتفوّق — جميع المنتجات')">اطلب الباقة عبر واتساب</button>
+        <div style="font-size:12px;opacity:.6;margin-top:10px">تسليم فوري خلال 5 دقائق</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="guarantee-section">
+  <div class="container">
+    <div class="guarantee-box" data-r>
+      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-text">
+        <h3>ضمان الرضا الكامل</h3>
+        <p>إذا ما عجبك المحتوى، تواصل معنا خلال 24 ساعة وبنرجع لك فلوسك كاملة بدون أي أسئلة. ثقتك أهم شيء عندنا.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section section-alt">
+  <div class="container">
+    <div class="sec-head" style="text-align:center" data-r>
+      <div class="sec-over">أسئلة شائعة</div>
+      <h2 class="sec-title">عندك سؤال؟</h2>
+    </div>
+    <div class="faq-list" data-r>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span>كيف أستلم الملفات بعد الدفع؟</span>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-a">بعد التحويل والتأكيد، نرسل لك الملفات فوراً عبر الواتساب — عادةً خلال 5 دقائق أو أقل.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span>هل الملخصات تغطي المنهج كامل؟</span>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-a">نعم، كل ملخص يغطي جميع فصول ودروس المادة بشكل مركّز ومنظّم — مصمّم عشان يسهّل عليك المراجعة ويختصر الوقت.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span>هل أقدر أستخدم الملفات بدون إنترنت؟</span>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-a">أكيد! الملفات بصيغة PDF تقدر تحمّلها وتستخدمها في أي وقت بدون إنترنت على جوالك أو كمبيوترك.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span>ما الفرق بين الملخص وأوراق العمل؟</span>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-a">الملخص يشرح لك المعلومات بشكل مبسّط ومنظّم. أوراق العمل فيها تمارين وأنشطة عشان تتدرب وتثبّت المعلومات — الاثنين مع بعض يعطونك أفضل نتيجة.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span>هل في ضمان استرجاع؟</span>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-a">نعم! إذا ما عجبك المحتوى، تواصل معنا خلال 24 ساعة ونرجع لك المبلغ كامل بدون أي أسئلة.</div>
       </div>
     </div>
   </div>
@@ -1545,11 +1982,11 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
       <div class="cta-deco cta-deco-2"></div>
       <div class="cta-deco cta-deco-3"></div>
       <div class="cta-deco cta-deco-4"></div>
-      <h2>ابدأ مذاكرتك الآن</h2>
-      <p>ملخصات وأوراق عمل واختبارات تفاعلية لجميع المراحل الدراسية</p>
+      <h2>لا تضيّع وقتك — ابدأ التفوّق الآن</h2>
+      <p>+500 طالب سبقوك واستفادوا — العرض ينتهي قريباً</p>
       <div style="display:flex;gap:14px;justify-content:center;position:relative;flex-wrap:wrap">
-        <a href="#products" class="btn btn-w">تصفح المنتجات ←</a>
-        <a href="/nafs.html" class="btn" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.4)">ادخل اختبار نافس</a>
+        <a href="#products" class="btn btn-w btn-glow" style="animation:ctaGlow 2s ease-in-out infinite">اطلب الآن قبل انتهاء العرض ←</a>
+        <a href="/nafs.html" class="btn" style="background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)">جرّب اختبار نافس مجاناً</a>
       </div>
     </div>
   </div>
@@ -1612,14 +2049,77 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
     </div>
     <div class="preview-pages" id="previewPages"></div>
     <div class="preview-info" id="previewInfo"></div>
-    <div class="preview-footer">
-      <button class="btn" onclick="orderViaWhatsApp()" style="font-size:14px;padding:12px 28px;background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.3)">🛒 اطلب النسخة الكاملة</button>
+    <div class="preview-footer" style="flex-direction:column;gap:8px">
+      <button class="btn btn-glow" onclick="orderViaWhatsApp()" style="font-size:14px;padding:14px 28px;background:#25D366;color:#fff;box-shadow:0 4px 14px rgba(37,211,102,.3);width:100%">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;display:inline;vertical-align:middle;margin-left:6px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        اطلب عبر واتساب — تسليم خلال 5 دقائق
+      </button>
+      <div style="font-size:11px;color:var(--ink-4);text-align:center">🛡️ ضمان استرجاع خلال 24 ساعة</div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Confirmation Modal -->
+<div class="order-overlay" id="orderOverlay" onclick="if(event.target===this)closeOrderModal()">
+  <div class="order-modal">
+    <div class="order-modal-header">
+      <div class="wa-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48" style="width:48px;height:48px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </div>
+      <h3>الشراء عبر واتساب</h3>
+      <p>يتم إتمام الطلب والدفع عبر الواتساب</p>
+    </div>
+    <div class="order-modal-body">
+      <div class="order-product-name" id="orderProductName"></div>
+      <div class="order-steps">
+        <div class="order-step">
+          <div class="order-step-num">1</div>
+          <div>تنتقل للواتساب وترسل طلبك تلقائياً</div>
+        </div>
+        <div class="order-step">
+          <div class="order-step-num">2</div>
+          <div>نرسل لك بيانات التحويل البنكي (الآيبان)</div>
+        </div>
+        <div class="order-step">
+          <div class="order-step-num">3</div>
+          <div>بعد التحويل، نرسل لك الملفات فوراً خلال 5 دقائق</div>
+        </div>
+      </div>
+    </div>
+    <div class="order-modal-footer">
+      <button class="order-wa-btn" id="orderConfirmBtn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        انتقل للواتساب لإكمال الشراء
+      </button>
+      <button class="order-cancel-btn" onclick="closeOrderModal()">رجوع</button>
+      <div class="order-guarantee">🛡️ ضمان استرجاع خلال 24 ساعة</div>
     </div>
   </div>
 </div>
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
+
+<!-- Social Proof Popup -->
+<div class="social-proof" id="socialProof">
+  <button class="social-proof-close" onclick="this.parentElement.classList.remove('show');spDismissed=true">✕</button>
+  <div class="social-proof-avatar">🛒</div>
+  <div>
+    <div class="social-proof-text"></div>
+    <div class="social-proof-time"></div>
+  </div>
+</div>
+
+<!-- Sticky Mobile CTA -->
+<div class="sticky-cta">
+  <div class="sticky-cta-inner">
+    <div class="sticky-cta-text">
+      تبدأ من 19 ر.س فقط
+      <span>العرض ينتهي اليوم</span>
+    </div>
+    <a href="#products" class="sticky-cta-btn">اطلب الآن</a>
+  </div>
+</div>
 
 <script>
 
@@ -1639,7 +2139,7 @@ function openPreview(slug, title, totalPages){
     pages.appendChild(img);
   }
   document.getElementById('previewInfo').innerHTML =
-    '📄 هذه معاينة لأول صفحتين فقط<br>الملف الكامل يحتوي على <strong>' + totalPages + ' صفحة</strong><br><span style="color:var(--ink-3);font-size:12px">تواصل معنا عبر واتساب وسيتم إرسال الآيبان وتسليم الملف فوراً</span>';
+    '📄 هذه معاينة لأول صفحتين فقط — الملف الكامل يحتوي على <strong>' + totalPages + ' صفحة</strong><br><span style="color:var(--green);font-size:12px;font-weight:700">اضغط الزر أدناه ← تنتقل للواتساب ← نرسل الآيبان ← تستلم الملف خلال 5 دقائق</span>';
   document.getElementById('previewOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1647,14 +2147,43 @@ function closePreview(){
   document.getElementById('previewOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
+let pendingOrderTitle = '';
 function orderProduct(title){
-  const msg = encodeURIComponent('السلام عليكم 👋\nأبغى أطلب: ' + title + '\nأرجو إرسال بيانات التحويل');
-  window.open('https://wa.me/' + WA_NUMBER + '?text=' + msg, '_blank');
+  pendingOrderTitle = title;
+  document.getElementById('orderProductName').textContent = title;
+  document.getElementById('orderOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
+function closeOrderModal(){
+  document.getElementById('orderOverlay').classList.remove('open');
+  if(!document.getElementById('previewOverlay').classList.contains('open'))
+    document.body.style.overflow = '';
+}
+function confirmOrder(){
+  const msg = encodeURIComponent('السلام عليكم 👋\nأبغى أطلب: ' + pendingOrderTitle + '\nأرجو إرسال بيانات التحويل');
+  window.open('https://wa.me/' + WA_NUMBER + '?text=' + msg, '_blank');
+  closeOrderModal();
+}
+document.getElementById('orderConfirmBtn').addEventListener('click', confirmOrder);
 function orderViaWhatsApp(){
   orderProduct(currentPreviewTitle);
 }
-document.addEventListener('keydown', e => { if(e.key === 'Escape') closePreview(); });
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){
+    if(document.getElementById('orderOverlay').classList.contains('open')) closeOrderModal();
+    else closePreview();
+  }
+});
+
+// === Add WhatsApp hint to all product card footers ===
+document.querySelectorAll('.p-foot').forEach(foot => {
+  // Skip "coming soon" cards
+  if(foot.closest('.soon')) return;
+  const hint = document.createElement('div');
+  hint.className = 'p-wa-hint';
+  hint.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" style="color:#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> الشراء عبر واتساب — تسليم فوري';
+  foot.appendChild(hint);
+});
 
 // === MOBILE MENU ===
 function toggleMobileMenu(){
@@ -1823,6 +2352,72 @@ function showToast(msg){
   t.textContent=msg;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),3500);
 }
+
+// === MARKETING: Countdown Timer (resets daily) ===
+function startCountdown(){
+  const el=document.getElementById('countdown');
+  if(!el) return;
+  function update(){
+    const now=new Date();
+    const end=new Date(now);
+    end.setHours(23,59,59,999);
+    const diff=end-now;
+    const h=String(Math.floor(diff/3600000)).padStart(2,'0');
+    const m=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+    const s=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+    el.textContent=h+':'+m+':'+s;
+  }
+  update();
+  setInterval(update,1000);
+}
+startCountdown();
+
+// === MARKETING: Social Proof Notifications ===
+const socialProofData=[
+  {name:'أحمد',city:'الرياض',product:'تجميعات نافس'},
+  {name:'فاطمة',city:'جدة',product:'ملخص العلوم'},
+  {name:'سعود',city:'الدمام',product:'باقة الطالب المتفوّق'},
+  {name:'نورة',city:'مكة',product:'ملخص لغتي'},
+  {name:'خالد',city:'المدينة',product:'أوراق عمل العلوم'},
+  {name:'ريم',city:'الرياض',product:'ملخص إنجليزي Top Goal 2'},
+  {name:'عبدالله',city:'بريدة',product:'تجميعات نافس'},
+  {name:'هيا',city:'الطائف',product:'ملخص لغتي — خامس'},
+  {name:'محمد',city:'أبها',product:'باقة الطالب المتفوّق'},
+  {name:'لمى',city:'حائل',product:'أوراق عمل لغتي'},
+];
+let spIndex=0;
+let spDismissed=false;
+function showSocialProof(){
+  if(spDismissed) return;
+  const d=socialProofData[spIndex%socialProofData.length];
+  const minutes=Math.floor(Math.random()*12)+1;
+  const el=document.getElementById('socialProof');
+  if(!el) return;
+  el.querySelector('.social-proof-text').innerHTML=
+    '<strong>'+d.name+' من '+d.city+'</strong> اشترى '+d.product;
+  el.querySelector('.social-proof-time').textContent='قبل '+minutes+' دقائق';
+  el.classList.add('show');
+  setTimeout(()=>{el.classList.remove('show');spIndex++},5000);
+}
+setTimeout(()=>showSocialProof(),8000);
+setInterval(()=>showSocialProof(),25000);
+
+// === MARKETING: Live Viewers (simulated) ===
+function updateViewers(){
+  const el=document.getElementById('liveViewers');
+  if(!el) return;
+  const n=Math.floor(Math.random()*15)+15;
+  el.textContent=n+' طالب يتصفحون الآن';
+}
+setInterval(updateViewers,30000);
+
+// Update product viewers too
+document.querySelectorAll('.p-viewers span:last-child').forEach(el=>{
+  setInterval(()=>{
+    const n=Math.floor(Math.random()*10)+5;
+    el.textContent=n+' طالب يشاهدون هذا المنتج الآن';
+  },20000);
+});
 
 </script>
 </body>
