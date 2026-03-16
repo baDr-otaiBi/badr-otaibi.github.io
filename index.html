@@ -190,16 +190,33 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .nav-links.show{
   display:flex!important;flex-direction:column;
   position:fixed;top:0;right:0;bottom:0;width:280px;
-  background:var(--bg);border-left:2px solid var(--ink);
-  padding:88px 24px 24px;z-index:101;gap:4px;
+  background:var(--bg);border-left:2px solid var(--border);
+  padding:88px 24px 24px;z-index:9999;gap:4px;
   animation:slideIn .3s var(--ease);
-  box-shadow:-8px 0 32px rgba(0,0,0,.12);
+  box-shadow:-8px 0 32px rgba(0,0,0,.2);
 }
+/* Separate mobile nav outside sticky nav to avoid backdrop-filter stacking context */
+.mobile-nav{
+  display:none;position:fixed;top:0;right:0;bottom:0;width:280px;
+  background:var(--bg);border-left:2px solid var(--border);
+  padding:88px 24px 24px;z-index:9999;
+  box-shadow:-8px 0 32px rgba(0,0,0,.2);
+  transform:translateX(100%);
+  transition:transform .3s var(--ease);
+}
+.mobile-nav.show{display:block;transform:translateX(0)}
+.mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:4px}
+.mobile-nav-links a{
+  display:block;text-decoration:none;color:var(--ink);font-size:16px;font-weight:700;
+  padding:14px 20px;border-radius:12px;transition:.2s var(--ease);
+  font-family:var(--font);
+}
+.mobile-nav-links a:hover,.mobile-nav-links a:active{color:var(--blue);background:var(--blue-soft)}
 @keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
 .nav-backdrop{
-  display:none;position:fixed;inset:0;z-index:100;
+  display:none;position:fixed;inset:0;z-index:9998;
   background:rgba(0,0,0,.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  animation:fadeIn .2s var(--ease);
+  transition:opacity .2s var(--ease);
 }
 .nav-backdrop.show{display:block}
 
@@ -878,6 +895,57 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   background:var(--green);animation:pulse 1.5s infinite;
 }
 
+/* ===== GAMES SECTION ===== */
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.game-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;
+  transition:.4s var(--ease);position:relative;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);
+  text-decoration:none;color:var(--ink);display:block;
+}
+[data-theme="dark"] .game-card{background:var(--white);border-color:var(--border)}
+.game-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.08)}
+.game-thumb{
+  height:180px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#1a1a2e,#16213e);
+  position:relative;overflow:hidden;
+}
+.game-thumb .pacman-preview{
+  width:60px;height:60px;background:#fbbf24;border-radius:50%;
+  position:relative;
+  clip-path:polygon(100% 50%,40% 0%,0% 0%,0% 100%,40% 100%);
+  animation:pacChomp .6s ease infinite alternate;
+}
+@keyframes pacChomp{
+  from{clip-path:polygon(100% 50%,30% 5%,0% 0%,0% 100%,30% 95%)}
+  to{clip-path:polygon(100% 50%,50% 40%,0% 0%,0% 100%,50% 60%)}
+}
+.game-thumb .preview-letters{
+  position:absolute;display:flex;gap:16px;
+  font-size:20px;font-weight:800;opacity:.6;
+}
+.game-thumb .preview-letters span:nth-child(1){color:#fb7185}
+.game-thumb .preview-letters span:nth-child(2){color:#60a5fa}
+.game-thumb .preview-letters span:nth-child(3){color:#34d399}
+.game-thumb .preview-letters span:nth-child(4){color:#fbbf24}
+.game-card-body{padding:20px}
+.game-card-body h3{font-family:var(--font);font-size:18px;font-weight:800;margin-bottom:6px}
+.game-card-body p{font-size:13px;color:var(--ink-2);line-height:1.8;margin-bottom:14px}
+.game-tag{
+  display:inline-block;padding:4px 12px;border-radius:100px;
+  font-size:11px;font-weight:700;font-family:var(--font);
+  background:var(--purple-soft);color:var(--purple);border:1px solid var(--purple);
+}
+.game-play-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 20px;border-radius:100px;
+  background:var(--blue);color:#fff;font-family:var(--font);
+  font-size:13px;font-weight:700;border:none;cursor:pointer;
+  float:left;transition:.2s;
+}
+.game-play-btn:hover{opacity:.85;transform:scale(1.05)}
+
 /* ===== MARKETING: Guarantee Section ===== */
 .guarantee-section{
   padding:60px 0;
@@ -1288,6 +1356,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
       <li><a href="#stages">المراحل</a></li>
       <li><a href="#products">المنتجات</a></li>
       <li><a href="#features">المميزات</a></li>
+      <li><a href="#games">الألعاب</a></li>
     </ul>
     <div class="nav-actions">
       <button class="theme-toggle" id="themeToggle" title="تبديل الوضع">
@@ -1300,6 +1369,16 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
     </div>
   </div>
 </nav>
+<!-- Mobile Menu (outside nav to avoid stacking context from backdrop-filter) -->
+<div class="mobile-nav" id="mobileNav">
+  <ul class="mobile-nav-links">
+    <li><a href="#">الرئيسية</a></li>
+    <li><a href="#stages">المراحل</a></li>
+    <li><a href="#products">المنتجات</a></li>
+    <li><a href="#features">المميزات</a></li>
+    <li><a href="#games">الألعاب</a></li>
+  </ul>
+</div>
 <div class="nav-backdrop" id="navBackdrop" onclick="toggleMobileMenu()"></div>
 
 <!-- HERO -->
@@ -2080,6 +2159,32 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   </div>
 </section>
 
+<!-- GAMES -->
+<section class="section section-alt" id="games">
+  <div class="container">
+    <div class="sec-head" data-r>
+      <div class="sec-over">الألعاب التعليمية</div>
+      <h2 class="sec-title">تعلّم وأنت تلعب 🎮</h2>
+      <p class="sec-desc">ألعاب تفاعلية ممتعة تساعد الأطفال على تعلّم الحروف والأرقام بطريقة مسلّية</p>
+    </div>
+    <div class="games-grid" data-r>
+      <a href="/games/pacman-arabic.html" class="game-card">
+        <div class="game-thumb">
+          <div class="preview-letters" style="top:30px;right:30px"><span>أ</span><span>ب</span><span>ت</span><span>ث</span></div>
+          <div class="pacman-preview"></div>
+          <div class="preview-letters" style="bottom:30px;left:30px"><span>ج</span><span>ح</span><span>خ</span><span>د</span></div>
+        </div>
+        <div class="game-card-body">
+          <h3>باك مان الحروف العربية</h3>
+          <p>ساعد باك مان في أكل جميع الحروف الهجائية! عند أكل كل حرف يظهر على الشاشة مع نطقه بالصوت.</p>
+          <span class="game-tag">تعلّم الحروف</span>
+          <span class="game-play-btn">ابدأ اللعب ←</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="section">
   <div class="container">
@@ -2123,6 +2228,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <li><a href="#products">ملخص العلوم — سادس ف2</a></li>
           <li><a href="#products">ملخص لغتي — سادس ف2</a></li>
           <li><a href="#products">ملخص إنجليزي Top Goal 2 — سادس ف2</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>الألعاب التعليمية</h4>
+        <ul>
+          <li><a href="/games/pacman-arabic.html">باك مان الحروف العربية</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -2293,10 +2404,10 @@ document.querySelectorAll('.p-foot').forEach(foot => {
 
 // === MOBILE MENU ===
 function toggleMobileMenu(){
-  const links = document.querySelector('.nav-links');
+  const mobileNav = document.getElementById('mobileNav');
   const backdrop = document.getElementById('navBackdrop');
-  const isOpen = links.classList.contains('show');
-  links.classList.toggle('show');
+  const isOpen = mobileNav.classList.contains('show');
+  mobileNav.classList.toggle('show');
   backdrop.classList.toggle('show');
   document.body.style.overflow = isOpen ? '' : 'hidden';
 }
@@ -2401,7 +2512,7 @@ const counterObs = new IntersectionObserver(e => {
 document.querySelectorAll('.hero-stats, .stats-banner').forEach(el => counterObs.observe(el));
 
 // === ACTIVE NAV SECTION TRACKING ===
-const navSections = ['products','stages','features'];
+const navSections = ['products','stages','features','games'];
 const navObs = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting){
@@ -2440,7 +2551,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
       window.scrollTo({top:y,behavior:'smooth'});
     }
     // Close mobile menu
-    document.querySelector('.nav-links')?.classList.remove('show');
+    document.getElementById('mobileNav')?.classList.remove('show');
     document.getElementById('navBackdrop')?.classList.remove('show');
     document.body.style.overflow='';
   });
