@@ -1081,28 +1081,42 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 }
 
 .book-card{
-  background:var(--white);border:2px solid var(--purple);
+  background:var(--white);border:2px solid var(--orange);
   border-radius:var(--radius-xl);overflow:hidden;
   position:relative;transition:.4s var(--ease);
-  box-shadow:0 4px 20px rgba(124,58,237,.08);
+  box-shadow:0 4px 20px rgba(234,88,12,.1),0 0 0 1px rgba(234,88,12,.05);
 }
-[data-theme="dark"] .book-card{background:var(--white);border-color:var(--purple)}
-.book-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(124,58,237,.15)}
+[data-theme="dark"] .book-card{background:var(--white);border-color:var(--orange)}
+.book-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(234,88,12,.18)}
 .book-card-inner{
   display:grid;grid-template-columns:1fr 1.2fr;gap:0;
 }
+/* Animated glow border */
+.book-card::before{
+  content:'';position:absolute;inset:-2px;z-index:-1;border-radius:var(--radius-xl);
+  background:linear-gradient(135deg,#f59e0b,#ea580c,#f59e0b,#b45309);
+  background-size:300% 300%;animation:gradientShift 4s ease infinite;
+  opacity:.6;filter:blur(8px);
+}
 .book-cover{
-  position:relative;overflow:hidden;min-height:320px;
-  background:linear-gradient(135deg,#4c1d95,#7c3aed,#a78bfa);
-  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;min-height:360px;
+  background:linear-gradient(135deg,#78350f,#b45309,#f59e0b,#fcd34d);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;
 }
 .book-cover-emoji{
-  font-size:100px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.2));
+  font-size:110px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.25));
   animation:float 5s ease-in-out infinite;
+}
+.book-cover-pages{
+  background:rgba(255,255,255,.2);backdrop-filter:blur(8px);
+  color:#fff;padding:8px 20px;border-radius:100px;
+  font-size:14px;font-weight:700;font-family:var(--font);
+  border:1px solid rgba(255,255,255,.25);
+  letter-spacing:.5px;
 }
 .book-cover-pattern{
   position:absolute;inset:0;
-  background-image:radial-gradient(rgba(255,255,255,.08) 1.5px,transparent 1.5px);
+  background-image:radial-gradient(rgba(255,255,255,.1) 1.5px,transparent 1.5px);
   background-size:20px 20px;
 }
 .book-cover-badge{
@@ -1111,6 +1125,11 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   color:#fff;padding:6px 16px;border-radius:100px;
   font-size:12px;font-weight:700;font-family:var(--font);
   border:1px solid rgba(255,255,255,.2);
+}
+.book-cover-flag{
+  position:absolute;top:16px;left:16px;font-size:36px;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.2));
+  animation:float 6s ease-in-out infinite reverse;
 }
 .book-info{padding:32px 28px;display:flex;flex-direction:column;justify-content:center}
 .book-cat{
@@ -1126,6 +1145,16 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   color:var(--ink);margin-bottom:10px;line-height:1.5;letter-spacing:-0.01em;
 }
 .book-desc{font-size:14px;color:var(--ink-2);line-height:2;margin-bottom:18px}
+.book-highlights{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px;
+}
+.book-highlight{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:12px;
+  background:var(--orange-soft);border:1px solid rgba(234,88,12,.12);
+  font-size:13px;font-weight:600;color:var(--ink);font-family:var(--font);
+}
+.book-highlight-icon{font-size:18px;flex-shrink:0}
 .book-features{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
 .book-feature{
   display:inline-flex;align-items:center;gap:4px;
@@ -1133,36 +1162,68 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   background:var(--purple-soft);color:var(--purple);
   border:1px solid rgba(124,58,237,.2);font-family:var(--font);
 }
+.book-testimonial{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:14px 16px;border-radius:14px;
+  background:var(--bg-alt);border:1px solid var(--border);
+  margin-bottom:18px;font-size:13px;line-height:1.8;color:var(--ink-2);
+}
+.book-testimonial-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--orange),#b45309);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:16px;flex-shrink:0;
+}
+.book-testimonial-text{flex:1}
+.book-testimonial-text strong{display:block;color:var(--ink);font-size:12px;margin-bottom:2px}
 .book-foot{
   display:flex;align-items:center;justify-content:space-between;
   padding-top:18px;border-top:1px solid var(--border);
   flex-wrap:wrap;gap:10px;
 }
-.book-price{font-family:var(--font);font-weight:900;font-size:24px;color:var(--ink)}
+.book-price{font-family:var(--font);font-weight:900;font-size:28px;color:var(--orange)}
 .book-price .currency{font-size:14px;font-weight:600;color:var(--ink-3)}
+.book-price-old{font-size:14px;color:var(--ink-4);text-decoration:line-through;font-family:var(--font);font-weight:600}
 .book-btn{
-  padding:12px 24px;border-radius:12px;
-  font-family:var(--font);font-size:14px;font-weight:700;
+  padding:14px 28px;border-radius:14px;
+  font-family:var(--font);font-size:15px;font-weight:700;
   border:none;cursor:pointer;
-  background:linear-gradient(135deg,var(--purple),var(--blue));
+  background:linear-gradient(135deg,var(--orange),#b45309);
   color:#fff;transition:.3s var(--ease);
-  box-shadow:0 4px 14px rgba(124,58,237,.25);
+  box-shadow:0 4px 14px rgba(234,88,12,.3);
+  position:relative;overflow:hidden;
 }
-.book-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,.3)}
+.book-btn::after{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  animation:btnShine 3s ease-in-out infinite;
+}
+@keyframes btnShine{0%{left:-100%}50%{left:100%}100%{left:100%}}
+.book-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(234,88,12,.35)}
 .book-btn-preview{
-  padding:12px 24px;border-radius:12px;
+  padding:14px 24px;border-radius:14px;
   font-family:var(--font);font-size:14px;font-weight:700;
-  border:1.5px solid var(--purple);cursor:pointer;
-  background:transparent;color:var(--purple);
+  border:1.5px solid var(--orange);cursor:pointer;
+  background:transparent;color:var(--orange);
   transition:.3s var(--ease);
 }
-.book-btn-preview:hover{background:var(--purple-soft)}
+.book-btn-preview:hover{background:var(--orange-soft)}
+.book-urgency{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 16px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(234,88,12,.08),rgba(245,158,11,.08));
+  border:1px solid rgba(234,88,12,.15);
+  font-size:12px;font-weight:600;color:var(--orange);
+  font-family:var(--font);margin-top:12px;
+}
 
 @media(max-width:768px){
   .book-card-inner{grid-template-columns:1fr}
-  .book-cover{min-height:200px}
+  .book-cover{min-height:220px}
   .book-info{padding:24px 20px}
   .book-title{font-size:18px}
+  .book-highlights{grid-template-columns:1fr}
+  .book-price{font-size:24px}
 }
 
 /* ===== RESPONSIVE ===== */
@@ -1604,31 +1665,56 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 
       <div class="book-card" data-r>
         <div class="book-card-inner">
-          <div class="book-cover" style="background:linear-gradient(135deg,#b45309,#f59e0b,#fcd34d)">
+          <div class="book-cover" style="background:linear-gradient(135deg,#78350f,#b45309,#f59e0b,#fcd34d)">
             <div class="book-cover-pattern"></div>
             <div class="book-cover-badge">تأليف المنصة</div>
+            <div class="book-cover-flag">🇯🇵</div>
             <div class="book-cover-emoji">✖️</div>
+            <div class="book-cover-pages">100 صفحة تفاعلية</div>
           </div>
           <div class="book-info">
             <div class="book-cat" style="color:var(--orange);background:var(--orange-soft);border-color:var(--orange)">كتب المنصة — حصري</div>
             <h3 class="book-title">الطريقة اليابانية لحفظ جدول الضرب — بتقنية تقاطع العصي</h3>
-            <p class="book-desc">كتاب من تأليف فريق الإتقان يشرح الطريقة اليابانية الشهيرة لحفظ جدول الضرب باستخدام تقنية تقاطع العصي — طريقة بصرية سهلة وممتعة تساعد الطالب على فهم الضرب بدلاً من الحفظ الأعمى</p>
+            <p class="book-desc">كتاب تفاعلي من 100 صفحة يشرح الطريقة اليابانية الشهيرة لحفظ جدول الضرب باستخدام تقنية تقاطع العصي — طريقة بصرية سهلة وممتعة تخلّي طفلك يفهم الضرب ويحبّه بدلاً من الحفظ الأعمى</p>
+
+            <div class="book-highlights">
+              <div class="book-highlight"><span class="book-highlight-icon">📖</span> 100 صفحة تفاعلية</div>
+              <div class="book-highlight"><span class="book-highlight-icon">🎨</span> رسومات توضيحية ملوّنة</div>
+              <div class="book-highlight"><span class="book-highlight-icon">🧩</span> تمارين تطبيقية</div>
+              <div class="book-highlight"><span class="book-highlight-icon">🇯🇵</span> تقنية يابانية مُثبتة</div>
+              <div class="book-highlight"><span class="book-highlight-icon">🧠</span> فهم بدلاً من الحفظ</div>
+              <div class="book-highlight"><span class="book-highlight-icon">👶</span> مناسب من الصف الثاني</div>
+            </div>
+
             <div class="book-features">
               <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">📕 تأليف المنصة</span>
-              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">📄 PDF</span>
-              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">🧮 جدول الضرب</span>
+              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">📄 PDF تفاعلي</span>
+              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">🧮 جدول الضرب كامل</span>
               <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">🎯 تقنية تقاطع العصي</span>
-              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">🇯🇵 الطريقة اليابانية</span>
+              <span class="book-feature" style="background:var(--green-soft);color:var(--green);border-color:rgba(5,150,105,.2)">✅ نتائج من أول أسبوع</span>
             </div>
+
+            <div class="book-testimonial">
+              <div class="book-testimonial-avatar">👩</div>
+              <div class="book-testimonial-text">
+                <strong>أم عبدالله — الرياض</strong>
+                "ولدي كان يكره جدول الضرب، بعد الكتاب هذا صار يحلّ لحاله ويستمتع! الطريقة اليابانية غيّرت كل شيء"
+              </div>
+            </div>
+
             <div class="book-foot">
               <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-                <span class="p-discount-badge" style="background:var(--orange)">متوفر الآن</span>
+                <span class="p-discount-badge" style="background:linear-gradient(135deg,var(--orange),#b45309);font-size:13px;padding:6px 14px">خصم 40%</span>
                 <div class="book-price">59 <span class="currency">ر.س</span></div>
+                <span class="book-price-old">99 ر.س</span>
               </div>
               <div style="display:flex;gap:8px">
-                <button class="book-btn-preview" style="border-color:var(--orange);color:var(--orange)" onclick="openPreview('book-japanese-multiply','الطريقة اليابانية لحفظ جدول الضرب',20)">معاينة</button>
-                <button class="book-btn" style="background:linear-gradient(135deg,var(--orange),#b45309)" onclick="orderProduct('كتاب الطريقة اليابانية لحفظ جدول الضرب — تأليف الإتقان')">اطلب الآن</button>
+                <button class="book-btn-preview" onclick="openPreview('book-japanese-multiply','الطريقة اليابانية لحفظ جدول الضرب',20)">معاينة</button>
+                <button class="book-btn" onclick="orderProduct('كتاب الطريقة اليابانية لحفظ جدول الضرب — 100 صفحة تفاعلية — تأليف الإتقان')">اطلب الآن</button>
               </div>
+            </div>
+            <div class="book-urgency">
+              <span>🔥</span> الطلب عالي على هذا الكتاب — احجز نسختك الآن
             </div>
           </div>
         </div>
