@@ -205,9 +205,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 
 /* ===== HERO ===== */
 .hero{
-  padding:100px 0 70px;
+  padding:72px 0 48px;
   position:relative;overflow:hidden;
-  min-height:90vh;display:flex;align-items:center;
+  min-height:auto;display:flex;align-items:center;
   border-bottom:1px solid var(--border);
   background:radial-gradient(ellipse at 50% 0%,var(--bg-alt) 0%,var(--bg) 70%);
 }
@@ -232,16 +232,16 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
   background:var(--white);color:var(--ink);
-  padding:10px 24px;border-radius:100px;font-size:13px;font-weight:600;
-  margin-bottom:28px;border:1px solid var(--border);
+  padding:8px 20px;border-radius:100px;font-size:13px;font-weight:600;
+  margin-bottom:20px;border:1px solid var(--border);
   font-family:var(--font);
   box-shadow:0 2px 12px rgba(0,0,0,.05);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
 }
 
 .hero h1{
-  font-family:var(--font);font-size:52px;font-weight:900;
-  line-height:1.3;margin-bottom:24px;color:var(--ink);letter-spacing:-0.03em;
+  font-family:var(--font);font-size:46px;font-weight:900;
+  line-height:1.25;margin-bottom:18px;color:var(--ink);letter-spacing:-0.03em;
 }
 .hero h1 .highlight{
   position:relative;display:inline-block;
@@ -298,10 +298,10 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .announce-btn:hover{background:var(--purple);box-shadow:0 4px 14px rgba(124,58,237,.25)}
 
 .hero-desc{
-  font-size:17px;color:var(--ink-2);line-height:2;
-  margin-bottom:40px;max-width:560px;margin-inline:auto;font-weight:400;
+  font-size:16px;color:var(--ink-2);line-height:1.9;
+  margin-bottom:28px;max-width:540px;margin-inline:auto;font-weight:400;
 }
-.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:52px}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
 .btn{
   display:inline-flex;align-items:center;gap:8px;
   padding:14px 32px;border-radius:14px;
@@ -318,7 +318,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .btn-out:hover{border-color:var(--ink-4);box-shadow:0 6px 20px rgba(0,0,0,.08)}
 [data-theme="dark"] .btn-out{background:var(--white);border-color:var(--border)}
 
-.hero-stats{display:flex;justify-content:center;gap:52px;flex-wrap:wrap}
+.hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
 .hero-stats > div{
   padding:16px 24px;border-radius:16px;
   background:var(--white);border:1px solid var(--border);
@@ -344,7 +344,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .trust-item svg{width:20px;height:20px;color:var(--blue);flex-shrink:0}
 
 /* ===== SECTION ===== */
-.section{padding:80px 0}
+.section{padding:64px 0}
 .section-alt{
   background-color:var(--bg-alt);
   border-top:1px solid var(--border);
@@ -1178,8 +1178,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 @media(max-width:768px){
   .nav-links{display:none}
   .hamburger{display:block}
-  .hero{padding:56px 0 40px;min-height:auto}
-  .hero h1{font-size:30px}
+  .hero{padding:48px 0 32px;min-height:auto}
+  .hero h1{font-size:28px}
   .hero-stats{gap:16px}
   .hero-stats > div{padding:12px 16px}
   .stat-n{font-size:22px}
@@ -1266,24 +1266,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         <a href="#products" class="btn btn-green btn-glow">اطلب الآن — قبل انتهاء العرض</a>
         <a href="#stages" class="btn btn-out">تصفح المراحل</a>
       </div>
-      <div class="live-activity au au4">
-        <span class="live-dot"></span>
-        <span id="liveViewers">23 طالب يتصفحون الآن</span>
-      </div>
-
-      <!-- Announcement Banner -->
-      <div class="hero-announce au au5">
-        <div class="announce-glow"></div>
-        <div class="announce-content">
-          <div class="announce-icon">🎉</div>
-          <div class="announce-text">
-            <div class="announce-label">عرض لفترة محدودة</div>
-            <p>خصم يصل إلى <strong>35%</strong> على جميع المنتجات — <strong>عرض لفترة محدودة</strong></p>
-          </div>
-          <a href="#products" class="announce-btn">استفد الآن</a>
-        </div>
-      </div>
-
       <div class="hero-stats au au5">
         <div>
           <div class="stat-n"><span class="counter" data-target="500">0</span><span>+</span></div>
@@ -1297,49 +1279,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="stat-n"><span class="counter" data-target="9">0</span></div>
           <div class="stat-l">منتج تعليمي</div>
         </div>
-      </div>
-      <div class="trust-bar au au5">
-        <div class="trust-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          ضمان استرجاع 24 ساعة
-        </div>
-        <div class="trust-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-          تسليم فوري
-        </div>
-        <div class="trust-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-          أسعار تبدأ من 19 ر.س
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="section section-alt">
-  <div class="container">
-    <div class="sec-head" style="text-align:center" data-r>
-      <div class="sec-over">سهل وسريع</div>
-      <h2 class="sec-title">3 خطوات وتبدأ تتفوّق</h2>
-      <p class="sec-desc" style="margin-inline:auto">بدون تسجيل، بدون تعقيد — تستلم ملفاتك خلال دقائق</p>
-    </div>
-    <div class="steps-grid" data-r>
-      <div class="step-connector"></div>
-      <div class="step-card">
-        <div class="step-num">١</div>
-        <h3>اختر المنتج</h3>
-        <p>تصفّح المنتجات واختر اللي يناسب مادتك وصفك</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">٢</div>
-        <h3>حوّل المبلغ</h3>
-        <p>تواصل معنا عبر الواتساب ونرسل لك بيانات التحويل فوراً</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">٣</div>
-        <h3>استلم وابدأ</h3>
-        <p>نرسل لك الملفات خلال 5 دقائق — حمّلها وابدأ ذاكر</p>
       </div>
     </div>
   </div>
@@ -1684,7 +1623,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
             <div class="book-foot">
               <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
                 <span class="p-discount-badge" style="background:var(--orange)">متوفر الآن</span>
-                <div class="book-price">19 <span class="currency">ر.س</span></div>
+                <div class="book-price">59 <span class="currency">ر.س</span></div>
               </div>
               <div style="display:flex;gap:8px">
                 <button class="book-btn-preview" style="border-color:var(--orange);color:var(--orange)" onclick="openPreview('book-japanese-multiply','الطريقة اليابانية لحفظ جدول الضرب',20)">معاينة</button>
