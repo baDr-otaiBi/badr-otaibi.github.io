@@ -1103,6 +1103,118 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 }
 .p-wa-hint svg{width:14px;height:14px;flex-shrink:0}
 
+/* ===== BOOKS SECTION (Platform-authored) ===== */
+.books-divider{
+  margin:56px 0 48px;text-align:center;position:relative;
+}
+.books-divider::before{
+  content:'';position:absolute;top:50%;left:0;right:0;height:1px;
+  background:var(--border);
+}
+.books-divider-label{
+  position:relative;display:inline-flex;align-items:center;gap:10px;
+  background:var(--bg);padding:0 24px;
+  font-family:var(--font);font-size:18px;font-weight:900;
+  color:var(--ink);
+}
+[data-theme="dark"] .books-divider-label{background:var(--bg)}
+.books-divider-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  display:grid;place-items:center;font-size:22px;color:#fff;
+}
+.books-divider-badge{
+  font-size:11px;font-weight:700;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  color:#fff;padding:4px 12px;border-radius:100px;
+  letter-spacing:.5px;
+}
+
+.book-card{
+  background:var(--white);border:2px solid var(--purple);
+  border-radius:var(--radius-xl);overflow:hidden;
+  position:relative;transition:.4s var(--ease);
+  box-shadow:0 4px 20px rgba(124,58,237,.08);
+}
+[data-theme="dark"] .book-card{background:var(--white);border-color:var(--purple)}
+.book-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(124,58,237,.15)}
+.book-card-inner{
+  display:grid;grid-template-columns:1fr 1.2fr;gap:0;
+}
+.book-cover{
+  position:relative;overflow:hidden;min-height:320px;
+  background:linear-gradient(135deg,#4c1d95,#7c3aed,#a78bfa);
+  display:flex;align-items:center;justify-content:center;
+}
+.book-cover-emoji{
+  font-size:100px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.2));
+  animation:float 5s ease-in-out infinite;
+}
+.book-cover-pattern{
+  position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1.5px,transparent 1.5px);
+  background-size:20px 20px;
+}
+.book-cover-badge{
+  position:absolute;top:16px;right:16px;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(8px);
+  color:#fff;padding:6px 16px;border-radius:100px;
+  font-size:12px;font-weight:700;font-family:var(--font);
+  border:1px solid rgba(255,255,255,.2);
+}
+.book-info{padding:32px 28px;display:flex;flex-direction:column;justify-content:center}
+.book-cat{
+  display:inline-block;width:fit-content;
+  font-size:11px;font-weight:700;letter-spacing:.5px;
+  color:var(--purple);margin-bottom:12px;
+  padding:4px 14px;border-radius:100px;
+  background:var(--purple-soft);border:1px solid var(--purple);
+  font-family:var(--font);
+}
+.book-title{
+  font-family:var(--font);font-size:22px;font-weight:900;
+  color:var(--ink);margin-bottom:10px;line-height:1.5;letter-spacing:-0.01em;
+}
+.book-desc{font-size:14px;color:var(--ink-2);line-height:2;margin-bottom:18px}
+.book-features{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+.book-feature{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600;
+  background:var(--purple-soft);color:var(--purple);
+  border:1px solid rgba(124,58,237,.2);font-family:var(--font);
+}
+.book-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:18px;border-top:1px solid var(--border);
+  flex-wrap:wrap;gap:10px;
+}
+.book-price{font-family:var(--font);font-weight:900;font-size:24px;color:var(--ink)}
+.book-price .currency{font-size:14px;font-weight:600;color:var(--ink-3)}
+.book-btn{
+  padding:12px 24px;border-radius:12px;
+  font-family:var(--font);font-size:14px;font-weight:700;
+  border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  color:#fff;transition:.3s var(--ease);
+  box-shadow:0 4px 14px rgba(124,58,237,.25);
+}
+.book-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,.3)}
+.book-btn-preview{
+  padding:12px 24px;border-radius:12px;
+  font-family:var(--font);font-size:14px;font-weight:700;
+  border:1.5px solid var(--purple);cursor:pointer;
+  background:transparent;color:var(--purple);
+  transition:.3s var(--ease);
+}
+.book-btn-preview:hover{background:var(--purple-soft)}
+
+@media(max-width:768px){
+  .book-card-inner{grid-template-columns:1fr}
+  .book-cover{min-height:200px}
+  .book-info{padding:24px 20px}
+  .book-title{font-size:18px}
+}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
   .products-grid{grid-template-columns:1fr}
@@ -1587,6 +1699,113 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- BOOKS DIVIDER -->
+    <div class="books-divider" data-r>
+      <div class="books-divider-label">
+        <div class="books-divider-icon">📕</div>
+        كتب من تأليف المنصة
+        <span class="books-divider-badge">حصري</span>
+      </div>
+    </div>
+
+    <!-- PLATFORM-AUTHORED BOOKS -->
+    <div style="display:flex;flex-direction:column;gap:24px;margin-bottom:40px">
+
+      <div class="book-card" data-r>
+        <div class="book-card-inner">
+          <div class="book-cover">
+            <div class="book-cover-pattern"></div>
+            <div class="book-cover-badge">تأليف المنصة</div>
+            <div class="book-cover-emoji">📕</div>
+          </div>
+          <div class="book-info">
+            <div class="book-cat">كتب المنصة — حصري</div>
+            <h3 class="book-title">كتاب تعلّم أساسيات البرمجة للمبتدئين</h3>
+            <p class="book-desc">كتاب شامل من تأليف فريق الإتقان — يشرح أساسيات البرمجة بأسلوب مبسّط ومناسب للطلاب من الصفر حتى الاحتراف</p>
+            <div class="book-features">
+              <span class="book-feature">📕 تأليف المنصة</span>
+              <span class="book-feature">📄 PDF</span>
+              <span class="book-feature">🎓 للمبتدئين</span>
+              <span class="book-feature">💡 أمثلة عملية</span>
+            </div>
+            <div class="book-foot">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span class="p-discount-badge" style="background:var(--purple)">جديد</span>
+                <div class="book-price">39 <span class="currency">ر.س</span></div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="book-btn-preview" onclick="openPreview('book-programming','كتاب أساسيات البرمجة',50)">معاينة</button>
+                <button class="book-btn" onclick="orderProduct('كتاب أساسيات البرمجة للمبتدئين — تأليف الإتقان')">اطلب الآن</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="book-card" data-r>
+        <div class="book-card-inner">
+          <div class="book-cover" style="background:linear-gradient(135deg,#0f766e,#14b8a6,#5eead4)">
+            <div class="book-cover-pattern"></div>
+            <div class="book-cover-badge">تأليف المنصة</div>
+            <div class="book-cover-emoji">📗</div>
+          </div>
+          <div class="book-info">
+            <div class="book-cat" style="color:var(--teal);background:var(--teal-soft);border-color:var(--teal)">كتب المنصة — حصري</div>
+            <h3 class="book-title">كتاب المهارات الرقمية — دليل الطالب الشامل</h3>
+            <p class="book-desc">مرجع متكامل يغطي المهارات الرقمية الأساسية التي يحتاجها كل طالب — من استخدام الحاسب إلى الأمان الرقمي</p>
+            <div class="book-features">
+              <span class="book-feature" style="background:var(--teal-soft);color:var(--teal);border-color:rgba(13,148,136,.2)">📗 تأليف المنصة</span>
+              <span class="book-feature" style="background:var(--teal-soft);color:var(--teal);border-color:rgba(13,148,136,.2)">📄 PDF</span>
+              <span class="book-feature" style="background:var(--teal-soft);color:var(--teal);border-color:rgba(13,148,136,.2)">💻 مهارات رقمية</span>
+              <span class="book-feature" style="background:var(--teal-soft);color:var(--teal);border-color:rgba(13,148,136,.2)">🔒 أمان رقمي</span>
+            </div>
+            <div class="book-foot">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span class="p-discount-badge" style="background:var(--teal)">جديد</span>
+                <div class="book-price">39 <span class="currency">ر.س</span></div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="book-btn-preview" style="border-color:var(--teal);color:var(--teal)" onclick="openPreview('book-digital-skills','كتاب المهارات الرقمية',45)">معاينة</button>
+                <button class="book-btn" style="background:linear-gradient(135deg,var(--teal),#0f766e)" onclick="orderProduct('كتاب المهارات الرقمية — تأليف الإتقان')">اطلب الآن</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="book-card" data-r>
+        <div class="book-card-inner">
+          <div class="book-cover" style="background:linear-gradient(135deg,#b45309,#f59e0b,#fcd34d)">
+            <div class="book-cover-pattern"></div>
+            <div class="book-cover-badge">تأليف المنصة</div>
+            <div class="book-cover-emoji">📙</div>
+          </div>
+          <div class="book-info">
+            <div class="book-cat" style="color:var(--orange);background:var(--orange-soft);border-color:var(--orange)">كتب المنصة — حصري</div>
+            <h3 class="book-title">كتاب أسرار التفوّق الدراسي — استراتيجيات المذاكرة الذكية</h3>
+            <p class="book-desc">دليل عملي من تأليف فريق الإتقان يعلّمك أفضل طرق المذاكرة وإدارة الوقت وتقنيات الحفظ السريع لتحقيق أعلى الدرجات</p>
+            <div class="book-features">
+              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">📙 تأليف المنصة</span>
+              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">📄 PDF</span>
+              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">🧠 تقنيات حفظ</span>
+              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">⏰ إدارة وقت</span>
+            </div>
+            <div class="book-foot">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span class="p-discount-badge" style="background:var(--orange)">جديد</span>
+                <div class="book-price">29 <span class="currency">ر.س</span></div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="book-btn-preview" style="border-color:var(--orange);color:var(--orange)" onclick="openPreview('book-study-tips','كتاب أسرار التفوّق الدراسي',35)">معاينة</button>
+                <button class="book-btn" style="background:linear-gradient(135deg,var(--orange),#b45309)" onclick="orderProduct('كتاب أسرار التفوّق الدراسي — تأليف الإتقان')">اطلب الآن</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- Payment Methods -->
