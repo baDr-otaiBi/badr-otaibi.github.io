@@ -140,6 +140,17 @@ body{
 }
 .footer a{color:rgba(255,255,255,.4);text-decoration:none}
 
+.preview-hint{
+  text-align:center;font-size:14px;font-weight:700;
+  color:#fbbf24;padding:6px;
+  opacity:0;transition:opacity .3s;
+  flex-shrink:0;
+}
+.preview-hint.show{opacity:1;animation:hintPulse 1s ease infinite}
+@keyframes hintPulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+.card{transition:transform .3s, background .3s, border-color .3s}
+
 @media(max-width:380px){
   .card .face{font-size:24px}
   .card .face .label{font-size:9px}
@@ -164,6 +175,8 @@ body{
   <button class="lvl-btn" data-level="medium">متوسط (١٢)</button>
   <button class="lvl-btn" data-level="hard">صعب (١٦)</button>
 </div>
+
+<div class="preview-hint" id="previewHint">احفظ أماكن الأزواج!</div>
 
 <div class="game-wrap">
   <div class="grid g4" id="grid"></div>
@@ -255,7 +268,7 @@ function startGame() {
 
   cards.forEach((card, idx) => {
     const el = document.createElement('div');
-    el.className = 'card';
+    el.className = 'card flipped'; // Start revealed
     el.dataset.idx = idx;
     el.innerHTML = `
       <div class="face">${card.type === 'emoji' ? card.content : '<span style="font-size:18px;font-weight:800">' + card.content + '</span>'}</div>
@@ -263,6 +276,18 @@ function startGame() {
     `;
     grid.appendChild(el);
   });
+
+  // Show all cards for a preview period, then flip them back
+  locked = true;
+  const hint = document.getElementById('previewHint');
+  hint.classList.add('show');
+  const previewTime = totalPairs <= 4 ? 2500 : totalPairs <= 6 ? 3000 : 3500;
+  setTimeout(() => {
+    grid.querySelectorAll('.card').forEach(c => c.classList.remove('flipped'));
+    hint.classList.remove('show');
+    locked = false;
+    startTime = Date.now();
+  }, previewTime);
 }
 
 function flipCard(el, idx) {
