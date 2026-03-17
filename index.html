@@ -372,6 +372,28 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .sec-title{font-family:var(--font);font-size:36px;font-weight:900;color:var(--ink);margin-bottom:14px;letter-spacing:-0.02em;line-height:1.3}
 .sec-desc{font-size:16px;color:var(--ink-2);max-width:520px;line-height:1.9}
 
+/* ===== PRODUCT FILTERS ===== */
+.product-filters{
+  display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;
+  padding:6px;background:var(--bg-alt);border-radius:14px;
+  border:1px solid var(--border);width:fit-content;
+}
+.pf-btn{
+  padding:8px 18px;border-radius:10px;border:none;
+  font-family:var(--font);font-size:13px;font-weight:700;
+  cursor:pointer;transition:.2s var(--ease);
+  background:transparent;color:var(--ink-3);
+}
+.pf-btn:hover{color:var(--ink);background:var(--white)}
+.pf-btn.on{background:var(--white);color:var(--blue);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.p-card[data-cat]{transition:opacity .3s, transform .4s var(--ease)}
+.p-card.filter-hide{display:none}
+@media(max-width:640px){
+  .product-filters{width:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+  .product-filters::-webkit-scrollbar{display:none}
+  .pf-btn{white-space:nowrap;flex-shrink:0}
+}
+
 /* ===== PRODUCTS ===== */
 .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .p-card{
@@ -1358,7 +1380,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="stat-l">سؤال مع الإجابة</div>
         </div>
         <div>
-          <div class="stat-n"><span class="counter" data-target="9">0</span></div>
+          <div class="stat-n"><span class="counter" data-target="10">0</span></div>
           <div class="stat-l">منتج تعليمي</div>
         </div>
       </div>
@@ -1375,8 +1397,16 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
       <p class="sec-desc">اختر المنتج اللي يناسبك — أسعار رمزية ونتائج مضمونة</p>
     </div>
 
+    <div class="product-filters" data-r>
+      <button class="pf-btn on" data-filter="all">الكل</button>
+      <button class="pf-btn" data-filter="tests">اختبارات</button>
+      <button class="pf-btn" data-filter="summaries">ملخصات</button>
+      <button class="pf-btn" data-filter="worksheets">أوراق عمل</button>
+      <button class="pf-btn" data-filter="expressions">تعبيرات</button>
+    </div>
+
     <div class="products-grid">
-      <div class="p-card bestseller" data-r>
+      <div class="p-card bestseller" data-r data-cat="tests">
         <div class="bestseller-glow"></div>
         <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,var(--blue),var(--purple),var(--rose));background-size:200% 100%;animation:gradientShift 3s infinite"></div>
         <span class="p-badge badge-hot">🔥 الأكثر مبيعاً</span>
@@ -1409,7 +1439,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
       </div>
 
-      <div class="p-card" data-r>
+      <div class="p-card" data-r data-cat="summaries">
         <div class="p-exclusive"></div>
         <span class="p-badge badge-new">متوفر</span>
         <div class="p-img">
@@ -1438,7 +1468,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
       </div>
 
-      <div class="p-card" data-r>
+      <div class="p-card" data-r data-cat="summaries">
         <div class="p-exclusive"></div>
         <span class="p-badge badge-new">متوفر</span>
         <div class="p-img">
@@ -1466,7 +1496,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
       </div>
 
-      <div class="p-card" data-r>
+      <div class="p-card" data-r data-cat="summaries">
         <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,var(--blue),#60a5fa,var(--blue));background-size:200% 100%;animation:shimmer 3s infinite"></div>
         <span class="p-badge" style="background:var(--blue);color:#fff">⭐ حصري</span>
         <div class="p-img">
@@ -1495,7 +1525,37 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
       </div>
 
-      <div class="p-card" data-r>
+      <div class="p-card" data-r data-cat="expressions">
+        <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,#f59e0b,#ef4444,#f59e0b);background-size:200% 100%;animation:shimmer 3s infinite"></div>
+        <span class="p-badge" style="background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff">🔥 جديد وحصري</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#92400e,#f59e0b)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">✍️</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat" style="color:var(--orange);background:var(--orange-soft);border-color:var(--orange)">تعبيرات — حصري</div>
+          <h3 class="p-title">تعبيرات إنجليزي Top Goal 2 — الصف السادس، الفصل الثاني</h3>
+          <p class="p-desc">التعبيرات المتوقعة للاختبار المركزي — مضمونة بنسبة كبيرة لأنها مستخرجة مباشرة من المنهج ومبنية على نمط الاختبارات السابقة</p>
+          <div class="p-features">
+            <span class="p-feature">🔥 مضمونة من المنهج</span>
+            <span class="p-feature">✍️ تعبيرات متوقعة</span>
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
+            <button class="p-btn" onclick="openPreview('english-expressions','تعبيرات إنجليزي Top Goal 2 — سادس ف2',8)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('تعبيرات إنجليزي Top Goal 2 — سادس ف2')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" data-r data-cat="worksheets">
         <div class="p-exclusive"></div>
         <span class="p-badge badge-new">جديد</span>
         <div class="p-img">
@@ -1525,7 +1585,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
       </div>
 
-      <div class="p-card" data-r>
+      <div class="p-card" data-r data-cat="worksheets">
         <div class="p-exclusive"></div>
         <span class="p-badge badge-new">جديد</span>
         <div class="p-img">
@@ -1554,7 +1614,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
       </div>
 
-      <div class="p-card" data-r>
+      <div class="p-card" data-r data-cat="summaries">
         <div class="p-exclusive"></div>
         <span class="p-badge badge-new">جديد</span>
         <div class="p-img">
@@ -1582,7 +1642,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
       </div>
 
-      <div class="p-card" data-r>
+      <div class="p-card" data-r data-cat="summaries">
         <div class="p-exclusive"></div>
         <span class="p-badge badge-new">جديد</span>
         <div class="p-img">
@@ -1610,7 +1670,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
       </div>
 
-      <div class="p-card soon" data-r>
+      <div class="p-card soon" data-r data-cat="tests">
         <div class="soon-overlay"><div class="soon-label">⏳ قريباً</div></div>
         <div class="p-img">
           <div class="p-img-bg" style="background:linear-gradient(135deg,#94A3B8,#CBD5E1)"></div>
@@ -1628,7 +1688,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
       </div>
 
-      <div class="p-card soon" data-r>
+      <div class="p-card soon" data-r data-cat="tests">
         <div class="soon-overlay"><div class="soon-label">⏳ قريباً</div></div>
         <div class="p-img">
           <div class="p-img-bg" style="background:linear-gradient(135deg,#94A3B8,#CBD5E1)"></div>
@@ -1777,6 +1837,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
               <a class="g-file" href="javascript:void(0)" onclick="event.stopPropagation();openPreview('science-summary','ملخص العلوم — سادس ف2',15)"><span class="f-icon">🔬</span> ملخص العلوم</a>
               <a class="g-file" href="javascript:void(0)" onclick="event.stopPropagation();openPreview('arabic-summary','ملخص لغتي — سادس ف2',12)"><span class="f-icon">📖</span> ملخص لغتي</a>
               <a class="g-file" href="javascript:void(0)" onclick="event.stopPropagation();openPreview('english-summary','ملخص إنجليزي Top Goal 2',12)"><span class="f-icon">🇬🇧</span> ملخص إنجليزي <span style="color:var(--blue);font-size:11px;font-weight:800">حصري</span></a>
+              <a class="g-file" href="javascript:void(0)" onclick="event.stopPropagation();openPreview('english-expressions','تعبيرات إنجليزي Top Goal 2',8)"><span class="f-icon">✍️</span> تعبيرات إنجليزي <span style="color:var(--orange);font-size:11px;font-weight:800">جديد</span></a>
               <a class="g-file" href="javascript:void(0)" onclick="event.stopPropagation();openPreview('science-worksheets','أوراق عمل العلوم',30)"><span class="f-icon">📝</span> أوراق عمل علوم</a>
               <a class="g-file" href="javascript:void(0)" onclick="event.stopPropagation();openPreview('arabic-worksheets','أوراق عمل لغتي',24)"><span class="f-icon">📝</span> أوراق عمل لغتي</a>
             </div>
@@ -2117,6 +2178,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <li><a href="#products">ملخص العلوم — سادس ف2</a></li>
           <li><a href="#products">ملخص لغتي — سادس ف2</a></li>
           <li><a href="#products">ملخص إنجليزي Top Goal 2 — سادس ف2</a></li>
+          <li><a href="#products">تعبيرات إنجليزي Top Goal 2 — سادس ف2</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -2425,6 +2487,28 @@ document.querySelectorAll('.s-tab').forEach(t => {
     document.querySelectorAll('.s-panel').forEach(x=>x.classList.remove('on'));
     t.classList.add('on');
     document.getElementById('p-'+t.dataset.s).classList.add('on');
+  });
+});
+
+// === PRODUCT FILTERS ===
+document.querySelectorAll('.pf-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.p-card[data-cat]').forEach(card => {
+      if (filter === 'all' || card.dataset.cat === filter) {
+        card.classList.remove('filter-hide');
+      } else {
+        card.classList.add('filter-hide');
+      }
+    });
+    // Also handle .p-card.soon without data-cat and book cards
+    document.querySelectorAll('.p-card.soon').forEach(card => {
+      if (!card.dataset.cat) {
+        card.classList.toggle('filter-hide', filter !== 'all');
+      }
+    });
   });
 });
 
