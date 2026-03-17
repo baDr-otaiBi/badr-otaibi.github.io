@@ -78,7 +78,7 @@ html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smo
 body{
   font-family:var(--font-body);background:var(--bg);color:var(--ink);line-height:1.8;
   font-size:15px;letter-spacing:-0.01em;
-  transition:background .4s var(--ease),color .4s var(--ease);
+  transition:background .3s var(--ease),color .3s var(--ease);
   opacity:0;animation:pageIn .5s var(--ease) .1s forwards;
   /* Subtle grid pattern like Adam Mirek */
   background-image:
@@ -149,13 +149,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   transition:background .3s,box-shadow .3s,border-color .3s;
 }
 [data-theme="dark"] .nav{background:rgba(15,23,42,.9);border-color:var(--border)}
-.nav.shadow{box-shadow:0 1px 24px rgba(0,0,0,.06)}
+.nav.shadow{box-shadow:0 2px 20px rgba(0,0,0,.08)}
 .nav-inner{
   display:flex;align-items:center;justify-content:space-between;
-  height:72px;
+  height:76px;
 }
 .logo{display:flex;align-items:center;text-decoration:none}
-.logo img{height:72px;width:auto;padding:6px 0}
+.logo img{height:72px;width:auto;padding:8px 0}
 .nav-links{display:flex;gap:4px;list-style:none}
 .nav-links a{
   text-decoration:none;color:var(--ink-2);font-size:14px;font-weight:700;
@@ -353,11 +353,14 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .trust-item svg{width:20px;height:20px;color:var(--blue);flex-shrink:0}
 
 /* ===== SECTION ===== */
-.section{padding:64px 0}
+.section{padding:56px 0}
 .section-alt{
   background-color:var(--bg-alt);
   border-top:1px solid var(--border);
   border-bottom:1px solid var(--border);
+}
+a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-visible{
+  outline:2px solid var(--blue);outline-offset:2px;border-radius:8px;
 }
 [data-theme="dark"] .section-alt{border-color:var(--border)}
 .sec-head{margin-bottom:56px}
@@ -382,7 +385,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   box-shadow:0 1px 3px rgba(0,0,0,.04);
 }
 [data-theme="dark"] .p-card{background:var(--white);border-color:var(--border)}
-.p-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.08)}
+.p-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1)}
 .p-card.soon{opacity:.7}
 .p-card.soon:hover{transform:none}
 .p-card.soon::after{display:none}
@@ -1255,7 +1258,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   .hero-stats{gap:16px}
   .hero-stats > div{padding:12px 16px}
   .stat-n{font-size:22px}
-  .section{padding:56px 0}
+  .section{padding:40px 0}
   .sec-title{font-size:24px}
   .stage-tabs{width:100%;flex-wrap:wrap}
   .s-tab{flex:1;justify-content:center;font-size:13px;padding:9px 12px}
