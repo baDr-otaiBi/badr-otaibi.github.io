@@ -15,14 +15,44 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // === Middleware ===
-app.use(helmet({ contentSecurityPolicy: false }));
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      imgSrc: ["'self'", "data:"],
+      connectSrc: ["'self'", "https://api.moyasar.com"],
+      frameSrc: ["'none'"],
+      objectSrc: ["'none'"],
+      baseUri: ["'self'"],
+      formAction: ["'self'"],
+    }
+  },
+  hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+  permissionsPolicy: { features: { camera: [], microphone: [], geolocation: [] } }
+}));
+app.use(cors({
+  origin: process.env.SITE_URL || 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT'],
+  credentials: true
+}));
+app.use(express.json({ limit: '1mb' }));
+app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 app.use(express.static(__dirname));
 
+// Rate limiter for general API
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
 app.use('/api/', limiter);
+
+// Strict rate limiter for login (anti brute-force)
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: { error: 'محاولات تسجيل دخول كثيرة، حاول بعد 15 دقيقة' }
+});
 
 // === Database Setup ===
 const dataDir = path.join(__dirname, 'data');
@@ -85,11 +115,21 @@ function generateDownloadToken() {
   return crypto.randomBytes(32).toString('hex');
 }
 
+function getJwtSecret() {
+  const secret = process.env.JWT_SECRET;
+  if (!secret || secret === 'change_this_to_random_secret_key' || secret.length < 32) {
+    console.error('CRITICAL: JWT_SECRET is not set or too weak. Set a strong random secret (32+ chars) in .env');
+    process.exit(1);
+  }
+  return secret;
+}
+
 function authenticateAdmin(req, res, next) {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) return res.status(401).json({ error: 'غير مصرح' });
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'default-secret');
+    const decoded = jwt.verify(token, getJwtSecret());
+    if (decoded.role !== 'admin') throw new Error('invalid role');
     req.admin = decoded;
     next();
   } catch {
@@ -119,8 +159,15 @@ app.post('/api/orders', (req, res) => {
   const product = db.prepare('SELECT * FROM products WHERE id = ? AND is_available = 1').get(product_id);
   if (!product) return res.status(400).json({ error: 'المنتج غير متاح' });
 
-  if (!customer_name || !customer_phone) {
+  if (!customer_name || !customer_phone || typeof customer_name !== 'string' || typeof customer_phone !== 'string') {
     return res.status(400).json({ error: 'الاسم ورقم الجوال مطلوبان' });
+  }
+  if (customer_name.length > 100 || customer_phone.length > 20) {
+    return res.status(400).json({ error: 'بيانات غير صالحة' });
+  }
+  // Validate phone format (Saudi number)
+  if (!/^(05|5|9665)\d{8,}$/.test(customer_phone.replace(/[\s\-+]/g, ''))) {
+    return res.status(400).json({ error: 'رقم الجوال غير صالح' });
   }
 
   const orderId = uuidv4();
@@ -253,7 +300,12 @@ app.get('/api/download/:token', (req, res) => {
     return res.status(403).json({ error: 'تم تجاوز الحد الأقصى للتحميل' });
   }
 
-  const filePath = path.join(__dirname, 'products', order.file_path);
+  // Path traversal protection
+  const productsDir = path.resolve(__dirname, 'products');
+  const filePath = path.resolve(productsDir, order.file_path);
+  if (!filePath.startsWith(productsDir + path.sep)) {
+    return res.status(403).json({ error: 'مسار غير مسموح' });
+  }
   if (!fs.existsSync(filePath)) {
     return res.status(404).json({ error: 'الملف غير موجود حالياً' });
   }
@@ -285,14 +337,28 @@ app.get('/api/download/:token/info', (req, res) => {
 
 // === Admin Routes ===
 
-// Admin login
-app.post('/api/admin/login', (req, res) => {
+// Admin login (with brute-force protection)
+app.post('/api/admin/login', loginLimiter, (req, res) => {
   const { username, password } = req.body;
-  const adminUser = process.env.ADMIN_USERNAME || 'admin';
-  const adminPass = process.env.ADMIN_PASSWORD || 'admin123';
 
-  if (username === adminUser && password === adminPass) {
-    const token = jwt.sign({ role: 'admin' }, process.env.JWT_SECRET || 'default-secret', { expiresIn: '24h' });
+  if (!username || !password || typeof username !== 'string' || typeof password !== 'string') {
+    return res.status(400).json({ error: 'بيانات غير صالحة' });
+  }
+
+  const adminUser = process.env.ADMIN_USERNAME;
+  const adminPass = process.env.ADMIN_PASSWORD;
+
+  if (!adminUser || !adminPass || adminPass === 'change_this_password' || adminPass.length < 12) {
+    console.error('CRITICAL: Admin credentials not configured properly in .env');
+    return res.status(503).json({ error: 'الخدمة غير متاحة حالياً' });
+  }
+
+  // Constant-time comparison to prevent timing attacks
+  const userMatch = crypto.timingSafeEqual(Buffer.from(username.padEnd(256)), Buffer.from(adminUser.padEnd(256)));
+  const passMatch = crypto.timingSafeEqual(Buffer.from(password.padEnd(256)), Buffer.from(adminPass.padEnd(256)));
+
+  if (userMatch && passMatch) {
+    const token = jwt.sign({ role: 'admin', iat: Math.floor(Date.now() / 1000) }, getJwtSecret(), { expiresIn: '4h' });
     return res.json({ token });
   }
   res.status(401).json({ error: 'بيانات الدخول غير صحيحة' });
@@ -323,11 +389,21 @@ app.get('/api/admin/stats', authenticateAdmin, (req, res) => {
   });
 });
 
-// Update product
+// Update product (with input validation)
 app.put('/api/admin/products/:id', authenticateAdmin, (req, res) => {
   const { name, description, price, is_available } = req.body;
+  const numPrice = Number(price);
+  if (!name || typeof name !== 'string' || name.length > 200) {
+    return res.status(400).json({ error: 'اسم المنتج غير صالح' });
+  }
+  if (description && (typeof description !== 'string' || description.length > 1000)) {
+    return res.status(400).json({ error: 'الوصف غير صالح' });
+  }
+  if (isNaN(numPrice) || numPrice < 0 || numPrice > 99999) {
+    return res.status(400).json({ error: 'السعر غير صالح' });
+  }
   db.prepare('UPDATE products SET name = ?, description = ?, price = ?, is_available = ? WHERE id = ?')
-    .run(name, description, price, is_available ? 1 : 0, req.params.id);
+    .run(name.trim(), (description || '').trim(), numPrice, is_available ? 1 : 0, req.params.id);
   res.json({ success: true });
 });
 
@@ -355,8 +431,7 @@ app.get('/nafs.html', (req, res) => res.sendFile(path.join(__dirname, 'nafs.html
 
 // === Start Server ===
 app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
-  console.log(`📁 Admin panel: http://localhost:${PORT}/admin`);
+  console.log(`Server running on port ${PORT}`);
 
   // Ensure products directory exists
   const productsDir = path.join(__dirname, 'products');

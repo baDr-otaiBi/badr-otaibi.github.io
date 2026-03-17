@@ -250,9 +250,9 @@ async function loadOrders() {
 
     let action = '';
     if (o.status === 'pending') {
-      action = `<button class="approve-btn" onclick="approveOrder('${o.id}')">اعتماد يدوي</button>`;
+      action = `<button class="approve-btn" data-action="approve" data-id="${escapeHtml(o.id)}">اعتماد يدوي</button>`;
     } else if (o.status === 'paid' && o.download_token) {
-      action = `<button class="copy-btn" onclick="copyLink('${o.download_token}')">نسخ رابط التحميل</button>`;
+      action = `<button class="copy-btn" data-action="copy" data-token="${escapeHtml(o.download_token)}">نسخ رابط التحميل</button>`;
     }
 
     html += `<tr>
@@ -268,6 +268,14 @@ async function loadOrders() {
 
   html += '</tbody></table>';
   document.getElementById('ordersTable').innerHTML = html;
+
+  // Attach event listeners safely (no inline onclick)
+  document.querySelectorAll('[data-action="approve"]').forEach(btn => {
+    btn.addEventListener('click', () => approveOrder(btn.dataset.id));
+  });
+  document.querySelectorAll('[data-action="copy"]').forEach(btn => {
+    btn.addEventListener('click', () => copyLink(btn.dataset.token));
+  });
 }
 
 async function approveOrder(orderId) {
@@ -278,7 +286,9 @@ async function approveOrder(orderId) {
   });
   if (res.ok) {
     const data = await res.json();
-    alert('تم الاعتماد! رابط التحميل:\n' + window.location.origin + '/download.html?token=' + data.download_token);
+    // Copy download link to clipboard instead of showing in alert
+    const link = window.location.origin + '/download.html?token=' + data.download_token;
+    navigator.clipboard.writeText(link).then(() => alert('تم الاعتماد! تم نسخ رابط التحميل إلى الحافظة.'));
     loadOrders();
     loadStats();
   }

@@ -357,7 +357,9 @@ applyTheme(getTheme());
 function toggleTheme(){applyTheme(getTheme()==='dark'?'light':'dark')}
 
 // ===== CONFIG =====
-const PASS = '6362';
+// Hashed verification to avoid exposing password in source
+const _h = function(s){var h=0;for(var i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0}return h};
+const _V = 1659449;
 const SK = 'nafs_done';
 const AK = 'nafs_auth';
 
@@ -365,7 +367,7 @@ const AK = 'nafs_auth';
 document.getElementById('gateForm').addEventListener('submit', function(e) {
   e.preventDefault();
   var val = document.getElementById('passField').value.trim();
-  if (val === PASS) {
+  if (_h(val) === _V) {
     localStorage.setItem(AK, '1');
     startApp();
   } else {
