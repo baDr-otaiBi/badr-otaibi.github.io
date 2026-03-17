@@ -247,16 +247,47 @@ body{
 .game-play:hover{opacity:.9;transform:scale(1.03)}
 .game-play.disabled{background:var(--ink-4);pointer-events:none;opacity:.6}
 
-/* Coming soon card */
-.game-card.coming{opacity:.65}
-.game-card.coming:hover{transform:none;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.coming-icon{font-size:48px;opacity:.4}
-.coming-badge{
-  position:absolute;top:16px;right:16px;
-  padding:4px 14px;border-radius:100px;font-size:11px;font-weight:700;
-  background:rgba(0,0,0,.5);color:#fff;font-family:var(--font);
-  backdrop-filter:blur(4px);
+/* Numbers game preview */
+.game-preview.numbers-theme{
+  background:linear-gradient(135deg,#1e1b4b,#312e81);
 }
+.numbers-scene{
+  display:flex;gap:16px;align-items:center;justify-content:center;
+  width:100%;height:100%;
+}
+.num-expr{
+  font-size:36px;font-weight:900;color:#fbbf24;
+  direction:ltr;letter-spacing:2px;
+  text-shadow:0 0 20px rgba(251,191,36,.4);
+}
+.num-choices{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+}
+.num-choice{
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.15);
+  display:grid;place-items:center;
+  font-size:18px;font-weight:800;color:#fff;
+}
+.num-choice.hl{background:rgba(52,211,153,.25);border-color:#34d399;color:#34d399}
+
+/* Memory game preview */
+.game-preview.memory-theme{
+  background:linear-gradient(135deg,#14532d,#166534);
+}
+.memory-scene{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+  padding:24px;
+}
+.mem-card{
+  width:48px;height:48px;border-radius:10px;
+  background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.15);
+  display:grid;place-items:center;font-size:20px;
+  animation:memPulse 2s ease infinite;
+}
+.mem-card:nth-child(even){animation-delay:.5s}
+.mem-card.revealed{background:rgba(52,211,153,.2);border-color:#34d399}
+@keyframes memPulse{0%,100%{opacity:.7}50%{opacity:1}}
 
 /* FEATURES STRIP */
 .features-strip{
@@ -381,43 +412,56 @@ body{
         </div>
       </a>
 
-      <!-- COMING SOON: Numbers -->
-      <div class="game-card coming">
-        <div class="game-preview coming-theme">
-          <span class="coming-badge">قريباً</span>
-          <span class="coming-icon">&#128290;</span>
+      <!-- NUMBERS GAME -->
+      <a href="/games/numbers.html" class="game-card">
+        <div class="game-preview numbers-theme">
+          <div class="numbers-scene">
+            <div class="num-expr">٧ + ٥ = ?</div>
+            <div class="num-choices">
+              <div class="num-choice">١٠</div>
+              <div class="num-choice hl">١٢</div>
+              <div class="num-choice">١١</div>
+              <div class="num-choice">١٣</div>
+            </div>
+          </div>
         </div>
         <div class="game-body">
           <h3>تحدي الأرقام العربية</h3>
-          <p>لعبة تفاعلية لتعلّم الأرقام العربية والعمليات الحسابية الأساسية — جمع وطرح وضرب بطريقة ممتعة.</p>
+          <p>٦ مستويات تتدرج من الجمع البسيط حتى الضرب — اختر الإجابة الصحيحة وتحدى نفسك! بالأرقام العربية.</p>
           <div class="game-meta">
             <div class="game-tags">
               <span class="game-tag tag-orange">الأرقام</span>
-              <span class="game-tag tag-gray">قريباً</span>
+              <span class="game-tag tag-blue">٦ مستويات</span>
             </div>
-            <span class="game-play disabled">قريباً</span>
+            <span class="game-play">ابدأ اللعب &#9654;</span>
           </div>
         </div>
-      </div>
+      </a>
 
-      <!-- COMING SOON: Memory -->
-      <div class="game-card coming">
-        <div class="game-preview coming-theme">
-          <span class="coming-badge">قريباً</span>
-          <span class="coming-icon">&#129504;</span>
+      <!-- MEMORY GAME -->
+      <a href="/games/memory.html" class="game-card">
+        <div class="game-preview memory-theme">
+          <div class="memory-scene">
+            <div class="mem-card revealed">&#128049;</div>
+            <div class="mem-card">?</div>
+            <div class="mem-card revealed">قطة</div>
+            <div class="mem-card">?</div>
+            <div class="mem-card revealed">&#127795;</div>
+            <div class="mem-card">?</div>
+          </div>
         </div>
         <div class="game-body">
           <h3>لعبة الذاكرة — كلمات وصور</h3>
-          <p>اختبر ذاكرتك بمطابقة الكلمات العربية مع صورها — تساعد على تقوية المفردات وسرعة التذكّر.</p>
+          <p>طابق الكلمة العربية مع صورتها! ٣ مستويات صعوبة — اختبر ذاكرتك وتعلّم مفردات جديدة.</p>
           <div class="game-meta">
             <div class="game-tags">
               <span class="game-tag tag-green">المفردات</span>
-              <span class="game-tag tag-gray">قريباً</span>
+              <span class="game-tag tag-purple">٣ مستويات</span>
             </div>
-            <span class="game-play disabled">قريباً</span>
+            <span class="game-play">ابدأ اللعب &#9654;</span>
           </div>
         </div>
-      </div>
+      </a>
 
     </div>
 

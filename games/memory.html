@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>لعبة الذاكرة — الإتقان التعليمية</title>
+<link rel="icon" type="image/png" href="/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--font:'Cairo',sans-serif}
+html,body{height:100%;overflow-x:hidden;-webkit-user-select:none;user-select:none}
+body{
+  font-family:var(--font);
+  background:#0f172a;color:#f3f4f6;
+  display:flex;flex-direction:column;
+}
+
+.top-bar{
+  width:100%;padding:10px 16px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.08);
+  flex-shrink:0;
+}
+.top-bar a{color:#60a5fa;text-decoration:none;font-weight:700;font-size:13px}
+
+.stats-bar{
+  display:flex;gap:12px;justify-content:center;
+  padding:10px;flex-shrink:0;font-size:14px;font-weight:700;
+}
+.stat{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.06);padding:6px 16px;border-radius:100px;
+  border:1px solid rgba(255,255,255,.08);
+}
+.stat .v{color:#fbbf24}
+.stat .v.g{color:#34d399}
+
+.game-wrap{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:12px;min-height:0;
+}
+
+/* Level selector */
+.level-select{
+  display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;justify-content:center;
+}
+.lvl-btn{
+  padding:8px 20px;border-radius:100px;
+  background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);
+  color:#fff;font-family:var(--font);font-size:13px;font-weight:700;
+  cursor:pointer;transition:.2s;
+}
+.lvl-btn:active{transform:scale(.95)}
+.lvl-btn.on{background:rgba(167,139,250,.25);border-color:#a78bfa;color:#a78bfa}
+
+/* Grid */
+.grid{
+  display:grid;gap:8px;
+  width:100%;max-width:500px;
+}
+.grid.g4{grid-template-columns:repeat(4,1fr)}
+.grid.g4x3{grid-template-columns:repeat(4,1fr)} /* 4x3=12 */
+.grid.g4x4{grid-template-columns:repeat(4,1fr)} /* 4x4=16 */
+
+.card{
+  aspect-ratio:1;border-radius:14px;
+  background:rgba(255,255,255,.07);
+  border:1.5px solid rgba(255,255,255,.1);
+  cursor:pointer;position:relative;
+  transition:transform .3s, background .3s;
+  -webkit-tap-highlight-color:transparent;
+  display:grid;place-items:center;
+  overflow:hidden;
+}
+.card:active{transform:scale(.95)}
+.card .face{
+  font-size:32px;opacity:0;
+  transition:opacity .2s;
+  text-align:center;line-height:1.2;
+}
+.card .face .label{
+  display:block;font-size:11px;font-weight:700;
+  color:#94a3b8;margin-top:2px;
+}
+.card .back{
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-size:24px;color:rgba(255,255,255,.2);
+  transition:opacity .2s;
+}
+.card.flipped{
+  background:rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.2);
+}
+.card.flipped .face{opacity:1}
+.card.flipped .back{opacity:0}
+.card.matched{
+  background:rgba(52,211,153,.15);
+  border-color:#34d399;
+  pointer-events:none;
+}
+.card.matched .face{opacity:1}
+.card.matched .back{opacity:0}
+.card.wrong{
+  animation:cardShake .4s;
+  border-color:#fb7185;background:rgba(251,113,133,.1);
+}
+@keyframes cardShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* Win */
+.win-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(12px);
+  z-index:100;justify-content:center;align-items:center;
+  flex-direction:column;text-align:center;padding:24px;
+}
+.win-overlay.show{display:flex}
+.win-title{font-size:32px;font-weight:900;color:#fbbf24;margin-bottom:8px}
+.win-sub{color:#94a3b8;font-size:15px;margin-bottom:8px}
+.win-stats{
+  display:flex;gap:24px;margin:16px 0 24px;font-size:15px;
+}
+.win-stats .ws{text-align:center}
+.win-stats .ws .n{font-size:28px;font-weight:900;display:block;margin-bottom:2px}
+.win-stats .ws .n.y{color:#fbbf24}
+.win-stats .ws .n.b{color:#60a5fa}
+.win-stats .ws .l{font-size:12px;color:#94a3b8}
+.btn-play{
+  padding:14px 40px;background:#fbbf24;color:#111;border:none;
+  border-radius:100px;font-family:var(--font);font-size:16px;font-weight:800;
+  cursor:pointer;
+}
+.btn-play:active{transform:scale(.95)}
+
+.footer{
+  flex-shrink:0;text-align:center;padding:8px;
+  font-size:11px;color:rgba(255,255,255,.25);
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.footer a{color:rgba(255,255,255,.4);text-decoration:none}
+
+@media(max-width:380px){
+  .card .face{font-size:24px}
+  .card .face .label{font-size:9px}
+  .grid{gap:6px}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="/games/">← الألعاب</a>
+  <span style="font-size:12px;color:rgba(255,255,255,.4)">الإتقان التعليمية</span>
+</div>
+
+<div class="stats-bar">
+  <div class="stat">المحاولات: <span class="v" id="moves">0</span></div>
+  <div class="stat">الأزواج: <span class="v g" id="pairs">0</span> / <span id="totalPairs">4</span></div>
+</div>
+
+<div class="level-select">
+  <button class="lvl-btn on" data-level="easy">سهل (٨)</button>
+  <button class="lvl-btn" data-level="medium">متوسط (١٢)</button>
+  <button class="lvl-btn" data-level="hard">صعب (١٦)</button>
+</div>
+
+<div class="game-wrap">
+  <div class="grid g4" id="grid"></div>
+</div>
+
+<div class="footer">&copy; 2026 <a href="/">الإتقان التعليمية</a> — جميع الحقوق محفوظة</div>
+
+<div class="win-overlay" id="winOverlay">
+  <div class="win-title">&#127881; ممتاز!</div>
+  <div class="win-sub">وجدت كل الأزواج!</div>
+  <div class="win-stats">
+    <div class="ws"><span class="n y" id="winMoves">0</span><span class="l">محاولة</span></div>
+    <div class="ws"><span class="n b" id="winTime">0</span><span class="l">ثانية</span></div>
+  </div>
+  <button class="btn-play" onclick="startGame()">العب مرة أخرى</button>
+  <div style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.25)">&copy; الإتقان التعليمية</div>
+</div>
+
+<script>
+// Word-Image pairs (emoji as "image", Arabic word)
+const ALL_PAIRS = [
+  {emoji:'&#128049;', word:'قطة'},
+  {emoji:'&#128054;', word:'كلب'},
+  {emoji:'&#127795;', word:'شجرة'},
+  {emoji:'&#9728;&#65039;', word:'شمس'},
+  {emoji:'&#127769;', word:'قمر'},
+  {emoji:'&#11088;', word:'نجمة'},
+  {emoji:'&#127802;', word:'وردة'},
+  {emoji:'&#128038;', word:'طائر'},
+  {emoji:'&#128031;', word:'سمكة'},
+  {emoji:'&#127823;', word:'تفاحة'},
+  {emoji:'&#128218;', word:'كتاب'},
+  {emoji:'&#127968;', word:'بيت'},
+  {emoji:'&#128663;', word:'سيارة'},
+  {emoji:'&#9889;', word:'برق'},
+  {emoji:'&#127754;', word:'موجة'},
+  {emoji:'&#9749;', word:'قهوة'},
+];
+
+const LEVELS = {
+  easy:   {pairs:4, cols:'g4'},
+  medium: {pairs:6, cols:'g4x3'},
+  hard:   {pairs:8, cols:'g4x4'},
+};
+
+let currentLevel = 'easy';
+let cards = [];
+let flipped = [];
+let matched = 0;
+let totalPairs = 0;
+let moves = 0;
+let locked = false;
+let startTime = 0;
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function startGame() {
+  document.getElementById('winOverlay').classList.remove('show');
+  const level = LEVELS[currentLevel];
+  totalPairs = level.pairs;
+  matched = 0; moves = 0; flipped = []; locked = false;
+  startTime = Date.now();
+
+  document.getElementById('moves').textContent = '0';
+  document.getElementById('pairs').textContent = '0';
+  document.getElementById('totalPairs').textContent = totalPairs;
+
+  // Pick random pairs
+  const selected = shuffle([...ALL_PAIRS]).slice(0, totalPairs);
+
+  // Create card data: each pair = emoji card + word card
+  cards = [];
+  selected.forEach((pair, i) => {
+    cards.push({id: i, type:'emoji', content: pair.emoji, word: pair.word, pairId: i});
+    cards.push({id: i, type:'word',  content: pair.word,  word: pair.word, pairId: i});
+  });
+  shuffle(cards);
+
+  // Render grid
+  const grid = document.getElementById('grid');
+  grid.className = 'grid ' + level.cols;
+  grid.innerHTML = '';
+
+  cards.forEach((card, idx) => {
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.dataset.idx = idx;
+    el.innerHTML = `
+      <div class="face">${card.type === 'emoji' ? card.content : '<span style="font-size:18px;font-weight:800">' + card.content + '</span>'}</div>
+      <div class="back">?</div>
+    `;
+    grid.appendChild(el);
+  });
+}
+
+function flipCard(el, idx) {
+  if (locked || el.classList.contains('flipped') || el.classList.contains('matched')) return;
+  if (flipped.length >= 2) return;
+
+  el.classList.add('flipped');
+  flipped.push({el, idx, card: cards[idx]});
+
+  if (flipped.length === 2) {
+    moves++;
+    document.getElementById('moves').textContent = moves;
+    locked = true;
+
+    const [a, b] = flipped;
+    if (a.card.pairId === b.card.pairId && a.card.type !== b.card.type) {
+      // Match!
+      setTimeout(() => {
+        a.el.classList.add('matched');
+        b.el.classList.add('matched');
+        matched++;
+        document.getElementById('pairs').textContent = matched;
+        flipped = [];
+        locked = false;
+
+        if (matched === totalPairs) {
+          const elapsed = Math.round((Date.now() - startTime) / 1000);
+          setTimeout(() => showWin(elapsed), 400);
+        }
+      }, 400);
+    } else {
+      // No match
+      setTimeout(() => {
+        a.el.classList.add('wrong');
+        b.el.classList.add('wrong');
+        setTimeout(() => {
+          a.el.classList.remove('flipped', 'wrong');
+          b.el.classList.remove('flipped', 'wrong');
+          flipped = [];
+          locked = false;
+        }, 500);
+      }, 600);
+    }
+  }
+}
+
+function showWin(seconds) {
+  document.getElementById('winMoves').textContent = moves;
+  document.getElementById('winTime').textContent = seconds;
+  document.getElementById('winOverlay').classList.add('show');
+}
+
+// Event delegation for grid
+const grid = document.getElementById('grid');
+grid.addEventListener('click', e => {
+  const card = e.target.closest('.card');
+  if (card) flipCard(card, parseInt(card.dataset.idx));
+});
+grid.addEventListener('touchstart', e => {
+  const card = e.target.closest('.card');
+  if (card) { e.preventDefault(); flipCard(card, parseInt(card.dataset.idx)); }
+}, {passive: false});
+
+// Level buttons
+document.querySelectorAll('.lvl-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.lvl-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    currentLevel = btn.dataset.level;
+    startGame();
+  });
+});
+
+startGame();
+</script>
+</body>
+</html>

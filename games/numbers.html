@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>تحدي الأرقام — الإتقان التعليمية</title>
+<link rel="icon" type="image/png" href="/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--font:'Cairo',sans-serif}
+html,body{height:100%;overflow:hidden;-webkit-user-select:none;user-select:none}
+body{
+  font-family:var(--font);
+  background:#0f172a;color:#f3f4f6;
+  display:flex;flex-direction:column;
+}
+
+.top-bar{
+  width:100%;padding:10px 16px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.08);
+  flex-shrink:0;
+}
+.top-bar a{color:#60a5fa;text-decoration:none;font-weight:700;font-size:13px}
+
+.game-wrap{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:16px;min-height:0;
+}
+
+/* Question card */
+.q-card{
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.1);
+  border-radius:24px;padding:32px 24px;
+  text-align:center;width:100%;max-width:400px;
+  position:relative;
+}
+.q-type{
+  display:inline-block;padding:4px 16px;border-radius:100px;
+  font-size:12px;font-weight:700;margin-bottom:16px;
+  background:rgba(96,165,250,.15);color:#60a5fa;border:1px solid rgba(96,165,250,.3);
+}
+.q-expression{
+  font-size:52px;font-weight:900;margin:8px 0 24px;
+  letter-spacing:4px;direction:ltr;
+  background:linear-gradient(135deg,#fbbf24,#f97316);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.q-hint{font-size:13px;color:#94a3b8;margin-bottom:20px}
+
+/* Answer buttons */
+.answers{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  width:100%;max-width:400px;margin-top:12px;
+}
+.ans-btn{
+  padding:16px;border-radius:16px;
+  background:rgba(255,255,255,.07);
+  border:1.5px solid rgba(255,255,255,.12);
+  color:#fff;font-family:var(--font);font-size:24px;font-weight:800;
+  cursor:pointer;transition:.2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.ans-btn:active{transform:scale(.95)}
+.ans-btn.correct{background:rgba(52,211,153,.25);border-color:#34d399;color:#34d399}
+.ans-btn.wrong{background:rgba(251,113,133,.2);border-color:#fb7185;color:#fb7185;animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+
+/* Stats bar */
+.stats-bar{
+  display:flex;gap:12px;justify-content:center;
+  padding:10px;flex-shrink:0;font-size:14px;font-weight:700;
+}
+.stat{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.06);padding:6px 16px;border-radius:100px;
+  border:1px solid rgba(255,255,255,.08);
+}
+.stat .v{color:#fbbf24}
+.stat .v.g{color:#34d399}
+.stat .v.r{color:#fb7185}
+
+/* Progress bar */
+.progress-wrap{
+  width:100%;max-width:400px;margin-top:16px;
+  height:6px;border-radius:3px;background:rgba(255,255,255,.08);
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg,#60a5fa,#a78bfa);
+  transition:width .3s;width:0;
+}
+
+/* Level badge */
+.level-badge{
+  margin-top:12px;font-size:13px;font-weight:700;
+  color:#a78bfa;
+}
+
+/* Feedback */
+.feedback{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+  font-size:64px;z-index:50;pointer-events:none;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s;
+  opacity:0;
+}
+.feedback.show{transform:translate(-50%,-50%) scale(1);opacity:1}
+
+/* Footer */
+.footer{
+  flex-shrink:0;text-align:center;padding:8px;
+  font-size:11px;color:rgba(255,255,255,.25);
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.footer a{color:rgba(255,255,255,.4);text-decoration:none}
+
+/* End screen */
+.end-screen{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(12px);
+  z-index:100;justify-content:center;align-items:center;
+  flex-direction:column;text-align:center;padding:24px;
+}
+.end-screen.show{display:flex}
+.end-title{font-size:32px;font-weight:900;color:#fbbf24;margin-bottom:8px}
+.end-stats{
+  display:flex;gap:24px;margin:16px 0 24px;font-size:15px;
+}
+.end-stats .es{text-align:center}
+.end-stats .es .n{font-size:28px;font-weight:900;display:block;margin-bottom:2px}
+.end-stats .es .n.g{color:#34d399}
+.end-stats .es .n.r{color:#fb7185}
+.end-stats .es .n.y{color:#fbbf24}
+.end-stats .es .l{font-size:12px;color:#94a3b8}
+.btn-play{
+  padding:14px 40px;background:#fbbf24;color:#111;border:none;
+  border-radius:100px;font-family:var(--font);font-size:16px;font-weight:800;
+  cursor:pointer;
+}
+.btn-play:active{transform:scale(.95)}
+
+@media(max-height:600px){
+  .q-expression{font-size:36px}
+  .q-card{padding:20px 16px}
+  .ans-btn{padding:12px;font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="/games/">← الألعاب</a>
+  <span style="font-size:12px;color:rgba(255,255,255,.4)">الإتقان التعليمية</span>
+</div>
+
+<div class="stats-bar">
+  <div class="stat">النقاط: <span class="v" id="score">0</span></div>
+  <div class="stat">صح: <span class="v g" id="correctCount">0</span></div>
+  <div class="stat">خطأ: <span class="v r" id="wrongCount">0</span></div>
+</div>
+
+<div class="game-wrap">
+  <div class="q-card">
+    <div class="q-type" id="qType">جمع</div>
+    <div class="q-expression" id="qExpr">٣ + ٥</div>
+    <div class="q-hint" id="qHint">اختر الإجابة الصحيحة</div>
+  </div>
+
+  <div class="answers" id="answers">
+    <button class="ans-btn">٨</button>
+    <button class="ans-btn">٦</button>
+    <button class="ans-btn">٧</button>
+    <button class="ans-btn">٩</button>
+  </div>
+
+  <div class="progress-wrap"><div class="progress-fill" id="progress"></div></div>
+  <div class="level-badge" id="levelBadge">المستوى ١ — جمع</div>
+</div>
+
+<div class="footer">&copy; 2026 <a href="/">الإتقان التعليمية</a> — جميع الحقوق محفوظة</div>
+
+<div class="feedback" id="feedback"></div>
+
+<div class="end-screen" id="endScreen">
+  <div class="end-title">&#127881; أحسنت!</div>
+  <div class="end-stats">
+    <div class="es"><span class="n y" id="endScore">0</span><span class="l">النقاط</span></div>
+    <div class="es"><span class="n g" id="endCorrect">0</span><span class="l">إجابة صحيحة</span></div>
+    <div class="es"><span class="n r" id="endWrong">0</span><span class="l">إجابة خاطئة</span></div>
+  </div>
+  <button class="btn-play" onclick="startGame()">العب مرة أخرى</button>
+  <div style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.25)">&copy; الإتقان التعليمية</div>
+</div>
+
+<script>
+// Arabic-Eastern numerals
+const AR = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+function toAr(n) {
+  return String(n).replace(/\d/g, d => AR[d]);
+}
+
+const OPS = [
+  {type:'جمع', symbol:'+', fn:(a,b)=>a+b},
+  {type:'طرح', symbol:'−', fn:(a,b)=>a-b},
+  {type:'ضرب', symbol:'×', fn:(a,b)=>a*b},
+];
+
+// Levels: gradually increase difficulty
+const LEVELS = [
+  {name:'المستوى ١ — جمع',       ops:[0], maxNum:9,  questions:5},
+  {name:'المستوى ٢ — جمع أكبر',  ops:[0], maxNum:20, questions:5},
+  {name:'المستوى ٣ — طرح',       ops:[1], maxNum:15, questions:5},
+  {name:'المستوى ٤ — جمع وطرح',  ops:[0,1], maxNum:20, questions:5},
+  {name:'المستوى ٥ — ضرب',       ops:[2], maxNum:9,  questions:5},
+  {name:'المستوى ٦ — مختلط',     ops:[0,1,2], maxNum:12, questions:5},
+];
+
+const TOTAL_QUESTIONS = LEVELS.reduce((s,l) => s + l.questions, 0);
+
+let score = 0, correct = 0, wrong = 0, currentQ = 0, currentLevel = 0;
+let questionInLevel = 0;
+let locked = false;
+let answer = 0;
+
+function rand(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generateQuestion() {
+  const level = LEVELS[currentLevel];
+  const opIdx = level.ops[rand(0, level.ops.length - 1)];
+  const op = OPS[opIdx];
+
+  let a, b, result;
+  do {
+    a = rand(1, level.maxNum);
+    b = rand(1, level.maxNum);
+    // For subtraction, ensure a >= b (no negatives)
+    if (opIdx === 1 && a < b) [a, b] = [b, a];
+    result = op.fn(a, b);
+  } while (result < 0 || result > 200);
+
+  answer = result;
+  const expr = toAr(a) + ' ' + op.symbol + ' ' + toAr(b);
+
+  document.getElementById('qType').textContent = op.type;
+  document.getElementById('qExpr').textContent = expr;
+  document.getElementById('qHint').textContent = 'اختر الإجابة الصحيحة';
+  document.getElementById('levelBadge').textContent = level.name;
+
+  // Generate 4 choices (1 correct + 3 wrong)
+  const choices = new Set([result]);
+  while (choices.size < 4) {
+    let fake;
+    const offset = rand(1, Math.max(3, Math.floor(result * 0.4) + 2));
+    fake = result + (Math.random() < 0.5 ? offset : -offset);
+    if (fake < 0) fake = result + rand(1, 5);
+    if (fake === result) fake = result + rand(1, 3);
+    choices.add(Math.round(fake));
+  }
+
+  // Shuffle
+  const arr = [...choices];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = rand(0, i);
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+
+  const btns = document.querySelectorAll('.ans-btn');
+  btns.forEach((btn, i) => {
+    btn.textContent = toAr(arr[i]);
+    btn.dataset.val = arr[i];
+    btn.className = 'ans-btn';
+    btn.disabled = false;
+  });
+
+  // Update progress
+  const pct = (currentQ / TOTAL_QUESTIONS) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+}
+
+function showFeedback(emoji) {
+  const fb = document.getElementById('feedback');
+  fb.textContent = emoji;
+  fb.classList.remove('show');
+  void fb.offsetWidth;
+  fb.classList.add('show');
+  setTimeout(() => fb.classList.remove('show'), 600);
+}
+
+function handleAnswer(val) {
+  if (locked) return;
+  locked = true;
+
+  const btns = document.querySelectorAll('.ans-btn');
+  const isCorrect = parseInt(val) === answer;
+
+  btns.forEach(btn => {
+    btn.disabled = true;
+    if (parseInt(btn.dataset.val) === answer) {
+      btn.classList.add('correct');
+    } else if (btn.dataset.val === val && !isCorrect) {
+      btn.classList.add('wrong');
+    }
+  });
+
+  if (isCorrect) {
+    score += 10;
+    correct++;
+    showFeedback('&#9989;');
+  } else {
+    wrong++;
+    showFeedback('&#10060;');
+  }
+
+  document.getElementById('score').textContent = score;
+  document.getElementById('correctCount').textContent = correct;
+  document.getElementById('wrongCount').textContent = wrong;
+
+  currentQ++;
+  questionInLevel++;
+
+  setTimeout(() => {
+    locked = false;
+    if (currentQ >= TOTAL_QUESTIONS) {
+      endGame();
+      return;
+    }
+    // Move to next level if needed
+    if (questionInLevel >= LEVELS[currentLevel].questions) {
+      currentLevel++;
+      questionInLevel = 0;
+    }
+    generateQuestion();
+  }, 800);
+}
+
+function endGame() {
+  document.getElementById('endScore').textContent = score;
+  document.getElementById('endCorrect').textContent = correct;
+  document.getElementById('endWrong').textContent = wrong;
+  document.getElementById('endScreen').classList.add('show');
+}
+
+function startGame() {
+  score = 0; correct = 0; wrong = 0; currentQ = 0;
+  currentLevel = 0; questionInLevel = 0; locked = false;
+  document.getElementById('score').textContent = '0';
+  document.getElementById('correctCount').textContent = '0';
+  document.getElementById('wrongCount').textContent = '0';
+  document.getElementById('endScreen').classList.remove('show');
+  document.getElementById('progress').style.width = '0%';
+  generateQuestion();
+}
+
+// Click handlers
+document.getElementById('answers').addEventListener('click', e => {
+  const btn = e.target.closest('.ans-btn');
+  if (btn) handleAnswer(btn.dataset.val);
+});
+document.getElementById('answers').addEventListener('touchstart', e => {
+  const btn = e.target.closest('.ans-btn');
+  if (btn) { e.preventDefault(); handleAnswer(btn.dataset.val); }
+}, {passive: false});
+
+startGame();
+</script>
+</body>
+</html>
