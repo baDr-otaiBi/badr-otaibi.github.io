@@ -832,32 +832,6 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
 .s-panel.on{animation:scaleIn .4s var(--ease) both}
 @keyframes panelSlide{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
 
-/* ===== MARKETING: Social Proof Popup ===== */
-.social-proof{
-  position:fixed;bottom:90px;left:24px;z-index:97;
-  background:var(--white);border:1px solid var(--border);
-  border-radius:16px;padding:14px 20px;
-  box-shadow:0 8px 32px rgba(0,0,0,.12);
-  display:flex;align-items:center;gap:12px;
-  transform:translateX(-120%);opacity:0;
-  transition:all .5s var(--ease);
-  max-width:340px;
-}
-.social-proof.show{transform:translateX(0);opacity:1}
-.social-proof-avatar{
-  width:42px;height:42px;border-radius:12px;
-  display:grid;place-items:center;font-size:20px;
-  background:var(--green-soft);flex-shrink:0;
-}
-.social-proof-text{font-size:13px;color:var(--ink-2);line-height:1.7}
-.social-proof-text strong{color:var(--ink);font-weight:700}
-.social-proof-time{font-size:11px;color:var(--ink-4);margin-top:2px}
-.social-proof-close{
-  position:absolute;top:6px;left:6px;width:20px;height:20px;
-  border-radius:50%;border:none;background:var(--bg-alt);
-  font-size:10px;cursor:pointer;color:var(--ink-4);
-  display:grid;place-items:center;
-}
 
 /* ===== MARKETING: Urgency Banner ===== */
 .urgency-banner{
@@ -987,7 +961,6 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
   .sticky-cta{display:block}
   .whatsapp-btn{bottom:76px}
   .scroll-top{bottom:76px}
-  .social-proof{bottom:142px}
 }
 
 /* ===== MARKETING: Animated CTA Button ===== */
@@ -2463,15 +2436,6 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- Social Proof Popup -->
-<div class="social-proof" id="socialProof">
-  <button class="social-proof-close" onclick="this.parentElement.classList.remove('show');spDismissed=true">✕</button>
-  <div class="social-proof-avatar">🛒</div>
-  <div>
-    <div class="social-proof-text"></div>
-    <div class="social-proof-time"></div>
-  </div>
-</div>
 
 <!-- Sticky Mobile CTA -->
 <div class="sticky-cta">
@@ -2735,35 +2699,6 @@ function startCountdown(){
 }
 startCountdown();
 
-// === MARKETING: Social Proof Notifications ===
-const socialProofData=[
-  {name:'أحمد',city:'الرياض',product:'تجميعات نافس'},
-  {name:'فاطمة',city:'جدة',product:'ملخص العلوم'},
-  {name:'سعود',city:'الدمام',product:'أوراق عمل العلوم'},
-  {name:'نورة',city:'مكة',product:'ملخص لغتي'},
-  {name:'خالد',city:'المدينة',product:'أوراق عمل العلوم'},
-  {name:'ريم',city:'الرياض',product:'ملخص إنجليزي Top Goal 2'},
-  {name:'عبدالله',city:'بريدة',product:'تجميعات نافس'},
-  {name:'هيا',city:'الطائف',product:'ملخص لغتي — خامس'},
-  {name:'محمد',city:'أبها',product:'كتاب أساسيات البرمجة'},
-  {name:'لمى',city:'حائل',product:'أوراق عمل لغتي'},
-];
-let spIndex=0;
-let spDismissed=false;
-function showSocialProof(){
-  if(spDismissed) return;
-  const d=socialProofData[spIndex%socialProofData.length];
-  const minutes=Math.floor(Math.random()*12)+1;
-  const el=document.getElementById('socialProof');
-  if(!el) return;
-  el.querySelector('.social-proof-text').innerHTML=
-    '<strong>'+d.name+' من '+d.city+'</strong> اشترى '+d.product;
-  el.querySelector('.social-proof-time').textContent='قبل '+minutes+' دقائق';
-  el.classList.add('show');
-  setTimeout(()=>{el.classList.remove('show');spIndex++},5000);
-}
-setTimeout(()=>showSocialProof(),8000);
-setInterval(()=>showSocialProof(),25000);
 
 // === MARKETING: Live Viewers (simulated) ===
 function updateViewers(){
