@@ -764,14 +764,15 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
 .footer-license p{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8}
 [data-theme="dark"] .footer-brand img{filter:brightness(0) invert(1)}
 
-/* Trust Badge */
-.trust-bar{
-  background:linear-gradient(135deg,#059669,#047857);color:#fff;
-  text-align:center;padding:8px 16px;font-size:13px;font-weight:700;
-  font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:8px;
-  letter-spacing:.02em;
+/* Verified badge in nav */
+.verified-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--green-soft);color:var(--green);
+  font-size:11px;font-weight:800;font-family:var(--font);
+  padding:4px 10px;border-radius:8px;letter-spacing:.01em;
+  white-space:nowrap;
 }
-.trust-bar svg{width:18px;height:18px;flex-shrink:0}
+.verified-badge svg{width:14px;height:14px;flex-shrink:0}
 
 /* Scroll to top */
 .scroll-top{
@@ -1283,7 +1284,7 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
   .deco{display:none}
   .hero-orb{display:none}
   .cursor-dot{display:none!important}
-  .trust-bar{gap:12px}
+  .verified-badge{display:none}
   .feat{min-height:auto}
   .announce-content{flex-direction:column;text-align:center;gap:10px}
   .announce-text{text-align:center}
@@ -1299,12 +1300,6 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
 <!-- Custom Cursor -->
 <div class="cursor-dot" id="cursorDot"></div>
 
-<!-- TRUST BADGE -->
-<div class="trust-bar">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-  موقع موثوق — منصة الإتقان التعليمية مرخّصة رسمياً
-</div>
-
 <!-- URGENCY BANNER -->
 <div class="urgency-banner">
   <span>عرض محدود — خصم على جميع المنتجات</span>
@@ -1317,6 +1312,10 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
     <a href="#" class="logo">
       <img src="/logo-new.png" alt="الإتقان التعليمية">
     </a>
+    <span class="verified-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      موثوق
+    </span>
     <ul class="nav-links">
       <li><a href="#" class="on">الرئيسية</a></li>
       <li><a href="#stages">المراحل</a></li>
