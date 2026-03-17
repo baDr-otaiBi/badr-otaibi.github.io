@@ -1437,6 +1437,7 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
               <a class="g-file" href="javascript:void(0)" onclick="event.stopPropagation();openPreview('english-expressions','تعبيرات إنجليزي Top Goal 2',8)"><span class="f-icon">✍️</span> تعبيرات إنجليزي <span style="color:var(--orange);font-size:11px;font-weight:800">جديد</span></a>
               <a class="g-file" href="javascript:void(0)" onclick="event.stopPropagation();openPreview('science-worksheets','أوراق عمل العلوم',30)"><span class="f-icon">📝</span> أوراق عمل علوم</a>
               <a class="g-file" href="javascript:void(0)" onclick="event.stopPropagation();openPreview('arabic-worksheets','أوراق عمل لغتي',24)"><span class="f-icon">📝</span> أوراق عمل لغتي</a>
+              <a class="g-file" href="#books" onclick="event.stopPropagation()"><span class="f-icon">📐</span> دليل أفكار المطويات — علوم <span style="color:var(--orange);font-size:11px;font-weight:800">جديد</span></a>
             </div>
           </div>
         </div>
@@ -1458,10 +1459,18 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
             <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
           </div>
         </div>
-        <div class="g-row">
-          <div class="g-header" style="cursor:default">
+        <div class="g-row" onclick="this.classList.toggle('open')">
+          <div class="g-header">
             <div class="g-right"><div class="g-num" style="background:var(--blue-soft);color:var(--blue)">3</div><div class="g-name">الصف الثالث الابتدائي</div></div>
-            <div class="g-left"><span class="g-soon-tag">قريباً</span></div>
+            <div class="g-left"><span class="g-available-tag">متاح</span><div class="g-chevron">▼</div></div>
+          </div>
+          <div class="g-body">
+            <div class="g-files">
+              <a class="g-file" href="#summaries" onclick="event.stopPropagation()"><span class="f-icon">📖</span> ملخص لغتي — ف2</a>
+              <a class="g-file" href="#summaries" onclick="event.stopPropagation()"><span class="f-icon">🔬</span> ملخص العلوم — ف2</a>
+              <a class="g-file" href="#worksheets" onclick="event.stopPropagation()"><span class="f-icon">📝</span> أوراق عمل لغتي — ف2</a>
+              <a class="g-file" href="#worksheets" onclick="event.stopPropagation()"><span class="f-icon">📝</span> أوراق عمل علوم — ف2</a>
+            </div>
           </div>
         </div>
         <div class="g-row">
@@ -1819,6 +1828,60 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
           </div>
         </div>
       </div>
+
+      <div class="p-card" data-r data-cat="summaries">
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">جديد</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#1e40af,#3b82f6)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">📖</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">ملخصات</div>
+          <h3 class="p-title">ملخص مادة لغتي — الصف الثالث، الفصل الثاني</h3>
+          <p class="p-desc">ملخص شامل ومنظّم لمادة لغتي الجميلة للصف الثالث الابتدائي — يغطي أهم الدروس والقواعد للفصل الثاني</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 ثالث ف2</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — ثالث ف2')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" data-r data-cat="summaries">
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">جديد</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#065f46,#10b981)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">🔬</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">ملخصات</div>
+          <h3 class="p-title">ملخص مادة العلوم — الصف الثالث، الفصل الثاني</h3>
+          <p class="p-desc">ملخص شامل ومنظّم لمادة العلوم للصف الثالث الابتدائي — يغطي أهم المفاهيم والمواضيع الأساسية للفصل الثاني</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 ثالث ف2</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص العلوم — ثالث ف2')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1892,7 +1955,61 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
         </div>
       </div>
 
+      <div class="p-card" data-r data-cat="worksheets">
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">جديد</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#1e40af,#60a5fa)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">📝</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">أوراق عمل</div>
+          <h3 class="p-title">أوراق عمل لغتي — الصف الثالث، الفصل الثاني</h3>
+          <p class="p-desc">أوراق عمل شاملة لمادة لغتي الجميلة للصف الثالث الابتدائي — تدريبات وأنشطة متنوعة للفصل الثاني</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 ثالث ف2</span>
+            <span class="p-feature">📝 أوراق عمل</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 25%</span>
+              <div class="p-price">29 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">39 ر.س</span>
+            </div>
+            <button class="p-btn-buy" onclick="orderProduct('أوراق عمل لغتي — ثالث ف2')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
 
+      <div class="p-card" data-r data-cat="worksheets">
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">جديد</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#065f46,#34d399)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">🔬</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">أوراق عمل</div>
+          <h3 class="p-title">أوراق عمل علوم — الصف الثالث، الفصل الثاني</h3>
+          <p class="p-desc">أوراق عمل شاملة لمادة العلوم للصف الثالث الابتدائي — تمارين وأنشطة متنوعة للفصل الثاني</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 ثالث ف2</span>
+            <span class="p-feature">📝 أوراق عمل</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 25%</span>
+              <div class="p-price">29 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">39 ر.س</span>
+            </div>
+            <button class="p-btn-buy" onclick="orderProduct('أوراق عمل علوم — ثالث ف2')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -1960,6 +2077,46 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
             </div>
             <div class="book-urgency">
               <span>🔥</span> الطلب عالي على هذا الكتاب — احجز نسختك الآن
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="book-card" data-r>
+        <div class="book-card-inner">
+          <div class="book-cover" style="background:linear-gradient(135deg,#065f46,#10b981);display:flex;align-items:center;justify-content:center">
+            <div style="text-align:center;color:#fff;padding:20px">
+              <div style="font-size:48px;margin-bottom:12px">📐</div>
+              <div style="font-size:18px;font-weight:800;line-height:1.4">دليل أفكار المطويات</div>
+              <div style="font-size:13px;opacity:.8;margin-top:6px">مادة العلوم — صف سادس</div>
+            </div>
+            <div class="book-cover-badge" style="background:var(--green)">جديد</div>
+          </div>
+          <div class="book-info">
+            <div class="book-cat" style="color:var(--green);background:var(--green-soft);border-color:rgba(5,150,105,.2)">دليل تعليمي — صف سادس</div>
+            <h3 class="book-title">دليل أفكار المطويات لمادة العلوم — الصف السادس</h3>
+            <p class="book-desc">دليل شامل بأفكار إبداعية لتصميم المطويات العلمية — يحتوي على أوراق تفاعلية جاهزة تساعد الطالب على تنظيم المعلومات بطريقة ممتعة وبصرية</p>
+
+            <div class="book-highlights">
+              <div class="book-highlight"><span class="book-highlight-icon">📄</span> أوراق تفاعلية جاهزة</div>
+              <div class="book-highlight"><span class="book-highlight-icon">🎨</span> أفكار إبداعية للمطويات</div>
+              <div class="book-highlight"><span class="book-highlight-icon">🔬</span> مادة العلوم</div>
+              <div class="book-highlight"><span class="book-highlight-icon">📚</span> الصف السادس — ف2</div>
+            </div>
+
+            <div class="book-features">
+              <span class="book-feature" style="background:var(--green-soft);color:var(--green);border-color:rgba(5,150,105,.2)">📄 PDF</span>
+              <span class="book-feature" style="background:var(--green-soft);color:var(--green);border-color:rgba(5,150,105,.2)">📐 أوراق تفاعلية</span>
+              <span class="book-feature" style="background:var(--green-soft);color:var(--green);border-color:rgba(5,150,105,.2)">🔬 علوم سادس</span>
+            </div>
+
+            <div class="book-foot">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <div class="book-price">39 <span class="currency">ر.س</span></div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="book-btn" style="background:linear-gradient(135deg,var(--green),#047857)" onclick="orderProduct('دليل أفكار المطويات لمادة العلوم — سادس')">اطلب الآن</button>
+              </div>
             </div>
           </div>
         </div>
