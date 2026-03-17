@@ -155,7 +155,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   height:72px;
 }
 .logo{display:flex;align-items:center;text-decoration:none}
-.logo img{height:72px;width:auto}
+.logo img{height:72px;width:auto;padding:6px 0}
 .nav-links{display:flex;gap:4px;list-style:none}
 .nav-links a{
   text-decoration:none;color:var(--ink-2);font-size:14px;font-weight:700;
@@ -372,27 +372,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 .sec-title{font-family:var(--font);font-size:36px;font-weight:900;color:var(--ink);margin-bottom:14px;letter-spacing:-0.02em;line-height:1.3}
 .sec-desc{font-size:16px;color:var(--ink-2);max-width:520px;line-height:1.9}
 
-/* ===== PRODUCT FILTERS ===== */
-.product-filters{
-  display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;
-  padding:6px;background:var(--bg-alt);border-radius:14px;
-  border:1px solid var(--border);width:fit-content;
-}
-.pf-btn{
-  padding:8px 18px;border-radius:10px;border:none;
-  font-family:var(--font);font-size:13px;font-weight:700;
-  cursor:pointer;transition:.2s var(--ease);
-  background:transparent;color:var(--ink-3);
-}
-.pf-btn:hover{color:var(--ink);background:var(--white)}
-.pf-btn.on{background:var(--white);color:var(--blue);box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.p-card[data-cat]{transition:opacity .3s, transform .4s var(--ease)}
-.p-card.filter-hide{display:none}
-@media(max-width:640px){
-  .product-filters{width:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
-  .product-filters::-webkit-scrollbar{display:none}
-  .pf-btn{white-space:nowrap;flex-shrink:0}
-}
 
 /* ===== PRODUCTS ===== */
 .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -1317,7 +1296,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
     <ul class="nav-links">
       <li><a href="#" class="on">الرئيسية</a></li>
       <li><a href="#stages">المراحل</a></li>
-      <li><a href="#products">المنتجات</a></li>
+      <li><a href="#summaries">الملخصات</a></li>
       <li><a href="#features">المميزات</a></li>
       <li><a href="/games/">الألعاب</a></li>
     </ul>
@@ -1337,7 +1316,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   <ul class="mobile-nav-links">
     <li><a href="#">الرئيسية</a></li>
     <li><a href="#stages">المراحل</a></li>
-    <li><a href="#products">المنتجات</a></li>
+    <li><a href="#summaries">الملخصات</a></li>
     <li><a href="#features">المميزات</a></li>
     <li><a href="/games/">الألعاب</a></li>
   </ul>
@@ -1385,413 +1364,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section class="section" id="products">
-  <div class="container">
-    <div class="sec-head" data-r>
-      <div class="sec-over">المنتجات</div>
-      <h2 class="sec-title">ابدأ التفوّق من هنا</h2>
-      <p class="sec-desc">اختر المنتج اللي يناسبك — أسعار رمزية ونتائج مضمونة</p>
-    </div>
-
-    <div class="product-filters" data-r>
-      <button class="pf-btn on" data-filter="all">الكل</button>
-      <button class="pf-btn" data-filter="tests">اختبارات</button>
-      <button class="pf-btn" data-filter="summaries">ملخصات</button>
-      <button class="pf-btn" data-filter="worksheets">أوراق عمل</button>
-      <button class="pf-btn" data-filter="expressions">تعبيرات</button>
-    </div>
-
-    <div class="products-grid">
-      <div class="p-card bestseller" data-r data-cat="tests">
-        <div class="bestseller-glow"></div>
-        <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,var(--blue),var(--purple),var(--rose));background-size:200% 100%;animation:gradientShift 3s infinite"></div>
-        <span class="p-badge badge-hot">🔥 الأكثر مبيعاً</span>
-        <div class="p-img">
-          <picture>
-            <source srcset="/images/nafs-ad.webp" type="image/webp">
-            <img src="/images/nafs-ad.png" alt="تجميعات اختبار نافس" class="p-ad-img" loading="lazy">
-          </picture>
-        </div>
-        <div class="p-body">
-          <div class="p-cat">بنك أسئلة نافس</div>
-          <h3 class="p-title">تجميعات اختبار نافس — 1000 سؤال</h3>
-          <div class="p-viewers"><span class="dot"></span> <span>12 طالب يشاهدون هذا المنتج الآن</span></div>
-          <p class="p-desc">تجميعة شاملة تضم 1000 سؤال من اختبارات نافس مع الإجابات النموذجية — تشمل ملفات PDF + دخول الاختبار التدريبي التفاعلي</p>
-          <div class="p-features">
-            <span class="p-feature">📝 1000 سؤال</span>
-            <span class="p-feature">✅ مع الإجابات</span>
-            <span class="p-feature">🎯 اختبار تفاعلي</span>
-            <span class="p-feature">📄 ملفات PDF</span>
-          </div>
-          <div class="p-foot">
-            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-              <span class="p-discount-badge">خصم 30%</span>
-              <div class="p-price">49 <span class="currency">ر.س</span></div>
-              <span class="p-price-old">69 ر.س</span>
-            </div>
-            <button class="p-btn" onclick="openPreview('nafs','بنك أسئلة نافس — 1000 سؤال',271)">معاينة</button>
-            <button class="p-btn-buy btn-glow" onclick="orderProduct('بنك أسئلة نافس — 1000 سؤال')">اطلب الآن</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card" data-r data-cat="summaries">
-        <div class="p-exclusive"></div>
-        <span class="p-badge badge-new">متوفر</span>
-        <div class="p-img">
-          <picture>
-            <source srcset="/images/science-summary-ad.webp" type="image/webp">
-            <img src="/images/science-summary-ad.png" alt="ملخص مادة العلوم" class="p-ad-img" loading="lazy">
-          </picture>
-        </div>
-        <div class="p-body">
-          <div class="p-cat">ملخصات</div>
-          <h3 class="p-title">ملخص مادة العلوم — الصف السادس، الفصل الثاني</h3>
-          <p class="p-desc">ملخص شامل ومنظّم لمادة العلوم للصف السادس الابتدائي — يغطي أهم المفاهيم والمواضيع الأساسية</p>
-          <div class="p-features">
-            <span class="p-feature">📄 PDF</span>
-            <span class="p-feature">📚 سادس ف2</span>
-          </div>
-          <div class="p-foot">
-            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-              <span class="p-discount-badge">خصم 35%</span>
-              <div class="p-price">19 <span class="currency">ر.س</span></div>
-              <span class="p-price-old">29 ر.س</span>
-            </div>
-            <button class="p-btn" onclick="openPreview('science-summary','ملخص العلوم — سادس ف2',15)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('ملخص العلوم — سادس ف2')">اطلب الآن</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card" data-r data-cat="summaries">
-        <div class="p-exclusive"></div>
-        <span class="p-badge badge-new">متوفر</span>
-        <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#1e40af,#3b82f6)"></div>
-          <div class="p-dots"></div>
-          <div class="emoji">📖</div>
-        </div>
-        <div class="p-body">
-          <div class="p-cat">ملخصات</div>
-          <h3 class="p-title">ملخص مادة لغتي — الصف السادس، الفصل الثاني</h3>
-          <p class="p-desc">ملخص شامل ومنظّم لمادة لغتي الجميلة للصف السادس الابتدائي — يغطي أهم الدروس والقواعد</p>
-          <div class="p-features">
-            <span class="p-feature">📄 PDF</span>
-            <span class="p-feature">📚 سادس ف2</span>
-          </div>
-          <div class="p-foot">
-            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-              <span class="p-discount-badge">خصم 35%</span>
-              <div class="p-price">19 <span class="currency">ر.س</span></div>
-              <span class="p-price-old">29 ر.س</span>
-            </div>
-            <button class="p-btn" onclick="openPreview('arabic-summary','ملخص لغتي — سادس ف2',12)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — سادس ف2')">اطلب الآن</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card" data-r data-cat="summaries">
-        <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,var(--blue),#60a5fa,var(--blue));background-size:200% 100%;animation:shimmer 3s infinite"></div>
-        <span class="p-badge" style="background:var(--blue);color:#fff">⭐ حصري</span>
-        <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#1e40af,#60a5fa)"></div>
-          <div class="p-dots"></div>
-          <div class="emoji">🇬🇧</div>
-        </div>
-        <div class="p-body">
-          <div class="p-cat">ملخصات — حصري</div>
-          <h3 class="p-title">ملخص الإنجليزي Top Goal 2 — الصف السادس، الفصل الثاني</h3>
-          <p class="p-desc">ملخص حصري لأحدث منهج إنجليزي Top Goal 2 — لا يتوفر في أي موقع آخر</p>
-          <div class="p-features">
-            <span class="p-feature">⭐ حصري</span>
-            <span class="p-feature">📄 PDF</span>
-            <span class="p-feature">📚 سادس ف2</span>
-          </div>
-          <div class="p-foot">
-            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-              <span class="p-discount-badge">خصم 35%</span>
-              <div class="p-price">19 <span class="currency">ر.س</span></div>
-              <span class="p-price-old">29 ر.س</span>
-            </div>
-            <button class="p-btn" onclick="openPreview('english-summary','ملخص إنجليزي Top Goal 2 — سادس ف2',12)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('ملخص إنجليزي Top Goal 2 — سادس ف2')">اطلب الآن</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card" data-r data-cat="expressions">
-        <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,#f59e0b,#ef4444,#f59e0b);background-size:200% 100%;animation:shimmer 3s infinite"></div>
-        <span class="p-badge" style="background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff">🔥 جديد وحصري</span>
-        <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#92400e,#f59e0b)"></div>
-          <div class="p-dots"></div>
-          <div class="emoji">✍️</div>
-        </div>
-        <div class="p-body">
-          <div class="p-cat" style="color:var(--orange);background:var(--orange-soft);border-color:var(--orange)">تعبيرات — حصري</div>
-          <h3 class="p-title">تعبيرات إنجليزي Top Goal 2 — الصف السادس، الفصل الثاني</h3>
-          <p class="p-desc">التعبيرات المتوقعة للاختبار المركزي — مضمونة بنسبة كبيرة لأنها مستخرجة مباشرة من المنهج ومبنية على نمط الاختبارات السابقة</p>
-          <div class="p-features">
-            <span class="p-feature">🔥 مضمونة من المنهج</span>
-            <span class="p-feature">✍️ تعبيرات متوقعة</span>
-            <span class="p-feature">📄 PDF</span>
-            <span class="p-feature">📚 سادس ف2</span>
-          </div>
-          <div class="p-foot">
-            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-              <span class="p-discount-badge">خصم 35%</span>
-              <div class="p-price">19 <span class="currency">ر.س</span></div>
-              <span class="p-price-old">29 ر.س</span>
-            </div>
-            <button class="p-btn" onclick="openPreview('english-expressions','تعبيرات إنجليزي Top Goal 2 — سادس ف2',8)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('تعبيرات إنجليزي Top Goal 2 — سادس ف2')">اطلب الآن</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card" data-r data-cat="worksheets">
-        <div class="p-exclusive"></div>
-        <span class="p-badge badge-new">جديد</span>
-        <div class="p-img">
-          <picture>
-            <source srcset="/images/science-worksheets-ad.webp" type="image/webp">
-            <img src="/images/science-worksheets-ad.png" alt="أوراق عمل علوم" class="p-ad-img" loading="lazy">
-          </picture>
-        </div>
-        <div class="p-body">
-          <div class="p-cat">أوراق عمل</div>
-          <h3 class="p-title">أوراق عمل علوم — الصف السادس، الفصل الثاني</h3>
-          <p class="p-desc">أوراق عمل شاملة لمادة العلوم للصف السادس الابتدائي — تمارين وأنشطة متنوعة</p>
-          <div class="p-features">
-            <span class="p-feature">📄 PDF</span>
-            <span class="p-feature">📚 سادس ف2</span>
-            <span class="p-feature">📝 أوراق عمل</span>
-          </div>
-          <div class="p-foot">
-            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-              <span class="p-discount-badge">خصم 25%</span>
-              <div class="p-price">29 <span class="currency">ر.س</span></div>
-              <span class="p-price-old">39 ر.س</span>
-            </div>
-            <button class="p-btn" onclick="openPreview('science-worksheets','أوراق عمل العلوم — سادس ف2',30)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('أوراق عمل العلوم — سادس ف2')">اطلب الآن</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card" data-r data-cat="worksheets">
-        <div class="p-exclusive"></div>
-        <span class="p-badge badge-new">جديد</span>
-        <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#1d4ed8,#93c5fd)"></div>
-          <div class="p-dots"></div>
-          <div class="emoji">📝</div>
-        </div>
-        <div class="p-body">
-          <div class="p-cat">أوراق عمل</div>
-          <h3 class="p-title">أوراق عمل لغتي — الصف السادس، الفصل الثاني</h3>
-          <p class="p-desc">أوراق عمل شاملة لمادة لغتي الجميلة للصف السادس الابتدائي — تدريبات وأنشطة متنوعة</p>
-          <div class="p-features">
-            <span class="p-feature">📄 PDF</span>
-            <span class="p-feature">📚 سادس ف2</span>
-            <span class="p-feature">📝 أوراق عمل</span>
-          </div>
-          <div class="p-foot">
-            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-              <span class="p-discount-badge">خصم 25%</span>
-              <div class="p-price">29 <span class="currency">ر.س</span></div>
-              <span class="p-price-old">39 ر.س</span>
-            </div>
-            <button class="p-btn" onclick="openPreview('arabic-worksheets','أوراق عمل لغتي — سادس ف2',24)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('أوراق عمل لغتي — سادس ف2')">اطلب الآن</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card" data-r data-cat="summaries">
-        <div class="p-exclusive"></div>
-        <span class="p-badge badge-new">جديد</span>
-        <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#2563eb,#60a5fa)"></div>
-          <div class="p-dots"></div>
-          <div class="emoji">📖</div>
-        </div>
-        <div class="p-body">
-          <div class="p-cat">ملخصات</div>
-          <h3 class="p-title">ملخص مادة لغتي — الصف الخامس، الفصل الأول</h3>
-          <p class="p-desc">ملخص شامل ومنظّم لمادة لغتي الجميلة للصف الخامس الابتدائي — الفصل الدراسي الأول</p>
-          <div class="p-features">
-            <span class="p-feature">📄 PDF</span>
-            <span class="p-feature">📚 خامس ف1</span>
-          </div>
-          <div class="p-foot">
-            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-              <span class="p-discount-badge">خصم 35%</span>
-              <div class="p-price">19 <span class="currency">ر.س</span></div>
-              <span class="p-price-old">29 ر.س</span>
-            </div>
-            <button class="p-btn" onclick="openPreview('arabic-g5-s1','ملخص لغتي — خامس ف1',10)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — خامس ف1')">اطلب الآن</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card" data-r data-cat="summaries">
-        <div class="p-exclusive"></div>
-        <span class="p-badge badge-new">جديد</span>
-        <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#2563eb,#60a5fa)"></div>
-          <div class="p-dots"></div>
-          <div class="emoji">📖</div>
-        </div>
-        <div class="p-body">
-          <div class="p-cat">ملخصات</div>
-          <h3 class="p-title">ملخص مادة لغتي — الصف الخامس، الفصل الثاني</h3>
-          <p class="p-desc">ملخص شامل ومنظّم لمادة لغتي الجميلة للصف الخامس الابتدائي — الفصل الدراسي الثاني</p>
-          <div class="p-features">
-            <span class="p-feature">📄 PDF</span>
-            <span class="p-feature">📚 خامس ف2</span>
-          </div>
-          <div class="p-foot">
-            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-              <span class="p-discount-badge">خصم 35%</span>
-              <div class="p-price">19 <span class="currency">ر.س</span></div>
-              <span class="p-price-old">29 ر.س</span>
-            </div>
-            <button class="p-btn" onclick="openPreview('arabic-g5-s2','ملخص لغتي — خامس ف2',11)">معاينة</button>
-            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — خامس ف2')">اطلب الآن</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card soon" data-r data-cat="tests">
-        <div class="soon-overlay"><div class="soon-label">⏳ قريباً</div></div>
-        <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#94A3B8,#CBD5E1)"></div>
-          <div class="p-dots"></div>
-          <div class="emoji">🧠</div>
-        </div>
-        <div class="p-body">
-          <div class="p-cat">اختبارات</div>
-          <h3 class="p-title">بنك أسئلة القدرات</h3>
-          <p class="p-desc">أسئلة محلولة للقسم الكمي واللفظي — قريباً بإذن الله</p>
-          <div class="p-foot">
-            <div class="p-price" style="color:var(--ink-4)">—</div>
-            <button class="p-btn soon-btn">قريباً</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card soon" data-r data-cat="tests">
-        <div class="soon-overlay"><div class="soon-label">⏳ قريباً</div></div>
-        <div class="p-img">
-          <div class="p-img-bg" style="background:linear-gradient(135deg,#94A3B8,#CBD5E1)"></div>
-          <div class="p-dots"></div>
-          <div class="emoji">🎯</div>
-        </div>
-        <div class="p-body">
-          <div class="p-cat">اختبارات</div>
-          <h3 class="p-title">بنك أسئلة التحصيلي</h3>
-          <p class="p-desc">ملخصات وتجميعات لاختبار التحصيلي — قريباً بإذن الله</p>
-          <div class="p-foot">
-            <div class="p-price" style="color:var(--ink-4)">—</div>
-            <button class="p-btn soon-btn">قريباً</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- BOOKS DIVIDER -->
-    <div class="books-divider" data-r>
-      <div class="books-divider-label">
-        <div class="books-divider-icon">📕</div>
-        كتب من تأليف المنصة
-        <span class="books-divider-badge">حصري</span>
-      </div>
-    </div>
-
-    <!-- PLATFORM-AUTHORED BOOKS -->
-    <div style="display:flex;flex-direction:column;gap:24px;margin-bottom:40px">
-
-      <div class="book-card" data-r>
-        <div class="book-card-inner">
-          <div class="book-cover" style="background:#2563eb;padding:0">
-            <img src="/images/japanese-multiply-cover.png" alt="كتاب الطريقة اليابانية لحفظ جدول الضرب" style="width:100%;height:100%;object-fit:cover;display:block">
-            <div class="book-cover-badge">تأليف المنصة</div>
-            <div class="book-cover-pages">100 صفحة تفاعلية</div>
-          </div>
-          <div class="book-info">
-            <div class="book-cat" style="color:var(--orange);background:var(--orange-soft);border-color:var(--orange)">كتب المنصة — حصري</div>
-            <h3 class="book-title">الطريقة اليابانية لحفظ جدول الضرب — بتقنية تقاطع العصي</h3>
-            <p class="book-desc">كتاب تفاعلي من 100 صفحة يشرح الطريقة اليابانية الشهيرة لحفظ جدول الضرب باستخدام تقنية تقاطع العصي — طريقة بصرية سهلة وممتعة تخلّي طفلك يفهم الضرب ويحبّه بدلاً من الحفظ الأعمى</p>
-
-            <div class="book-highlights">
-              <div class="book-highlight"><span class="book-highlight-icon">📖</span> 100 صفحة تفاعلية</div>
-              <div class="book-highlight"><span class="book-highlight-icon">🎨</span> رسومات توضيحية ملوّنة</div>
-              <div class="book-highlight"><span class="book-highlight-icon">🧩</span> تمارين تطبيقية</div>
-              <div class="book-highlight"><span class="book-highlight-icon">🇯🇵</span> تقنية يابانية مُثبتة</div>
-              <div class="book-highlight"><span class="book-highlight-icon">🧠</span> فهم بدلاً من الحفظ</div>
-              <div class="book-highlight"><span class="book-highlight-icon">👶</span> مناسب من الصف الثاني</div>
-            </div>
-
-            <div class="book-features">
-              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">📕 تأليف المنصة</span>
-              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">📄 PDF تفاعلي</span>
-              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">🧮 جدول الضرب كامل</span>
-              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">🎯 تقنية تقاطع العصي</span>
-              <span class="book-feature" style="background:var(--green-soft);color:var(--green);border-color:rgba(5,150,105,.2)">✅ نتائج من أول أسبوع</span>
-            </div>
-
-            <div class="book-testimonial">
-              <div class="book-testimonial-avatar">👩</div>
-              <div class="book-testimonial-text">
-                <strong>أم عبدالله — الرياض</strong>
-                "ولدي كان يكره جدول الضرب، بعد الكتاب هذا صار يحلّ لحاله ويستمتع! الطريقة اليابانية غيّرت كل شيء"
-              </div>
-            </div>
-
-            <div class="book-foot">
-              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-                <span class="p-discount-badge" style="background:linear-gradient(135deg,var(--orange),#b45309);font-size:13px;padding:6px 14px">خصم 40%</span>
-                <div class="book-price">59 <span class="currency">ر.س</span></div>
-                <span class="book-price-old">99 ر.س</span>
-              </div>
-              <div style="display:flex;gap:8px">
-                <button class="book-btn-preview" onclick="openPreview('book-japanese-multiply','الطريقة اليابانية لحفظ جدول الضرب',20)">معاينة</button>
-                <button class="book-btn" onclick="orderProduct('كتاب الطريقة اليابانية لحفظ جدول الضرب — 100 صفحة تفاعلية — تأليف الإتقان')">اطلب الآن</button>
-              </div>
-            </div>
-            <div class="book-urgency">
-              <span>🔥</span> الطلب عالي على هذا الكتاب — احجز نسختك الآن
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Payment Methods -->
-    <div class="payment-note" data-r style="flex-direction:column;gap:16px;text-align:center">
-      <div style="display:flex;align-items:center;justify-content:center;gap:10px">
-        <svg viewBox="0 0 24 24" fill="#25D366" style="width:28px;height:28px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <strong style="font-size:16px">كيف تطلب؟ عبر الواتساب مباشرة</strong>
-      </div>
-      <div style="font-size:13px;line-height:2">
-        اضغط على <strong>"اطلب الآن"</strong> في أي منتج ← تنتقل للواتساب تلقائياً ← نرسل لك الآيبان ← حوّل المبلغ ← تستلم الملفات فوراً خلال 5 دقائق
-      </div>
-      <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-3)">
-        <span>✅ حوالة بنكية</span>
-        <span style="color:var(--ink-4)">🕐 Apple Pay — قريباً</span>
-        <span style="color:var(--ink-4)">🕐 مدى — قريباً</span>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -1955,6 +1527,437 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- TESTS -->
+<section class="section" id="products">
+  <div class="container">
+    <div class="sec-head" data-r>
+      <div class="sec-over">بنوك الأسئلة</div>
+      <h2 class="sec-title">بنوك الأسئلة والاختبارات</h2>
+      <p class="sec-desc">تجميعات شاملة مع الإجابات النموذجية — جاهزة للتدريب والمراجعة</p>
+    </div>
+
+    <div class="products-grid">
+      <div class="p-card bestseller" data-r data-cat="tests">
+        <div class="bestseller-glow"></div>
+        <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,var(--blue),var(--purple),var(--rose));background-size:200% 100%;animation:gradientShift 3s infinite"></div>
+        <span class="p-badge badge-hot">🔥 الأكثر مبيعاً</span>
+        <div class="p-img">
+          <picture>
+            <source srcset="/images/nafs-ad.webp" type="image/webp">
+            <img src="/images/nafs-ad.png" alt="تجميعات اختبار نافس" class="p-ad-img" loading="lazy">
+          </picture>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">بنك أسئلة نافس</div>
+          <h3 class="p-title">تجميعات اختبار نافس — 1000 سؤال</h3>
+          <div class="p-viewers"><span class="dot"></span> <span>12 طالب يشاهدون هذا المنتج الآن</span></div>
+          <p class="p-desc">تجميعة شاملة تضم 1000 سؤال من اختبارات نافس مع الإجابات النموذجية — تشمل ملفات PDF + دخول الاختبار التدريبي التفاعلي</p>
+          <div class="p-features">
+            <span class="p-feature">📝 1000 سؤال</span>
+            <span class="p-feature">✅ مع الإجابات</span>
+            <span class="p-feature">🎯 اختبار تفاعلي</span>
+            <span class="p-feature">📄 ملفات PDF</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 30%</span>
+              <div class="p-price">49 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">69 ر.س</span>
+            </div>
+            <button class="p-btn" onclick="openPreview('nafs','بنك أسئلة نافس — 1000 سؤال',271)">معاينة</button>
+            <button class="p-btn-buy btn-glow" onclick="orderProduct('بنك أسئلة نافس — 1000 سؤال')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
+      <div class="p-card soon" data-r data-cat="tests">
+        <div class="soon-overlay"><div class="soon-label">⏳ قريباً</div></div>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#94A3B8,#CBD5E1)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">🧠</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">اختبارات</div>
+          <h3 class="p-title">بنك أسئلة القدرات</h3>
+          <p class="p-desc">أسئلة محلولة للقسم الكمي واللفظي — قريباً بإذن الله</p>
+          <div class="p-foot">
+            <div class="p-price" style="color:var(--ink-4)">—</div>
+            <button class="p-btn soon-btn">قريباً</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card soon" data-r data-cat="tests">
+        <div class="soon-overlay"><div class="soon-label">⏳ قريباً</div></div>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#94A3B8,#CBD5E1)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">🎯</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">اختبارات</div>
+          <h3 class="p-title">بنك أسئلة التحصيلي</h3>
+          <p class="p-desc">ملخصات وتجميعات لاختبار التحصيلي — قريباً بإذن الله</p>
+          <div class="p-foot">
+            <div class="p-price" style="color:var(--ink-4)">—</div>
+            <button class="p-btn soon-btn">قريباً</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SUMMARIES -->
+<section class="section section-alt" id="summaries">
+  <div class="container">
+    <div class="sec-head" data-r>
+      <div class="sec-over">الملخصات</div>
+      <h2 class="sec-title">ملخصات المواد الدراسية</h2>
+      <p class="sec-desc">ملخصات شاملة ومنظّمة لأهم المواد — موجّهة للاختبارات النهائية والمركزية</p>
+    </div>
+
+    <div class="products-grid">
+      <div class="p-card" data-r data-cat="summaries">
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">متوفر</span>
+        <div class="p-img">
+          <picture>
+            <source srcset="/images/science-summary-ad.webp" type="image/webp">
+            <img src="/images/science-summary-ad.png" alt="ملخص مادة العلوم" class="p-ad-img" loading="lazy">
+          </picture>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">ملخصات</div>
+          <h3 class="p-title">ملخص مادة العلوم — الصف السادس، الفصل الثاني</h3>
+          <p class="p-desc">ملخص شامل ومنظّم لمادة العلوم للصف السادس الابتدائي — يغطي أهم المفاهيم والمواضيع الأساسية</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
+            <button class="p-btn" onclick="openPreview('science-summary','ملخص العلوم — سادس ف2',15)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص العلوم — سادس ف2')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" data-r data-cat="summaries">
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">متوفر</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#1e40af,#3b82f6)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">📖</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">ملخصات</div>
+          <h3 class="p-title">ملخص مادة لغتي — الصف السادس، الفصل الثاني</h3>
+          <p class="p-desc">ملخص شامل ومنظّم لمادة لغتي الجميلة للصف السادس الابتدائي — يغطي أهم الدروس والقواعد</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
+            <button class="p-btn" onclick="openPreview('arabic-summary','ملخص لغتي — سادس ف2',12)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — سادس ف2')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" data-r data-cat="summaries">
+        <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,var(--blue),#60a5fa,var(--blue));background-size:200% 100%;animation:shimmer 3s infinite"></div>
+        <span class="p-badge" style="background:var(--blue);color:#fff">⭐ حصري</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#1e40af,#60a5fa)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">🇬🇧</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">ملخصات — حصري</div>
+          <h3 class="p-title">ملخص الإنجليزي Top Goal 2 — الصف السادس، الفصل الثاني</h3>
+          <p class="p-desc">ملخص حصري لأحدث منهج إنجليزي Top Goal 2 — لا يتوفر في أي موقع آخر</p>
+          <div class="p-features">
+            <span class="p-feature">⭐ حصري</span>
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
+            <button class="p-btn" onclick="openPreview('english-summary','ملخص إنجليزي Top Goal 2 — سادس ف2',12)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص إنجليزي Top Goal 2 — سادس ف2')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" data-r data-cat="expressions">
+        <div class="p-exclusive" style="opacity:1;background:linear-gradient(90deg,#f59e0b,#ef4444,#f59e0b);background-size:200% 100%;animation:shimmer 3s infinite"></div>
+        <span class="p-badge" style="background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff">🔥 جديد وحصري</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#92400e,#f59e0b)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">✍️</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat" style="color:var(--orange);background:var(--orange-soft);border-color:var(--orange)">تعبيرات — حصري</div>
+          <h3 class="p-title">تعبيرات إنجليزي Top Goal 2 — الصف السادس، الفصل الثاني</h3>
+          <p class="p-desc">التعبيرات المتوقعة للاختبار المركزي — مضمونة بنسبة كبيرة لأنها مستخرجة مباشرة من المنهج ومبنية على نمط الاختبارات السابقة</p>
+          <div class="p-features">
+            <span class="p-feature">🔥 مضمونة من المنهج</span>
+            <span class="p-feature">✍️ تعبيرات متوقعة</span>
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
+            <button class="p-btn" onclick="openPreview('english-expressions','تعبيرات إنجليزي Top Goal 2 — سادس ف2',8)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('تعبيرات إنجليزي Top Goal 2 — سادس ف2')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="p-card" data-r data-cat="summaries">
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">جديد</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#2563eb,#60a5fa)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">📖</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">ملخصات</div>
+          <h3 class="p-title">ملخص مادة لغتي — الصف الخامس، الفصل الأول</h3>
+          <p class="p-desc">ملخص شامل ومنظّم لمادة لغتي الجميلة للصف الخامس الابتدائي — الفصل الدراسي الأول</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 خامس ف1</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
+            <button class="p-btn" onclick="openPreview('arabic-g5-s1','ملخص لغتي — خامس ف1',10)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — خامس ف1')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
+      <div class="p-card" data-r data-cat="summaries">
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">جديد</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#2563eb,#60a5fa)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">📖</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">ملخصات</div>
+          <h3 class="p-title">ملخص مادة لغتي — الصف الخامس، الفصل الثاني</h3>
+          <p class="p-desc">ملخص شامل ومنظّم لمادة لغتي الجميلة للصف الخامس الابتدائي — الفصل الدراسي الثاني</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 خامس ف2</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 35%</span>
+              <div class="p-price">19 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">29 ر.س</span>
+            </div>
+            <button class="p-btn" onclick="openPreview('arabic-g5-s2','ملخص لغتي — خامس ف2',11)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('ملخص لغتي — خامس ف2')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKSHEETS -->
+<section class="section" id="worksheets">
+  <div class="container">
+    <div class="sec-head" data-r>
+      <div class="sec-over">أوراق العمل</div>
+      <h2 class="sec-title">أوراق عمل تدريبية</h2>
+      <p class="sec-desc">تمارين وأنشطة متنوعة تُثبّت الفهم وتجهّزك للاختبار</p>
+    </div>
+
+    <div class="products-grid">
+      <div class="p-card" data-r data-cat="worksheets">
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">جديد</span>
+        <div class="p-img">
+          <picture>
+            <source srcset="/images/science-worksheets-ad.webp" type="image/webp">
+            <img src="/images/science-worksheets-ad.png" alt="أوراق عمل علوم" class="p-ad-img" loading="lazy">
+          </picture>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">أوراق عمل</div>
+          <h3 class="p-title">أوراق عمل علوم — الصف السادس، الفصل الثاني</h3>
+          <p class="p-desc">أوراق عمل شاملة لمادة العلوم للصف السادس الابتدائي — تمارين وأنشطة متنوعة</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+            <span class="p-feature">📝 أوراق عمل</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 25%</span>
+              <div class="p-price">29 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">39 ر.س</span>
+            </div>
+            <button class="p-btn" onclick="openPreview('science-worksheets','أوراق عمل العلوم — سادس ف2',30)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('أوراق عمل العلوم — سادس ف2')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" data-r data-cat="worksheets">
+        <div class="p-exclusive"></div>
+        <span class="p-badge badge-new">جديد</span>
+        <div class="p-img">
+          <div class="p-img-bg" style="background:linear-gradient(135deg,#1d4ed8,#93c5fd)"></div>
+          <div class="p-dots"></div>
+          <div class="emoji">📝</div>
+        </div>
+        <div class="p-body">
+          <div class="p-cat">أوراق عمل</div>
+          <h3 class="p-title">أوراق عمل لغتي — الصف السادس، الفصل الثاني</h3>
+          <p class="p-desc">أوراق عمل شاملة لمادة لغتي الجميلة للصف السادس الابتدائي — تدريبات وأنشطة متنوعة</p>
+          <div class="p-features">
+            <span class="p-feature">📄 PDF</span>
+            <span class="p-feature">📚 سادس ف2</span>
+            <span class="p-feature">📝 أوراق عمل</span>
+          </div>
+          <div class="p-foot">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="p-discount-badge">خصم 25%</span>
+              <div class="p-price">29 <span class="currency">ر.س</span></div>
+              <span class="p-price-old">39 ر.س</span>
+            </div>
+            <button class="p-btn" onclick="openPreview('arabic-worksheets','أوراق عمل لغتي — سادس ف2',24)">معاينة</button>
+            <button class="p-btn-buy" onclick="orderProduct('أوراق عمل لغتي — سادس ف2')">اطلب الآن</button>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</section>
+
+<!-- BOOKS -->
+<section class="section section-alt" id="books">
+  <div class="container">
+    <div class="sec-head" data-r>
+      <div class="sec-over">كتب المنصة</div>
+      <h2 class="sec-title">كتب من تأليف الإتقان</h2>
+      <p class="sec-desc">كتب حصرية من إعدادنا — مصمّمة لتحقيق أقصى فائدة تعليمية</p>
+    </div>
+
+    <!-- PLATFORM-AUTHORED BOOKS -->
+    <div style="display:flex;flex-direction:column;gap:24px;margin-bottom:40px">
+
+      <div class="book-card" data-r>
+        <div class="book-card-inner">
+          <div class="book-cover" style="background:#2563eb;padding:0">
+            <img src="/images/japanese-multiply-cover.png" alt="كتاب الطريقة اليابانية لحفظ جدول الضرب" style="width:100%;height:100%;object-fit:cover;display:block">
+            <div class="book-cover-badge">تأليف المنصة</div>
+            <div class="book-cover-pages">100 صفحة تفاعلية</div>
+          </div>
+          <div class="book-info">
+            <div class="book-cat" style="color:var(--orange);background:var(--orange-soft);border-color:var(--orange)">كتب المنصة — حصري</div>
+            <h3 class="book-title">الطريقة اليابانية لحفظ جدول الضرب — بتقنية تقاطع العصي</h3>
+            <p class="book-desc">كتاب تفاعلي من 100 صفحة يشرح الطريقة اليابانية الشهيرة لحفظ جدول الضرب باستخدام تقنية تقاطع العصي — طريقة بصرية سهلة وممتعة تخلّي طفلك يفهم الضرب ويحبّه بدلاً من الحفظ الأعمى</p>
+
+            <div class="book-highlights">
+              <div class="book-highlight"><span class="book-highlight-icon">📖</span> 100 صفحة تفاعلية</div>
+              <div class="book-highlight"><span class="book-highlight-icon">🎨</span> رسومات توضيحية ملوّنة</div>
+              <div class="book-highlight"><span class="book-highlight-icon">🧩</span> تمارين تطبيقية</div>
+              <div class="book-highlight"><span class="book-highlight-icon">🇯🇵</span> تقنية يابانية مُثبتة</div>
+              <div class="book-highlight"><span class="book-highlight-icon">🧠</span> فهم بدلاً من الحفظ</div>
+              <div class="book-highlight"><span class="book-highlight-icon">🎓</span> من الصف الثاني ابتدائي للثالث ثانوي</div>
+            </div>
+
+            <div class="book-features">
+              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">📕 تأليف المنصة</span>
+              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">📄 PDF تفاعلي</span>
+              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">🧮 جدول الضرب كامل</span>
+              <span class="book-feature" style="background:var(--orange-soft);color:var(--orange);border-color:rgba(234,88,12,.2)">🎯 تقنية تقاطع العصي</span>
+              <span class="book-feature" style="background:var(--green-soft);color:var(--green);border-color:rgba(5,150,105,.2)">✅ نتائج من أول أسبوع</span>
+            </div>
+
+            <div class="book-testimonial">
+              <div class="book-testimonial-avatar">👩</div>
+              <div class="book-testimonial-text">
+                <strong>أم عبدالله — الرياض</strong>
+                "ولدي كان يكره جدول الضرب، بعد الكتاب هذا صار يحلّ لحاله ويستمتع! الطريقة اليابانية غيّرت كل شيء"
+              </div>
+            </div>
+
+            <div class="book-foot">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span class="p-discount-badge" style="background:linear-gradient(135deg,var(--orange),#b45309);font-size:13px;padding:6px 14px">خصم 40%</span>
+                <div class="book-price">59 <span class="currency">ر.س</span></div>
+                <span class="book-price-old">99 ر.س</span>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="book-btn-preview" onclick="openPreview('book-japanese-multiply','الطريقة اليابانية لحفظ جدول الضرب',20)">معاينة</button>
+                <button class="book-btn" onclick="orderProduct('كتاب الطريقة اليابانية لحفظ جدول الضرب — 100 صفحة تفاعلية — تأليف الإتقان')">اطلب الآن</button>
+              </div>
+            </div>
+            <div class="book-urgency">
+              <span>🔥</span> الطلب عالي على هذا الكتاب — احجز نسختك الآن
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Payment Methods -->
+    <div class="payment-note" data-r style="flex-direction:column;gap:16px;text-align:center">
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px">
+        <svg viewBox="0 0 24 24" fill="#25D366" style="width:28px;height:28px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <strong style="font-size:16px">كيف تطلب؟ عبر الواتساب مباشرة</strong>
+      </div>
+      <div style="font-size:13px;line-height:2">
+        اضغط على <strong>"اطلب الآن"</strong> في أي منتج ← تنتقل للواتساب تلقائياً ← نرسل لك الآيبان ← حوّل المبلغ ← تستلم الملفات فوراً خلال 5 دقائق
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-3)">
+        <span>✅ حوالة بنكية</span>
+        <span style="color:var(--ink-4)">🕐 Apple Pay — قريباً</span>
+        <span style="color:var(--ink-4)">🕐 مدى — قريباً</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -2172,13 +2175,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
         </ul>
       </div>
       <div class="footer-col">
-        <h4>المنتجات</h4>
+        <h4>الأقسام</h4>
         <ul>
-          <li><a href="#products">تجميعات نافس</a></li>
-          <li><a href="#products">ملخص العلوم — سادس ف2</a></li>
-          <li><a href="#products">ملخص لغتي — سادس ف2</a></li>
-          <li><a href="#products">ملخص إنجليزي Top Goal 2 — سادس ف2</a></li>
-          <li><a href="#products">تعبيرات إنجليزي Top Goal 2 — سادس ف2</a></li>
+          <li><a href="#products">بنوك الأسئلة</a></li>
+          <li><a href="#summaries">الملخصات</a></li>
+          <li><a href="#worksheets">أوراق العمل</a></li>
+          <li><a href="#books">كتب المنصة</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -2464,7 +2466,7 @@ const counterObs = new IntersectionObserver(e => {
 document.querySelectorAll('.hero-stats, .stats-banner').forEach(el => counterObs.observe(el));
 
 // === ACTIVE NAV SECTION TRACKING ===
-const navSections = ['products','stages','features'];
+const navSections = ['products','summaries','worksheets','books','stages','features'];
 const navObs = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting){
@@ -2487,28 +2489,6 @@ document.querySelectorAll('.s-tab').forEach(t => {
     document.querySelectorAll('.s-panel').forEach(x=>x.classList.remove('on'));
     t.classList.add('on');
     document.getElementById('p-'+t.dataset.s).classList.add('on');
-  });
-});
-
-// === PRODUCT FILTERS ===
-document.querySelectorAll('.pf-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-    const filter = btn.dataset.filter;
-    document.querySelectorAll('.p-card[data-cat]').forEach(card => {
-      if (filter === 'all' || card.dataset.cat === filter) {
-        card.classList.remove('filter-hide');
-      } else {
-        card.classList.add('filter-hide');
-      }
-    });
-    // Also handle .p-card.soon without data-cat and book cards
-    document.querySelectorAll('.p-card.soon').forEach(card => {
-      if (!card.dataset.cat) {
-        card.classList.toggle('filter-hide', filter !== 'all');
-      }
-    });
   });
 });
 
