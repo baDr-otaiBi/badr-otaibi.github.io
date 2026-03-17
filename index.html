@@ -756,7 +756,22 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
   border-top:1px solid rgba(255,255,255,.1);
   padding-top:24px;font-size:13px;color:rgba(255,255,255,.45);text-align:center;
 }
+.footer-bottom a{color:rgba(255,255,255,.55);text-decoration:none;transition:.2s}
+.footer-bottom a:hover{color:var(--blue)}
+.footer-links{display:flex;justify-content:center;gap:18px;margin-top:10px;flex-wrap:wrap}
+.footer-license{margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.footer-license img{height:50px;width:auto;filter:brightness(0) invert(1);opacity:.7}
+.footer-license p{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8}
 [data-theme="dark"] .footer-brand img{filter:brightness(0) invert(1)}
+
+/* Trust Badge */
+.trust-bar{
+  background:linear-gradient(135deg,#059669,#047857);color:#fff;
+  text-align:center;padding:8px 16px;font-size:13px;font-weight:700;
+  font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:8px;
+  letter-spacing:.02em;
+}
+.trust-bar svg{width:18px;height:18px;flex-shrink:0}
 
 /* Scroll to top */
 .scroll-top{
@@ -1283,6 +1298,12 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
 
 <!-- Custom Cursor -->
 <div class="cursor-dot" id="cursorDot"></div>
+
+<!-- TRUST BADGE -->
+<div class="trust-bar">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+  موقع موثوق — منصة الإتقان التعليمية مرخّصة رسمياً
+</div>
 
 <!-- URGENCY BANNER -->
 <div class="urgency-banner">
@@ -2193,6 +2214,8 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
         <ul>
           <li><a href="/games/">الألعاب التعليمية</a></li>
           <li><a href="/nafs.html">اختبار نافس</a></li>
+          <li><a href="/terms.html">شروط الخدمة</a></li>
+          <li><a href="/privacy.html">سياسة الخصوصية</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -2204,6 +2227,14 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
     </div>
     <div class="footer-bottom">
       &copy; 2026 الإتقان التعليمية — جميع الحقوق محفوظة
+      <div class="footer-links">
+        <a href="/terms.html">شروط الخدمة</a>
+        <a href="/privacy.html">سياسة الخصوصية</a>
+      </div>
+      <div class="footer-license">
+        <img src="/name-logo.png" alt="بدر محمد العتيبي">
+        <p>يتم تشغيل منصة الإتقان بواسطة <strong>بدر محمد العتيبي</strong> بموجب رخصة عمل حر — الوثيقة رقم (FL-101913154)</p>
+      </div>
     </div>
   </div>
 </footer>
