@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مقالات تعليمية — الإتقان التعليمية</title>
+<meta name="description" content="مقالات تعليمية وتربوية من منصة الإتقان — نصائح دراسية، طرق مذاكرة فعّالة، وقيم تربوية لبناء جيل متميّز">
+<link rel="icon" type="image/png" href="/logo-new.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+(function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+</script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#111827;--ink-2:#4b5563;--ink-3:#6b7280;--ink-4:#9ca3af;--ink-5:#d1d5db;
+  --border:#e5e7eb;--bg:#f9fafb;--bg-alt:#f3f4f6;--white:#fff;
+  --grid-color:rgba(0,0,0,.03);
+  --green:#059669;--green-soft:#ecfdf5;
+  --blue:#2563eb;--blue-soft:#eff6ff;
+  --purple:#7c3aed;--purple-soft:#f5f3ff;
+  --rose:#e11d48;--rose-soft:#fff1f2;
+  --orange:#ea580c;--orange-soft:#fff7ed;
+  --teal:#0d9488;--teal-soft:#f0fdfa;
+  --yellow:#facc15;--yellow-dark:#a16207;
+  --font:'Cairo',sans-serif;
+  --font-body:'Rubik','Cairo',sans-serif;
+  --font-read:'Noto Naskh Arabic','Rubik','Cairo',sans-serif;
+  --radius:14px;--radius-lg:22px;--radius-xl:30px;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"]{
+  --ink:#f3f4f6;--ink-2:#d1d5db;--ink-3:#9ca3af;--ink-4:#6b7280;--ink-5:#374151;
+  --border:#334155;--bg:#0f172a;--bg-alt:#162032;--white:#1e293b;
+  --grid-color:rgba(255,255,255,.03);
+  --green:#34d399;--green-soft:rgba(52,211,153,.12);
+  --blue:#60a5fa;--blue-soft:rgba(96,165,250,.15);
+  --purple:#a78bfa;--purple-soft:rgba(167,139,250,.15);
+  --rose:#fb7185;--rose-soft:rgba(251,113,133,.12);
+  --orange:#fb923c;--orange-soft:rgba(251,146,60,.12);
+  --teal:#2dd4bf;--teal-soft:rgba(45,212,191,.12);
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{
+  font-family:var(--font-body);background:var(--bg);color:var(--ink);line-height:1.8;font-size:15px;
+  background-image:
+    radial-gradient(ellipse at 20% 0%,rgba(251,191,36,.08) 0%,transparent 50%),
+    radial-gradient(ellipse at 80% 100%,rgba(147,51,234,.06) 0%,transparent 50%),
+    linear-gradient(var(--grid-color) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,40px 40px,40px 40px;
+  background-attachment:fixed;
+  transition:background .3s var(--ease),color .3s var(--ease);
+  opacity:0;animation:pageIn .6s var(--ease) .1s forwards;
+}
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
+@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeScale{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(251,191,36,.15)}50%{box-shadow:0 0 40px rgba(251,191,36,.3)}}
+@keyframes heartBeat{0%{transform:scale(1)}15%{transform:scale(1.3)}30%{transform:scale(1)}45%{transform:scale(1.15)}60%{transform:scale(1)}}
+::selection{background:var(--purple);color:#fff}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-thumb{background:var(--ink-5);border-radius:10px}
+
+/* ===== NAV ===== */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);transition:background .3s,box-shadow .3s;
+}
+[data-theme="dark"] .nav{background:rgba(15,23,42,.9)}
+.nav-inner{
+  max-width:1280px;margin:0 auto;padding:0 24px;
+  display:flex;align-items:center;justify-content:space-between;height:68px;
+}
+.logo{display:flex;align-items:center;text-decoration:none}
+.logo img{height:56px;width:auto;padding:6px 0}
+.nav-links{display:flex;gap:6px;list-style:none;align-items:center}
+.nav-links a{
+  text-decoration:none;color:var(--ink-2);font-size:14px;font-weight:700;
+  padding:8px 16px;border-radius:10px;transition:.2s var(--ease);font-family:var(--font);
+}
+.nav-links a:hover,.nav-links a.on{color:var(--blue);background:var(--blue-soft)}
+.nav-actions{display:flex;align-items:center;gap:8px}
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;border:1.5px solid var(--border);
+  background:var(--white);cursor:pointer;display:grid;place-items:center;
+  font-size:18px;transition:.3s var(--ease);color:var(--ink-3);
+}
+.theme-toggle:hover{background:var(--blue-soft);color:var(--blue);border-color:var(--blue)}
+.back-btn{
+  padding:8px 20px;border-radius:12px;background:var(--green);color:#fff;
+  font-family:var(--font);font-size:13px;font-weight:700;text-decoration:none;
+  transition:.25s var(--ease);
+}
+.back-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(5,150,105,.3)}
+.hamburger{display:none;background:none;border:none;cursor:pointer}
+.hamburger svg{width:24px;height:24px;color:var(--ink)}
+
+/* ===== PAGE HEADER ===== */
+.page-header{
+  text-align:center;padding:72px 24px 48px;position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;
+  background:radial-gradient(circle,rgba(251,191,36,.12),transparent 70%);
+  border-radius:50%;animation:float 6s ease-in-out infinite;pointer-events:none;
+}
+.page-header::after{
+  content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;
+  background:radial-gradient(circle,rgba(147,51,234,.1),transparent 70%);
+  border-radius:50%;animation:float 8s ease-in-out infinite reverse;pointer-events:none;
+}
+.page-header .badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;letter-spacing:0.5px;
+  color:#92400e;background:linear-gradient(135deg,#fef3c7,#fde68a);
+  padding:8px 22px;border-radius:100px;
+  border:1.5px solid #f59e0b;font-family:var(--font);margin-bottom:20px;
+  box-shadow:0 2px 12px rgba(245,158,11,.2);
+}
+[data-theme="dark"] .page-header .badge{color:#fbbf24;background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(251,191,36,.08));border-color:rgba(251,191,36,.4)}
+.page-header h1{
+  font-family:var(--font);font-size:44px;font-weight:900;color:var(--ink);
+  margin-bottom:16px;letter-spacing:-0.02em;line-height:1.4;
+  position:relative;z-index:1;
+}
+.page-header h1 .highlight{
+  background:linear-gradient(135deg,#f59e0b,#ea580c);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.page-header p{
+  font-size:17px;color:var(--ink-2);max-width:600px;margin:0 auto;line-height:2;
+  position:relative;z-index:1;
+}
+.page-header .stats-row{
+  display:flex;justify-content:center;gap:32px;margin-top:28px;position:relative;z-index:1;
+}
+.page-header .stat-item{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.page-header .stat-num{
+  font-family:var(--font);font-size:28px;font-weight:900;color:var(--ink);
+}
+.page-header .stat-label{
+  font-family:var(--font);font-size:12px;font-weight:600;color:var(--ink-3);
+}
+
+/* ===== FILTER TABS ===== */
+.filter-tabs{
+  display:flex;justify-content:center;gap:8px;flex-wrap:wrap;
+  max-width:700px;margin:0 auto 48px;padding:0 24px;
+}
+.f-tab{
+  padding:8px 20px;border-radius:100px;border:1.5px solid var(--border);
+  background:var(--white);color:var(--ink-2);font-family:var(--font);
+  font-size:13px;font-weight:700;cursor:pointer;transition:.2s var(--ease);
+}
+.f-tab:hover{border-color:var(--blue);color:var(--blue)}
+.f-tab.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* ===== ARTICLES GRID ===== */
+.container{max-width:900px;margin:0 auto;padding:0 24px 80px}
+.articles-list{display:flex;flex-direction:column;gap:56px}
+
+/* ===== ARTICLE CARD — PAPER STYLE ===== */
+.article{
+  position:relative;
+  background:linear-gradient(165deg,#fffdf7 0%,#fefce8 30%,#fef9c3 100%);
+  border:none;border-radius:4px;overflow:visible;
+  transition:.5s var(--ease);
+  animation:fadeScale .7s var(--ease) both;
+  /* Paper shadow */
+  box-shadow:
+    0 1px 1px rgba(0,0,0,.05),
+    0 4px 6px rgba(0,0,0,.04),
+    0 12px 24px rgba(0,0,0,.06),
+    inset 0 0 80px rgba(255,249,219,.5);
+}
+[data-theme="dark"] .article{
+  background:linear-gradient(165deg,#1e1b14 0%,#2a2517 30%,#302a1a 100%);
+  box-shadow:0 1px 1px rgba(0,0,0,.2),0 4px 6px rgba(0,0,0,.15),0 12px 24px rgba(0,0,0,.2),inset 0 0 80px rgba(50,44,20,.3);
+}
+/* Paper corner fold */
+.article::before{
+  content:'';position:absolute;top:0;left:0;width:40px;height:40px;
+  background:linear-gradient(135deg,var(--bg) 50%,#f5e9b0 50%,#ecd97e);
+  box-shadow:2px 2px 4px rgba(0,0,0,.08);z-index:2;
+}
+[data-theme="dark"] .article::before{
+  background:linear-gradient(135deg,var(--bg) 50%,#3d3520 50%,#4a3f25);
+}
+/* Tape decoration on top */
+.article::after{
+  content:'';position:absolute;top:-8px;right:60px;width:80px;height:28px;
+  background:rgba(251,191,36,.35);border-radius:2px;
+  transform:rotate(-2deg);z-index:3;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+[data-theme="dark"] .article::after{background:rgba(251,191,36,.15)}
+.article:hover{
+  transform:translateY(-6px) rotate(-0.3deg);
+  box-shadow:0 2px 2px rgba(0,0,0,.04),0 8px 16px rgba(0,0,0,.06),0 24px 48px rgba(0,0,0,.1);
+}
+/* Article number badge */
+.article-num{
+  position:absolute;top:16px;right:16px;z-index:4;
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font);font-size:16px;font-weight:900;
+  box-shadow:0 3px 12px rgba(245,158,11,.35);
+}
+[data-theme="dark"] .article-num{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#1e1b14}
+
+.article-head{
+  padding:48px 48px 0;position:relative;z-index:1;
+}
+.article-cat{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:700;letter-spacing:0.5px;
+  padding:5px 14px;border-radius:100px;font-family:var(--font);margin-bottom:18px;
+}
+.cat-study{color:#1e40af;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3)}
+.cat-skills{color:#0f766e;background:rgba(13,148,136,.1);border:1px solid rgba(13,148,136,.3)}
+.cat-values{color:#6d28d9;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3)}
+.cat-parents{color:#be123c;background:rgba(225,29,72,.08);border:1px solid rgba(225,29,72,.3)}
+.cat-motivation{color:#c2410c;background:rgba(234,88,12,.1);border:1px solid rgba(234,88,12,.3)}
+[data-theme="dark"] .cat-study{color:var(--blue);background:var(--blue-soft);border-color:var(--blue)}
+[data-theme="dark"] .cat-skills{color:var(--teal);background:var(--teal-soft);border-color:var(--teal)}
+[data-theme="dark"] .cat-values{color:var(--purple);background:var(--purple-soft);border-color:var(--purple)}
+[data-theme="dark"] .cat-parents{color:var(--rose);background:var(--rose-soft);border-color:var(--rose)}
+[data-theme="dark"] .cat-motivation{color:var(--orange);background:var(--orange-soft);border-color:var(--orange)}
+
+.article-title{
+  font-family:var(--font);font-size:28px;font-weight:900;color:#1a1a1a;
+  margin-bottom:14px;line-height:1.5;letter-spacing:-0.01em;
+}
+[data-theme="dark"] .article-title{color:var(--ink)}
+.article-info{
+  display:flex;align-items:center;gap:16px;color:#78716c;font-size:13px;
+  font-family:var(--font);flex-wrap:wrap;
+}
+[data-theme="dark"] .article-info{color:var(--ink-3)}
+.article-info span{display:flex;align-items:center;gap:5px}
+.article-info svg{width:15px;height:15px}
+
+/* Decorative divider */
+.article-divider{
+  margin:24px 48px 0;height:2px;position:relative;z-index:1;
+  background:repeating-linear-gradient(90deg,#d4a017 0,#d4a017 8px,transparent 8px,transparent 16px);
+  opacity:.3;
+}
+[data-theme="dark"] .article-divider{opacity:.15}
+
+.article-body{
+  padding:28px 48px 36px;position:relative;z-index:1;
+  font-family:var(--font-read);font-size:19px;line-height:2.4;color:#44403c;
+}
+[data-theme="dark"] .article-body{color:var(--ink-2)}
+.article-body p{margin-bottom:22px}
+.article-body p:last-child{margin-bottom:0}
+.article-body strong{color:#1a1a1a;font-weight:600}
+[data-theme="dark"] .article-body strong{color:var(--ink)}
+.article-body h3{
+  font-family:var(--font);font-size:20px;font-weight:800;color:#292524;
+  margin:36px 0 16px;padding-bottom:10px;
+  border-bottom:2px dashed rgba(180,140,40,.25);
+  display:flex;align-items:center;gap:10px;
+}
+[data-theme="dark"] .article-body h3{color:var(--ink);border-color:rgba(251,191,36,.15)}
+.article-body ul,.article-body ol{
+  padding-right:28px;margin:16px 0 22px;
+}
+.article-body li{margin-bottom:10px;line-height:2.2}
+.article-body .tip{
+  background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(37,99,235,.12));
+  border-right:4px solid #2563eb;
+  padding:22px 28px;border-radius:0 16px 16px 0;
+  margin:28px 0;font-size:17px;color:#1e3a5f;line-height:2;
+  position:relative;
+}
+[data-theme="dark"] .article-body .tip{background:var(--blue-soft);color:var(--ink)}
+.article-body .tip::before{
+  content:'';position:absolute;top:12px;right:-22px;width:20px;height:20px;
+  background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;
+}
+.article-body .quote{
+  background:linear-gradient(135deg,rgba(5,150,105,.05),rgba(5,150,105,.12));
+  border-right:4px solid #059669;
+  padding:22px 28px;border-radius:0 16px 16px 0;
+  margin:28px 0;font-size:17px;color:#064e3b;font-weight:500;line-height:2;
+  position:relative;
+}
+[data-theme="dark"] .article-body .quote{background:var(--green-soft);color:var(--ink)}
+.article-body .warn{
+  background:linear-gradient(135deg,rgba(234,88,12,.05),rgba(234,88,12,.12));
+  border-right:4px solid #ea580c;
+  padding:22px 28px;border-radius:0 16px 16px 0;
+  margin:28px 0;font-size:17px;color:#7c2d12;line-height:2;
+}
+[data-theme="dark"] .article-body .warn{background:var(--orange-soft);color:var(--ink)}
+
+/* ===== ARTICLE FOOTER — TAGS + REACTIONS ===== */
+.article-footer{
+  padding:0 48px 36px;position:relative;z-index:1;
+}
+.article-tags{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px;
+}
+.tag{
+  font-size:12px;font-weight:600;color:#78716c;background:rgba(255,255,255,.6);
+  padding:5px 14px;border-radius:100px;font-family:var(--font);border:1px solid rgba(180,140,40,.2);
+}
+[data-theme="dark"] .tag{background:rgba(255,255,255,.05);border-color:rgba(251,191,36,.15);color:var(--ink-3)}
+
+/* Reaction bar */
+.reactions{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding-top:16px;border-top:1px dashed rgba(180,140,40,.2);
+}
+[data-theme="dark"] .reactions{border-color:rgba(251,191,36,.1)}
+.reactions-label{font-family:var(--font);font-size:13px;font-weight:700;color:#92400e;margin-left:8px}
+[data-theme="dark"] .reactions-label{color:#fbbf24}
+.react-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 16px;border-radius:100px;
+  border:1.5px solid rgba(180,140,40,.2);background:rgba(255,255,255,.5);
+  cursor:pointer;transition:.3s var(--ease);font-family:var(--font);
+  font-size:13px;font-weight:600;color:#78716c;
+}
+[data-theme="dark"] .react-btn{background:rgba(255,255,255,.05);border-color:rgba(251,191,36,.12);color:var(--ink-3)}
+.react-btn:hover{transform:scale(1.08);border-color:#f59e0b;background:rgba(245,158,11,.08)}
+.react-btn.reacted{border-color:#f59e0b;background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;font-weight:700}
+[data-theme="dark"] .react-btn.reacted{background:rgba(251,191,36,.15);color:#fbbf24;border-color:#fbbf24}
+.react-btn .emoji{font-size:18px;transition:.3s var(--ease)}
+.react-btn:hover .emoji{transform:scale(1.2)}
+.react-btn.reacted .emoji{animation:heartBeat .6s ease both}
+.react-count{font-size:12px;min-width:16px;text-align:center}
+
+/* Reading progress for each article */
+.article-progress{
+  position:absolute;bottom:0;right:0;left:0;height:3px;
+  background:linear-gradient(90deg,#f59e0b,#ea580c,#e11d48);
+  border-radius:0 0 4px 4px;transform:scaleX(0);transform-origin:right;
+  transition:transform .3s;z-index:5;
+}
+
+/* ===== FOOTER ===== */
+.footer-mini{
+  background:#111827;color:rgba(255,255,255,.6);text-align:center;
+  padding:28px 24px;font-size:13px;font-family:var(--font);
+}
+[data-theme="dark"] .footer-mini{background:#0a0f1e}
+.footer-mini a{color:var(--blue);text-decoration:none}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:block}
+  .page-header{padding:48px 20px 32px}
+  .page-header h1{font-size:28px}
+  .page-header p{font-size:15px}
+  .page-header .stats-row{gap:20px}
+  .page-header .stat-num{font-size:22px}
+  .filter-tabs{gap:6px}
+  .f-tab{font-size:12px;padding:7px 14px}
+  .article-head{padding:40px 24px 0}
+  .article-title{font-size:22px}
+  .article-divider{margin:20px 24px 0}
+  .article-body{padding:20px 24px 28px;font-size:17px;line-height:2.1}
+  .article-body h3{font-size:18px}
+  .article-body .tip,.article-body .quote,.article-body .warn{padding:16px 20px;font-size:15px}
+  .article-footer{padding:0 24px 28px}
+  .container{padding:0 16px 60px}
+  .article::after{right:30px;width:60px}
+  .article-num{width:36px;height:36px;font-size:14px}
+  .articles-list{gap:48px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <img src="/logo-new.png" alt="الإتقان التعليمية">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">الرئيسية</a></li>
+      <li><a href="/#stages">المراحل</a></li>
+      <li><a href="/#books">الكتب</a></li>
+      <li><a href="/articles/" class="on">المقالات</a></li>
+      <li><a href="/games/">الألعاب</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+        <span id="themeIcon">&#9790;</span>
+      </button>
+      <a href="/" class="back-btn">الرئيسية</a>
+      <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('show')" aria-label="القائمة">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" style="display:none;position:fixed;top:0;right:0;bottom:0;width:280px;background:var(--bg);border-left:2px solid var(--border);padding:88px 24px 24px;z-index:9999;box-shadow:-8px 0 32px rgba(0,0,0,.2)">
+  <ul style="list-style:none;display:flex;flex-direction:column;gap:4px">
+    <li><a href="/" style="display:block;text-decoration:none;color:var(--ink);font-size:16px;font-weight:700;padding:14px 20px;border-radius:12px;font-family:var(--font)">الرئيسية</a></li>
+    <li><a href="/#stages" style="display:block;text-decoration:none;color:var(--ink);font-size:16px;font-weight:700;padding:14px 20px;border-radius:12px;font-family:var(--font)">المراحل</a></li>
+    <li><a href="/#books" style="display:block;text-decoration:none;color:var(--ink);font-size:16px;font-weight:700;padding:14px 20px;border-radius:12px;font-family:var(--font)">الكتب</a></li>
+    <li><a href="/articles/" style="display:block;text-decoration:none;color:var(--blue);font-size:16px;font-weight:700;padding:14px 20px;border-radius:12px;font-family:var(--font);background:var(--blue-soft)">المقالات</a></li>
+    <li><a href="/games/" style="display:block;text-decoration:none;color:var(--ink);font-size:16px;font-weight:700;padding:14px 20px;border-radius:12px;font-family:var(--font)">الألعاب</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="badge">مقالات تعليمية وتربوية</div>
+  <h1>نبني العقول <span class="highlight">ونُلهم القلوب</span></h1>
+  <p>مقالات مختارة بعناية تساعد الطالب على التفوّق الدراسي وتغرس فيه القيم الجميلة والمهارات الحياتية</p>
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">مقالات</div></div>
+    <div class="stat-item"><div class="stat-num">+40</div><div class="stat-label">دقيقة قراءة</div></div>
+    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">تصنيفات</div></div>
+  </div>
+</div>
+
+<!-- FILTER TABS -->
+<div class="filter-tabs">
+  <button class="f-tab on" onclick="filterArticles('all',this)">الكل</button>
+  <button class="f-tab" onclick="filterArticles('study',this)">مهارات دراسية</button>
+  <button class="f-tab" onclick="filterArticles('skills',this)">مهارات حياتية</button>
+  <button class="f-tab" onclick="filterArticles('values',this)">قيم تربوية</button>
+  <button class="f-tab" onclick="filterArticles('motivation',this)">تحفيز</button>
+</div>
+
+<!-- ARTICLES -->
+<div class="container">
+  <div class="articles-list" id="articlesList">
+
+    <!-- ========== ARTICLE 1: كيف تذاكر بذكاء ========== -->
+    <article class="article" data-cat="study">
+      <div class="article-num">١</div>
+      <div class="article-progress"></div>
+      <div class="article-head">
+        <span class="article-cat cat-study">مهارات دراسية</span>
+        <h2 class="article-title">كيف تذاكر بذكاء لا بجهد؟ — أسرار التفوّق الدراسي</h2>
+        <div class="article-info">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ٨ دقائق قراءة</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> الإتقان التعليمية</span>
+        </div>
+      </div>
+      <div class="article-divider"></div>
+      <div class="article-body">
+        <p>كثير من الطلاب يقضون ساعات طويلة في المذاكرة لكنّ نتائجهم لا تعكس هذا الجهد. المشكلة ليست في قلّة الذكاء أو كثرة المادة، بل في <strong>طريقة المذاكرة نفسها</strong>. العلم الحديث أثبت أن هناك طرقًا محددة تجعل المعلومة تثبت في الذاكرة طويلة المدى، بينما طرق أخرى شائعة — كإعادة القراءة المتكررة — هي من أضعف الطرق فعالية.</p>
+
+        <p>في هذا المقال، سنشارك معك أهم الاستراتيجيات العلمية المُثبتة التي يستخدمها الطلاب المتفوّقون حول العالم. لا تحتاج أن تكون عبقريًا لتطبّقها، كل ما تحتاجه هو أن تبدأ.</p>
+
+        <h3>أولًا: تقنية بومودورو — ذاكر بتركيز لا بساعات</h3>
+        <p>هل جرّبت أن تجلس للمذاكرة ٣ ساعات متواصلة وتكتشف أنك لم تستوعب شيئًا؟ ذلك لأن الدماغ البشري لا يستطيع التركيز بكفاءة لأكثر من ٢٥-٣٠ دقيقة متواصلة. تقنية بومودورو تعتمد على هذا المبدأ:</p>
+        <ol>
+          <li><strong>ذاكر بتركيز كامل لمدة ٢٥ دقيقة</strong> — أغلق الجوال وكل المشتّتات</li>
+          <li><strong>خذ استراحة قصيرة ٥ دقائق</strong> — قم، تحرّك، اشرب ماء</li>
+          <li><strong>كرّر ٤ جولات</strong> ثم خذ استراحة طويلة ١٥-٢٠ دقيقة</li>
+        </ol>
+        <div class="tip"><strong>نصيحة ذهبية:</strong> في الاستراحة القصيرة، لا تفتح السوشال ميديا! لأنها تُشتّت الدماغ وتحتاج وقتًا أطول للعودة للتركيز. بدلًا من ذلك، قف وتمدّد أو اغسل وجهك.</div>
+
+        <h3>ثانيًا: الاسترجاع النشط — اختبر نفسك باستمرار</h3>
+        <p>أكبر خطأ يرتكبه الطلاب هو الاكتفاء بقراءة المادة عدة مرات وظنّهم أنهم فهموها. الحقيقة أن <strong>القراءة المتكررة تمنحك شعورًا زائفًا بالفهم</strong>. الطريقة الأفضل هي أن تُغلق الكتاب وتحاول استرجاع المعلومات من ذاكرتك. هذا الجهد الذهني هو الذي يُثبّت المعلومة فعلًا.</p>
+        <ul>
+          <li>بعد قراءة كل فقرة، أغلق الكتاب واكتب ما تتذكّره بكلماتك أنت</li>
+          <li>استخدم بطاقات الاستذكار (Flashcards) لمراجعة التعريفات والمفاهيم</li>
+          <li>حلّ أسئلة على المادة بدلًا من إعادة قراءتها — <strong>تجميعاتنا في الإتقان مصممة خصيصًا لهذا الغرض</strong></li>
+          <li>علّم المادة لشخص آخر (أو تخيّل أنك تشرحها) — إذا استطعت شرحها بوضوح فأنت فاهمها حقًا</li>
+        </ul>
+
+        <h3>ثالثًا: التكرار المتباعد — راجع في الوقت الصح</h3>
+        <p>عقلك ينسى المعلومات بمرور الوقت وفق منحنى يُسمّى «منحنى النسيان». لكن إذا راجعت المادة في فترات متباعدة ومحددة، فإنك تُعيد ضبط هذا المنحنى وتجعل المعلومة تبقى لفترة أطول بكثير.</p>
+        <div class="tip"><strong>جدول مقترح للمراجعة:</strong><br>المراجعة الأولى: بعد يوم واحد من الدراسة<br>المراجعة الثانية: بعد ٣ أيام<br>المراجعة الثالثة: بعد أسبوع<br>المراجعة الرابعة: بعد أسبوعين<br>بهذه الطريقة تُثبّت المادة في ذاكرتك طويلة المدى بأقل مجهود.</div>
+
+        <h3>رابعًا: بيئة المذاكرة مهمّة أكثر مما تتوقع</h3>
+        <p>مكان المذاكرة يؤثر بشكل كبير على تركيزك واستيعابك. احرص على هذه الأمور:</p>
+        <ul>
+          <li><strong>إضاءة جيدة:</strong> يُفضّل الضوء الطبيعي أو إضاءة بيضاء قوية</li>
+          <li><strong>مكتب مرتّب:</strong> الفوضى حولك تُشتّت ذهنك دون أن تشعر</li>
+          <li><strong>الجوال بعيد عنك:</strong> ضعه في غرفة أخرى أو على وضع الطيران</li>
+          <li><strong>درجة حرارة مريحة:</strong> الحرارة العالية تسبب النعاس والبرد يُشتّت</li>
+        </ul>
+
+        <h3>خامسًا: النوم ليس رفاهية — هو جزء من المذاكرة</h3>
+        <p>كثير من الطلاب يسهرون ليلة الاختبار ظنًّا منهم أنهم يستفيدون من الوقت الإضافي. الحقيقة العلمية أن <strong>الدماغ يُثبّت المعلومات وينقلها للذاكرة طويلة المدى أثناء النوم</strong>. الطالب الذي ينام ٧-٨ ساعات يتفوّق على الطالب الساهر حتى لو ذاكر ساعات أقل.</p>
+        <div class="warn"><strong>تحذير:</strong> السهر ليلة الاختبار يُضعف قدرتك على التركيز والاسترجاع بنسبة قد تصل إلى ٤٠٪. نم مبكرًا وثق أن ما ذاكرته كافٍ.</div>
+
+        <p>التفوّق الدراسي ليس حكرًا على «الأذكياء». إنه مهارة يمكن لأي طالب تعلّمها. ابدأ بتطبيق طريقة واحدة من هذه الطرق اليوم، وستلاحظ الفرق خلال أسابيع قليلة. <strong>وتذكّر: المذاكرة الذكية تختصر عليك الوقت وتعطيك نتائج أفضل.</strong></p>
+      </div>
+      <div class="article-footer">
+        <div class="article-tags">
+          <span class="tag">مذاكرة</span>
+          <span class="tag">تفوّق دراسي</span>
+          <span class="tag">تقنية بومودورو</span>
+          <span class="tag">نصائح</span>
+        </div>
+        <div class="reactions">
+          <span class="reactions-label">هل أفادك المقال؟</span>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">🤩</span> <span class="react-count">42</span></button>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">💡</span> <span class="react-count">38</span></button>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">📚</span> <span class="react-count">25</span></button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ========== ARTICLE 2: إدارة الوقت ========== -->
+    <article class="article" data-cat="skills">
+      <div class="article-num">٢</div>
+      <div class="article-progress"></div>
+      <div class="article-head">
+        <span class="article-cat cat-skills">مهارات حياتية</span>
+        <h2 class="article-title">إدارة الوقت للطالب — كيف تُنجز أكثر وتتوتّر أقل؟</h2>
+        <div class="article-info">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ٧ دقائق قراءة</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> الإتقان التعليمية</span>
+        </div>
+      </div>
+      <div class="article-divider"></div>
+      <div class="article-body">
+        <p>«ما عندي وقت» — هذه العبارة نسمعها من كثير من الطلاب. لكن الحقيقة أن جميعنا يملك نفس الـ٢٤ ساعة يوميًا. الفرق بين الطالب المتفوّق والطالب المتأخر ليس كمية الوقت، بل <strong>كيفية استثماره</strong>. إدارة الوقت ليست مهارة دراسية فقط، بل هي مهارة حياتية ستفيدك في كل مرحلة من مراحل حياتك.</p>
+
+        <h3>لماذا يضيع وقتنا؟</h3>
+        <p>قبل أن نتعلّم كيف ندير وقتنا، يجب أن نفهم أين يذهب. أجرت إحدى الدراسات بحثًا على طلاب المرحلة المتوسطة والثانوية، ووجدت أن متوسط الوقت الذي يقضيه الطالب على الشاشات (جوال، ألعاب، تطبيقات) يتجاوز <strong>٥ ساعات يوميًا</strong>! تخيّل لو استثمرت ساعة واحدة فقط من هذه الخمس في المذاكرة المركّزة — كم ستتغير نتائجك؟</p>
+
+        <h3>خطوات عملية لإدارة وقتك</h3>
+
+        <p><strong>الخطوة الأولى: اكتب مهامك كل يوم</strong></p>
+        <p>كل مساء قبل النوم، اكتب قائمة بالمهام التي تريد إنجازها غدًا. لا تعتمد على ذاكرتك فقط. القائمة المكتوبة تُوضّح لك ما يجب فعله وتمنحك شعورًا رائعًا عند شطب كل مهمة تنتهي منها.</p>
+
+        <p><strong>الخطوة الثانية: رتّب أولوياتك</strong></p>
+        <p>ليست كل المهام بنفس الأهمية. استخدم هذه القاعدة البسيطة:</p>
+        <ul>
+          <li><strong>مهم وعاجل:</strong> افعله الآن (واجب يُسلّم غدًا)</li>
+          <li><strong>مهم وغير عاجل:</strong> حدد له وقتًا (مراجعة لاختبار بعد أسبوع)</li>
+          <li><strong>غير مهم وعاجل:</strong> حاول تفويضه أو إنجازه بسرعة</li>
+          <li><strong>غير مهم وغير عاجل:</strong> تجنّبه أو أجّله (سوشال ميديا، ألعاب)</li>
+        </ul>
+
+        <div class="tip"><strong>قاعدة الدقيقتين:</strong> إذا كانت المهمة تحتاج أقل من دقيقتين، افعلها فورًا ولا تؤجّلها. تأجيل المهام الصغيرة يتراكم ويُسبّب ضغطًا كبيرًا.</div>
+
+        <p><strong>الخطوة الثالثة: خصّص وقتًا ثابتًا للمذاكرة</strong></p>
+        <p>اجعل لنفسك جدولًا يوميًا ثابتًا. مثلًا: المذاكرة من ٤ إلى ٦ عصرًا كل يوم. عندما يتحوّل الأمر إلى عادة، لن تحتاج قوة إرادة لتبدأ — ستبدأ تلقائيًا كما تبدأ بالصلاة في وقتها.</p>
+
+        <p><strong>الخطوة الرابعة: لا تنسَ وقت الراحة والمرح</strong></p>
+        <p>إدارة الوقت لا تعني أن تدرس طوال اليوم! جسمك وعقلك يحتاجان للراحة والترفيه. خصّص وقتًا للعب الرياضة، ولقضاء وقت مع العائلة، ولهواياتك. الطالب المتوازن أداؤه أفضل من الطالب المُرهق.</p>
+
+        <div class="quote"><strong>قال عمر بن الخطاب رضي الله عنه:</strong> «روّحوا عن القلوب ساعة بعد ساعة، فإنّ القلوب إذا كلّت عميت»</div>
+
+        <h3>أدوات تساعدك</h3>
+        <ul>
+          <li><strong>تطبيقات المؤقّت:</strong> استخدم مؤقّت بومودورو على جوالك (لكن بعد انتهاء المذاكرة!)</li>
+          <li><strong>جدول أسبوعي ورقي:</strong> علّقه أمام مكتبك لتراه دائمًا</li>
+          <li><strong>ملخصاتنا في الإتقان:</strong> تختصر عليك ساعات المذاكرة لأنها مُركّزة ومُنظّمة</li>
+        </ul>
+
+        <p>تذكّر: الوقت هو أثمن ما تملك. لا يمكنك شراؤه أو استرجاعه. لكنك تستطيع أن تتعلّم كيف تستثمره بحكمة. <strong>ابدأ اليوم — ولو بخطوة صغيرة — وستشكر نفسك لاحقًا.</strong></p>
+      </div>
+      <div class="article-footer">
+        <div class="article-tags">
+          <span class="tag">إدارة الوقت</span>
+          <span class="tag">تنظيم</span>
+          <span class="tag">إنتاجية</span>
+          <span class="tag">حياة الطالب</span>
+        </div>
+        <div class="reactions">
+          <span class="reactions-label">هل أفادك المقال؟</span>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">🤩</span> <span class="react-count">35</span></button>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">⏰</span> <span class="react-count">29</span></button>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">🎯</span> <span class="react-count">22</span></button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ========== ARTICLE 3: التفوق يبدأ من البيت ========== -->
+    <article class="article" data-cat="values">
+      <div class="article-num">٣</div>
+      <div class="article-progress"></div>
+      <div class="article-head">
+        <span class="article-cat cat-values">قيم تربوية</span>
+        <h2 class="article-title">التفوّق يبدأ من البيت — دور الأسرة في نجاح الأبناء دراسيًا</h2>
+        <div class="article-info">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ٩ دقائق قراءة</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> الإتقان التعليمية</span>
+        </div>
+      </div>
+      <div class="article-divider"></div>
+      <div class="article-body">
+        <p>يظنّ كثير من الآباء والأمهات أن مسؤولية تعليم الأبناء تقع على المدرسة فقط. لكن الأبحاث التربوية تؤكد أن <strong>البيت هو المدرسة الأولى والأهم</strong>، وأن الأسرة تلعب الدور الأكبر في تشكيل شخصية الطفل التعليمية. الطالب الذي ينشأ في بيئة أسرية داعمة ومحفّزة يتفوّق حتى لو كانت مدرسته عادية.</p>
+
+        <div class="quote">﴿ يَا أَيُّهَا الَّذِينَ آمَنُوا قُوا أَنفُسَكُمْ وَأَهْلِيكُمْ نَارًا ﴾ — سورة التحريم<br><br>هذه الآية الكريمة تُذكّرنا بأن تربية الأبناء أمانة عظيمة ومسؤولية مشتركة بين الأب والأم.</div>
+
+        <h3>أولًا: كُن قدوة — لا واعظًا فقط</h3>
+        <p>الأطفال يتعلّمون بالمشاهدة أكثر مما يتعلّمون بالكلام. إذا رآك ابنك تقرأ كتابًا، سيحب القراءة. وإذا رآك تقضي ساعات على الجوال، سيفعل مثلك. لا تقل لابنك «ذاكر!» وأنت ممسك بجوالك — بل اجلس بجانبه واقرأ أو اعمل على شيء مفيد. القدوة العملية أبلغ من ألف محاضرة.</p>
+
+        <h3>ثانيًا: شجّع الجهد لا النتيجة فقط</h3>
+        <p>كثير من الآباء يُكافئون الابن فقط عندما يحصل على درجة كاملة، ويُعاقبونه عندما تنخفض درجاته. هذا الأسلوب يخلق خوفًا من الفشل ويُضعف الدافعية. الأسلوب الأفضل هو أن <strong>تُشجّع الجهد والمحاولة</strong>:</p>
+        <ul>
+          <li>«شفت إنك ذاكرت بجد — أنا فخور فيك بغض النظر عن الدرجة»</li>
+          <li>«الدرجة نزلت شوي لكن أنا أعرف إنك تقدر — وش نسوي عشان نتحسّن؟»</li>
+          <li>«الغلط عادي — المهم إنك تعلّمت منه»</li>
+        </ul>
+        <div class="tip"><strong>دراسة مهمة:</strong> أثبتت أبحاث جامعة ستانفورد أن الأطفال الذين يُمدحون على جهدهم (بدلًا من ذكائهم) يُطوّرون عقلية نمو ويكونون أكثر إصرارًا على التعلّم ومواجهة التحديات.</div>
+
+        <h3>ثالثًا: وفّر بيئة مناسبة للدراسة</h3>
+        <p>لا يُطلب منك شراء مكتب فاخر أو غرفة خاصة. يكفي أن توفّر لابنك:</p>
+        <ul>
+          <li>مكانًا هادئًا ومضاءً جيدًا للمذاكرة</li>
+          <li>أدوات مدرسية منظّمة وفي متناول يده</li>
+          <li>وقتًا ثابتًا للمذاكرة يحترمه الجميع في البيت (لا تلفزيون بصوت عالٍ أثناء دراسته)</li>
+          <li>تقليل المشتّتات: الجوال والألعاب بعيدًا عن مكان الدراسة</li>
+        </ul>
+
+        <h3>رابعًا: تابع دون أن تُراقب</h3>
+        <p>هناك فرق كبير بين المتابعة والمراقبة. المتابعة تعني أن تسأل ابنك عن يومه الدراسي وتطّلع على واجباته وتتواصل مع معلميه. أما المراقبة فهي الجلوس فوق رأسه كل دقيقة. الأولى تبني الثقة والمسؤولية، والثانية تقتل الاستقلالية.</p>
+
+        <h3>خامسًا: لا تقارنه بغيره — أبدًا</h3>
+        <p>«شف ابن فلان جاب الكامل» — هذه العبارة من أخطر ما يمكن أن يسمعه الطفل. المقارنة تُحطّم الثقة بالنفس وتخلق الحقد والكراهية. كل طفل فريد بقدراته ومواهبه. قارنه بنفسه فقط: «الحمدلله تحسّنت عن الشهر الماضي» — هذا هو التشجيع الصحيح.</p>
+
+        <div class="warn"><strong>انتبه:</strong> الضغط الزائد على الابن للتحصيل العالي قد يأتي بنتائج عكسية تمامًا: قلق، اكتئاب، كره للدراسة، وأحيانًا الغش. التوازن هو المفتاح.</div>
+
+        <h3>سادسًا: ادعُ لأبنائك</h3>
+        <p>لا تنسَ أقوى سلاح عندك كأب أو أم: <strong>الدعاء</strong>. ادعُ لأبنائك في كل صلاة بالتوفيق والهداية والنجاح. دعوة الوالد لولده مستجابة بإذن الله.</p>
+
+        <div class="quote"><strong>قال رسول الله ﷺ:</strong> «ثلاث دعوات مستجابات لا شك فيهن: دعوة الوالد لولده، ودعوة المسافر، ودعوة المظلوم»</div>
+
+        <p>أبناؤنا أغلى ما نملك. وأعظم استثمار في حياتهم ليس المال أو الألعاب — بل <strong>الوقت والاهتمام والحب والدعاء</strong>. اجعل بيتك مدرسة للخير والعلم والأخلاق، وسترى ثمار ذلك بإذن الله.</p>
+      </div>
+      <div class="article-footer">
+        <div class="article-tags">
+          <span class="tag">تربية</span>
+          <span class="tag">دور الأسرة</span>
+          <span class="tag">تحفيز الأبناء</span>
+          <span class="tag">أولياء الأمور</span>
+        </div>
+        <div class="reactions">
+          <span class="reactions-label">هل أفادك المقال؟</span>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">❤️</span> <span class="react-count">51</span></button>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">👨‍👩‍👧‍👦</span> <span class="react-count">33</span></button>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">🤲</span> <span class="react-count">28</span></button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ========== ARTICLE 4: التغلب على قلق الاختبارات ========== -->
+    <article class="article" data-cat="motivation">
+      <div class="article-num">٤</div>
+      <div class="article-progress"></div>
+      <div class="article-head">
+        <span class="article-cat cat-motivation">تحفيز</span>
+        <h2 class="article-title">لا تخف من الاختبار — كيف تتغلّب على القلق وتدخل بثقة؟</h2>
+        <div class="article-info">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ٧ دقائق قراءة</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> الإتقان التعليمية</span>
+        </div>
+      </div>
+      <div class="article-divider"></div>
+      <div class="article-body">
+        <p>القلق قبل الاختبارات شعور طبيعي يمرّ به كل الطلاب — حتى المتفوّقين منهم. القليل من التوتر مفيد لأنه يُحفّزك على المذاكرة والاستعداد. لكن عندما يتحوّل هذا التوتر إلى <strong>خوف شديد يُعيقك عن التركيز والتذكّر</strong>، فهنا يجب أن تتعلّم كيف تتعامل معه.</p>
+
+        <h3>لماذا نشعر بالقلق قبل الاختبار؟</h3>
+        <p>قلق الاختبار ينبع عادةً من واحد أو أكثر من هذه الأسباب:</p>
+        <ul>
+          <li><strong>الخوف من الفشل:</strong> «ماذا لو رسبت؟ ماذا سيقول أهلي؟»</li>
+          <li><strong>عدم الاستعداد الكافي:</strong> التأخّر في المذاكرة يزيد الضغط</li>
+          <li><strong>تجارب سابقة سلبية:</strong> إذا سبق أن حصلت على درجة منخفضة في مادة معينة</li>
+          <li><strong>الضغط الاجتماعي:</strong> توقعات الأهل والمقارنة مع الزملاء</li>
+        </ul>
+
+        <h3>استراتيجيات فعّالة للتغلّب على القلق</h3>
+
+        <p><strong>١. الاستعداد المبكّر هو أقوى علاج</strong></p>
+        <p>٨٠٪ من قلق الاختبار سببه التأخّر في المذاكرة. عندما تبدأ مبكرًا وتراجع بشكل منتظم، ستدخل الاختبار وأنت مطمئن لأنك تعرف أنك مستعد. لا تنتظر ليلة الاختبار — ابدأ قبلها بأيام.</p>
+
+        <p><strong>٢. تمارين التنفس — سلاحك السري</strong></p>
+        <p>قبل الاختبار أو أثناءه إذا شعرت بالتوتر، جرّب هذا التمرين البسيط:</p>
+        <div class="tip"><strong>تمرين ٤-٧-٨:</strong><br>استنشق من أنفك لمدة ٤ ثوانٍ<br>احبس النَّفَس لمدة ٧ ثوانٍ<br>أخرج الهواء من فمك ببطء لمدة ٨ ثوانٍ<br>كرّر ٣ مرات — ستشعر بهدوء فوري.</div>
+
+        <p><strong>٣. غيّر حديثك الداخلي</strong></p>
+        <p>عقلك يصدّق ما تُكرّره. إذا كنت تقول لنفسك «أنا بأرسب» أو «هالمادة مستحيلة»، فأنت تُبرمج عقلك على الفشل. استبدل هذه الأفكار بأخرى إيجابية:</p>
+        <ul>
+          <li>بدلًا من «أنا ما أقدر» → قل «أنا ذاكرت وأنا مستعد بإذن الله»</li>
+          <li>بدلًا من «الاختبار صعب» → قل «توكّلت على الله — اللي أعرفه بأجاوبه واللي ما أعرفه بأحاول»</li>
+          <li>بدلًا من «لازم أجيب الكامل» → قل «بأعطي أفضل ما عندي والنتيجة على الله»</li>
+        </ul>
+
+        <p><strong>٤. ليلة الاختبار — ماذا تفعل؟</strong></p>
+        <p>لا تذاكر مادة جديدة ليلة الاختبار. فقط راجع مراجعة خفيفة وسريعة للنقاط الرئيسية. كل واجبك، واقرأ أذكار النوم، ونم مبكّرًا. صباح الاختبار: صلِّ الفجر، كُل فطورًا خفيفًا، واذهب مبكّرًا.</p>
+
+        <p><strong>٥. أثناء الاختبار — نصائح ذهبية</strong></p>
+        <ul>
+          <li>ابدأ بقراءة جميع الأسئلة قراءة سريعة قبل أن تبدأ بالإجابة</li>
+          <li>ابدأ بالأسئلة السهلة أولًا — هذا يمنحك ثقة ويضمن الدرجات المضمونة</li>
+          <li>إذا واجهتك سؤال صعب، انتقل للسؤال التالي وعُد إليه لاحقًا</li>
+          <li>لا تترك أي سؤال فارغًا — حاول دائمًا حتى لو لم تكن متأكدًا</li>
+          <li>راجع إجاباتك قبل التسليم إذا بقي وقت</li>
+        </ul>
+
+        <div class="quote"><strong>قال الله تعالى:</strong> ﴿ فَإِنَّ مَعَ الْعُسْرِ يُسْرًا * إِنَّ مَعَ الْعُسْرِ يُسْرًا ﴾ — سورة الشرح<br><br>تأمّل كيف ذكر الله اليُسر مرتين! أيًا كانت صعوبة الاختبار، الفرج قريب بإذن الله.</div>
+
+        <p>كل اختبار هو مجرّد محطة في رحلة طويلة. لا يُحدّد قيمتك ولا يُحدّد مستقبلك. <strong>ثق بالله ثم بنفسك، وتذكّر أن الاختبار سيمضي — لكن ما تتعلّمه من الصبر والاجتهاد سيبقى معك للأبد.</strong></p>
+      </div>
+      <div class="article-footer">
+        <div class="article-tags">
+          <span class="tag">قلق الاختبارات</span>
+          <span class="tag">ثقة بالنفس</span>
+          <span class="tag">تحفيز</span>
+          <span class="tag">نصائح اختبارات</span>
+        </div>
+        <div class="reactions">
+          <span class="reactions-label">هل أفادك المقال؟</span>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">💪</span> <span class="react-count">47</span></button>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">😌</span> <span class="react-count">31</span></button>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">🌟</span> <span class="react-count">26</span></button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ========== ARTICLE 5: القراءة تصنع العظماء ========== -->
+    <article class="article" data-cat="skills">
+      <div class="article-num">٥</div>
+      <div class="article-progress"></div>
+      <div class="article-head">
+        <span class="article-cat cat-skills">مهارات حياتية</span>
+        <h2 class="article-title">القراءة تصنع العظماء — لماذا يجب أن تقرأ كل يوم؟</h2>
+        <div class="article-info">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ٨ دقائق قراءة</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> الإتقان التعليمية</span>
+        </div>
+      </div>
+      <div class="article-divider"></div>
+      <div class="article-body">
+        <p>أول كلمة أنزلها الله في القرآن الكريم كانت <strong>«اقرأ»</strong>. ليست صدفة أن الله بدأ رسالته الخالدة للبشرية بهذه الكلمة. القراءة هي المفتاح الذي يفتح أبواب العلم والمعرفة والحكمة. وكل عظيم في التاريخ كان قارئًا نهمًا.</p>
+
+        <div class="quote">﴿ اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ * خَلَقَ الْإِنسَانَ مِنْ عَلَقٍ * اقْرَأْ وَرَبُّكَ الْأَكْرَمُ * الَّذِي عَلَّمَ بِالْقَلَمِ * عَلَّمَ الْإِنسَانَ مَا لَمْ يَعْلَمْ ﴾ — سورة العلق</div>
+
+        <h3>ماذا تفعل القراءة بعقلك؟</h3>
+        <p>القراءة ليست مجرّد هواية ممتعة — إنها تمرين حقيقي للدماغ. عندما تقرأ، يحدث في دماغك ما يلي:</p>
+        <ul>
+          <li><strong>تتوسّع حصيلتك اللغوية:</strong> تتعلّم كلمات وتعبيرات جديدة تُحسّن كتابتك وتعبيرك</li>
+          <li><strong>يتحسّن تركيزك:</strong> القراءة تدرّب عقلك على التركيز لفترات أطول</li>
+          <li><strong>تنمو ملكة الإبداع:</strong> القصص والأفكار الجديدة توسّع خيالك</li>
+          <li><strong>تزداد ثقافتك:</strong> تصبح قادرًا على الحوار في موضوعات مختلفة</li>
+          <li><strong>يتحسّن مستواك الدراسي:</strong> الطالب القارئ يتفوّق في الفهم والاستيعاب واللغة العربية والإنجليزية</li>
+        </ul>
+
+        <div class="tip"><strong>حقيقة مذهلة:</strong> أثبتت الدراسات أن قراءة ٢٠ دقيقة فقط يوميًا تُعرّض الطفل لحوالي ١.٨ مليون كلمة سنويًا! هذا يعني حصيلة لغوية ضخمة تتراكم عامًا بعد عام.</div>
+
+        <h3>كيف تبدأ عادة القراءة؟</h3>
+
+        <p><strong>١. ابدأ بما تحب</strong></p>
+        <p>لا تُجبر نفسك على قراءة كتب «ثقيلة» أو معقّدة. ابدأ بما يُثير اهتمامك: قصص مغامرات، كتب عن الفضاء، سير العظماء، كتب رياضية. المهم أن تبدأ — وبمرور الوقت ستتوسّع اهتماماتك تلقائيًا.</p>
+
+        <p><strong>٢. خصّص وقتًا ثابتًا</strong></p>
+        <p>أفضل وقت للقراءة هو قبل النوم بنصف ساعة. ضع الجوال جانبًا وامسك كتابًا. ستنام بشكل أفضل وستستيقظ بعقل أنشط. يمكنك أيضًا القراءة بعد صلاة الفجر أو في أي وقت هادئ تختاره.</p>
+
+        <p><strong>٣. اجعلها تحديًا ممتعًا</strong></p>
+        <p>ضع لنفسك هدفًا: «سأقرأ كتابًا واحدًا كل شهر» أو «سأقرأ ١٠ صفحات يوميًا». تتبّع تقدّمك واحتفل بكل كتاب تُنهيه. يمكنك مشاركة ما تقرأه مع أصدقائك وتكوين حلقة قراءة.</p>
+
+        <p><strong>٤. نوّع في قراءاتك</strong></p>
+        <ul>
+          <li><strong>القرآن الكريم:</strong> أعظم كتاب على وجه الأرض — اجعل له وردًا يوميًا</li>
+          <li><strong>السيرة النبوية:</strong> قصة أعظم إنسان عرفته البشرية</li>
+          <li><strong>كتب العلوم المبسّطة:</strong> تفتح عينيك على عجائب الكون</li>
+          <li><strong>قصص الناجحين:</strong> تُلهمك وتُعطيك دروسًا عملية</li>
+          <li><strong>كتب المهارات:</strong> تُعلّمك أشياء جديدة تُفيدك في حياتك</li>
+        </ul>
+
+        <div class="quote"><strong>قال الإمام الشافعي:</strong> «ليس العلم ما حُفظ، العلم ما نفع»<br><br>اقرأ لتنتفع ولتنفع غيرك. واجعل القراءة عادة يومية كالأكل والشرب — تغذّي بها عقلك كما تغذّي جسمك.</div>
+
+        <p>كل كتاب تقرأه يُضيف لك عمرًا جديدًا. فمن خلال الكتب تعيش تجارب الآلاف وتتعلّم من حكمتهم دون أن تمرّ بأخطائهم. <strong>ابدأ اليوم — كتاب واحد قد يُغيّر حياتك.</strong></p>
+      </div>
+      <div class="article-footer">
+        <div class="article-tags">
+          <span class="tag">القراءة</span>
+          <span class="tag">تطوير الذات</span>
+          <span class="tag">حصيلة لغوية</span>
+          <span class="tag">عادات يومية</span>
+        </div>
+        <div class="reactions">
+          <span class="reactions-label">هل أفادك المقال؟</span>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">📖</span> <span class="react-count">39</span></button>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">🧠</span> <span class="react-count">27</span></button>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">✨</span> <span class="react-count">21</span></button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ========== ARTICLE 6: احترام المعلم ========== -->
+    <article class="article" data-cat="values">
+      <div class="article-num">٦</div>
+      <div class="article-progress"></div>
+      <div class="article-head">
+        <span class="article-cat cat-values">قيم تربوية</span>
+        <h2 class="article-title">معلّمك هو سرّ نجاحك — لماذا يستحق كل التقدير؟</h2>
+        <div class="article-info">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ٦ دقائق قراءة</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> الإتقان التعليمية</span>
+        </div>
+      </div>
+      <div class="article-divider"></div>
+      <div class="article-body">
+        <p>خلف كل طبيب أنقذ حياة، وكل مهندس بنى ناطحة سحاب، وكل عالم اكتشف علاجًا — يقف <strong>معلّم</strong> صبر عليه وعلّمه وآمن به حين لم يكن يعرف شيئًا. المعلم ليس مجرد شخص يشرح الدرس — إنه مربّي أجيال وباني حضارات.</p>
+
+        <div class="quote"><strong>قال أمير الشعراء أحمد شوقي:</strong><br>«قُم للمعلّم وفِّهِ التبجيلا — كاد المعلمُ أن يكون رسولا»<br>«أعلمتَ أشرفَ أو أجلَّ من الذي — يبني ويُنشئُ أنفسًا وعقولا»</div>
+
+        <h3>ماذا يفعل المعلم من أجلك؟</h3>
+        <p>معلمك يقضي ساعات في التحضير قبل أن يدخل الفصل. يبحث عن أفضل الطرق لتوصيل المعلومة لك. يُصحّح عشرات الأوراق بعد الدوام. يتابع مستواك ويهتم بتقدّمك. يصبر على أسئلتك حتى لو كرّرت السؤال عشر مرات. كل هذا لأنه يُريد لك النجاح.</p>
+
+        <p>وكثير من المعلمين يفعلون ذلك بأجور متواضعة وظروف صعبة. لكنهم يستمرون لأن رسالتهم أكبر من مجرّد وظيفة — <strong>إنهم يزرعون بذور المستقبل</strong>.</p>
+
+        <h3>كيف تكون طالبًا يفتخر به معلمه؟</h3>
+        <ul>
+          <li><strong>أنصت باهتمام:</strong> عندما يشرح المعلم، أعطه تركيزك الكامل. لا تتحدّث مع زميلك ولا تنشغل بشيء آخر</li>
+          <li><strong>شارك في الحصة:</strong> ارفع يدك، أجب عن الأسئلة، اسأل إذا لم تفهم. المعلم يحب الطالب المتفاعل</li>
+          <li><strong>التزم بالأدب:</strong> تحدّث باحترام دائمًا. حتى لو اختلفت معه، عبّر عن رأيك بلطف</li>
+          <li><strong>أدِّ واجباتك:</strong> عندما ترى المعلم أنك جاد في دراستك، سيبذل جهدًا إضافيًا لمساعدتك</li>
+          <li><strong>اشكره:</strong> كلمة «شكرًا يا أستاذ» تصنع فرقًا كبيرًا في يومه. رسالة شكر بسيطة في نهاية الفصل قد تكون أغلى هدية يتلقّاها</li>
+        </ul>
+
+        <div class="tip"><strong>هل تعلم؟</strong> أن أكثر ما يُسعد المعلم ليس الراتب أو الإجازات — بل أن يرى طالبًا تخرّج ونجح في حياته ثم يعود ليقول له: «شكرًا لك يا أستاذ — أنت السبب بعد الله في نجاحي». هذه اللحظة تُعيد للمعلم طاقته وتُذكّره لماذا اختار هذه المهنة الشريفة.</div>
+
+        <p>إسلامنا العظيم رفع من مكانة المعلم والعالم رفعةً عظيمة. قال رسول الله ﷺ: «إنّ الله وملائكته وأهل السماوات والأرض، حتى النملة في جحرها وحتى الحوت، ليُصلّون على معلّم الناس الخير». تأمّل! حتى النمل والحيتان تدعو لمعلم الخير!</p>
+
+        <p><strong>معلمك يستحق أن تحترمه وتُقدّره وتدعو له. فهو شريك في كل نجاح تُحقّقه في حياتك.</strong></p>
+      </div>
+      <div class="article-footer">
+        <div class="article-tags">
+          <span class="tag">احترام المعلم</span>
+          <span class="tag">أدب الطالب</span>
+          <span class="tag">قيم تربوية</span>
+          <span class="tag">شكر</span>
+        </div>
+        <div class="reactions">
+          <span class="reactions-label">هل أفادك المقال؟</span>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">🎓</span> <span class="react-count">44</span></button>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">❤️</span> <span class="react-count">36</span></button>
+          <button class="react-btn" onclick="react(this)"><span class="emoji">🤲</span> <span class="react-count">30</span></button>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-mini">
+  الإتقان التعليمية &copy; 2026 — جميع الحقوق محفوظة &nbsp;|&nbsp; <a href="/privacy.html">الخصوصية</a> &nbsp;|&nbsp; <a href="/terms.html">الشروط</a>
+</div>
+
+<script>
+// Theme toggle
+function toggleTheme(){
+  const t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('theme',t);
+  document.getElementById('themeIcon').innerHTML=t==='dark'?'&#9788;':'&#9790;';
+}
+(function(){
+  if(document.documentElement.getAttribute('data-theme')==='dark'){
+    document.getElementById('themeIcon').innerHTML='&#9788;';
+  }
+})();
+
+// Mobile menu
+document.getElementById('mobileMenu').style.display='';
+document.getElementById('mobileMenu').style.transform='translateX(100%)';
+document.getElementById('mobileMenu').style.transition='transform .3s cubic-bezier(.4,0,.2,1)';
+document.querySelector('.hamburger').addEventListener('click',function(){
+  const m=document.getElementById('mobileMenu');
+  const isOpen=m.style.transform==='translateX(0px)';
+  m.style.transform=isOpen?'translateX(100%)':'translateX(0px)';
+});
+
+// Filter articles
+function filterArticles(cat,btn){
+  document.querySelectorAll('.f-tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.article').forEach(a=>{
+    if(cat==='all'||a.dataset.cat===cat){
+      a.style.display='';
+      a.style.animation='up .5s cubic-bezier(.4,0,.2,1) both';
+    }else{
+      a.style.display='none';
+    }
+  });
+}
+
+// Scroll shadow on nav
+window.addEventListener('scroll',function(){
+  document.querySelector('.nav').classList.toggle('shadow',window.scrollY>10);
+},{passive:true});
+
+// Reaction buttons
+function react(btn){
+  if(btn.classList.contains('reacted')) return;
+  btn.classList.add('reacted');
+  const countEl=btn.querySelector('.react-count');
+  countEl.textContent=parseInt(countEl.textContent)+1;
+}
+
+// Stagger article animations
+document.querySelectorAll('.article').forEach((a,i)=>{
+  a.style.animationDelay=(i*0.12)+'s';
+});
+</script>
+</body>
+</html>
