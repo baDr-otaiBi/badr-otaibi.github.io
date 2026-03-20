@@ -306,6 +306,33 @@ body{
 }
 [data-theme="dark"] .article-body .warn{background:var(--orange-soft);color:var(--ink)}
 
+/* ===== ARTICLE PREVIEW / EXPAND ===== */
+.article-body{max-height:220px;overflow:hidden;position:relative}
+.article-body.expanded{max-height:none;overflow:visible}
+.article-body:not(.expanded)::after{
+  content:'';position:absolute;bottom:0;right:0;left:0;height:120px;
+  background:linear-gradient(to top,#fef9c3 0%,rgba(254,249,195,0) 100%);
+  pointer-events:none;
+}
+[data-theme="dark"] .article-body:not(.expanded)::after{
+  background:linear-gradient(to top,#302a1a 0%,rgba(48,42,26,0) 100%);
+}
+.read-more-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:14px;margin-top:-8px;
+  background:linear-gradient(135deg,#fef3c7,#fde68a);
+  border:1.5px dashed rgba(180,140,40,.3);border-radius:0 0 4px 4px;
+  font-family:var(--font);font-size:14px;font-weight:700;color:#92400e;
+  cursor:pointer;transition:.3s var(--ease);position:relative;z-index:1;
+}
+[data-theme="dark"] .read-more-btn{background:linear-gradient(135deg,rgba(251,191,36,.1),rgba(251,191,36,.05));color:#fbbf24;border-color:rgba(251,191,36,.2)}
+.read-more-btn:hover{background:linear-gradient(135deg,#fde68a,#fbbf24);transform:translateY(-1px)}
+[data-theme="dark"] .read-more-btn:hover{background:rgba(251,191,36,.15)}
+.read-more-btn svg{width:18px;height:18px;transition:.3s var(--ease)}
+.read-more-btn.expanded svg{transform:rotate(180deg)}
+.article-footer{display:none}
+.article-footer.show{display:block}
+
 /* ===== ARTICLE FOOTER — TAGS + REACTIONS ===== */
 .article-footer{
   padding:0 48px 36px;position:relative;z-index:1;
@@ -376,7 +403,7 @@ body{
   .article-body{padding:20px 24px 28px;font-size:17px;line-height:2.1}
   .article-body h3{font-size:18px}
   .article-body .tip,.article-body .quote,.article-body .warn{padding:16px 20px;font-size:15px}
-  .article-footer{padding:0 24px 28px}
+  .article-footer.show{padding:0 24px 28px}
   .container{padding:0 16px 60px}
   .article::after{right:30px;width:60px}
   .article-num{width:36px;height:36px;font-size:14px}
@@ -502,6 +529,10 @@ body{
 
         <p>التفوّق الدراسي ليس حكرًا على «الأذكياء». إنه مهارة يمكن لأي طالب تعلّمها. ابدأ بتطبيق طريقة واحدة من هذه الطرق اليوم، وستلاحظ الفرق خلال أسابيع قليلة. <strong>وتذكّر: المذاكرة الذكية تختصر عليك الوقت وتعطيك نتائج أفضل.</strong></p>
       </div>
+      <button class="read-more-btn" onclick="toggleArticle(this)">
+        <span>اقرأ المقال كاملاً</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
       <div class="article-footer">
         <div class="article-tags">
           <span class="tag">مذاكرة</span>
@@ -570,6 +601,10 @@ body{
 
         <p>تذكّر: الوقت هو أثمن ما تملك. لا يمكنك شراؤه أو استرجاعه. لكنك تستطيع أن تتعلّم كيف تستثمره بحكمة. <strong>ابدأ اليوم — ولو بخطوة صغيرة — وستشكر نفسك لاحقًا.</strong></p>
       </div>
+      <button class="read-more-btn" onclick="toggleArticle(this)">
+        <span>اقرأ المقال كاملاً</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
       <div class="article-footer">
         <div class="article-tags">
           <span class="tag">إدارة الوقت</span>
@@ -640,6 +675,10 @@ body{
 
         <p>أبناؤنا أغلى ما نملك. وأعظم استثمار في حياتهم ليس المال أو الألعاب — بل <strong>الوقت والاهتمام والحب والدعاء</strong>. اجعل بيتك مدرسة للخير والعلم والأخلاق، وسترى ثمار ذلك بإذن الله.</p>
       </div>
+      <button class="read-more-btn" onclick="toggleArticle(this)">
+        <span>اقرأ المقال كاملاً</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
       <div class="article-footer">
         <div class="article-tags">
           <span class="tag">تربية</span>
@@ -714,6 +753,10 @@ body{
 
         <p>كل اختبار هو مجرّد محطة في رحلة طويلة. لا يُحدّد قيمتك ولا يُحدّد مستقبلك. <strong>ثق بالله ثم بنفسك، وتذكّر أن الاختبار سيمضي — لكن ما تتعلّمه من الصبر والاجتهاد سيبقى معك للأبد.</strong></p>
       </div>
+      <button class="read-more-btn" onclick="toggleArticle(this)">
+        <span>اقرأ المقال كاملاً</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
       <div class="article-footer">
         <div class="article-tags">
           <span class="tag">قلق الاختبارات</span>
@@ -784,6 +827,10 @@ body{
 
         <p>كل كتاب تقرأه يُضيف لك عمرًا جديدًا. فمن خلال الكتب تعيش تجارب الآلاف وتتعلّم من حكمتهم دون أن تمرّ بأخطائهم. <strong>ابدأ اليوم — كتاب واحد قد يُغيّر حياتك.</strong></p>
       </div>
+      <button class="read-more-btn" onclick="toggleArticle(this)">
+        <span>اقرأ المقال كاملاً</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
       <div class="article-footer">
         <div class="article-tags">
           <span class="tag">القراءة</span>
@@ -838,6 +885,10 @@ body{
 
         <p><strong>معلمك يستحق أن تحترمه وتُقدّره وتدعو له. فهو شريك في كل نجاح تُحقّقه في حياتك.</strong></p>
       </div>
+      <button class="read-more-btn" onclick="toggleArticle(this)">
+        <span>اقرأ المقال كاملاً</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
       <div class="article-footer">
         <div class="article-tags">
           <span class="tag">احترام المعلم</span>
@@ -904,6 +955,26 @@ function filterArticles(cat,btn){
 window.addEventListener('scroll',function(){
   document.querySelector('.nav').classList.toggle('shadow',window.scrollY>10);
 },{passive:true});
+
+// Toggle article expand/collapse
+function toggleArticle(btn){
+  const article=btn.closest('.article');
+  const body=article.querySelector('.article-body');
+  const footer=article.querySelector('.article-footer');
+  const isExpanded=body.classList.contains('expanded');
+  if(isExpanded){
+    body.classList.remove('expanded');
+    footer.classList.remove('show');
+    btn.classList.remove('expanded');
+    btn.querySelector('span').textContent='اقرأ المقال كاملاً';
+    article.scrollIntoView({behavior:'smooth',block:'start'});
+  } else {
+    body.classList.add('expanded');
+    footer.classList.add('show');
+    btn.classList.add('expanded');
+    btn.querySelector('span').textContent='إخفاء المقال';
+  }
+}
 
 // Reaction buttons
 function react(btn){
