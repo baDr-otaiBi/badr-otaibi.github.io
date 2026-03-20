@@ -660,17 +660,29 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
   background:var(--white);border:1px solid var(--border);
   text-align:center;transition:.4s var(--ease);
   min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  box-shadow:0 1px 3px rgba(0,0,0,.04);
+  box-shadow:0 1px 3px rgba(0,0,0,.04);position:relative;overflow:hidden;
 }
+.feat::before{
+  content:'';position:absolute;top:0;right:0;left:0;height:3px;
+  background:var(--accent,var(--blue));transform:scaleX(0);transition:transform .4s var(--ease);
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+}
+.feat:hover::before{transform:scaleX(1)}
 [data-theme="dark"] .feat{background:var(--white);border-color:var(--border)}
 .feat:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.08)}
+[data-r].v .feat:nth-child(1){animation-delay:.0s}
+[data-r].v .feat:nth-child(2){animation-delay:.1s}
+[data-r].v .feat:nth-child(3){animation-delay:.2s}
+[data-r].v .feat:nth-child(4){animation-delay:.3s}
+[data-r].v .feat:nth-child(5){animation-delay:.4s}
+[data-r].v .feat:nth-child(6){animation-delay:.5s}
 .feat-ic{
   width:60px;height:60px;border-radius:16px;
   display:grid;place-items:center;font-size:28px;
   margin:0 auto 18px;border:none;
   transition:.3s var(--ease);
 }
-.feat:hover .feat-ic{transform:scale(1.1) rotate(-5deg);animation:wiggle .5s ease}
+.feat:hover .feat-ic{transform:scale(1.15) rotate(-5deg);animation:wiggle .5s ease}
 .feat h3{font-family:var(--font);font-weight:800;font-size:16px;margin-bottom:10px;letter-spacing:-0.01em}
 .feat p{font-size:13.5px;color:var(--ink-2);line-height:1.9}
 
@@ -2251,34 +2263,34 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
       <h2 class="sec-title">ليش أكثر من 500 طالب يثقون فينا؟</h2>
       <p class="sec-desc" style="margin-inline:auto">لأننا نوفّر لك محتوى مركّز يوصلك للدرجة الكاملة</p>
     </div>
-    <div class="feat-grid">
-      <div class="feat" data-r>
+    <div class="feat-grid" data-r>
+      <div class="feat" style="--accent:var(--blue);--accent-soft:var(--blue-soft)">
         <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">📝</div>
         <h3>1000 سؤال مع الإجابة</h3>
         <p>تجميعة شاملة لأسئلة نافس مع إجابات نموذجية مفصّلة</p>
       </div>
-      <div class="feat" data-r>
-        <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">⬇️</div>
+      <div class="feat" style="--accent:var(--green);--accent-soft:var(--green-soft)">
+        <div class="feat-ic" style="background:var(--green-soft);color:var(--green)">⬇️</div>
         <h3>تحميل فوري</h3>
         <p>حمّل الملفات مباشرة بصيغة PDF واستخدمها بدون إنترنت</p>
       </div>
-      <div class="feat" data-r>
-        <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">📱</div>
+      <div class="feat" style="--accent:var(--purple);--accent-soft:var(--purple-soft)">
+        <div class="feat-ic" style="background:var(--purple-soft);color:var(--purple)">📱</div>
         <h3>يعمل على كل جهاز</h3>
         <p>تصميم متجاوب يعمل بسلاسة على الجوال والتابلت والكمبيوتر</p>
       </div>
-      <div class="feat" data-r>
-        <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">🎯</div>
+      <div class="feat" style="--accent:var(--orange);--accent-soft:var(--orange-soft)">
+        <div class="feat-ic" style="background:var(--orange-soft);color:var(--orange)">🎯</div>
         <h3>اختبار تفاعلي</h3>
         <p>حل الأسئلة مباشرة في الموقع وتابع تقدمك بشكل مباشر</p>
       </div>
-      <div class="feat" data-r>
-        <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">⭐</div>
+      <div class="feat" style="--accent:var(--rose);--accent-soft:var(--rose-soft)">
+        <div class="feat-ic" style="background:var(--rose-soft);color:var(--rose)">⭐</div>
         <h3>محتوى حصري</h3>
         <p>ملخصات لا تتوفر في أي موقع آخر — حصرياً على الإتقان</p>
       </div>
-      <div class="feat" data-r>
-        <div class="feat-ic" style="background:var(--blue-soft);color:var(--blue)">🔄</div>
+      <div class="feat" style="--accent:var(--teal);--accent-soft:var(--teal-soft)">
+        <div class="feat-ic" style="background:var(--teal-soft);color:var(--teal)">🔄</div>
         <h3>تحديث مستمر</h3>
         <p>إضافة مواد ومراحل جديدة باستمرار — تابعنا للمزيد</p>
       </div>
