@@ -17,7 +17,7 @@
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Rubik:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 // Apply theme instantly to prevent flash
 (function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.querySelector('meta[name="theme-color"]').content=t==='dark'?'#0E0E1A':'#FAFAFE'})();
@@ -1223,6 +1223,67 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
   .book-price{font-size:24px}
 }
 
+/* ===== ARTICLES ===== */
+.articles-grid{display:grid;grid-template-columns:1fr;gap:40px;max-width:820px;margin:0 auto}
+.article-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;
+  transition:.4s var(--ease);
+  box-shadow:0 1px 3px rgba(0,0,0,.04);
+}
+[data-theme="dark"] .article-card{background:var(--white);border-color:var(--border)}
+.article-header{
+  padding:36px 40px 0;
+}
+.article-category{
+  display:inline-block;font-size:12px;font-weight:700;letter-spacing:0.5px;
+  color:var(--purple);background:var(--purple-soft);padding:5px 14px;border-radius:100px;
+  border:1px solid var(--purple);font-family:var(--font);margin-bottom:16px;
+}
+.article-title{
+  font-family:var(--font);font-size:26px;font-weight:800;color:var(--ink);
+  margin-bottom:12px;line-height:1.5;letter-spacing:-0.01em;
+}
+.article-meta{
+  display:flex;align-items:center;gap:12px;color:var(--ink-3);font-size:13px;
+  font-family:var(--font);margin-bottom:8px;
+}
+.article-meta svg{width:16px;height:16px;flex-shrink:0}
+.article-body{
+  padding:28px 40px 36px;
+  font-family:'Noto Naskh Arabic','Rubik','Cairo',sans-serif;
+  font-size:18px;line-height:2.2;color:var(--ink-2);
+}
+.article-body p{margin-bottom:20px}
+.article-body p:last-child{margin-bottom:0}
+.article-body strong{color:var(--ink);font-weight:600}
+.article-body .article-highlight{
+  background:var(--blue-soft);border-right:4px solid var(--blue);
+  padding:18px 24px;border-radius:0 var(--radius) var(--radius) 0;
+  margin:24px 0;font-size:17px;color:var(--ink);
+}
+.article-body .article-verse{
+  background:var(--green-soft);border-right:4px solid var(--green);
+  padding:18px 24px;border-radius:0 var(--radius) var(--radius) 0;
+  margin:24px 0;font-size:17px;color:var(--ink);font-weight:500;
+}
+.article-footer{
+  padding:0 40px 32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.article-tag{
+  font-size:12px;font-weight:600;color:var(--ink-3);background:var(--bg-alt);
+  padding:5px 12px;border-radius:100px;font-family:var(--font);
+  border:1px solid var(--border);
+}
+@media(max-width:768px){
+  .article-header{padding:24px 20px 0}
+  .article-body{padding:20px 20px 28px;font-size:17px;line-height:2.1}
+  .article-title{font-size:22px}
+  .article-footer{padding:0 20px 24px}
+  .article-body .article-highlight,
+  .article-body .article-verse{padding:14px 18px;font-size:16px}
+}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:1080px){
   .products-grid{grid-template-columns:repeat(2,1fr)}
@@ -1295,6 +1356,7 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
       <li><a href="#summaries">الملخصات</a></li>
       <li><a href="#worksheets">أوراق العمل</a></li>
       <li><a href="#books">الكتب</a></li>
+      <li><a href="#articles">المقالات</a></li>
       <li><a href="/games/">الألعاب</a></li>
     </ul>
     <div class="nav-actions">
@@ -1316,6 +1378,7 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
     <li><a href="#summaries">الملخصات</a></li>
     <li><a href="#worksheets">أوراق العمل</a></li>
     <li><a href="#books">الكتب</a></li>
+    <li><a href="#articles">المقالات</a></li>
     <li><a href="/games/">الألعاب</a></li>
   </ul>
 </div>
@@ -2185,6 +2248,199 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
         <div class="stat-number">5</div>
         <div class="stat-label">دقائق للتسليم</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="section" id="articles">
+  <div class="container">
+    <div class="sec-head" style="text-align:center" data-r>
+      <div class="sec-over">مقالات تربوية</div>
+      <h2 class="sec-title">مقالات في القيم والأخلاق</h2>
+      <p class="sec-desc" style="margin-inline:auto">مقالات تعليمية قصيرة تغرس القيم الجميلة في نفوس أبنائنا</p>
+    </div>
+
+    <div class="articles-grid" data-r>
+
+      <!-- Article 1: الصدق -->
+      <article class="article-card">
+        <div class="article-header">
+          <span class="article-category">قيم إسلامية</span>
+          <h3 class="article-title">الصدق — منارة الطريق</h3>
+          <div class="article-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>٥ دقائق قراءة</span>
+          </div>
+        </div>
+        <div class="article-body">
+          <p>الصدق من أعظم القيم التي حثّنا عليها ديننا الحنيف، وهو أساس كل خلق جميل. فالإنسان الصادق يُحبّه الله ويُحبّه الناس، ويكون موضع ثقة واحترام في مجتمعه. والصدق ليس فقط في الكلام، بل في الأفعال والنوايا أيضًا.</p>
+
+          <div class="article-verse">﴿ يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ ﴾ — سورة التوبة</div>
+
+          <p>حين يتعوّد الطفل على الصدق منذ صغره، ينشأ قوي الشخصية واثقًا بنفسه. فالكذب يُولّد القلق والخوف، بينما الصدق يمنح صاحبه راحة البال وصفاء القلب. والصادق لا يحتاج أن يتذكّر ما قاله، لأن الحقيقة واحدة لا تتبدّل.</p>
+
+          <div class="article-highlight"><strong>قال رسول الله ﷺ:</strong> «عليكم بالصدق، فإنّ الصدق يهدي إلى البرّ، وإنّ البرّ يهدي إلى الجنة»</div>
+
+          <p>تخيّل أنك في المدرسة وكسرتَ شيئًا بالخطأ. لو قلتَ الحقيقة، قد يُعاتبك المعلم لحظة، لكنه سيحترمك ويثق بك دائمًا. أما لو كذبت، فستعيش في خوف من اكتشاف الحقيقة، وإذا اكتُشفت ستفقد ثقة الجميع.</p>
+
+          <p><strong>كيف نتحلّى بالصدق؟</strong> نبدأ بأن نكون صادقين مع أنفسنا أولًا، ثم مع أهلنا وأصدقائنا. ونتذكّر دائمًا أن الصدق طريق النجاة، وأن الله يرى ويسمع كل شيء. فلنجعل الصدق عادتنا اليومية، في البيت والمدرسة والشارع.</p>
+        </div>
+        <div class="article-footer">
+          <span class="article-tag">الصدق</span>
+          <span class="article-tag">أخلاق</span>
+          <span class="article-tag">تربية</span>
+        </div>
+      </article>
+
+      <!-- Article 2: الأمانة -->
+      <article class="article-card">
+        <div class="article-header">
+          <span class="article-category">قيم إسلامية</span>
+          <h3 class="article-title">الأمانة — خُلق الأنبياء</h3>
+          <div class="article-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>٤ دقائق قراءة</span>
+          </div>
+        </div>
+        <div class="article-body">
+          <p>الأمانة صفة عظيمة كان يُلقّب بها نبيّنا محمد ﷺ قبل البعثة، فكان أهل مكة يُسمّونه «الصادق الأمين». والأمانة تعني أن تحفظ ما اؤتمنت عليه، سواء كان مالًا أو سرًّا أو عملًا أو حتى كلمة.</p>
+
+          <div class="article-verse">﴿ إِنَّ اللَّهَ يَأْمُرُكُمْ أَن تُؤَدُّوا الْأَمَانَاتِ إِلَىٰ أَهْلِهَا ﴾ — سورة النساء</div>
+
+          <p>الأمانة في المدرسة تعني أن تؤدّي واجباتك بنفسك دون غش، وأن تحافظ على ممتلكات زملائك، وأن تُعيد ما تستعيره. وفي البيت تعني أن تحفظ أسرار عائلتك وتقوم بمسؤولياتك.</p>
+
+          <div class="article-highlight"><strong>هل تعلم؟</strong> أن قريشًا كانت تودع أماناتها عند النبي ﷺ حتى بعد أن عادَوه، لأنهم كانوا يعلمون أنه لن يخون أمانة أبدًا.</div>
+
+          <p>عندما يُعطيك صديقك لعبته ليوم واحد، فالأمانة أن تُعيدها كما أخذتها. وعندما يُخبرك أحد بسرّ، فالأمانة أن تحفظه في قلبك. وعندما يكون المعلم غائبًا عن الفصل، فالأمانة أن تلتزم بالهدوء كأنه موجود.</p>
+
+          <p><strong>ثمرات الأمانة:</strong> من يتّصف بالأمانة يكسب حب الناس واحترامهم، ويصبح محلّ ثقة الجميع. والمجتمع الذي يسوده خلق الأمانة يعيش أفراده في أمان وطمأنينة وتعاون.</p>
+        </div>
+        <div class="article-footer">
+          <span class="article-tag">الأمانة</span>
+          <span class="article-tag">أخلاق</span>
+          <span class="article-tag">سيرة نبوية</span>
+        </div>
+      </article>
+
+      <!-- Article 3: بر الوالدين -->
+      <article class="article-card">
+        <div class="article-header">
+          <span class="article-category" style="--purple:var(--rose);--purple-soft:var(--rose-soft)">قيم أسرية</span>
+          <h3 class="article-title">بر الوالدين — مفتاح الجنة</h3>
+          <div class="article-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>٥ دقائق قراءة</span>
+          </div>
+        </div>
+        <div class="article-body">
+          <p>بر الوالدين من أعظم العبادات بعد توحيد الله، وقد قرنه الله تعالى بعبادته في كتابه الكريم. فالوالدان هما سبب وجودنا بعد الله، وهما من سهروا الليالي وتعبوا من أجل راحتنا وسعادتنا.</p>
+
+          <div class="article-verse">﴿ وَقَضَىٰ رَبُّكَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ وَبِالْوَالِدَيْنِ إِحْسَانًا ﴾ — سورة الإسراء</div>
+
+          <p>أمّك حملتك تسعة أشهر في بطنها، وسهرت على راحتك وأنت طفل صغير لا تستطيع فعل شيء. وأبوك يعمل كل يوم ليوفّر لك الطعام والملبس والتعليم. كل هذا الحب يستحق منّا أن نردّه بالإحسان والطاعة.</p>
+
+          <div class="article-highlight"><strong>سُئل النبي ﷺ:</strong> أيّ العمل أحبّ إلى الله؟ قال: «الصلاة على وقتها»، قيل: ثم أيّ؟ قال: «بر الوالدين».</div>
+
+          <p><strong>كيف نبرّ والدينا؟</strong> نطيعهما فيما يأمراننا به (ما لم يكن معصية)، ونتحدّث معهما بأدب واحترام، ونساعدهما في أعمال البيت، وندعو لهما دائمًا. حتى الابتسامة في وجه أمّك وأبيك هي من البر.</p>
+
+          <p>تذكّر أن والديك لن يبقيا معك للأبد، فاغتنم وجودهما. ابدأ اليوم: قبّل رأس أمّك، ساعد أباك، قل لهما «أحبكما». هذه الكلمات البسيطة تصنع سعادة لا تُقدّر بثمن.</p>
+        </div>
+        <div class="article-footer">
+          <span class="article-tag">بر الوالدين</span>
+          <span class="article-tag">قيم أسرية</span>
+          <span class="article-tag">إحسان</span>
+        </div>
+      </article>
+
+      <!-- Article 4: احترام المعلم -->
+      <article class="article-card">
+        <div class="article-header">
+          <span class="article-category" style="--purple:var(--teal);--purple-soft:var(--teal-soft)">قيم تعليمية</span>
+          <h3 class="article-title">احترام المعلم — وسام الأدب</h3>
+          <div class="article-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>٤ دقائق قراءة</span>
+          </div>
+        </div>
+        <div class="article-body">
+          <p>المعلم هو الشمعة التي تُنير دروب المعرفة، وهو الذي يأخذ بيدك من ظلمات الجهل إلى نور العلم. احترام المعلم ليس مجرّد واجب، بل هو تقدير لرسالة عظيمة يحملها على عاتقه.</p>
+
+          <div class="article-highlight"><strong>قال أمير الشعراء أحمد شوقي:</strong> «قُم للمعلّم وفِّهِ التبجيلا — كاد المعلمُ أن يكون رسولا»</div>
+
+          <p>فكّر في معلمك الذي يقضي ساعات طويلة يُحضّر الدرس ويشرح لك ويُصحّح أوراقك. هو يفعل ذلك لأنه يُريد لك النجاح والتفوّق. هذا الجهد الكبير يستحق منك أن تُنصت باهتمام، وأن تحترمه في حضوره وغيابه.</p>
+
+          <p><strong>كيف نحترم المعلم؟</strong> نُنصت له عندما يتحدث، ونرفع أيدينا قبل أن نسأل، ونلتزم بقوانين الفصل، ونشكره على جهده. وإذا أخطأ المعلم في شيء، نُنبّهه بأدب واحترام دون إحراج.</p>
+
+          <p>تذكّر أن كل ناجح في هذه الحياة — طبيب أو مهندس أو عالم — كان وراء نجاحه معلّم صبور آمن به وعلّمه. فكن ممتنًّا لمعلميك، وادعُ لهم بالخير، فهم يستحقون كل التقدير.</p>
+        </div>
+        <div class="article-footer">
+          <span class="article-tag">احترام المعلم</span>
+          <span class="article-tag">أدب</span>
+          <span class="article-tag">تعليم</span>
+        </div>
+      </article>
+
+      <!-- Article 5: التعاون -->
+      <article class="article-card">
+        <div class="article-header">
+          <span class="article-category" style="--purple:var(--green);--purple-soft:var(--green-soft)">قيم اجتماعية</span>
+          <h3 class="article-title">التعاون — قوّة الجماعة</h3>
+          <div class="article-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>٤ دقائق قراءة</span>
+          </div>
+        </div>
+        <div class="article-body">
+          <p>التعاون من أجمل القيم التي تجعل المجتمع قويًّا ومتماسكًا. فالإنسان بطبيعته لا يستطيع أن يعيش وحده، وهو بحاجة دائمة لمساعدة الآخرين ومساعدتهم. والتعاون يجعل العمل الصعب سهلًا، والحِمل الثقيل خفيفًا.</p>
+
+          <div class="article-verse">﴿ وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ وَلَا تَعَاوَنُوا عَلَى الْإِثْمِ وَالْعُدْوَانِ ﴾ — سورة المائدة</div>
+
+          <p>في المدرسة، عندما يتعاون الطلاب في مشروع جماعي، تكون النتيجة أفضل بكثير مما لو عمل كل واحد وحده. وفي البيت، عندما يتعاون أفراد الأسرة في ترتيب المنزل، ينتهي العمل بسرعة ويستمتع الجميع بوقتهم.</p>
+
+          <div class="article-highlight"><strong>مثل عربي جميل:</strong> «يد واحدة لا تُصفّق» — فالنجاح الحقيقي يأتي من العمل الجماعي والتكاتف.</div>
+
+          <p><strong>صور التعاون في حياتنا:</strong> مساعدة زميلك الذي لم يفهم الدرس، ومشاركة أدواتك المدرسية مع من نسي أدواته، والمشاركة في تنظيف الفصل، وإعانة كبار السن في عبور الطريق.</p>
+
+          <p>قال رسول الله ﷺ: «مثل المؤمنين في توادّهم وتراحمهم وتعاطفهم مثل الجسد الواحد، إذا اشتكى منه عضو تداعى له سائر الجسد بالسهر والحمى». فلنكن كالجسد الواحد، نتعاون ونتراحم ونُعين بعضنا.</p>
+        </div>
+        <div class="article-footer">
+          <span class="article-tag">التعاون</span>
+          <span class="article-tag">عمل جماعي</span>
+          <span class="article-tag">مجتمع</span>
+        </div>
+      </article>
+
+      <!-- Article 6: الصبر -->
+      <article class="article-card">
+        <div class="article-header">
+          <span class="article-category" style="--purple:var(--orange);--purple-soft:var(--orange-soft)">قيم شخصية</span>
+          <h3 class="article-title">الصبر — سلاح المؤمن</h3>
+          <div class="article-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>٥ دقائق قراءة</span>
+          </div>
+        </div>
+        <div class="article-body">
+          <p>الصبر من أعظم الأخلاق التي يتحلّى بها المؤمن، وهو مفتاح النجاح في الدنيا والآخرة. فكل شيء جميل في الحياة يحتاج إلى صبر: التعلّم يحتاج صبرًا، والنجاح يحتاج صبرًا، وحتى زراعة شجرة تحتاج صبرًا حتى تُثمر.</p>
+
+          <div class="article-verse">﴿ إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ ﴾ — سورة الزمر</div>
+
+          <p>تخيّل أنك تتعلّم ركوب الدراجة لأول مرة. ستسقط مرة واثنتين وثلاثًا، لكن إذا صبرت واستمررت في المحاولة، ستتعلّم وستشعر بفرحة عظيمة. أما لو استسلمت من أول سقطة، فلن تتعلّم أبدًا.</p>
+
+          <div class="article-highlight"><strong>قاعدة ذهبية:</strong> كل صعوبة تواجهها هي فرصة لتصبح أقوى. فالماس لا يُصبح جميلًا إلا بعد أن يمرّ بضغط شديد.</div>
+
+          <p><strong>أنواع الصبر:</strong> صبر على طاعة الله كالصلاة والصيام، وصبر عن معصية الله كالابتعاد عمّا حرّم، وصبر على أقدار الله كالمرض والصعوبات. وكل نوع منها له أجر عظيم عند الله.</p>
+
+          <p>في دراستك، قد تجد مادة صعبة لا تفهمها بسهولة. لا تيأس ولا تستسلم. راجعها مرة بعد مرة، واسأل معلمك، واستعن بالله. فإن مع العسر يسرًا، ونتيجة الصبر دائمًا حلوة ومُرضية.</p>
+        </div>
+        <div class="article-footer">
+          <span class="article-tag">الصبر</span>
+          <span class="article-tag">إيمان</span>
+          <span class="article-tag">نجاح</span>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
