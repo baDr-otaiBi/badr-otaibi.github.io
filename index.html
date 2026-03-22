@@ -93,7 +93,7 @@ body{
 ::-webkit-scrollbar-track{background:transparent}
 
 /* Reading progress */
-.reading-bar{position:fixed;top:0;right:0;height:3px;background:var(--blue);z-index:200;width:0;transition:none;border-radius:0 0 0 2px}
+.reading-bar{display:none}
 
 .container{max-width:1280px;margin:0 auto;padding:0 24px}
 
@@ -140,77 +140,374 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   transform:translate(calc(var(--shadow-offset) + 2px), calc(var(--shadow-offset) + 2px));
 }
 
-/* ===== NAV ===== */
+/* ===== NAV — Ultra-Modern Premium ===== */
 .nav{
-  position:sticky;top:0;z-index:100;
-  background:rgba(255,255,255,.88);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  transition:background .3s,box-shadow .3s,border-color .3s;
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:64px;
+  background:transparent;
+  border-bottom:1px solid transparent;
+  transition:background .3s cubic-bezier(.4,0,.2,1),
+             box-shadow .3s cubic-bezier(.4,0,.2,1),
+             border-color .3s cubic-bezier(.4,0,.2,1),
+             transform .35s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
 }
-[data-theme="dark"] .nav{background:rgba(15,23,42,.9);border-color:var(--border)}
-.nav.shadow{box-shadow:0 2px 20px rgba(0,0,0,.08)}
+.nav.scrolled{
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom-color:rgba(0,0,0,.06);
+}
+.nav.scrolled.shadow{
+  box-shadow:0 0 0 1px rgba(0,0,0,.03),0 2px 4px rgba(0,0,0,.02),0 8px 16px rgba(0,0,0,.04);
+}
+.nav.nav-hidden{transform:translateY(-100%)}
+[data-theme="dark"] .nav.scrolled{background:rgba(15,23,42,.88);border-bottom-color:rgba(255,255,255,.06)}
+[data-theme="dark"] .nav.scrolled.shadow{box-shadow:0 0 0 1px rgba(255,255,255,.04),0 2px 4px rgba(0,0,0,.1),0 8px 16px rgba(0,0,0,.2)}
+
 .nav-inner{
   display:flex;align-items:center;justify-content:space-between;
-  height:76px;
+  height:64px;max-width:1280px;margin:0 auto;padding:0 24px;
 }
-.logo{display:flex;align-items:center;text-decoration:none}
-.logo img{height:72px;width:auto;padding:8px 0}
-.nav-links{display:flex;gap:4px;list-style:none}
-.nav-links a{
+
+/* Logo */
+.logo{display:flex;align-items:center;text-decoration:none;position:relative;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.logo:hover{transform:scale(.95)}
+.logo img{height:52px;width:auto}
+.logo::after{
+  content:'';position:absolute;inset:-4px;border-radius:16px;
+  background:linear-gradient(135deg,var(--blue),var(--purple),var(--blue));
+  background-size:300% 300%;
+  opacity:0;z-index:-1;filter:blur(8px);
+  animation:gradientShift 5s ease infinite;
+  transition:opacity .3s;
+}
+.logo:hover::after{opacity:.15}
+
+/* Nav links — center */
+.nav-links{display:flex;gap:4px;list-style:none;align-items:center}
+.nav-links>li{position:relative}
+.nav-links>li>a{
   text-decoration:none;color:var(--ink-2);font-size:14px;font-weight:700;
-  padding:8px 18px;border-radius:10px;transition:.2s var(--ease);
-  font-family:var(--font);letter-spacing:0.01em;
+  padding:8px 16px;border-radius:8px;
+  transition:color .2s cubic-bezier(.4,0,.2,1),background .2s cubic-bezier(.4,0,.2,1);
+  font-family:var(--font);letter-spacing:-0.01em;
+  position:relative;display:inline-flex;align-items:center;gap:6px;
 }
-.nav-links a:hover{color:var(--blue);background:var(--blue-soft);border-radius:10px}
-.nav-links a.on{color:var(--blue);background:var(--blue-soft);border-radius:10px;position:relative}
-.nav-links a.on::after{content:'';position:absolute;bottom:-2px;right:25%;left:25%;height:3px;background:var(--blue);border-radius:3px}
+.nav-links>li>a::after{
+  content:'';position:absolute;bottom:0;right:0;left:0;height:2px;
+  background:linear-gradient(90deg,var(--blue),var(--purple));
+  border-radius:2px;
+  transform:scaleX(0);transform-origin:right;
+  transition:transform .25s cubic-bezier(.4,0,.2,1);
+}
+.nav-links>li>a:hover{color:var(--ink)}
+.nav-links>li>a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-links>li>a.on{color:var(--blue);font-weight:800}
+.nav-links>li>a.on::after{transform:scaleX(1);background:var(--blue)}
+
+/* Dropdown chevron */
+.nav-chevron{
+  width:12px;height:12px;transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  flex-shrink:0;opacity:.5;
+}
+.nav-links>li:hover .nav-chevron{transform:rotate(180deg);opacity:1}
+
+/* ===== MEGA MENU ===== */
+.mega-menu{
+  position:absolute;top:100%;right:50%;
+  min-width:520px;
+  padding:28px 32px;
+  background:var(--white);
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:16px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.03),
+    0 2px 4px rgba(0,0,0,.02),
+    0 8px 16px rgba(0,0,0,.04),
+    0 24px 48px rgba(0,0,0,.06);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-8px) translateX(50%) scale(.98);
+  transition:opacity .25s cubic-bezier(.4,0,.2,1),
+             transform .25s cubic-bezier(.4,0,.2,1),
+             visibility .25s;
+  pointer-events:none;
+  z-index:200;
+}
+.mega-menu::before{
+  content:'';position:absolute;top:-8px;right:50%;transform:translateX(50%);
+  width:16px;height:16px;background:var(--white);
+  border:1px solid rgba(0,0,0,.06);border-bottom:none;border-right:none;
+  transform:translateX(50%) rotate(45deg);
+  border-radius:3px 0 0 0;
+}
+[data-theme="dark"] .mega-menu{
+  background:var(--white);border-color:var(--border);
+  box-shadow:0 0 0 1px rgba(255,255,255,.05),0 8px 32px rgba(0,0,0,.4);
+}
+[data-theme="dark"] .mega-menu::before{background:var(--white);border-color:var(--border)}
+
+.nav-links>li:hover>.mega-menu,
+.nav-links>li>.mega-menu.force-open{
+  opacity:1;visibility:visible;
+  transform:translateY(8px) translateX(50%) scale(1);
+  pointer-events:auto;
+}
+
+/* Mega menu grid */
+.mega-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
+.mega-grid.cols-3{grid-template-columns:1fr 1fr 1fr}
+
+.mega-col-title{
+  text-transform:uppercase;font-size:11px;letter-spacing:.08em;
+  color:var(--ink-4);font-weight:800;font-family:var(--font);
+  margin-bottom:16px;padding:0 14px;
+}
+
+.mega-item{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 14px;border-radius:10px;
+  text-decoration:none;color:var(--ink);
+  transition:all .2s ease;
+  position:relative;
+}
+.mega-item:hover{
+  background:rgba(0,0,0,.03);
+  transform:translateX(4px);
+}
+[dir="rtl"] .mega-item:hover{transform:translateX(-4px)}
+[data-theme="dark"] .mega-item:hover{background:rgba(255,255,255,.05)}
+
+.mega-item-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:grid;place-items:center;font-size:18px;flex-shrink:0;
+  background:var(--bg-alt);
+  transition:transform .2s ease;
+}
+.mega-item:hover .mega-item-icon{transform:scale(1.08)}
+
+.mega-item-text{display:flex;flex-direction:column;min-width:0}
+.mega-item-text strong{font-size:14px;font-weight:700;font-family:var(--font);color:var(--ink)}
+.mega-item-text span{font-size:12px;color:var(--ink-3);line-height:1.4;margin-top:2px}
+
+.mega-item-arrow{
+  opacity:0;transform:translateX(4px);
+  transition:opacity .2s,transform .2s;
+  margin-right:auto;color:var(--ink-4);font-size:14px;
+}
+.mega-item:hover .mega-item-arrow{opacity:1;transform:translateX(0)}
+
+/* Staggered children */
+.mega-item{opacity:0;transform:translateY(8px) translateX(0)}
+.nav-links>li:hover .mega-item,
+.mega-menu.force-open .mega-item{
+  animation:megaItemIn .3s cubic-bezier(.4,0,.2,1) forwards;
+}
+.nav-links>li:hover .mega-item:nth-child(1),.mega-menu.force-open .mega-item:nth-child(1){animation-delay:.03s}
+.nav-links>li:hover .mega-item:nth-child(2),.mega-menu.force-open .mega-item:nth-child(2){animation-delay:.06s}
+.nav-links>li:hover .mega-item:nth-child(3),.mega-menu.force-open .mega-item:nth-child(3){animation-delay:.09s}
+.nav-links>li:hover .mega-item:nth-child(4),.mega-menu.force-open .mega-item:nth-child(4){animation-delay:.12s}
+.nav-links>li:hover .mega-item:nth-child(5),.mega-menu.force-open .mega-item:nth-child(5){animation-delay:.15s}
+.nav-links>li:hover .mega-item:nth-child(6),.mega-menu.force-open .mega-item:nth-child(6){animation-delay:.18s}
+@keyframes megaItemIn{to{opacity:1;transform:translateY(0) translateX(0)}}
+
+/* Mega menu featured card */
+.mega-featured{
+  grid-column:1/-1;margin-top:20px;padding-top:20px;
+  border-top:1px solid var(--border);
+}
+.mega-featured-card{
+  display:flex;align-items:center;gap:16px;
+  padding:16px;border-radius:12px;
+  background:linear-gradient(135deg,var(--blue-soft),var(--purple-soft));
+  text-decoration:none;color:var(--ink);
+  transition:transform .2s,box-shadow .2s;
+}
+.mega-featured-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.mega-featured-badge{
+  display:inline-flex;padding:3px 8px;border-radius:6px;
+  background:var(--blue);color:#fff;font-size:10px;font-weight:800;
+  font-family:var(--font);letter-spacing:.03em;
+}
+
+/* Nav actions — right side */
 .nav-actions{display:flex;align-items:center;gap:8px}
+
+/* Search */
+.nav-search{position:relative;display:flex;align-items:center}
+.nav-search-btn{
+  width:38px;height:38px;border-radius:10px;border:none;
+  background:transparent;cursor:pointer;display:grid;place-items:center;
+  color:var(--ink-3);transition:all .2s cubic-bezier(.4,0,.2,1);
+}
+.nav-search-btn:hover{background:var(--bg-alt);color:var(--ink)}
+.nav-search-btn svg{width:18px;height:18px}
+.nav-search-input{
+  width:0;overflow:hidden;border:none;outline:none;
+  font-family:var(--font);font-size:14px;font-weight:600;
+  color:var(--ink);background:transparent;
+  transition:width .3s cubic-bezier(.4,0,.2,1),padding .3s cubic-bezier(.4,0,.2,1);
+  padding:0;
+}
+.nav-search.open .nav-search-input{
+  width:200px;padding:8px 12px;
+  border:1px solid var(--border);border-radius:10px;
+  background:var(--bg);
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.06);
+}
+.nav-search.open .nav-search-btn{color:var(--blue)}
+
+/* Theme toggle */
 .theme-toggle{
-  width:42px;height:42px;border-radius:12px;border:1.5px solid var(--border);
+  width:38px;height:38px;border-radius:10px;border:1.5px solid var(--border);
   background:var(--white);cursor:pointer;display:grid;place-items:center;
-  font-size:20px;transition:.3s var(--ease);position:relative;color:var(--ink-3);
+  font-size:18px;transition:.3s var(--ease);position:relative;color:var(--ink-3);
 }
 .theme-toggle:hover{background:var(--blue-soft);transform:rotate(15deg);color:var(--blue);border-color:var(--blue)}
 .theme-toggle .t-icon{transition:.4s var(--ease)}
 [data-theme="dark"] .theme-toggle{border-color:var(--border);background:var(--white)}
 
+/* CTA Button */
 .nav-cta{
-  padding:10px 22px;border-radius:12px;
+  padding:9px 20px;border-radius:10px;
   background:var(--green);color:#fff;border:none;
-  font-family:var(--font);font-size:14px;font-weight:700;
-  cursor:pointer;text-decoration:none;transition:.25s var(--ease);
+  font-family:var(--font);font-size:13px;font-weight:700;
+  cursor:pointer;text-decoration:none;
+  transition:all .2s cubic-bezier(.4,0,.2,1);
   box-shadow:0 2px 8px rgba(5,150,105,.25);
+  position:relative;overflow:hidden;
 }
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(5,150,105,.3)}
+.nav-cta::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.2),transparent);
+  opacity:0;transition:opacity .2s;
+}
+.nav-cta:hover{
+  transform:translateY(-1px);
+  box-shadow:0 4px 14px rgba(5,150,105,.4);
+}
+.nav-cta:hover::before{opacity:1}
+.nav-cta:active{transform:scale(.98);box-shadow:0 2px 6px rgba(5,150,105,.3)}
 
-.hamburger{display:none;background:none;border:none;cursor:pointer}
-.hamburger svg{width:24px;height:24px;color:var(--ink)}
+/* Hamburger — animated */
+.hamburger{
+  display:none;width:38px;height:38px;border-radius:10px;
+  border:none;background:transparent;cursor:pointer;
+  position:relative;padding:0;
+  transition:background .2s;
+}
+.hamburger:hover{background:var(--bg-alt)}
+.hamburger-line{
+  display:block;width:20px;height:2px;
+  background:var(--ink);border-radius:2px;
+  position:absolute;right:9px;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .2s;
+}
+.hamburger-line:nth-child(1){top:14px}
+.hamburger-line:nth-child(2){top:20px}
+.hamburger-line:nth-child(3){top:26px}
+.hamburger.is-open .hamburger-line:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.is-open .hamburger-line:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.is-open .hamburger-line:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 
-/* Mobile nav (outside sticky nav to avoid backdrop-filter stacking context) */
+/* ===== MOBILE NAV ===== */
 .mobile-nav{
-  display:none;position:fixed;top:0;right:0;bottom:0;width:280px;
-  background:var(--bg);border-left:2px solid var(--border);
-  padding:88px 24px 24px;z-index:9999;
-  box-shadow:-8px 0 32px rgba(0,0,0,.2);
+  position:fixed;top:0;right:0;bottom:0;width:320px;max-width:85vw;
+  background:var(--bg);
+  padding:0;z-index:9999;
   transform:translateX(100%);
-  transition:transform .3s var(--ease);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;overscroll-behavior:contain;
+  display:flex;flex-direction:column;
 }
-.mobile-nav.show{display:block;transform:translateX(0)}
-.mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:4px}
-.mobile-nav-links a{
-  display:block;text-decoration:none;color:var(--ink);font-size:16px;font-weight:700;
-  padding:14px 20px;border-radius:12px;transition:.2s var(--ease);
+[dir="rtl"] .mobile-nav{right:auto;left:0;transform:translateX(-100%)}
+.mobile-nav.show{transform:translateX(0)}
+[dir="rtl"] .mobile-nav.show{transform:translateX(0)}
+
+.mobile-nav-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 24px;height:64px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.mobile-nav-close{
+  width:40px;height:40px;border-radius:10px;border:none;
+  background:transparent;cursor:pointer;display:grid;place-items:center;
+  color:var(--ink);font-size:20px;transition:all .2s;
+}
+.mobile-nav-close:hover{background:var(--bg-alt)}
+
+.mobile-nav-links{
+  list-style:none;display:flex;flex-direction:column;gap:2px;
+  padding:20px 16px;flex:1;
+}
+.mobile-nav-links>li>a{
+  display:flex;align-items:center;justify-content:space-between;
+  text-decoration:none;color:var(--ink);font-size:16px;font-weight:700;
+  padding:14px 16px;border-radius:12px;transition:.2s var(--ease);
   font-family:var(--font);
+  opacity:0;transform:translateX(20px);
 }
+[dir="rtl"] .mobile-nav-links>li>a{transform:translateX(-20px)}
+.mobile-nav.show .mobile-nav-links>li>a{
+  animation:mobileSlideIn .35s cubic-bezier(.4,0,.2,1) forwards;
+}
+.mobile-nav.show .mobile-nav-links>li:nth-child(1)>a{animation-delay:.05s}
+.mobile-nav.show .mobile-nav-links>li:nth-child(2)>a{animation-delay:.1s}
+.mobile-nav.show .mobile-nav-links>li:nth-child(3)>a{animation-delay:.15s}
+.mobile-nav.show .mobile-nav-links>li:nth-child(4)>a{animation-delay:.2s}
+.mobile-nav.show .mobile-nav-links>li:nth-child(5)>a{animation-delay:.25s}
+.mobile-nav.show .mobile-nav-links>li:nth-child(6)>a{animation-delay:.3s}
+.mobile-nav.show .mobile-nav-links>li:nth-child(7)>a{animation-delay:.35s}
+@keyframes mobileSlideIn{to{opacity:1;transform:translateX(0)}}
+
 .mobile-nav-links a:hover,.mobile-nav-links a:active{color:var(--blue);background:var(--blue-soft)}
-@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
-.nav-backdrop{
-  display:none;position:fixed;inset:0;z-index:9998;
-  background:rgba(0,0,0,.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  transition:opacity .2s var(--ease);
+.mobile-nav-links a.on{color:var(--blue);background:var(--blue-soft)}
+
+/* Mobile accordion submenu */
+.mobile-submenu{
+  max-height:0;overflow:hidden;
+  transition:max-height .35s cubic-bezier(.4,0,.2,1);
+  padding-right:16px;border-right:2px solid var(--border);
+  margin-right:16px;
 }
-.nav-backdrop.show{display:block}
+.mobile-submenu.open{max-height:500px}
+.mobile-submenu a{
+  display:block;text-decoration:none;color:var(--ink-2);
+  font-size:14px;font-weight:600;padding:10px 16px;
+  border-radius:10px;transition:.2s;font-family:var(--font);
+}
+.mobile-submenu a:hover{color:var(--blue);background:var(--blue-soft)}
+.mobile-chevron{
+  width:16px;height:16px;color:var(--ink-4);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);flex-shrink:0;
+}
+.mobile-chevron.rotated{transform:rotate(180deg)}
+
+/* Mobile nav CTA */
+.mobile-nav-cta{
+  padding:16px;border-top:1px solid var(--border);flex-shrink:0;
+}
+.mobile-nav-cta a{
+  display:block;text-align:center;padding:14px;border-radius:12px;
+  background:var(--green);color:#fff;text-decoration:none;
+  font-family:var(--font);font-size:15px;font-weight:700;
+  box-shadow:0 2px 8px rgba(5,150,105,.25);
+  transition:all .2s;
+}
+.mobile-nav-cta a:hover{box-shadow:0 4px 14px rgba(5,150,105,.35)}
+
+.nav-backdrop{
+  position:fixed;inset:0;z-index:9998;
+  background:rgba(0,0,0,.3);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  opacity:0;visibility:hidden;
+  transition:opacity .3s cubic-bezier(.4,0,.2,1),visibility .3s;
+}
+.nav-backdrop.show{opacity:1;visibility:visible}
+
+/* Body padding for fixed nav */
+body{padding-top:64px}
 
 /* ===== HERO ===== */
 .hero{
@@ -844,6 +1141,17 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
 }
 .verified-badge svg{width:14px;height:14px;flex-shrink:0}
 
+/* Scroll progress bar */
+.nav-progress{
+  position:fixed;top:0;right:0;left:0;height:2px;z-index:201;
+  background:transparent;pointer-events:none;
+}
+.nav-progress-bar{
+  height:100%;width:0;
+  background:linear-gradient(90deg,var(--blue),var(--purple));
+  transition:none;border-radius:0 0 2px 2px;
+}
+
 /* Scroll to top */
 .scroll-top{
   position:fixed;bottom:24px;right:24px;z-index:98;
@@ -911,6 +1219,7 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
   font-family:var(--font);font-size:13px;font-weight:700;
   display:flex;align-items:center;justify-content:center;gap:12px;
   flex-wrap:wrap;
+  position:relative;z-index:101;
 }
 .urgency-banner .countdown{
   display:inline-flex;align-items:center;gap:4px;
@@ -1359,7 +1668,9 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
 }
 @media(max-width:768px){
   .nav-links{display:none}
-  .hamburger{display:block}
+  .hamburger{display:flex;align-items:center;justify-content:center}
+  .nav-search{display:none}
+  .nav-cta{display:none}
   .hero{padding:48px 0 32px;min-height:auto}
   .hero h1{font-size:28px}
   .hero-stats{gap:16px}
@@ -1376,6 +1687,7 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
   .hero-orb{display:none}
   .cursor-dot{display:none!important}
   .verified-badge{display:none}
+  .mega-menu{display:none!important}
   .feat{min-height:auto}
   .announce-content{flex-direction:column;text-align:center;gap:10px}
   .announce-text{text-align:center}
@@ -1398,8 +1710,12 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
 </div>
 
 <!-- NAV -->
-<nav class="nav">
-  <div class="container nav-inner">
+<!-- Scroll Progress -->
+<div class="nav-progress"><div class="nav-progress-bar" id="navProgress"></div></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <!-- Logo -->
     <a href="#" class="logo">
       <img src="/logo-new.png" alt="الإتقان التعليمية">
     </a>
@@ -1407,39 +1723,200 @@ a:focus-visible,.p-btn:focus-visible,.p-btn-buy:focus-visible,.nav-cta:focus-vis
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
       موثوق
     </span>
+
+    <!-- Center Nav Links -->
     <ul class="nav-links">
       <li><a href="#" class="on">الرئيسية</a></li>
+
+      <!-- المنتجات with mega menu -->
+      <li>
+        <a href="#products">
+          المنتجات
+          <svg class="nav-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
+        </a>
+        <div class="mega-menu">
+          <div class="mega-grid">
+            <div>
+              <div class="mega-col-title">المواد التعليمية</div>
+              <a href="#summaries" class="mega-item">
+                <div class="mega-item-icon" style="background:var(--blue-soft);color:var(--blue)">📋</div>
+                <div class="mega-item-text">
+                  <strong>الملخصات الدراسية</strong>
+                  <span>ملخصات مركّزة لجميع المواد</span>
+                </div>
+                <span class="mega-item-arrow">←</span>
+              </a>
+              <a href="#worksheets" class="mega-item">
+                <div class="mega-item-icon" style="background:var(--purple-soft);color:var(--purple)">📝</div>
+                <div class="mega-item-text">
+                  <strong>أوراق العمل</strong>
+                  <span>تمارين وأنشطة تفاعلية</span>
+                </div>
+                <span class="mega-item-arrow">←</span>
+              </a>
+              <a href="#books" class="mega-item">
+                <div class="mega-item-icon" style="background:var(--green-soft);color:var(--green)">📚</div>
+                <div class="mega-item-text">
+                  <strong>الكتب المدرسية</strong>
+                  <span>كتب شاملة ومُحدّثة</span>
+                </div>
+                <span class="mega-item-arrow">←</span>
+              </a>
+            </div>
+            <div>
+              <div class="mega-col-title">المراحل الدراسية</div>
+              <a href="#stages" class="mega-item">
+                <div class="mega-item-icon" style="background:var(--orange-soft);color:var(--orange)">🎒</div>
+                <div class="mega-item-text">
+                  <strong>الابتدائية</strong>
+                  <span>الصف الرابع إلى السادس</span>
+                </div>
+                <span class="mega-item-arrow">←</span>
+              </a>
+              <a href="#stages" class="mega-item">
+                <div class="mega-item-icon" style="background:var(--teal-soft);color:var(--teal)">📐</div>
+                <div class="mega-item-text">
+                  <strong>المتوسطة</strong>
+                  <span>الصف الأول إلى الثالث</span>
+                </div>
+                <span class="mega-item-arrow">←</span>
+              </a>
+              <a href="#stages" class="mega-item">
+                <div class="mega-item-icon" style="background:var(--rose-soft);color:var(--rose)">🎓</div>
+                <div class="mega-item-text">
+                  <strong>الثانوية</strong>
+                  <span>جميع المسارات</span>
+                </div>
+                <span class="mega-item-arrow">←</span>
+              </a>
+            </div>
+          </div>
+          <div class="mega-featured">
+            <a href="#products" class="mega-featured-card">
+              <div>
+                <span class="mega-featured-badge">جديد</span>
+              </div>
+              <div class="mega-item-text">
+                <strong>تجميعات نافس — 1000 سؤال</strong>
+                <span>أسئلة مع الإجابات النموذجية لاختبار نافس</span>
+              </div>
+              <span class="mega-item-arrow">←</span>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <!-- المحتوى with mega menu -->
+      <li>
+        <a href="#">
+          المحتوى
+          <svg class="nav-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
+        </a>
+        <div class="mega-menu" style="min-width:420px">
+          <div class="mega-grid" style="grid-template-columns:1fr">
+            <div>
+              <div class="mega-col-title">استكشف المحتوى</div>
+              <a href="/articles/" class="mega-item">
+                <div class="mega-item-icon" style="background:var(--blue-soft);color:var(--blue)">✍️</div>
+                <div class="mega-item-text">
+                  <strong>المقالات التعليمية</strong>
+                  <span>مقالات تربوية ونصائح للطلاب</span>
+                </div>
+                <span class="mega-item-arrow">←</span>
+              </a>
+              <a href="/games/" class="mega-item">
+                <div class="mega-item-icon" style="background:var(--green-soft);color:var(--green)">🎮</div>
+                <div class="mega-item-text">
+                  <strong>الألعاب التعليمية</strong>
+                  <span>تعلّم وأنت تلعب — ألعاب تفاعلية</span>
+                </div>
+                <span class="mega-item-arrow">←</span>
+              </a>
+              <a href="/nafs.html" class="mega-item">
+                <div class="mega-item-icon" style="background:var(--purple-soft);color:var(--purple)">🧠</div>
+                <div class="mega-item-text">
+                  <strong>اختبار نافس التفاعلي</strong>
+                  <span>تدرّب على أسئلة نافس مباشرة</span>
+                </div>
+                <span class="mega-item-arrow">←</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
       <li><a href="#stages">المراحل</a></li>
-      <li><a href="#summaries">الملخصات</a></li>
-      <li><a href="#worksheets">أوراق العمل</a></li>
-      <li><a href="#books">الكتب</a></li>
-      <li><a href="/articles/">المقالات</a></li>
-      <li><a href="/games/">الألعاب</a></li>
+      <li><a href="#features">لماذا نحن</a></li>
     </ul>
+
+    <!-- Right Actions -->
     <div class="nav-actions">
+      <!-- Search -->
+      <div class="nav-search" id="navSearch">
+        <input type="text" class="nav-search-input" id="navSearchInput" placeholder="ابحث..." autocomplete="off">
+        <button class="nav-search-btn" id="navSearchBtn" title="بحث" aria-label="بحث">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+        </button>
+      </div>
+
       <button class="theme-toggle" id="themeToggle" title="تبديل الوضع">
         <span class="t-icon" id="themeIcon">&#9790;</span>
       </button>
+
       <a href="#products" class="nav-cta">اطلب الآن</a>
-      <button class="hamburger" onclick="toggleMobileMenu()" aria-label="القائمة">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="القائمة">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
       </button>
     </div>
   </div>
 </nav>
-<!-- Mobile Menu (outside nav to avoid stacking context from backdrop-filter) -->
+
+<!-- Mobile Menu -->
 <div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <a href="#" class="logo" style="pointer-events:none">
+      <img src="/logo-new.png" alt="الإتقان التعليمية" style="height:40px">
+    </a>
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="إغلاق">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 5l10 10M15 5l-10 10"/></svg>
+    </button>
+  </div>
   <ul class="mobile-nav-links">
-    <li><a href="#">الرئيسية</a></li>
+    <li><a href="#" class="on">الرئيسية</a></li>
+    <li>
+      <a href="#products" class="mobile-has-sub">
+        المنتجات
+        <svg class="mobile-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+      </a>
+      <div class="mobile-submenu">
+        <a href="#summaries">الملخصات الدراسية</a>
+        <a href="#worksheets">أوراق العمل</a>
+        <a href="#books">الكتب المدرسية</a>
+        <a href="#stages">المراحل الدراسية</a>
+      </div>
+    </li>
+    <li>
+      <a href="#" class="mobile-has-sub">
+        المحتوى
+        <svg class="mobile-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+      </a>
+      <div class="mobile-submenu">
+        <a href="/articles/">المقالات التعليمية</a>
+        <a href="/games/">الألعاب التعليمية</a>
+        <a href="/nafs.html">اختبار نافس التفاعلي</a>
+      </div>
+    </li>
     <li><a href="#stages">المراحل</a></li>
-    <li><a href="#summaries">الملخصات</a></li>
-    <li><a href="#worksheets">أوراق العمل</a></li>
-    <li><a href="#books">الكتب</a></li>
-    <li><a href="/articles/">المقالات</a></li>
-    <li><a href="/games/">الألعاب</a></li>
+    <li><a href="#features">لماذا نحن</a></li>
   </ul>
+  <div class="mobile-nav-cta">
+    <a href="#products">اطلب الآن</a>
+  </div>
 </div>
-<div class="nav-backdrop" id="navBackdrop" onclick="toggleMobileMenu()"></div>
+<div class="nav-backdrop" id="navBackdrop"></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -2691,15 +3168,137 @@ document.querySelectorAll('.p-foot').forEach(foot => {
   foot.appendChild(hint);
 });
 
-// === MOBILE MENU ===
-function toggleMobileMenu(){
+// === MOBILE MENU (Ultra-Modern) ===
+function toggleMobileMenu(forceClose){
   const mobileNav = document.getElementById('mobileNav');
   const backdrop = document.getElementById('navBackdrop');
+  const hamburger = document.getElementById('hamburgerBtn');
   const isOpen = mobileNav.classList.contains('show');
-  mobileNav.classList.toggle('show');
-  backdrop.classList.toggle('show');
-  document.body.style.overflow = isOpen ? '' : 'hidden';
+  const shouldClose = forceClose === true || isOpen;
+
+  if(shouldClose){
+    mobileNav.classList.remove('show');
+    backdrop.classList.remove('show');
+    hamburger.classList.remove('is-open');
+    document.body.style.overflow = '';
+  } else {
+    mobileNav.classList.add('show');
+    backdrop.classList.add('show');
+    hamburger.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
 }
+
+// Hamburger click
+document.getElementById('hamburgerBtn')?.addEventListener('click', () => toggleMobileMenu());
+document.getElementById('mobileNavClose')?.addEventListener('click', () => toggleMobileMenu(true));
+document.getElementById('navBackdrop')?.addEventListener('click', () => toggleMobileMenu(true));
+
+// Mobile accordion submenus
+document.querySelectorAll('.mobile-has-sub').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const submenu = link.nextElementSibling;
+    const chevron = link.querySelector('.mobile-chevron');
+    const isOpen = submenu.classList.contains('open');
+    // Close all others
+    document.querySelectorAll('.mobile-submenu.open').forEach(s => {
+      s.classList.remove('open');
+      s.previousElementSibling?.querySelector('.mobile-chevron')?.classList.remove('rotated');
+    });
+    if(!isOpen){
+      submenu.classList.add('open');
+      chevron?.classList.add('rotated');
+    }
+  });
+});
+
+// Search toggle
+const navSearch = document.getElementById('navSearch');
+const navSearchBtn = document.getElementById('navSearchBtn');
+const navSearchInput = document.getElementById('navSearchInput');
+navSearchBtn?.addEventListener('click', () => {
+  navSearch.classList.toggle('open');
+  if(navSearch.classList.contains('open')){
+    setTimeout(() => navSearchInput.focus(), 300);
+  }
+});
+navSearchInput?.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){
+    navSearch.classList.remove('open');
+    navSearchInput.blur();
+  }
+});
+document.addEventListener('click', e => {
+  if(navSearch && !navSearch.contains(e.target)){
+    navSearch.classList.remove('open');
+  }
+});
+
+// === MEGA MENU — Hover delay & keyboard accessibility ===
+document.querySelectorAll('.nav-links>li').forEach(li => {
+  const mega = li.querySelector('.mega-menu');
+  if(!mega) return;
+  let openTimer, closeTimer;
+
+  li.addEventListener('mouseenter', () => {
+    clearTimeout(closeTimer);
+    openTimer = setTimeout(() => mega.classList.add('force-open'), 100);
+  });
+  li.addEventListener('mouseleave', () => {
+    clearTimeout(openTimer);
+    closeTimer = setTimeout(() => mega.classList.remove('force-open'), 150);
+  });
+
+  // Keyboard: open on Enter/Space
+  const trigger = li.querySelector(':scope > a');
+  if(trigger){
+    trigger.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        const isOpen = mega.classList.contains('force-open');
+        // Close all megas
+        document.querySelectorAll('.mega-menu.force-open').forEach(m => m.classList.remove('force-open'));
+        if(!isOpen) mega.classList.add('force-open');
+      }
+      if(e.key === 'Escape'){
+        mega.classList.remove('force-open');
+      }
+    });
+  }
+
+  // Arrow key navigation inside mega menu
+  mega.addEventListener('keydown', e => {
+    const items = [...mega.querySelectorAll('.mega-item')];
+    const idx = items.indexOf(document.activeElement);
+    if(e.key === 'ArrowDown'){
+      e.preventDefault();
+      items[(idx + 1) % items.length]?.focus();
+    } else if(e.key === 'ArrowUp'){
+      e.preventDefault();
+      items[(idx - 1 + items.length) % items.length]?.focus();
+    } else if(e.key === 'Escape'){
+      mega.classList.remove('force-open');
+      trigger?.focus();
+    }
+  });
+});
+
+// Close mega menus on outside click
+document.addEventListener('click', e => {
+  if(!e.target.closest('.nav-links')){
+    document.querySelectorAll('.mega-menu.force-open').forEach(m => m.classList.remove('force-open'));
+  }
+});
+
+// === ⌘K / Ctrl+K Command palette search ===
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key === 'k'){
+    e.preventDefault();
+    navSearch?.classList.add('open');
+    setTimeout(() => navSearchInput?.focus(), 100);
+  }
+});
 
 // === CUSTOM CURSOR (desktop only, skip on touch) ===
 if(window.matchMedia('(pointer:fine)').matches && window.innerWidth >= 768){
@@ -2759,18 +3358,45 @@ function setTheme(t){
 document.getElementById('themeIcon').innerHTML = getTheme()==='dark'?'&#9788;':'&#9790;';
 document.getElementById('themeToggle').addEventListener('click',()=>setTheme(getTheme()==='dark'?'light':'dark'));
 
-// === SCROLL HANDLER (single, throttled) ===
+// === SCROLL HANDLER — Smart hide/reveal + frosted glass ===
 let lastScroll = 0;
+let scrollDelta = 0;
+const SCROLL_THRESHOLD = 8;
 function onScroll(){
   const y = scrollY;
-  document.querySelector('.nav').classList.toggle('shadow', y > 10);
+  const nav = document.getElementById('mainNav');
+
+  // Frosted glass on scroll
+  nav.classList.toggle('scrolled', y > 10);
+  nav.classList.toggle('shadow', y > 50);
+
+  // Smart hide on scroll down, reveal on scroll up
+  const diff = y - lastScroll;
+  if(Math.abs(diff) > SCROLL_THRESHOLD){
+    if(diff > 0 && y > 100){
+      nav.classList.add('nav-hidden');
+    } else {
+      nav.classList.remove('nav-hidden');
+    }
+  }
+
   document.getElementById('scrollTop').classList.toggle('show', y > 400);
-  // Reading progress
+
+  // Scroll progress bar (gradient)
   const h = document.documentElement.scrollHeight - window.innerHeight;
-  if(h>0) document.getElementById('readingBar').style.width = (y/h*100)+'%';
+  if(h > 0){
+    const pct = (y / h * 100);
+    document.getElementById('navProgress').style.width = pct + '%';
+    // Also update old reading bar if it exists
+    const rb = document.getElementById('readingBar');
+    if(rb) rb.style.width = pct + '%';
+  }
+
   lastScroll = y;
 }
 window.addEventListener('scroll', onScroll, {passive:true});
+// Initial call
+onScroll();
 
 // === COUNTER ANIMATION ===
 function animateCounters(){
@@ -2806,12 +3432,20 @@ const navObs = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting){
       const id = entry.target.id;
-      document.querySelectorAll('.nav-links a').forEach(a => {
-        a.classList.toggle('on', a.getAttribute('href') === '#'+id);
+      document.querySelectorAll('.nav-links>li>a').forEach(a => {
+        const href = a.getAttribute('href');
+        if(href && href.startsWith('#')){
+          a.classList.toggle('on', href === '#'+id);
+        }
+      });
+      // Also update mega menu items
+      document.querySelectorAll('.mega-item').forEach(a => {
+        const href = a.getAttribute('href');
+        if(href) a.classList.toggle('on', href === '#'+id);
       });
     }
   });
-},{threshold:.2,rootMargin:'-80px 0px -50% 0px'});
+},{threshold:.2,rootMargin:'-72px 0px -50% 0px'});
 navSections.forEach(id => {
   const el = document.getElementById(id);
   if(el) navObs.observe(el);
@@ -2835,14 +3469,12 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     e.preventDefault();
     const t=document.querySelector(href);
     if(t){
-      const offset = 80; // nav height
+      const offset = 72; // nav height
       const y = t.getBoundingClientRect().top + scrollY - offset;
       window.scrollTo({top:y,behavior:'smooth'});
     }
     // Close mobile menu
-    document.getElementById('mobileNav')?.classList.remove('show');
-    document.getElementById('navBackdrop')?.classList.remove('show');
-    document.body.style.overflow='';
+    toggleMobileMenu(true);
   });
 });
 

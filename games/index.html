@@ -61,61 +61,120 @@ body{
 ::selection{background:var(--purple);color:#fff}
 .container{max-width:1100px;margin:0 auto;padding:0 24px}
 
-/* NAV */
+/* NAV — Ultra-Modern Premium (matching main page) */
 .nav{
-  position:sticky;top:0;z-index:100;
-  background:rgba(255,255,255,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
+  position:fixed;top:0;left:0;right:0;z-index:100;height:64px;
+  background:transparent;border-bottom:1px solid transparent;
+  transition:background .3s cubic-bezier(.4,0,.2,1),box-shadow .3s cubic-bezier(.4,0,.2,1),
+             border-color .3s cubic-bezier(.4,0,.2,1),transform .35s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
 }
-[data-theme="dark"] .nav{background:rgba(15,23,42,.9)}
+.nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:rgba(0,0,0,.06)}
+.nav.scrolled.shadow{box-shadow:0 0 0 1px rgba(0,0,0,.03),0 2px 4px rgba(0,0,0,.02),0 8px 16px rgba(0,0,0,.04)}
+.nav.nav-hidden{transform:translateY(-100%)}
+[data-theme="dark"] .nav.scrolled{background:rgba(15,23,42,.88);border-bottom-color:rgba(255,255,255,.06)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{display:flex;align-items:center;text-decoration:none}
-.logo img{height:64px;width:auto;padding:4px 0}
+.logo{display:flex;align-items:center;text-decoration:none;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.logo:hover{transform:scale(.95)}
+.logo img{height:52px;width:auto}
 .nav-links{display:flex;gap:4px;list-style:none}
 .nav-links a{
   text-decoration:none;color:var(--ink-2);font-size:14px;font-weight:700;
-  padding:8px 16px;border-radius:10px;transition:.2s;font-family:var(--font);
+  padding:8px 16px;border-radius:8px;font-family:var(--font);letter-spacing:-0.01em;
+  position:relative;transition:color .2s cubic-bezier(.4,0,.2,1);
 }
-.nav-links a:hover,.nav-links a.on{color:var(--blue);background:var(--blue-soft)}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;right:0;left:0;height:2px;
+  background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:2px;
+  transform:scaleX(0);transform-origin:right;transition:transform .25s cubic-bezier(.4,0,.2,1);
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-links a.on{color:var(--blue);font-weight:800}
+.nav-links a.on::after{transform:scaleX(1);background:var(--blue)}
 .nav-actions{display:flex;align-items:center;gap:8px}
 .theme-toggle{
-  width:40px;height:40px;border-radius:10px;border:1.5px solid var(--border);
+  width:38px;height:38px;border-radius:10px;border:1.5px solid var(--border);
   background:var(--white);cursor:pointer;display:grid;place-items:center;
-  font-size:18px;color:var(--ink-3);transition:.3s;
+  font-size:18px;color:var(--ink-3);transition:.3s var(--ease);
 }
-.theme-toggle:hover{color:var(--blue);border-color:var(--blue)}
+.theme-toggle:hover{color:var(--blue);border-color:var(--blue);background:var(--blue-soft);transform:rotate(15deg)}
+[data-theme="dark"] .theme-toggle{border-color:var(--border);background:var(--white)}
 .nav-cta{
-  padding:8px 20px;border-radius:10px;background:var(--green);color:#fff;
+  padding:9px 20px;border-radius:10px;background:var(--green);color:#fff;
   font-family:var(--font);font-size:13px;font-weight:700;text-decoration:none;
-  transition:.2s;
+  transition:all .2s cubic-bezier(.4,0,.2,1);box-shadow:0 2px 8px rgba(5,150,105,.25);
+  position:relative;overflow:hidden;
 }
-.nav-cta:hover{opacity:.9}
-.hamburger{display:none;background:none;border:none;cursor:pointer}
-.hamburger svg{width:24px;height:24px;color:var(--ink)}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(5,150,105,.4)}
+.nav-cta:active{transform:scale(.98)}
+.hamburger{
+  display:none;width:38px;height:38px;border-radius:10px;border:none;
+  background:transparent;cursor:pointer;position:relative;padding:0;transition:background .2s;
+}
+.hamburger:hover{background:var(--bg-alt)}
+.hamburger-line{
+  display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;
+  position:absolute;right:9px;transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .2s;
+}
+.hamburger-line:nth-child(1){top:14px}
+.hamburger-line:nth-child(2){top:20px}
+.hamburger-line:nth-child(3){top:26px}
+.hamburger.is-open .hamburger-line:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.is-open .hamburger-line:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.is-open .hamburger-line:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 
 /* Mobile nav */
 .mobile-nav{
-  display:none;position:fixed;top:0;right:0;bottom:0;width:280px;
-  background:var(--bg);border-left:2px solid var(--border);
-  padding:80px 24px 24px;z-index:9999;
-  transform:translateX(100%);transition:transform .3s var(--ease);
+  position:fixed;top:0;left:0;bottom:0;width:320px;max-width:85vw;
+  background:var(--bg);padding:0;z-index:9999;
+  transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;display:flex;flex-direction:column;
 }
-.mobile-nav.show{display:block;transform:translateX(0)}
-.mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:4px}
+.mobile-nav.show{transform:translateX(0)}
+.mobile-nav-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 24px;height:64px;border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.mobile-nav-close{
+  width:40px;height:40px;border-radius:10px;border:none;
+  background:transparent;cursor:pointer;display:grid;place-items:center;
+  color:var(--ink);font-size:20px;transition:all .2s;
+}
+.mobile-nav-close:hover{background:var(--bg-alt)}
+.mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:2px;padding:20px 16px;flex:1}
 .mobile-nav-links a{
   display:block;text-decoration:none;color:var(--ink);font-size:16px;font-weight:700;
-  padding:14px 20px;border-radius:12px;transition:.2s;font-family:var(--font);
+  padding:14px 16px;border-radius:12px;transition:.2s var(--ease);font-family:var(--font);
+  opacity:0;transform:translateX(-20px);
 }
+.mobile-nav.show .mobile-nav-links a{animation:mobileSlideIn .35s cubic-bezier(.4,0,.2,1) forwards}
+.mobile-nav.show .mobile-nav-links li:nth-child(1) a{animation-delay:.05s}
+.mobile-nav.show .mobile-nav-links li:nth-child(2) a{animation-delay:.1s}
+.mobile-nav.show .mobile-nav-links li:nth-child(3) a{animation-delay:.15s}
+.mobile-nav.show .mobile-nav-links li:nth-child(4) a{animation-delay:.2s}
+@keyframes mobileSlideIn{to{opacity:1;transform:translateX(0)}}
 .mobile-nav-links a:hover{color:var(--blue);background:var(--blue-soft)}
-.nav-backdrop{
-  display:none;position:fixed;inset:0;z-index:9998;
-  background:rgba(0,0,0,.4);backdrop-filter:blur(4px);
+.mobile-nav-links a.on{color:var(--blue);background:var(--blue-soft)}
+.mobile-nav-cta{padding:16px;border-top:1px solid var(--border);flex-shrink:0}
+.mobile-nav-cta a{
+  display:block;text-align:center;padding:14px;border-radius:12px;
+  background:var(--green);color:#fff;text-decoration:none;
+  font-family:var(--font);font-size:15px;font-weight:700;
+  box-shadow:0 2px 8px rgba(5,150,105,.25);transition:all .2s;
 }
-.nav-backdrop.show{display:block}
+.nav-backdrop{
+  position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.3);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
+}
+.nav-backdrop.show{opacity:1;visibility:visible}
+body{padding-top:64px}
 
 @media(max-width:768px){
   .nav-links{display:none}
-  .hamburger{display:block}
+  .hamburger{display:flex;align-items:center;justify-content:center}
+  .nav-cta{display:none}
 }
 
 /* HERO */
@@ -343,7 +402,7 @@ body{
 <body>
 
 <!-- NAV -->
-<nav class="nav">
+<nav class="nav" id="mainNav">
   <div class="container nav-inner">
     <a href="/" class="logo"><img src="/logo-new.png" alt="الإتقان التعليمية"></a>
     <ul class="nav-links">
@@ -355,21 +414,30 @@ body{
     <div class="nav-actions">
       <button class="theme-toggle" id="themeToggle" title="تبديل الوضع"><span id="themeIcon">&#9790;</span></button>
       <a href="/#products" class="nav-cta">اطلب الآن</a>
-      <button class="hamburger" onclick="toggleMenu()" aria-label="القائمة">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      <button class="hamburger" id="hamburgerBtn" aria-label="القائمة">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
       </button>
     </div>
   </div>
 </nav>
 <div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <a href="/" class="logo" style="pointer-events:none"><img src="/logo-new.png" alt="الإتقان التعليمية" style="height:40px"></a>
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="إغلاق">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 5l10 10M15 5l-10 10"/></svg>
+    </button>
+  </div>
   <ul class="mobile-nav-links">
     <li><a href="/">الرئيسية</a></li>
     <li><a href="/#products">المنتجات</a></li>
-    <li><a href="/games/">الألعاب</a></li>
+    <li><a href="/games/" class="on">الألعاب</a></li>
     <li><a href="/nafs.html">اختبار نافس</a></li>
   </ul>
+  <div class="mobile-nav-cta"><a href="/#products">اطلب الآن</a></div>
 </div>
-<div class="nav-backdrop" id="navBackdrop" onclick="toggleMenu()"></div>
+<div class="nav-backdrop" id="navBackdrop"></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -521,15 +589,37 @@ themeToggle.addEventListener('click', () => {
   updateThemeIcon();
 });
 
-// Mobile menu
-function toggleMenu(){
+// Mobile menu — Ultra-Modern
+function toggleMenu(forceClose){
   const nav = document.getElementById('mobileNav');
   const bd = document.getElementById('navBackdrop');
-  const open = nav.classList.contains('show');
-  nav.classList.toggle('show');
-  bd.classList.toggle('show');
-  document.body.style.overflow = open ? '' : 'hidden';
+  const hamburger = document.getElementById('hamburgerBtn');
+  const isOpen = nav.classList.contains('show');
+  const shouldClose = forceClose === true || isOpen;
+  if(shouldClose){
+    nav.classList.remove('show');bd.classList.remove('show');
+    hamburger.classList.remove('is-open');document.body.style.overflow='';
+  } else {
+    nav.classList.add('show');bd.classList.add('show');
+    hamburger.classList.add('is-open');document.body.style.overflow='hidden';
+  }
 }
+document.getElementById('hamburgerBtn')?.addEventListener('click',()=>toggleMenu());
+document.getElementById('mobileNavClose')?.addEventListener('click',()=>toggleMenu(true));
+document.getElementById('navBackdrop')?.addEventListener('click',()=>toggleMenu(true));
+
+// Smart scroll hide/reveal
+let lastScroll=0;
+window.addEventListener('scroll',()=>{
+  const y=scrollY;const nav=document.getElementById('mainNav');
+  nav.classList.toggle('scrolled',y>10);
+  nav.classList.toggle('shadow',y>50);
+  if(Math.abs(y-lastScroll)>8){
+    if(y>lastScroll&&y>100) nav.classList.add('nav-hidden');
+    else nav.classList.remove('nav-hidden');
+  }
+  lastScroll=y;
+},{passive:true});
 </script>
 </body>
 </html>
